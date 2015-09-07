@@ -20,7 +20,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/join")
-	public String join(ModelAttribute memberVo){
+	public String join(ModelAttribute MemberVo){
 		memberService.join(memberVo);
 		return "redirect:/";
 		

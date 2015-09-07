@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -79,18 +83,76 @@
 			<div class="col-lg-12">
 				<form id="contactform" action="contact/contact.php" method="post" class="validateform" name="send-contact">
 					<div class="row">
-					<form id="join-form" name="joinForm" method="post" action="join">
+					<form id="join-form" name="joinForm" method="post" action="/join">
 
-					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="">
+					<table>
+					<tr>
+						<td rowspan="4">사진</td>
+						<td>이름</td>
+						<td><input id="name" name="memberName" type="" value=""></td>
+					</tr>
+					<tr>
+						<td>아이디</td>
+						<td><input name="memberId" type="id" value="">
+							<input type="button" value="id 중복체크" ></td>
+					</tr>
+					<tr>
+						<td>페스워드</td>
+						<td><input name="password" type="password" value=""></td>
+					</tr>
+					<tr>
+						<td>페스워드 확인</td>
+						<td><input name="password1" type="password" value=""></td>
+					</tr>
+					<tr>
+						<td>이메일</td>
+						<td><input id="email" name="email" type="text" value=""></td>
+					</tr>
+					<tr>
+						<td>생년월일</td>
+						<td>
+							<select name="year">
+							<c:forEach var="i" begin="1960" end="2015">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+							</select>
+							<select name="month">
+							<c:forEach var="i" begin="1" end="12">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+							</select>
+							<select name="day">
+							<c:forEach var="i" begin="1" end="31">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="2">주소</td>
+						<td><input  name="postNumber" id="postNumber" class="txt" style="width: 10%; text-align: center;" maxlength="6" value="" readonly="readonly"/><input type="button" name="searchPost" value="우편번호검색" /></td>
+					</tr>
+					<tr>
+						<td><input name="address" id="address" class="txt" style="width: 100%;" readonly="readonly" value="" /></td>
+					</tr>
+					<tr>
+						<td>연락처</td>
+						<td>
+							<select name="phoneNum1">
+								<option value="010" selected>010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="017">017</option>
+								<option value="019">019</option>
+								<option value="">없음</option>
+							</select>
+							<input name="phoneNum2"/>
+							<input name="phoneNum3"/>	
+						</td>
+						
+					</tr>
 
-					<label class="block-label" for="email">이메일</label>
-					<input id="email" name="email" type="text" value="">
-					<input type="button" value="id 중복체크" >
-					
-					<label class="block-label">패스워드</label>
-					<input name="password" type="password" value="">
-					
+					</table>
 					<fieldset>
 						<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
 						<label>서비스 약관에 동의합니다.</label>
@@ -100,8 +162,8 @@
 					
 				</form>
 				</form>
-					</div>
-				</form>
+				
+				</div>
 			</div>
 		</div>
 	</div>
