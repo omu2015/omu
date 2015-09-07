@@ -8,5 +8,17 @@
 
  	<!-- sql mapping files -->
  	<sqlMap resource="member.xml"/>
- 	
+ 	<sqlMap resource="img.xml"/>
+ 	<sqlMap resource="board.xml"/>
+ 	<sqlMap resource="comments.xml"/>
+ 	<sqlMap resource="content.xml"/>
+ 	<sqlMap resource="contentBox.xml"/>
+ 	<sqlMap resource="good.xml"/>
+ 	<sqlMap resource="img.xml"/>
+ 	<sqlMap resource="imgBox.xml"/>
+ 	<sqlMap resource="menuBox.xml"/>
+ 	<sqlMap resource="plan.xml"/>
+ 	<sqlMap resource="product.xml"/>
+ 	<sqlMap resource="theme.xml"/>
+ 	<sqlMap resource="themeBox.xml"/>
 </sqlMapConfig>
