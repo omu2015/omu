@@ -8,7 +8,6 @@
 
  	<!-- sql mapping files -->
  	<sqlMap resource="member.xml"/>
- 	<sqlMap resource="img.xml"/>
  	<sqlMap resource="board.xml"/>
  	<sqlMap resource="comments.xml"/>
  	<sqlMap resource="content.xml"/>
