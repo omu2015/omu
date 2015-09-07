@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit2015.omu.service.MemberService;
+import com.bit2015.omu.vo.MemberVo;
 
 @Controller
 @RequestMapping("/member")
@@ -20,7 +22,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/join")
-	public String join(ModelAttribute MemberVo){
+	public String join(@ModelAttribute MemberVo memberVo,
+						@RequestParam String year,
+						@RequestParam String month,
+						@RequestParam String day
+						
+			){
+		memberVo.setBirth(year+month+day);
+		memberVo.setMemberGrade("member");
+		memberVo.setMemberStatus("active");
+		System.out.println(memberVo);
 		memberService.join(memberVo);
 		return "redirect:/";
 		

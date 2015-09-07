@@ -81,9 +81,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<form id="contactform" action="contact/contact.php" method="post" class="validateform" name="send-contact">
 					<div class="row">
-					<form id="join-form" name="joinForm" method="post" action="/join">
+					<form id="join-form" name="joinForm" method="post" action="/member/join">
 
 					<table>
 					<tr>
@@ -130,10 +129,10 @@
 					</tr>
 					<tr>
 						<td rowspan="2">주소</td>
-						<td><input  name="postNumber" id="postNumber" class="txt" style="width: 10%; text-align: center;" maxlength="6" value="" readonly="readonly"/><input type="button" name="searchPost" value="우편번호검색" /></td>
+						<td><input  name="zipCode" id="zipCode" class="txt" style="width: 10%; text-align: center;" maxlength="6" value="" /><input type="button" name="searchPost" value="우편번호검색" /></td>
 					</tr>
 					<tr>
-						<td><input name="address" id="address" class="txt" style="width: 100%;" readonly="readonly" value="" /></td>
+						<td><input name="address" id="address" class="txt" style="width: 100%;"  value="" /></td>
 					</tr>
 					<tr>
 						<td>연락처</td>
@@ -157,10 +156,7 @@
 						<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
 						<label>서비스 약관에 동의합니다.</label>
 					</fieldset>
-					
 					<input type="submit" value="가입하기">
-					
-				</form>
 				</form>
 				
 				</div>
