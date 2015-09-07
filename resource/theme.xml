@@ -15,7 +15,7 @@
 		]]>
 	</select>
 	
-	<select id="selectVo" parameterClass="ThemeVo">
+	<select id="selectVo" parameterClass="java.lang.Long">
 		<![CDATA[
 			select * from theme where theme_no=#theme_no#
 		]]>

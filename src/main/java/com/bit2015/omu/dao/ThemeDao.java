@@ -21,12 +21,13 @@ public class ThemeDao {
 		return list;
 	}
 	
+	public void selectVo(Long theme_no){
+		sqlMapClientTemplate.queryForObject("theme.insert", theme_no);
+	}
+	
 	public void insert(ThemeVo themeVo){
 		sqlMapClientTemplate.insert("theme.insert", themeVo);
 	}
-	
-	
-	
 	
 	
 }
