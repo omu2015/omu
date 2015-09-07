@@ -15,7 +15,6 @@ public class ContentVo {
 	private String id;
 	private String title;
 	private String category;
-	private String distance;
 	private String address;
 	private String longitude;
 	private String latitude;
@@ -101,12 +100,6 @@ public class ContentVo {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getDistance() {
-		return distance;
-	}
-	public void setDistance(String distance) {
-		this.distance = distance;
-	}
 	public String getAddress() {
 		return address;
 	}
@@ -151,9 +144,10 @@ public class ContentVo {
 				+ ", imageUrl=" + imageUrl + ", direction=" + direction
 				+ ", zipcode=" + zipcode + ", placeUrl=" + placeUrl + ", id="
 				+ id + ", title=" + title + ", category=" + category
-				+ ", distance=" + distance + ", address=" + address
-				+ ", longitude=" + longitude + ", latitude=" + latitude
-				+ ", addressBCode=" + addressBCode + ", cost=" + cost
-				+ ", time=" + time + "]";
+				+ ", address=" + address + ", longitude=" + longitude
+				+ ", latitude=" + latitude + ", addressBCode=" + addressBCode
+				+ ", cost=" + cost + ", time=" + time + "]";
 	}
+	
+	
 }

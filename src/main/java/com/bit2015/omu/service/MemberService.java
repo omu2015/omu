@@ -13,7 +13,7 @@ public class MemberService {
 	MemberDao memberDao;
 	
 	public void join(MemberVo memberVo){
-		memberDao.join(memberVo);
+		memberDao.insert(memberVo);
 	}
 	
 

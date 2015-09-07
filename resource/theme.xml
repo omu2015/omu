@@ -3,24 +3,34 @@
 <sqlMap namespace="theme">
 	<typeAlias alias="ThemeVo" type="com.bit2015.omu.vo.ThemeVo"/>
 	
-	<insert id="insert" parameterClass="ThemeVo">
-		<![CDATA[
-			insert INTO theme VALUES(theme_no_seq.nextval, #themeName#)
-		]]>
-	</insert>
-	
-	<select id="selectAll" parameterClass="ThemeVo">
+	<select id="selectAll" resultClass="ThemeVo">
 		<![CDATA[
 			select * from theme
 		]]>
 	</select>
 	
-	<select id="selectVo" parameterClass="ThemeVo">
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ThemeVo">
 		<![CDATA[
 			select * from theme where theme_no=#theme_no#
 		]]>
 	</select>
 	
+	<insert id="insert" parameterClass="ThemeVo">
+		<![CDATA[
+			insert INTO theme VALUES(theme_no_seq.nextval, #themeName#)
+		]]>
+	</insert>
+
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from theme where theme_no=#theme_no#
+		]]>
+	</delete>
 	
+	<update id="update" parameterClass="ThemeVo">
+		<![CDATA[
+			update theme set themeName = #themeName# where theme_no=#theme_no#
+		]]>
+	</update>
 	
 </sqlMap>
