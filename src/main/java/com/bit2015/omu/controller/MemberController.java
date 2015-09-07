@@ -29,8 +29,8 @@ public class MemberController {
 						
 			){
 		memberVo.setBirth(year+month+day);
-		memberVo.setMemberGrade("member");
-		memberVo.setMemberStatus("active");
+		memberVo.setMemberGrade("member");			// 회원가입시 회원등급 자동 member
+		memberVo.setMemberStatus("active");			// 회원가입시 회원활동 자동 active
 		System.out.println(memberVo);
 		memberService.join(memberVo);
 		return "redirect:/";

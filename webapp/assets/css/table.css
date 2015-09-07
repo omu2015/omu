@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+#join-form table		{ margin: 0px 50px 0px; ;
+						 
+	
+}
+
+#join-form table .title { background-color: #68A4C4;
+				  		  color: #fff;
+}
+
+#join-form table td	{ padding : 15px;
+}
+
+table #photo		{ width: 150px;
+					  text-align: center;
+}
+form input[type="submit"], input[type="checkbox"], fieldset label { float: right}
