@@ -6,7 +6,7 @@ public class MemberVo {
 	private String memberName;
 	private String password;
 	private String email;
-	private long img_no;
+	private String imageURL;
 	private String memberGrade;
 	private String memberStatus;
 	private String birth;
@@ -17,20 +17,6 @@ public class MemberVo {
 	private String phoneNum3;
 	private String joinDate;
 	private String joinOutDate;
-	
-	
-	public String getZipCode() {
-		return zipCode;
-	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public long getMember_no() {
 		return member_no;
 	}
@@ -55,11 +41,17 @@ public class MemberVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public long getImg_no() {
-		return img_no;
+	public String getEmail() {
+		return email;
 	}
-	public void setImg_no(long img_no) {
-		this.img_no = img_no;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 	public String getMemberGrade() {
 		return memberGrade;
@@ -78,6 +70,12 @@ public class MemberVo {
 	}
 	public void setBirth(String birth) {
 		this.birth = birth;
+	}
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 	public String getAddress() {
 		return address;
@@ -119,12 +117,15 @@ public class MemberVo {
 	public String toString() {
 		return "MemberVo [member_no=" + member_no + ", memberId=" + memberId
 				+ ", memberName=" + memberName + ", password=" + password
-				+ ", email=" + email + ", img_no=" + img_no + ", memberGrade="
-				+ memberGrade + ", memberStatus=" + memberStatus + ", birth="
-				+ birth + ", zipCode=" + zipCode + ", address=" + address
-				+ ", phoneNum1=" + phoneNum1 + ", phoneNum2=" + phoneNum2
-				+ ", phoneNum3=" + phoneNum3 + ", joinDate=" + joinDate
-				+ ", joinOutDate=" + joinOutDate + "]";
+				+ ", email=" + email + ", imageURL=" + imageURL
+				+ ", memberGrade=" + memberGrade + ", memberStatus="
+				+ memberStatus + ", birth=" + birth + ", zipCode=" + zipCode
+				+ ", address=" + address + ", phoneNum1=" + phoneNum1
+				+ ", phoneNum2=" + phoneNum2 + ", phoneNum3=" + phoneNum3
+				+ ", joinDate=" + joinDate + ", joinOutDate=" + joinOutDate
+				+ "]";
 	}
+	
+	
 
 }

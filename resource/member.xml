@@ -5,7 +5,7 @@
 	
 	<insert id="join" parameterClass="MemberVo">
 		<![CDATA[
-			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #img_no#, #memberGrade#, #memberStatus#, #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null, #email#, #zipCode#)
+			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #imageURL#, #memberGrade#, #memberStatus#, #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null, #email#, #zipCode#)
 		]]>
 	</insert>
 	
