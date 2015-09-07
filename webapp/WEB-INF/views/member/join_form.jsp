@@ -97,7 +97,7 @@
 							<input type="button" value="id 중복체크" ></td>
 					</tr>
 					<tr>
-						<td>페스워드</td>
+						<td> 페스워드</td>
 						<td><input name="password" type="password" value=""></td>
 					</tr>
 					<tr>
