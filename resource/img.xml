@@ -3,4 +3,13 @@
 <sqlMap namespace="img">
 	<typeAlias alias="ImgVo" type="com.bit2015.omu.vo.ImgVo"/>
 	
+	
+	<insert id="insert" parameterClass="ImgVo">
+		<![CDATA[
+			insert into Img values(img_no_seq.nextval, #imageUrl#)
+		]]>
+	</insert>
+	
+	
+	
 </sqlMap>
