@@ -15,23 +15,23 @@
 		]]>
 	</select>
 	
-	<select id="selectVo" parameterClass="java.lang.Long">
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="MemberVo">
 		<![CDATA[
 			select * from MEMBER where member_no=#member_no#
 		]]>
 	</select>
 
-	<delete id="delete" parameterClass="MemberVo">
+	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
 			delete from MEMBER where member_no=#member_no#
 		]]>
 	</delete>
 	
-	<update id="update">
+	
+	<update id="update" parameterClass="MemberVo">
 		<![CDATA[
 			update MEMBER set 
-			
-			
+			memberId=#memberId#,
 			memberName=#memberName#,
 			password= #password#,
 			imageURL= #imageURL#,
@@ -42,11 +42,13 @@
 			phoneNum1= #phoneNum1#,
 			phoneNum2= #phoneNum2#,
 			phoneNum3= #phoneNum3#,
-			joinOutDate=#joinOutDate#,
+			joinDate=sysdate,
+			joinOutDate=sysdate,
 			email= #email#,
 			zipCode= #zipCode#
-			 where member_no=#member_no#
+			where member_no=#member_no#
 		]]>
 	</update>
+	<!-- 			joinOutDate=to_char(#joinOutDate#, 'YYYYMMDDHH24MISS'),	 -->
 	
 </sqlMap>
