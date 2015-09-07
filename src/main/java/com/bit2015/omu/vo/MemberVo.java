@@ -10,6 +10,7 @@ public class MemberVo {
 	private String memberGrade;
 	private String memberStatus;
 	private String birth;
+	private String zipCode;
 	private String address;
 	private String phoneNum1;
 	private String phoneNum2;
@@ -18,7 +19,12 @@ public class MemberVo {
 	private String joinOutDate;
 	
 	
-	
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -115,14 +121,10 @@ public class MemberVo {
 				+ ", memberName=" + memberName + ", password=" + password
 				+ ", email=" + email + ", img_no=" + img_no + ", memberGrade="
 				+ memberGrade + ", memberStatus=" + memberStatus + ", birth="
-				+ birth + ", address=" + address + ", phoneNum1=" + phoneNum1
-				+ ", phoneNum2=" + phoneNum2 + ", phoneNum3=" + phoneNum3
-				+ ", joinDate=" + joinDate + ", joinOutDate=" + joinOutDate
-				+ "]";
+				+ birth + ", zipCode=" + zipCode + ", address=" + address
+				+ ", phoneNum1=" + phoneNum1 + ", phoneNum2=" + phoneNum2
+				+ ", phoneNum3=" + phoneNum3 + ", joinDate=" + joinDate
+				+ ", joinOutDate=" + joinOutDate + "]";
 	}
-	
-	
-	
-	
 
 }
