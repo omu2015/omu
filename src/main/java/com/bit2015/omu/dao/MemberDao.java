@@ -17,7 +17,7 @@ public class MemberDao {
 		
 	}
 	// 회원가입
-	public void join(MemberVo memberVo){
-		sqlMapClientTemplate.insert("member.join", memberVo);
+	public void insert(MemberVo memberVo){
+		sqlMapClientTemplate.insert("member.insert", memberVo);
 	}
 }

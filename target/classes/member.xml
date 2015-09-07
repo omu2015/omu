@@ -3,10 +3,50 @@
 <sqlMap namespace="member">
 	<typeAlias alias="MemberVo" type="com.bit2015.omu.vo.MemberVo"/>
 	
-	<insert id="join" parameterClass="MemberVo">
+	<insert id="insert" parameterClass="MemberVo">
 		<![CDATA[
 			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #imageURL#, #memberGrade#, #memberStatus#, #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null, #email#, #zipCode#)
 		]]>
 	</insert>
+	
+	<select id="selectAll" resultClass="MemberVo">
+		<![CDATA[
+			select * from MEMBER
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long">
+		<![CDATA[
+			select * from MEMBER where member_no=#member_no#
+		]]>
+	</select>
+
+	<delete id="delete" parameterClass="MemberVo">
+		<![CDATA[
+			delete from MEMBER where member_no=#member_no#
+		]]>
+	</delete>
+	
+	<update id="update">
+		<![CDATA[
+			update MEMBER set 
+			
+			
+			memberName=#memberName#,
+			password= #password#,
+			imageURL= #imageURL#,
+			memberGrade= #memberGrade#,
+			memberStatus #memberStatus#,
+			birth= #birth#,
+			address= #address#,
+			phoneNum1= #phoneNum1#,
+			phoneNum2= #phoneNum2#,
+			phoneNum3= #phoneNum3#,
+			joinOutDate=#joinOutDate#,
+			email= #email#,
+			zipCode= #zipCode#
+			 where member_no=#member_no#
+		]]>
+	</update>
 	
 </sqlMap>
