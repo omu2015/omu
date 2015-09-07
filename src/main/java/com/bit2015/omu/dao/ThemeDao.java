@@ -22,7 +22,7 @@ public class ThemeDao {
 	}
 	
 	public void insert(ThemeVo themeVo){
-		sqlMapClientTemplate.insert("member.insert", themeVo);
+		sqlMapClientTemplate.insert("theme.insert", themeVo);
 	}
 	
 	

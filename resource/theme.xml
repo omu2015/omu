@@ -9,7 +9,7 @@
 		]]>
 	</insert>
 	
-	<select id="selectAll" parameterClass="ThemeVo">
+	<select id="selectAll" resultClass="ThemeVo">
 		<![CDATA[
 			select * from theme
 		]]>
@@ -20,7 +20,5 @@
 			select * from theme where theme_no=#theme_no#
 		]]>
 	</select>
-	
-	
 	
 </sqlMap>
