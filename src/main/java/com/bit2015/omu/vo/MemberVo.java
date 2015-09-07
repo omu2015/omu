@@ -100,8 +100,15 @@ public class MemberVo {
 	public void setJoinOutDate(String joinOutDate) {
 		this.joinOutDate = joinOutDate;
 	}
-	
-	
-	
-
+	@Override
+	public String toString() {
+		return "MemberVo [member_no=" + member_no + ", memberId=" + memberId
+				+ ", membeName=" + membeName + ", password=" + password
+				+ ", img_no=" + img_no + ", memberGrade=" + memberGrade
+				+ ", memberStatus=" + memberStatus + ", birth=" + birth
+				+ ", address=" + address + ", phoneNum1=" + phoneNum1
+				+ ", phoneNum2=" + phoneNum2 + ", phoneNum3=" + phoneNum3
+				+ ", joinDate=" + joinDate + ", joinOutDate=" + joinOutDate
+				+ "]";
+	}
 }
