@@ -58,13 +58,13 @@ public class TestService {
 		//selectVo
 		//MemberVo memberVo=memberDao.selectVo((long) 7);
 		//System.out.println(memberVo.toString());
-		
+	
 		//update
 		List<MemberVo> list=memberDao.selectAll();
 		System.out.println(list.toString());
-		MemberVo memberVo=memberDao.selectVo((long) 7);
-		memberVo.setMemberName("기모다");
-		//memberDao.update(memberVo);
+		MemberVo memberVo=memberDao.selectVo((long) 11);
+		memberVo.setMemberName("주우섯");
+		memberDao.update(memberVo);
 		List<MemberVo> list2=memberDao.selectAll();
 		System.out.println(list2.toString());
 		

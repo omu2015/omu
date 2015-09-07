@@ -36,7 +36,7 @@
 			password= #password#,
 			imageURL= #imageURL#,
 			memberGrade= #memberGrade#,
-			memberStatus #memberStatus#,
+			memberStatus= #memberStatus#,
 			birth= #birth#,
 			address= #address#,
 			phoneNum1= #phoneNum1#,
