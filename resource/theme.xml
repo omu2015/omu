@@ -9,7 +9,7 @@
 		]]>
 	</select>
 	
-	<select id="selectVo" parameterClass="java.lang.Long">
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ThemeVo">
 		<![CDATA[
 			select * from theme where theme_no=#theme_no#
 		]]>
@@ -21,13 +21,13 @@
 		]]>
 	</insert>
 
-	<delete id="delete" parameterClass="ThemeVo">
+	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
 			delete from theme where theme_no=#theme_no#
 		]]>
 	</delete>
 	
-	<update id="update">
+	<update id="update" parameterClass="ThemeVo">
 		<![CDATA[
 			update theme set themeName = #themeName# where theme_no=#theme_no#
 		]]>

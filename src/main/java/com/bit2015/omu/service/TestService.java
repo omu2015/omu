@@ -19,13 +19,31 @@ public class TestService {
 	public void test(){
 		//List<BoardVo> list=boardDao.selectAll();
 		//List<BoardVo> list=ImgDao.selectAll();
-		ThemeVo themeVo=new ThemeVo();
-		themeVo.setTheme_no(1);
-		themeVo.setThemeName("노래방");
+
+		//insert
+		//ThemeVo themeVo=new ThemeVo();
+		//themeVo.setTheme_no(2);
+		//themeVo.setThemeName("피시방");
+		//themeDao.insert(themeVo);
 		
-		themeDao.insert(themeVo);
-		List<ThemeVo> list=themeDao.selectAll();
-		System.out.println(list.get(0).getTheme_no()+list.get(0).getThemeName());
+		//delete
+		//themeDao.delete((long)1);
+		//List<ThemeVo> list=themeDao.selectAll();
+		//System.out.println(list.toString());
+		
+		//selectVo
+		//ThemeVo themeVo=themeDao.selectVo((long) 2);
+		//System.out.println(themeVo.getTheme_no()+themeVo.getThemeName());
+		
+		//update
+		//List<ThemeVo> list=themeDao.selectAll();
+		//System.out.println(list.toString());
+		//	ThemeVo themeVo=themeDao.selectVo((long)2);
+		//themeVo.setThemeName("주우성수정완료");
+		//	themeDao.update(themeVo);
+		//List<ThemeVo> list2=themeDao.selectAll();
+		//System.out.println(list2.toString());
+
 		
 		//System.out.println(list.toString());
 		
