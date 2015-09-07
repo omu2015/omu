@@ -53,7 +53,7 @@
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="contact.html">Contact</a></li>
 						<li><a href="login_form">Login</a></li>
-						<li><a href="join_form">Join</a></li>
+						<li><a href="/member/joinForm">Join</a></li>
                     </ul>
                 </div>
             </div>

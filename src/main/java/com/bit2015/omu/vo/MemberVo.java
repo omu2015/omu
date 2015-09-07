@@ -3,7 +3,7 @@ package com.bit2015.omu.vo;
 public class MemberVo {
 	private long member_no;
 	private String memberId;
-	private String membeName;
+	private String memberName;
 	private String password;
 	private long img_no;
 	private String memberGrade;
@@ -28,11 +28,11 @@ public class MemberVo {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getMembeName() {
-		return membeName;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setMembeName(String membeName) {
-		this.membeName = membeName;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public String getPassword() {
 		return password;
@@ -103,7 +103,7 @@ public class MemberVo {
 	@Override
 	public String toString() {
 		return "MemberVo [member_no=" + member_no + ", memberId=" + memberId
-				+ ", membeName=" + membeName + ", password=" + password
+				+ ", membeName=" + memberName + ", password=" + password
 				+ ", img_no=" + img_no + ", memberGrade=" + memberGrade
 				+ ", memberStatus=" + memberStatus + ", birth=" + birth
 				+ ", address=" + address + ", phoneNum1=" + phoneNum1

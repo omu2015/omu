@@ -3,9 +3,9 @@
 <sqlMap namespace="member">
 	<typeAlias alias="MemberVo" type="com.bit2015.omu.vo.MemberVo"/>
 	
-	<insert id="insert" parameterClass="MemberVo">
+	<insert id="join" parameterClass="MemberVo">
 		<![CDATA[
-			insert into member values(member_seq.nextval,,,,)
+			insert into member values(member_seq.nextval, #memberId#, #memberName#, #password#, #img_no#, #memberGrade#, #memberStatus#, #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null)
 		]]>
 	</insert>
 	
