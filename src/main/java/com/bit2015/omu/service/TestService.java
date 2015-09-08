@@ -6,16 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
+import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 
@@ -23,13 +20,45 @@ import com.bit2015.omu.vo.ThemeBoxVo;
 public class TestService {
 	
 	@Autowired
-	PlanDao planDao;
+	GoodDao goodDao;
 	
 	public void test2(){
 		
 	}
 	
 	public void test(){
+		
+	}
+	
+	public void good(){
+		
+		 //insert
+		/*
+		GoodVo goodVo=new GoodVo();
+		goodVo.setContent_no(5);
+		goodVo.setMember_no(11);
+		goodDao.insert(goodVo);
+		List<GoodVo> list2=goodDao.selectAll();
+		System.out.println(list2.toString());
+		*/		
+		
+		//delete
+		//goodDao.delete((long)2);
+		//List<GoodVo> list=goodDao.selectAll();
+		//System.out.println(list.toString());
+		
+
+		//selectVo
+		/*
+		List<GoodVo> list=goodDao.selectAll();
+		System.out.println(list.toString());
+		GoodVo goodVo=goodDao.selectVo((long) 2);
+		System.out.println(goodVo.getGood_no()+" "+goodVo.getContent_no());
+		*/
+		
+	}
+	
+	public void plan(){
 		//insert
 		
 		/*

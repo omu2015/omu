@@ -2,4 +2,30 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="good">
 	<typeAlias alias="GoodVo" type="com.bit2015.omu.vo.GoodVo"/>
+	
+	
+	<insert id="insert" parameterClass="GoodVo">
+		<![CDATA[
+			insert INTO GOOD VALUES(good_no_seq.nextval, #content_no#, #member_no#)
+		]]>
+	</insert>
+	
+	<select id="selectAll" resultClass="GoodVo">
+		<![CDATA[
+			select * from GOOD
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="GoodVo">
+		<![CDATA[
+			select * from GOOD where good_no=#good_no#
+		]]>
+	</select>
+
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from GOOD where good_no=#good_no#
+		]]>
+	</delete>
+	
 </sqlMap>
