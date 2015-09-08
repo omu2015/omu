@@ -11,11 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.bit2015.omu.dao.BoardCommentsDao;
 import com.bit2015.omu.dao.BoardDao;
+import com.bit2015.omu.dao.BoardImgBoxDao;
 import com.bit2015.omu.dao.ContentBoxDao;
 import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.vo.BoardCommentsVo;
+import com.bit2015.omu.vo.BoardImgBoxVo;
 import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.GoodVo;
@@ -26,7 +28,7 @@ import com.bit2015.omu.vo.ThemeBoxVo;
 public class TestService {
 	
 	@Autowired
-	BoardCommentsDao boardCommentsDao;
+	BoardImgBoxDao boardImgBoxDao;
 	
 	public void test2(){
 		
@@ -35,39 +37,38 @@ public class TestService {
 	public void test(){
 		
 		//insert
-				/*
-				BoardCommentsVo boardCommentsVo=new BoardCommentsVo();
-				boardCommentsVo.setMember_no(11);
-				boardCommentsVo.setMessage("세번째들어간다");
-				boardCommentsVo.setBoard_no(3);
-				boardCommentsDao.insert(boardCommentsVo);
-				List<BoardCommentsVo> list2=boardCommentsDao.selectAll();
+		/*
+				BoardImgBoxVo boardImgBoxVo=new BoardImgBoxVo();
+				boardImgBoxVo.setBoard_no(4);
+				boardImgBoxVo.setImageURL("sdfsdfsdfsdf/google");
+				boardImgBoxDao.insert(boardImgBoxVo);
+				List<BoardImgBoxVo> list2=boardImgBoxDao.selectAll();
 				System.out.println(list2.toString());
 				*/
 				
 				//delete
 				/*
-				boardCommentsDao.delete((long)2);
-				List<BoardCommentsVo> list=boardCommentsDao.selectAll();
+				boardImgBoxDao.delete((long)2);
+				List<BoardImgBoxVo> list=boardImgBoxDao.selectAll();
 				System.out.println(list.toString());
 				*/
 
 				//selectVo
 				/*
-				List<BoardCommentsVo> list=boardCommentsDao.selectAll();
+				List<BoardImgBoxVo> list=boardImgBoxDao.selectAll();
 				System.out.println(list.toString());
-				BoardCommentsVo boardConmmentsVo=boardCommentsDao.selectVo((long) 3);
-				System.out.println(boardConmmentsVo.getMember_no()+" "+boardConmmentsVo.getMessage());
+				BoardImgBoxVo boardImgBoxVo=boardImgBoxDao.selectVo((long) 3);
+				System.out.println(boardImgBoxVo.getImageURL()+" "+boardImgBoxVo.getBoardImgBox_no());
 				*/
 
 				//update
 				/*
-				List<BoardCommentsVo> list=boardCommentsDao.selectAll();
+				List<BoardImgBoxVo> list=boardImgBoxDao.selectAll();
 				System.out.println(list.toString());
-				BoardCommentsVo boardCommentsVo=boardCommentsDao.selectVo((long)3);
-				boardCommentsVo.setMessage("boardCommentsDao update 테스트");
-				boardCommentsDao.update(boardCommentsVo);
-				List<BoardCommentsVo> list2=boardCommentsDao.selectAll();
+				BoardImgBoxVo boardImgBoxVo=boardImgBoxDao.selectVo((long)3);
+				boardImgBoxVo.setImageURL("BoardImgBoxDao update 테스트");
+				boardImgBoxDao.update(boardImgBoxVo);
+				List<BoardImgBoxVo> list2=boardImgBoxDao.selectAll();
 				System.out.println(list2.toString());
 				*/
 		
