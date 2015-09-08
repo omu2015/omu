@@ -18,43 +18,96 @@
 <script src="../../assets/js/animate.js"></script>
 <script src="../../assets/js/custom.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9"></script>
 <script>
-
 function gogo(){
+	var a = new Array();
+	var b = new Array();
+	var c ; // 주소 위도경도 location
+	var d = document.getElementById("category1").value;	// 키워드
+	var juso = document.getElementById("sample6_address").value;
+	
+	console.log("입력주소      " + juso);
+	console.log("입력키워드명      " + d);
+	
 	$.ajax({
 	type : 'get',
-    url:'https://apis.daum.net/local/geo/addr2coord?apikey=bbef91da99f11fe76f4b3b523d3151e9&q=서울 도봉구 시루봉로 233-15 (방학동)&output=json',
-    data : {  },
+    url:'https://apis.daum.net/local/geo/addr2coord?apikey=bbef91da99f11fe76f4b3b523d3151e9&output=json',
+    data : { q : juso
+    			},
     dataType:'jsonp',
     success:function(response){
-    	console.log(response.channel.item[0].point_x);
-    	var $longitude = response.channel.item[0].point_x;
-    	console.log(response.channel.item[0].point_y);
-    	var $latitude = response.channel.item[0].point_y;
-    	
-    	$.ajax({
-    		type : 'get',
-    	    url:'https://apis.daum.net/local/geo/coord2addr?apikey=bbef91da99f11fe76f4b3b523d3151e9&inputCoordSystem=WGS84&output=json',
-    	    data : { 
-    	    	longitude : $longitude,
-    	    	latitude : $latitude
-    	    },
-    	    dataType:'jsonp',
-    	    success:function(response){
-    	    	console.log(response)
-    	    }
-    	})
-    	
-    }
-})
-}
+    	var longitude = response.channel.item[0].point_x;
+    	var latitude = response.channel.item[0].point_y;
+		c = latitude+","+longitude ; // 주소 위도경도 location
+		
+		$.ajax({
+		type : 'get',
+	    url:'https://apis.daum.net/local/v1/search/keyword.json?apikey=bbef91da99f11fe76f4b3b523d3151e9&radius=20000',
+	    data : {  
+	    	location : c,
+	    	query : d
+	    },
+	    dataType:'jsonp',
+	    success:function(response){
+	    	for(var i=0; i<response.channel.item.length; i++){
+	    		a[i] = response.channel.item[i].latitude;
+	    		b[i] = response.channel.item[i].longitude;
+	    		}
+			}
+		// 지도의 확대 레벨 
+		}).done(function() {
+			var mapContainer = document.getElementById('map');// 지도를 표시할 div 
+			var mapOption = {
+				center : new daum.maps.LatLng(a[0],b[0]), // 지도의 중심좌표
+				level : 3
+			// 	지도의 확대 레벨
+			};
+
+			var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+			// 마커가 표시될 위치입니다
+			for(var i=0; i<a.length; i++){
+				
+				var markerPosition = new daum.maps.LatLng(a[i], b[i]);
+			
+				// 마커를 생성합니다
+				
+				var marker= new daum.maps.Marker({
+				position : markerPosition
+				});
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+				}
+			var iwContent = '<div style="padding:5px;">Hello World!</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+			// 인포윈도우를 생성합니다
+			var infowindow = new daum.maps.InfoWindow({
+			    content : iwContent
+			});
+
+			// 마커에 마우스오버 이벤트를 등록합니다
+			daum.maps.event.addListener(marker , 'mouseover', function() {
+			  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+			    infowindow.open(map, this);
+			});
+
+			// 마커에 마우스아웃 이벤트를 등록합니다
+			daum.maps.event.addListener(marker, 'mouseout', function() {
+			    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+			    infowindow.close();
+			});
+			}) ;
+		}
+	})
+} 
+
 </script>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var fullAddr = ''; // 최종 주소 변수
@@ -95,8 +148,7 @@ function gogo(){
 </head>
 <body>
 	<div id="map" style="width: 500px; height: 400px;"></div>
-	<script type="text/javascript"
-		src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9"></script>
+	<!-- 
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
@@ -107,17 +159,7 @@ function gogo(){
 
 		var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-		// 마커가 표시될 위치입니다 
-		var markerPosition = new daum.maps.LatLng(37.5665350, 126.9779690);
-
-		// 마커를 생성합니다
-		var marker = new daum.maps.Marker({
-			position : markerPosition
-		});
-
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-	</script>
+	</script>  -->
 	<div>
 		<form action="#" method="get">
 		<table>
@@ -207,6 +249,11 @@ function gogo(){
 			<tr>
 				<td>비용</td>
 				<td><textarea></textarea></td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" id="category1">					
+				</td>
 			</tr>
 		</table>
 		</form>
