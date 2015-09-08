@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.bit2015.omu.dao.CommentsDao;
 import com.bit2015.omu.dao.ContentDao;
+import com.bit2015.omu.dao.ProductDao;
 import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
+import com.bit2015.omu.vo.ProductVo;
 
 @Service
 public class PJYTestService2 {
@@ -17,6 +19,8 @@ public class PJYTestService2 {
 	ContentDao contentDao;
     @Autowired
     CommentsDao commentsDao;
+    @Autowired
+    ProductDao  productDao;
 
 	public void test() {
 		
@@ -111,6 +115,42 @@ public class PJYTestService2 {
 		commentsVo.setMessage("주우성천재");
 		commentsDao.update(commentsVo);
 		List<CommentsVo> list2=commentsDao.selectAll();
+		System.out.println(list2.toString());*/
+		
+		/*product*/
+		
+	/*	selectAll
+	 *  List<ProductVo> list = productDao.selectAll();
+		 System.out.println(list.toString());*/
+	
+		 /*selectVo
+		 ProductVo productVo=productDao.selectVo((long) 3);
+		 System.out.println(productVo.toString());*/
+		
+		/*insert*/
+/*		ProductVo productVo =new ProductVo();
+	    productVo.setProductName("가라오케");
+	    productVo.setProductPrice(123456);
+	    productVo.setContent_no(7);
+		productDao.insert(productVo);
+		System.out.println(productVo.toString());
+		List<ProductVo> list=productDao.selectAll();
+		System.out.println(list.toString());*/
+		
+		/*delete*/
+/*		productDao.delete((long)2);
+	    List<ProductVo> list=productDao.selectAll();
+		System.out.println(list.toString());*/
+	   
+		/*update*/
+		/*List<ProductVo> list=productDao.selectAll();
+		System.out.println(list.toString());
+		ProductVo productVo=productDao.selectVo((long)3);
+		productVo.setProductName("강남가라오케");
+		productVo.setProductPrice(9999999);
+		//productVo.setContent_no(7);
+		productDao.update(productVo);
+		List<ProductVo> list2=productDao.selectAll();
 		System.out.println(list2.toString());*/
 	
 	}

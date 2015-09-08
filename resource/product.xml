@@ -3,4 +3,34 @@
 <sqlMap namespace="product">
 	<typeAlias alias="ProductVo" type="com.bit2015.omu.vo.ProductVo"/>
 	
+		<select id="selectAll" resultClass="ProductVo">
+    <![CDATA[
+       select * from product
+    ]]>
+	</select>
+
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ProductVo">
+    <![CDATA[
+       select * from product where product_no=#product_no#
+    ]]>
+	</select>
+
+
+	<insert id="insert" parameterClass="ProductVo">
+		<![CDATA[
+			insert INTO product VALUES(product_no_seq.nextval,#productName#,#productPrice#,#content_no#)
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterClass="java.lang.Long">
+	  <![CDATA[
+	    delete from product where product_no=#product_no#
+	  ]]>
+	</delete>
+	
+	<update id="update" parameterClass="ProductVo"> 
+	<![CDATA[
+	 update product set productName=#productName#, productPrice=#productPrice#  where  product_no=#product_no# 
+	 ]]> 
+    </update>
 </sqlMap>
