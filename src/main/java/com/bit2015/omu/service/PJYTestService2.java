@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.bit2015.omu.dao.CommentsDao;
 import com.bit2015.omu.dao.ContentDao;
+import com.bit2015.omu.dao.ImgBoxDao;
 import com.bit2015.omu.dao.ProductDao;
 import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
+import com.bit2015.omu.vo.ImgBoxVo;
 import com.bit2015.omu.vo.ProductVo;
 
 @Service
@@ -21,6 +23,9 @@ public class PJYTestService2 {
     CommentsDao commentsDao;
     @Autowired
     ProductDao  productDao;
+    @Autowired
+    ImgBoxDao imgBoxDao;
+    
 
 	public void test() {
 		
@@ -152,6 +157,54 @@ public class PJYTestService2 {
 		productDao.update(productVo);
 		List<ProductVo> list2=productDao.selectAll();
 		System.out.println(list2.toString());*/
+		
+		   /*imgbox*/
+	      
+	      //selectAll
+	      
+	     /*
+	      List<ImgBoxVo> list = imgBoxDao.selectAll();
+	      System.out.println(list.toString());
+	  */
+	      
+	      //selectVo
+	      
+	      /*   
+	       ImgBoxVo imgBoxVo=imgBoxDao.selectVo((long) 3);
+	      System.out.println(imgBoxVo.toString());
+	      */
+	      
+	      //insert
+	   
+	      /*   
+	       ImgBoxVo imgBoxVo =new ImgBoxVo();
+	      imgBoxVo.setContent_no(2);
+	      imgBoxVo.setImageURL("머지머지");;
+	      imgBoxDao.insert(imgBoxVo);
+	      System.out.println(imgBoxVo.toString());
+	      List<ImgBoxVo> list=imgBoxDao.selectAll();
+	      System.out.println(list.toString());
+	      */
+	      
+	      //delete
+	   
+	      /*   
+	       imgBoxDao.delete((long)5);
+	       List<ImgBoxVo> list=imgBoxDao.selectAll();
+	      System.out.println(list.toString());
+	      */
+	      
+	      //update
+	      
+	      /*
+	       List<ImgBoxVo> list=imgBoxDao.selectAll();
+	      System.out.println(list.toString());
+	      ImgBoxVo imgBoxVo=imgBoxDao.selectVo((long)1);
+	      imgBoxVo.setImageURL("주우성과 함께하는 테스트");;
+	      imgBoxDao.update(imgBoxVo);
+	      List<ImgBoxVo> list2=imgBoxDao.selectAll();
+	      System.out.println(list2.toString());
+	      */
 	
 	}
 }

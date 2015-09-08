@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="imgBox">
-	<typeAlias alias="ImgBoxVo" type="com.bit2015.omu.vo.ImgBoxVo"/>
-	
+   <typeAlias alias="ImgBoxVo" type="com.bit2015.omu.vo.ImgBoxVo"/>
+   
+      <select id="selectAll" resultClass="ImgBoxVo">
+    <![CDATA[
+       select * from imgBox
+    ]]>
+   </select>
+
+   <select id="selectVo" parameterClass="java.lang.Long" resultClass="ImgBoxVo">
+    <![CDATA[
+       select * from imgBox where imgBox_no=#imgBox_no#
+    ]]>
+   </select>
+
+
+   <insert id="insert" parameterClass="ImgBoxVo">
+      <![CDATA[
+         insert INTO imgBox VALUES(imgBox_no_seq.nextval,#content_no#,#imageURL#)
+      ]]>
+   </insert>
+   
+   <delete id="delete" parameterClass="java.lang.Long">
+     <![CDATA[
+       delete from imgBox where imgBox_no=#imgBox_no#
+     ]]>
+   </delete>
+   
+   <update id="update" parameterClass="ImgBoxVo"> 
+   <![CDATA[
+    update imgBox set imageURL=#imageURL# where imgBox_no=#imgBox_no# 
+    ]]> 
+    </update>
+   
 </sqlMap>
