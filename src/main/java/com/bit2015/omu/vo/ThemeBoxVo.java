@@ -2,33 +2,31 @@ package com.bit2015.omu.vo;
 
 public class ThemeBoxVo {
 
-	private long menuBox_no;
-	private long content_no;
-	private long product_no;
-	public long getMenuBox_no() {
-		return menuBox_no;
+	private long themeBox_no;
+	private long member_no;
+	private long theme_no;
+	public long getThemeBox_no() {
+		return themeBox_no;
 	}
-	public void setMenuBox_no(long menuBox_no) {
-		this.menuBox_no = menuBox_no;
+	public void setThemeBox_no(long themeBox_no) {
+		this.themeBox_no = themeBox_no;
 	}
-	public long getContent_no() {
-		return content_no;
+	public long getMember_no() {
+		return member_no;
 	}
-	public void setContent_no(long content_no) {
-		this.content_no = content_no;
+	public void setMember_no(long member_no) {
+		this.member_no = member_no;
 	}
-	public long getProduct_no() {
-		return product_no;
+	public long getTheme_no() {
+		return theme_no;
 	}
-	public void setProduct_no(long product_no) {
-		this.product_no = product_no;
+	public void setTheme_no(long theme_no) {
+		this.theme_no = theme_no;
 	}
 	@Override
 	public String toString() {
-		return "ThemeBoxVo [menuBox_no=" + menuBox_no + ", content_no="
-				+ content_no + ", product_no=" + product_no + "]";
+		return "ThemeBoxVo [themeBox_no=" + themeBox_no + ", member_no="
+				+ member_no + ", theme_no=" + theme_no + "]";
 	}
-	
-	
-	
+
 }

@@ -4,23 +4,67 @@ package com.bit2015.omu.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bit2015.omu.dao.MemberDao;
-import com.bit2015.omu.dao.ThemeDao;
-import com.bit2015.omu.vo.MemberVo;
-import com.bit2015.omu.vo.ThemeVo;
+import com.bit2015.omu.dao.ThemeBoxDao;
+import com.bit2015.omu.vo.ThemeBoxVo;
 
 @Service
 public class TestService {
 	
 	@Autowired
-	MemberDao memberDao;
+	ThemeBoxDao themeBoxDao;
+	
+	public void test2(){
+		
+		
+	}
 	
 	public void test(){
 		
 		
+		 //insert
+				/*
+				ThemeBoxVo themeBoxVo=new ThemeBoxVo();
+				themeBoxVo.setMember_no(11);
+				themeBoxVo.setTheme_no(2);
+				themeBoxDao.insert(themeBoxVo);
+				List<ThemeBoxVo> list2=themeBoxDao.selectAll();
+				System.out.println(list2.toString());
+				*/
+		
+		
+				//delete
+			//	themeBoxDao.delete((long)1);
+			//	List<ThemeBoxVo> list=themeBoxDao.selectAll();
+			//	System.out.println(list.toString());
+				
+		
+				//selectVo
+		/*
+				List<ThemeBoxVo> list=themeBoxDao.selectAll();
+				System.out.println(list.toString());
+				ThemeBoxVo themeBoxVo=themeBoxDao.selectVo((long) 2);
+				System.out.println(themeBoxVo.getTheme_no()+" "+themeBoxVo.getMember_no());
+		*/
+		
+				//update
+		/*
+				List<ThemeBoxVo> list=themeBoxDao.selectAll();
+				System.out.println(list.toString());
+				ThemeBoxVo themeBoxVo=themeBoxDao.selectVo((long)2);
+				themeBoxVo.setTheme_no(3);
+				themeBoxDao.update(themeBoxVo);
+				List<ThemeBoxVo> list2=themeBoxDao.selectAll();
+				System.out.println(list2.toString());
+		*/
+	}
+	
+	public void member(){
+		
+
 		//////////member.xml
 		
 		//List<MemberVo> list=memberDao.selectAll();
@@ -60,14 +104,19 @@ public class TestService {
 		//System.out.println(memberVo.toString());
 	
 		//update
+	/*	
 		List<MemberVo> list=memberDao.selectAll();
 		System.out.println(list.toString());
 		MemberVo memberVo=memberDao.selectVo((long) 11);
-		memberVo.setMemberName("주우섯");
+		memberVo.setMemberName("주우핫");
 		memberDao.update(memberVo);
 		List<MemberVo> list2=memberDao.selectAll();
 		System.out.println(list2.toString());
+		*/
 		
+	}
+	
+	public void theme(){
 		
 		//////////theme.xml
 
@@ -95,7 +144,9 @@ public class TestService {
 		//List<ThemeVo> list2=themeDao.selectAll();
 		//System.out.println(list2.toString());
 		
-		//System.out.println(list.toString());
-		
 	}
+	
 }
+				
+		
+

@@ -3,4 +3,38 @@
 <sqlMap namespace="themeBox">
 	<typeAlias alias="ThemeBoxVo" type="com.bit2015.omu.vo.ThemeBoxVo"/>
 	
+	
+	<insert id="insert" parameterClass="ThemeBoxVo">
+		<![CDATA[
+			insert INTO THEMEBOX VALUES(themeBox_no_seq.nextval, #member_no#, #theme_no#)
+		]]>
+	</insert>
+	
+	<select id="selectAll" resultClass="ThemeBoxVo">
+		<![CDATA[
+			select * from THEMEBOX
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ThemeBoxVo">
+		<![CDATA[
+			select * from THEMEBOX where themeBox_no=#themeBox_no#
+		]]>
+	</select>
+
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from THEMEBOX where themeBox_no=#themeBox_no#
+		]]>
+	</delete>
+	
+	<update id="update" parameterClass="ThemeBoxVo">
+		<![CDATA[
+			update THEMEBOX set 
+			member_no=#member_no#,
+			theme_no=#theme_no#
+			where themeBox_no=#themeBox_no#
+		]]>
+	</update>
+	
 </sqlMap>
