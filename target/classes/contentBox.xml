@@ -3,4 +3,49 @@
 <sqlMap namespace="contentBox">
 	<typeAlias alias="ContentBoxVo" type="com.bit2015.omu.vo.ContentBoxVo"/>
 	
+	
+	<insert id="insert" parameterClass="ContentBoxVo">
+		<![CDATA[
+			insert INTO contentBox VALUES(contentBox_no_seq.nextval, #plan_no#, #content_no#)
+		]]>
+	</insert>
+	
+	<select id="selectAll" resultClass="ContentBoxVo">
+		<![CDATA[
+			select * from contentBox
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ContentBoxVo">
+		<![CDATA[
+			select * from contentBox where contentBox_no=#contentBox_no#
+		]]>
+	</select>
+
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from contentBox where contentBox_no=#contentBox_no#
+		]]>
+	</delete>
+	
+	<update id="update" parameterClass="ContentBoxVo">
+		<![CDATA[
+			update contentBox set 
+			 plan_no = #plan_no#,
+			 content_no = #content_no#
+			where contentBox_no=#contentBox_no#
+		]]>
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </sqlMap>

@@ -9,9 +9,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit2015.omu.dao.ContentBoxDao;
 import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
@@ -20,13 +22,53 @@ import com.bit2015.omu.vo.ThemeBoxVo;
 public class TestService {
 	
 	@Autowired
-	GoodDao goodDao;
+	ContentBoxDao contentBoxDao;
 	
 	public void test2(){
 		
 	}
 	
 	public void test(){
+		
+	}
+	
+	public void contentBox(){
+		
+		 //insert
+		/*
+		ContentBoxVo contentBoxVo=new ContentBoxVo();
+		contentBoxVo.setPlan_no(2);
+		contentBoxVo.setContent_no(6);
+		contentBoxDao.insert(contentBoxVo);
+		List<ContentBoxVo> list2=contentBoxDao.selectAll();
+		System.out.println(list2.toString());
+		*/
+
+		//delete
+		/*
+		contentBoxDao.delete((long)2);
+		List<ContentBoxVo> list=contentBoxDao.selectAll();
+		System.out.println(list.toString());
+		*/
+
+		//selectVo
+/*
+		List<ContentBoxVo> list=contentBoxDao.selectAll();
+		System.out.println(list.toString());
+		ContentBoxVo contentBoxVo=contentBoxDao.selectVo((long) 3);
+		System.out.println(contentBoxVo.getPlan_no()+" "+contentBoxVo.getContent_no());
+		*/
+
+		//update
+		/*
+		List<ContentBoxVo> list=contentBoxDao.selectAll();
+		System.out.println(list.toString());
+		ContentBoxVo contentBoxVo=contentBoxDao.selectVo((long)3);
+		contentBoxVo.setContent_no(7);
+		contentBoxDao.update(contentBoxVo);
+		List<ContentBoxVo> list2=contentBoxDao.selectAll();
+		System.out.println(list2.toString());
+		*/
 		
 	}
 	
