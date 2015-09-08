@@ -59,6 +59,7 @@ public class PJYTestService2 {
 		
 		/*update*/
 		
+		
 		List<ContentVo> list=contentDao.selectAll();
 		System.out.println(list.toString());
 		ContentVo contentVo=contentDao.selectVo((long)5);
