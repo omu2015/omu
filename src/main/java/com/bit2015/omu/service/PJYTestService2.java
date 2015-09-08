@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit2015.omu.dao.CommentsDao;
 import com.bit2015.omu.dao.ContentDao;
+import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
 
 @Service
@@ -13,8 +15,13 @@ public class PJYTestService2 {
 
 	@Autowired
 	ContentDao contentDao;
+    @Autowired
+    CommentsDao commentsDao;
 
 	public void test() {
+		
+		
+		/*content*/
 		/*
 		 * selectAll
 		 * 
@@ -23,7 +30,9 @@ public class PJYTestService2 {
 		 */
 
 		/*
-		 * selectVo ContentVo contentVo=contentDao.selectVo((long) 2);
+		 * selectVo
+		 * 
+		 *  ContentVo contentVo=contentDao.selectVo((long) 2);
 		 * System.out.println(contentVo.toString());
 		 */
       
@@ -58,9 +67,7 @@ public class PJYTestService2 {
 		System.out.println(list.toString());*/
 		
 		/*update*/
-		
-		
-		List<ContentVo> list=contentDao.selectAll();
+		/*	List<ContentVo> list=contentDao.selectAll();
 		System.out.println(list.toString());
 		ContentVo contentVo=contentDao.selectVo((long)5);
 		contentVo.setPhone("번호 바꿔");
@@ -68,7 +75,42 @@ public class PJYTestService2 {
 		contentVo.setTitle("타이틀바꿔");
 		contentDao.update(contentVo);
 		List<ContentVo> list2=contentDao.selectAll();
+		System.out.println(list2.toString());*/
+	
+	  /*comments*/
+		/*selectAll*/
+		  
+		  //List<CommentsVo> list = commentsDao.selectAll();
+		 // System.out.println(list.toString());
+		
+		 //selectVo
+/*		  CommentsVo commentsVo=commentsDao.selectVo((long) 2);
+		  System.out.println(commentsVo.toString());*/
+		 //insert
+		 /*   CommentsVo commentsVo =new CommentsVo();
+		    commentsVo.setMember_no(11);
+		    commentsVo.setContent_no(5);
+		    
+			commentsDao.insert(commentsVo);
+			System.out.println(commentsVo.toString());
+			List<CommentsVo> list=commentsDao.selectAll();
+			System.out.println(list.toString());*/
+		
+		/*delete*/
+		
+		/*commentsDao.delete((long)1);
+	    List<CommentsVo> list=commentsDao.selectAll();
+		System.out.println(list.toString());*/
+		
+		/*update*/
+		
+		List<CommentsVo> list=commentsDao.selectAll();
+		System.out.println(list.toString());
+		CommentsVo commentsVo=commentsDao.selectVo((long)2);
+		commentsVo.setRegDate("시간을 바꿔");
+		commentsDao.update(commentsVo);
+		List<ContentVo> list2=contentDao.selectAll();
 		System.out.println(list2.toString());
+	
 	}
-
 }
