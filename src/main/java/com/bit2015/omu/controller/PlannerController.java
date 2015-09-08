@@ -16,8 +16,11 @@ public class PlannerController {
 		PJYTestService2 testService2;
 
 
-		@RequestMapping("/test")
+		@RequestMapping("/testAll")
 		public void test(){
 			testService2.test();
 		}	
+	
+		
+		
 }

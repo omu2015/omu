@@ -8,10 +8,10 @@ public class ContentVo {
 	private long member_no;
 	private String phone;
 	private String newAddress;
-	private String imageUrl;
+	private String imageURL;
 	private String direction;
-	private String zipcode;
-	private String placeUrl;
+	private String zipCode;
+	private String placeURL;
 	private String id;
 	private String title;
 	private String category;
@@ -19,9 +19,8 @@ public class ContentVo {
 	private String longitude;
 	private String latitude;
 	private String addressBCode;
-	private String cost;
-	private String time;
-	
+	private long cost;
+	private long time;
 	public long getContent_no() {
 		return content_no;
 	}
@@ -58,11 +57,11 @@ public class ContentVo {
 	public void setNewAddress(String newAddress) {
 		this.newAddress = newAddress;
 	}
-	public String getImageUrl() {
-		return imageUrl;
+	public String getImageURL() {
+		return imageURL;
 	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 	public String getDirection() {
 		return direction;
@@ -71,16 +70,16 @@ public class ContentVo {
 		this.direction = direction;
 	}
 	public String getZipcode() {
-		return zipcode;
+		return zipCode;
 	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
-	public String getPlaceUrl() {
-		return placeUrl;
+	public String getPlaceURL() {
+		return placeURL;
 	}
-	public void setPlaceUrl(String placeUrl) {
-		this.placeUrl = placeUrl;
+	public void setPlaceURL(String placeURL) {
+		this.placeURL = placeURL;
 	}
 	public String getId() {
 		return id;
@@ -124,16 +123,16 @@ public class ContentVo {
 	public void setAddressBCode(String addressBCode) {
 		this.addressBCode = addressBCode;
 	}
-	public String getCost() {
+	public long getCost() {
 		return cost;
 	}
-	public void setCost(String cost) {
+	public void setCost(long cost) {
 		this.cost = cost;
 	}
-	public String getTime() {
+	public long getTime() {
 		return time;
 	}
-	public void setTime(String time) {
+	public void setTime(long time) {
 		this.time = time;
 	}
 	@Override
@@ -141,13 +140,12 @@ public class ContentVo {
 		return "ContentVo [content_no=" + content_no + ", theme_no=" + theme_no
 				+ ", regDate=" + regDate + ", member_no=" + member_no
 				+ ", phone=" + phone + ", newAddress=" + newAddress
-				+ ", imageUrl=" + imageUrl + ", direction=" + direction
-				+ ", zipcode=" + zipcode + ", placeUrl=" + placeUrl + ", id="
+				+ ", imageURL=" + imageURL + ", direction=" + direction
+				+ ", zipcode=" + zipCode + ", placeURL=" + placeURL + ", id="
 				+ id + ", title=" + title + ", category=" + category
 				+ ", address=" + address + ", longitude=" + longitude
 				+ ", latitude=" + latitude + ", addressBCode=" + addressBCode
 				+ ", cost=" + cost + ", time=" + time + "]";
 	}
-	
 	
 }
