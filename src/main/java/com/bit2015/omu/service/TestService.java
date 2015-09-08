@@ -34,7 +34,42 @@ public class TestService {
 	
 	public void test(){
 		
-		
+		//insert
+				/*
+				BoardCommentsVo boardCommentsVo=new BoardCommentsVo();
+				boardCommentsVo.setMember_no(11);
+				boardCommentsVo.setMessage("세번째들어간다");
+				boardCommentsVo.setBoard_no(3);
+				boardCommentsDao.insert(boardCommentsVo);
+				List<BoardCommentsVo> list2=boardCommentsDao.selectAll();
+				System.out.println(list2.toString());
+				*/
+				
+				//delete
+				/*
+				boardCommentsDao.delete((long)2);
+				List<BoardCommentsVo> list=boardCommentsDao.selectAll();
+				System.out.println(list.toString());
+				*/
+
+				//selectVo
+				/*
+				List<BoardCommentsVo> list=boardCommentsDao.selectAll();
+				System.out.println(list.toString());
+				BoardCommentsVo boardConmmentsVo=boardCommentsDao.selectVo((long) 3);
+				System.out.println(boardConmmentsVo.getMember_no()+" "+boardConmmentsVo.getMessage());
+				*/
+
+				//update
+				/*
+				List<BoardCommentsVo> list=boardCommentsDao.selectAll();
+				System.out.println(list.toString());
+				BoardCommentsVo boardCommentsVo=boardCommentsDao.selectVo((long)3);
+				boardCommentsVo.setMessage("boardCommentsDao update 테스트");
+				boardCommentsDao.update(boardCommentsVo);
+				List<BoardCommentsVo> list2=boardCommentsDao.selectAll();
+				System.out.println(list2.toString());
+				*/
 		
 	}
 	
