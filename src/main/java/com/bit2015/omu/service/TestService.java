@@ -32,8 +32,12 @@ public class TestService {
 	
 	public void test(){
 		
+	}
+	
+	public void board(){
+		
 		 //insert
-			
+			/*
 			BoardVo boardVo=new BoardVo();
 			boardVo.setPlan_no(6);
 			boardVo.setMember_no(11);
@@ -41,7 +45,7 @@ public class TestService {
 			boardDao.insert(boardVo);
 			List<BoardVo> list2=boardDao.selectAll();
 			System.out.println(list2.toString());
-			
+			*/
 
 			//delete
 			/*
@@ -51,19 +55,19 @@ public class TestService {
 			*/
 
 			//selectVo
-	/*
-			List<BoardVo> list=contentBoxDao.selectAll();
+			/*
+			List<BoardVo> list=boardDao.selectAll();
 			System.out.println(list.toString());
 			BoardVo boardVo=boardDao.selectVo((long) 3);
-			System.out.println(boardVo.getPlan_no()+" "+boardVo.getContent_no());
+			System.out.println(boardVo.getPlan_no()+" "+boardVo.getMessage());
 			*/
 
 			//update
 			/*
 			List<BoardVo> list=boardDao.selectAll();
 			System.out.println(list.toString());
-			BoardVo contentBoxVo=boardDao.selectVo((long)3);
-			boardVo.setContent_no(7);
+			BoardVo boardVo=boardDao.selectVo((long)3);
+			boardVo.setMessage("이거 업데이트 되는건가요?");
 			boardDao.update(boardVo);
 			List<BoardVo> list2=boardDao.selectAll();
 			System.out.println(list2.toString());
