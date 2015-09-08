@@ -9,11 +9,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit2015.omu.dao.BoardCommentsDao;
 import com.bit2015.omu.dao.BoardDao;
 import com.bit2015.omu.dao.ContentBoxDao;
 import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
+import com.bit2015.omu.vo.BoardCommentsVo;
 import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.GoodVo;
@@ -24,13 +26,50 @@ import com.bit2015.omu.vo.ThemeBoxVo;
 public class TestService {
 	
 	@Autowired
-	BoardDao boardDao;
+	BoardCommentsDao boardCommentsDao;
 	
 	public void test2(){
 		
 	}
 	
 	public void test(){
+		
+		//insert
+		
+		BoardCommentsVo boardCommentsVo=new BoardCommentsVo();
+		boardCommentsVo.setMember_no(11);
+		boardCommentsVo.setMessage("들어간다");
+		boardCommentsVo.setBoard_no(3);
+		boardCommentsDao.insert(boardCommentsVo);
+		List<BoardCommentsVo> list2=boardCommentsDao.selectAll();
+		System.out.println(list2.toString());
+		
+		
+		//delete
+		/*
+		boardDao.delete((long)2);
+		List<BoardCommentsVo> list=boardDao.selectAll();
+		System.out.println(list.toString());
+		*/
+
+		//selectVo
+		/*
+		List<BoardCommentsVo> list=boardDao.selectAll();
+		System.out.println(list.toString());
+		BoardCommentsVo boardConmmentsVo=boardDao.selectVo((long) 3);
+		System.out.println(boardConmmentsVo.getPlan_no()+" "+boardConmmentsVo.getMessage());
+		*/
+
+		//update
+		/*
+		List<BoardCommentsVo> list=boardDao.selectAll();
+		System.out.println(list.toString());
+		BoardConmmentsVo boardConmmentsVo=boardDao.selectVo((long)3);
+		boardVo.setMessage("이거 업데이트 되는건가요?");
+		boardDao.update(boardConmmentsVo);
+		List<BoardCommentsVo> list2=boardDao.selectAll();
+		System.out.println(list2.toString());
+		*/
 		
 	}
 	

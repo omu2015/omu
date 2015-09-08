@@ -18,4 +18,6 @@
  	<sqlMap resource="product.xml"/>
  	<sqlMap resource="theme.xml"/>
  	<sqlMap resource="themeBox.xml"/>
+ 	<sqlMap resource="boardComments.xml"/>
+ 	
 </sqlMapConfig>
