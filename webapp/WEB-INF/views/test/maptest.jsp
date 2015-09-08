@@ -26,6 +26,7 @@ function gogo(){
 	var c ; // 주소 위도경도 location
 	var d = document.getElementById("category1").value;	// 키워드
 	var juso = document.getElementById("sample6_address").value;
+	var title = [];
 	
 	console.log("입력주소      " + juso);
 	console.log("입력키워드명      " + d);
@@ -53,10 +54,14 @@ function gogo(){
 	    	for(var i=0; i<response.channel.item.length; i++){
 	    		a[i] = response.channel.item[i].latitude;
 	    		b[i] = response.channel.item[i].longitude;
+	    		title[i] = response.channel.item[i].title;
 	    		}
 			}
 		// 지도의 확대 레벨 
 		}).done(function() {
+			var marker = [];
+			var infowindow;
+			
 			var mapContainer = document.getElementById('map');// 지도를 표시할 div 
 			var mapOption = {
 				center : new daum.maps.LatLng(a[0],b[0]), // 지도의 중심좌표
@@ -73,31 +78,32 @@ function gogo(){
 			
 				// 마커를 생성합니다
 				
-				var marker= new daum.maps.Marker({
-				position : markerPosition
+				marker[i] = new daum.maps.Marker({
+				position : markerPosition,
+				title : title[i]
 				});
 				// 마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
+				marker[i].setMap(map);
+				
+				// 마커에 마우스오버 이벤트를 등록합니다
+				daum.maps.event.addListener(marker[i] , 'mouseover', function() {
+				  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+				  	infowindow = new daum.maps.InfoWindow({
+				    	content : this.getTitle()
+				  	});
+				    	infowindow.open(map, this)
+				});
+
+				// 마커에 마우스아웃 이벤트를 등록합니다
+				daum.maps.event.addListener(marker[i], 'mouseout', function() {
+				    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+				    infowindow.close();
+				});
+
 				}
-			var iwContent = '<div style="padding:5px;">Hello World!</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
 			// 인포윈도우를 생성합니다
-			var infowindow = new daum.maps.InfoWindow({
-			    content : iwContent
-			});
-
-			// 마커에 마우스오버 이벤트를 등록합니다
-			daum.maps.event.addListener(marker , 'mouseover', function() {
-			  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-			    infowindow.open(map, this);
-			});
-
-			// 마커에 마우스아웃 이벤트를 등록합니다
-			daum.maps.event.addListener(marker, 'mouseout', function() {
-			    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-			    infowindow.close();
-			});
-			}) ;
+						}) ;
 		}
 	})
 } 
