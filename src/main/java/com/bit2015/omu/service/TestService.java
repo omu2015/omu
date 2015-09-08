@@ -2,27 +2,83 @@ package com.bit2015.omu.service;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+
+
+
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
+import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 
 @Service
 public class TestService {
 	
 	@Autowired
-	ThemeBoxDao themeBoxDao;
+	PlanDao planDao;
 	
 	public void test2(){
-		
 		
 	}
 	
 	public void test(){
+		//insert
+		
+		/*
+		PlanVo planVo=new PlanVo();
+		planVo.setMember_no(11);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.out.println(Calendar.getInstance().getTime());
+		String strDate = sdf.format(Calendar.getInstance().getTime());
+		System.out.println(strDate);
+		planVo.setPlanDate(strDate);
+		planVo.setTotalCost(20000);
+		planVo.setTotalTime(150);
+		planDao.insert(planVo);
+		List<PlanVo> list2=planDao.selectAll();
+		System.out.println(list2.toString());
+		*/
+
+		//delete
+	//	planDao.delete((long)3);
+	//	List<PlanVo> list=planDao.selectAll();
+	//	System.out.println(list.toString());
+		
+
+		//selectVo
+/*
+		List<PlanVo> list=planDao.selectAll();
+		System.out.println(list.toString());
+		PlanVo planVo=planDao.selectVo((long) 2);
+		System.out.println(planVo.getPlanDate()+" "+planVo.getTotalTime());
+
+*/
+		//update
+		/*
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.out.println(Calendar.getInstance().getTime());
+		String strDate = sdf.format(Calendar.getInstance().getTime());
+		System.out.println(strDate);
+		
+		List<PlanVo> list=planDao.selectAll();
+		System.out.println(list.toString());
+		PlanVo planVo=planDao.selectVo((long)2);
+		planVo.setPlanDate("1992/09/22 00:20:55");
+		planDao.update(planVo);
+		List<PlanVo> list2=planDao.selectAll();
+		System.out.println(list2.toString());
+		*/
+	}
+	
+	public void themeBox(){
 		
 		
 		 //insert

@@ -3,4 +3,40 @@
 <sqlMap namespace="plan">
 	<typeAlias alias="PlanVo" type="com.bit2015.omu.vo.PlanVo"/>
 	
+	<insert id="insert" parameterClass="PlanVo">
+		<![CDATA[
+			insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(#planDate#, 'yyyy/mm/dd hh24:mi:ss') ,#totalCost#,#totalTime#)
+		]]>
+	</insert>
+	
+	<select id="selectAll" resultClass="PlanVo">
+		<![CDATA[
+			select plan_no, member_no, planDate, totalCost, totalTime from plan
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="PlanVo">
+		<![CDATA[
+			select * from plan where plan_no=#plan_no#
+		]]>
+	</select>
+
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from plan where plan_no=#plan_no#
+		]]>
+	</delete>
+	
+	<update id="update" parameterClass="PlanVo">
+		<![CDATA[
+			update plan set 
+			member_no=#member_no#,
+			planDate=to_Date(#planDate#, 'yyyy/mm/dd hh24:mi:ss'),
+			totalCost=#totalCost#,
+			totalTime=#totalTime#
+			where plan_no=#plan_no#
+		]]>
+	</update>
+	
+	
 </sqlMap>

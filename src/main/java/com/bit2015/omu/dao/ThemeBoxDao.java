@@ -38,16 +38,4 @@ public class ThemeBoxDao {
 	public void update(ThemeBoxVo themeBoxVo) {
 		sqlMapClientTemplate.update("themeBox.update", themeBoxVo);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
