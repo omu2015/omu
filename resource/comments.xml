@@ -19,7 +19,7 @@
 
 	<insert id="insert" parameterClass="CommentsVo">
 		<![CDATA[
-			insert INTO comments VALUES(comments_no_seq.nextval,#member_no#,#content_no#,sysdate)
+			insert INTO comments VALUES(comments_no_seq.nextval,#member_no#,#content_no#,sysdate,#message#)
 		]]>
 	</insert>
 	
@@ -31,7 +31,7 @@
 	
 	<update id="update" parameterClass="CommentsVo"> 
 	<![CDATA[
-	 update comments set regDate=#regDate# where comments_no=#comments_no# 
+	 update comments set regDate=sysdate ,message=#message#  where comments_no=#comments_no# 
 	 ]]> 
     </update>
 

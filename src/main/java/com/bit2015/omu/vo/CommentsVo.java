@@ -6,7 +6,7 @@ public class CommentsVo {
 	private long member_no;
 	private long content_no;
 	private String regDate;
-	
+	private String message;
 	public long getComments_no() {
 		return comments_no;
 	}
@@ -31,14 +31,19 @@ public class CommentsVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	@Override
 	public String toString() {
 		return "CommentsVo [comments_no=" + comments_no + ", member_no="
 				+ member_no + ", content_no=" + content_no + ", regDate="
-				+ regDate + "]";
+				+ regDate + ", message=" + message + "]";
 	}
-	
+
 	
 	
 

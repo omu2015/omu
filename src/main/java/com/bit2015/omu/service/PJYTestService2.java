@@ -87,15 +87,16 @@ public class PJYTestService2 {
 /*		  CommentsVo commentsVo=commentsDao.selectVo((long) 2);
 		  System.out.println(commentsVo.toString());*/
 		 //insert
-		 /*   CommentsVo commentsVo =new CommentsVo();
+		/*
+		   CommentsVo commentsVo =new CommentsVo();
 		    commentsVo.setMember_no(11);
 		    commentsVo.setContent_no(5);
-		    
+		    commentsVo.setMessage("주우성주우성주우성주우성");
 			commentsDao.insert(commentsVo);
 			System.out.println(commentsVo.toString());
 			List<CommentsVo> list=commentsDao.selectAll();
-			System.out.println(list.toString());*/
-		
+			System.out.println(list.toString());
+*/		
 		/*delete*/
 		
 		/*commentsDao.delete((long)1);
@@ -104,13 +105,13 @@ public class PJYTestService2 {
 		
 		/*update*/
 		
-		List<CommentsVo> list=commentsDao.selectAll();
+		/*List<CommentsVo> list=commentsDao.selectAll();
 		System.out.println(list.toString());
-		CommentsVo commentsVo=commentsDao.selectVo((long)2);
-		commentsVo.setRegDate("시간을 바꿔");
+		CommentsVo commentsVo=commentsDao.selectVo((long)4);
+		commentsVo.setMessage("주우성천재");
 		commentsDao.update(commentsVo);
-		List<ContentVo> list2=contentDao.selectAll();
-		System.out.println(list2.toString());
+		List<CommentsVo> list2=commentsDao.selectAll();
+		System.out.println(list2.toString());*/
 	
 	}
 }
