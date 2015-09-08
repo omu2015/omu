@@ -1,0 +1,53 @@
+package com.bit2015.omu.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.ThemeBoxVo;
+import com.bit2015.omu.vo.ThemeVo;
+
+@Repository
+public class ThemeBoxDao {
+
+	@Autowired
+	SqlMapClientTemplate sqlMapClientTemplate;
+	
+	public void insert(ThemeBoxVo themeBoxVo){
+		sqlMapClientTemplate.insert("themeBox.insert", themeBoxVo);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ThemeBoxVo> selectAll(){
+		List<ThemeBoxVo> list= sqlMapClientTemplate.queryForList("themeBox.selectAll");
+		return list;
+	}
+	
+	public ThemeBoxVo selectVo(Long themeBox_no){
+		ThemeBoxVo themeBoxVo = (ThemeBoxVo) sqlMapClientTemplate.queryForObject("themeBox.selectVo", themeBox_no);
+		return themeBoxVo;
+	}
+
+	public void delete(Long themeBox_no) {
+		sqlMapClientTemplate.delete("themeBox.delete", themeBox_no);
+	}
+	
+	public void update(ThemeBoxVo themeBoxVo) {
+		sqlMapClientTemplate.update("themeBox.update", themeBoxVo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
