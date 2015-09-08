@@ -57,6 +57,17 @@ public class PJYTestService2 {
 	    List<ContentVo> list=contentDao.selectAll();
 		System.out.println(list.toString());*/
 		
+		/*update*/
+		
+		List<ContentVo> list=contentDao.selectAll();
+		System.out.println(list.toString());
+		ContentVo contentVo=contentDao.selectVo((long)5);
+		contentVo.setPhone("번호 바꿔");
+		contentVo.setId("아이디바꿔");
+		contentVo.setTitle("타이틀바꿔");
+		contentDao.update(contentVo);
+		List<ContentVo> list2=contentDao.selectAll();
+		System.out.println(list2.toString());
 	}
 
 }

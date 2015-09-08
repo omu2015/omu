@@ -32,5 +32,10 @@ public class ContentDao {
 		sqlMapClientTemplate.delete("content.delete",content_no);
 		
 	}
+
+	public void update(ContentVo contentVo) {
+		sqlMapClientTemplate.update("content.update", contentVo);
+
+	}
 	
 }
