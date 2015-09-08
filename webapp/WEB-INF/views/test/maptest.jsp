@@ -61,6 +61,7 @@ function gogo(){
 		}).done(function() {
 			var marker = [];
 			var infowindow;
+			var infowindow2;
 			
 			var mapContainer = document.getElementById('map');// 지도를 표시할 div 
 			var mapOption = {
@@ -81,11 +82,60 @@ function gogo(){
 				marker[i] = new daum.maps.Marker({
 				position : markerPosition,
 				title : title[i]
+				
 				});
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker[i].setMap(map);
 				
 				// 마커에 마우스오버 이벤트를 등록합니다
+				daum.maps.event.addListener(marker[i] , 'click', function() {
+						infowindow.close();
+				  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+				  	infowindow2 = new daum.maps.InfoWindow({
+				    	content : '<div class="overlaybox">' +
+				        '    <div class="boxtitle">금주 영화순위</div>' +
+				        '    <div class="first">' +
+				        '        <div class="triangle text">1</div>' +
+				        '        <div class="movietitle text"><input type="button" onclick="close()" value="X"/></div>' +
+				        '    </div>' +
+				        '    <ul>' +
+				        '        <li class="up">' +
+				        '            <span class="number">2</span>' +
+				        '            <span class="title">'+this.getTitle()+'</span>' +
+				        '            <span class="arrow up"></span>' +
+				        '            <span class="count">2</span>' +
+				        '        </li>' +
+				        '        <li>' +
+				        '            <span class="number">3</span>' +
+				        '            <span class="title">해적(바다로 간 산적)</span>' +
+				        '            <span class="arrow up"></span>' +
+				        '            <span class="count">6</span>' +
+				        '        </li>' +
+				        '        <li>' +
+				        '            <span class="number">4</span>' +
+				        '            <span class="title">해무</span>' +
+				        '            <span class="arrow up"></span>' +
+				        '            <span class="count">3</span>' +
+				        '        </li>' +
+				        '        <li>' +
+				        '            <span class="number">5</span>' +
+				        '            <span class="title">안녕, 헤이즐</span>' +
+				        '            <span class="arrow down"></span>' +
+				        '            <span class="count">1</span>' +
+				        '        </li>' +
+				        '    </ul>' +
+				        '</div>',
+				        xAnchor: 0.3,
+				        yAnchor: 0.91
+
+				  	});
+				  	infowindow2.open(map, this)
+				});
+				daum.maps.event.addListener(map, 'click', function() {
+				    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+				    infowindow2.close();
+				});
+				
 				daum.maps.event.addListener(marker[i] , 'mouseover', function() {
 				  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
 				  	infowindow = new daum.maps.InfoWindow({
@@ -110,6 +160,7 @@ function gogo(){
 
 </script>
 <script>
+
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
