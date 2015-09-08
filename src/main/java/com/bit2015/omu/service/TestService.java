@@ -9,10 +9,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit2015.omu.dao.BoardDao;
 import com.bit2015.omu.dao.ContentBoxDao;
 import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
+import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.PlanVo;
@@ -22,13 +24,51 @@ import com.bit2015.omu.vo.ThemeBoxVo;
 public class TestService {
 	
 	@Autowired
-	ContentBoxDao contentBoxDao;
+	BoardDao boardDao;
 	
 	public void test2(){
 		
 	}
 	
 	public void test(){
+		
+		 //insert
+			/*
+			BoardVo boardVo=new BoardVo();
+			boardVo.setPlan_no(6);
+			boardVo.setMember_no(11);
+			boardVo.setMessages("게시판글 예제");
+			
+			boardDao.insert(boardVo);
+			List<BoardVo> list2=boardDao.selectAll();
+			System.out.println(list2.toString());
+			
+*/
+			//delete
+			/*
+			boardDao.delete((long)2);
+			List<BoardVo> list=boardDao.selectAll();
+			System.out.println(list.toString());
+			*/
+
+			//selectVo
+	/*
+			List<BoardVo> list=contentBoxDao.selectAll();
+			System.out.println(list.toString());
+			BoardVo boardVo=boardDao.selectVo((long) 3);
+			System.out.println(boardVo.getPlan_no()+" "+boardVo.getContent_no());
+			*/
+
+			//update
+			/*
+			List<BoardVo> list=boardDao.selectAll();
+			System.out.println(list.toString());
+			BoardVo contentBoxVo=boardDao.selectVo((long)3);
+			boardVo.setContent_no(7);
+			boardDao.update(boardVo);
+			List<BoardVo> list2=boardDao.selectAll();
+			System.out.println(list2.toString());
+			*/
 		
 	}
 	

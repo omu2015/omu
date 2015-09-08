@@ -3,10 +3,39 @@
 <sqlMap namespace="board">
 	<typeAlias alias="BoardVo" type="com.bit2015.omu.vo.BoardVo"/>
 		
-	<insert id="insert">
+		<insert id="insert" parameterClass="BoardVo">
 		<![CDATA[
-			insert into board values(member_seq.nextval, #memberId#, #memberName#, #password#, #img_no#, #memberGrade#, #memberStatus#, #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null)
+			insert INTO board VALUES(board_no_seq.nextval, #plan_no#, #member_no# ,#messages#,#regDate#, #comments_no#)
 		]]>
 	</insert>
 	
+	<select id="selectAll" resultClass="BoardVo">
+		<![CDATA[
+			select * from board
+		]]>
+	</select>
+	
+	<select id="selectVo" parameterClass="java.lang.Long" resultClass="BoardVo">
+		<![CDATA[
+			select * from board where board_no=#board_no#
+		]]>
+	</select>
+
+	<delete id="delete" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from board where board_no=#board_no#
+		]]>
+	</delete>
+	
+	<update id="update" parameterClass="BoardVo">
+		<![CDATA[
+			update board set 
+			plan_no=#plan_no#,
+			member_no=#member_no#,
+			messages=#messages#,
+			regDate=#regDate#,
+			comments_no=#comments_no#
+			where board_no=#board_no#
+		]]>
+	</update>
 </sqlMap>
