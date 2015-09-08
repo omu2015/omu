@@ -5,7 +5,7 @@
 		
 		<insert id="insert" parameterClass="BoardVo">
 		<![CDATA[
-			insert INTO board VALUES(board_no_seq.nextval, #plan_no#, #member_no# ,#messages#,#regDate#, #comments_no#)
+			insert INTO board VALUES(board_no_seq.nextval, #plan_no#, #member_no#, #message#, sysdate)
 		]]>
 	</insert>
 	
@@ -32,9 +32,8 @@
 			update board set 
 			plan_no=#plan_no#,
 			member_no=#member_no#,
-			messages=#messages#,
-			regDate=#regDate#,
-			comments_no=#comments_no#
+			message=#message#,
+			regDate=sysdate
 			where board_no=#board_no#
 		]]>
 	</update>

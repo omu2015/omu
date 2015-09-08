@@ -5,7 +5,7 @@ public class BoardVo {
 	private long board_no;
 	private long plan_no;
 	private long member_no;
-	private String messages;
+	private String message;
 	private String regDate;
 	public long getBoard_no() {
 		return board_no;
@@ -25,11 +25,11 @@ public class BoardVo {
 	public void setMember_no(long member_no) {
 		this.member_no = member_no;
 	}
-	public String getMessages() {
-		return messages;
+	public String getMessage() {
+		return message;
 	}
-	public void setMessages(String messages) {
-		this.messages = messages;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	public String getRegDate() {
 		return regDate;
@@ -40,10 +40,9 @@ public class BoardVo {
 	@Override
 	public String toString() {
 		return "BoardVo [board_no=" + board_no + ", plan_no=" + plan_no
-				+ ", member_no=" + member_no + ", messages=" + messages
+				+ ", member_no=" + member_no + ", message=" + message
 				+ ", regDate=" + regDate + "]";
 	}
-	
 	
 	
 	

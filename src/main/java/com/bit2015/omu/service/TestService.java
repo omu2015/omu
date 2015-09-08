@@ -33,17 +33,16 @@ public class TestService {
 	public void test(){
 		
 		 //insert
-			/*
+			
 			BoardVo boardVo=new BoardVo();
 			boardVo.setPlan_no(6);
 			boardVo.setMember_no(11);
-			boardVo.setMessages("게시판글 예제");
-			
+			boardVo.setMessage("예제 수정후에바바바");
 			boardDao.insert(boardVo);
 			List<BoardVo> list2=boardDao.selectAll();
 			System.out.println(list2.toString());
 			
-*/
+
 			//delete
 			/*
 			boardDao.delete((long)2);
