@@ -16,5 +16,8 @@ public class MemberService {
 		memberDao.insert(memberVo);
 	}
 	
-
+	public MemberVo login(MemberVo memberVo){
+		MemberVo vo = memberDao.get(memberVo.getMemberId(), memberVo.getPassword());
+		return vo;	
+	}
 }

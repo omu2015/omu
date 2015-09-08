@@ -11,12 +11,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
+<style type="text/css">
+</style>
 <!-- css -->
+<link href="../../assets/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="../../assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
 <link href="../../assets/css/jcarousel.css" rel="stylesheet" />
 <link href="../../assets/css/flexslider.css" rel="stylesheet" />
 <link href="../../assets/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="../../assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../assets/js/jquery.leanModal.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 
 
 <!-- Theme skin -->
@@ -31,7 +38,7 @@
 <body>
 <div id="wrapper">
 	<!-- start header -->
-		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/header.jsp"/>
 	<!-- end header -->
 	
 	<section id="featured">
@@ -74,7 +81,6 @@
 	</section>
 	<section id="content">
 	<div class="container">
-		
 		<!-- divider -->
 			<div class="col-lg-12">
 				<div class="solidline">
@@ -146,6 +152,47 @@
 		</div>
 
 	</div>
+	
+<c:choose>
+	<c:when test="${empty authUser }">		
+		<div id="loginmodal"  >
+		<form name = "loginform" method="post" action="member/login">
+			<h2>LOGIN</h2>
+			<div class="p_c_text">회원이 되시면 여러가지 혜택을 누리실 수 있습니다.</div>
+			<div class="login_line" >
+				<div class="box_in">
+				<input type="text" name="memberId" id="id" size="23" value="woosungchu">
+				<input type="password" name="password" id="pw" size="23">
+				</div>
+				<input type="submit" value="LOGIN" class="btn_login1" >
+				<!-- <a href="/member/login"><span class="btn_login1">LOGIN</span></a> -->
+			</div>
+			<div class="find_join"><a href="">아이디 / 비밀번호 찾기</a> | <a href="">회원가입</a></div>
+				<div>
+				<div id="m_close" style="width:100px; margin:auto;">close</div>
+			</div>
+			</form>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<div></div>
+	</c:otherwise>
+</c:choose>
+
+<script type="text/javascript">
+	leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+    $(document).ready(function() {
+      $('#m_close').onclick(function() {
+        $('#loginmodal').hide();
+      });
+    });
+    $(function(){
+    	 $('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+    });
+
+ </script>
+ 
+	
 	</section>
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>

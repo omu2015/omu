@@ -1,5 +1,7 @@
 package com.bit2015.omu.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,7 +36,23 @@ public class MemberController {
 		System.out.println(memberVo);
 		memberService.join(memberVo);
 		return "redirect:/";
-		
 	}
-
+	
+	@RequestMapping("/login")
+	public String login(HttpSession session, @ModelAttribute MemberVo memberVo){
+		MemberVo vo = memberService.login(memberVo);
+		if(vo == null){	//로긴실패
+			return "redirect:/member";
+		}
+		//로긴처리
+		session.setAttribute("authUser", vo);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session, @ModelAttribute MemberVo memberVo){
+		session.removeAttribute( "authUser" );
+		session.invalidate();
+		return "redirect:/";
+	}
 }

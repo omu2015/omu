@@ -1,6 +1,8 @@
 package com.bit2015.omu.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -36,7 +38,14 @@ public class MemberDao {
 		sqlMapClientTemplate.update("member.update", memberVo);
 	}
 	
+	public MemberVo get(String memberId, String password){
+		Map<String, String> map  = new HashMap<String, String>();
+		map.put("memberId", memberId);
+		map.put("password", password);
 	
+		MemberVo vo = (MemberVo)sqlMapClientTemplate.queryForObject("member.getbyIdAndPassword", map);
+		return vo;
+	}
 	
 	
 	

@@ -49,6 +49,13 @@
 			where member_no=#member_no#
 		]]>
 	</update>
+	
+	
+	<select id="getbyIdAndPassword" resultClass="MemberVo" parameterClass="java.util.Map">
+	<![CDATA[
+		SELECT * from MEMBER where memberId=#memberId# and password=#password#
+		]]>
+	</select>
 	<!-- 			joinOutDate=to_char(#joinOutDate#, 'YYYYMMDDHH24MISS'),	 -->
 	
 </sqlMap>
