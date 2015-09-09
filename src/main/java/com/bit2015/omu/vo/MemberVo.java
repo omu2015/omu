@@ -5,18 +5,18 @@ public class MemberVo {
 	private String memberId;
 	private String memberName;
 	private String password;
-	private String email;
-	private String imageURL;
+	private String imageUrl;
 	private String memberGrade;
 	private String memberStatus;
 	private String birth;
-	private String zipCode;
 	private String address;
 	private String phoneNum1;
 	private String phoneNum2;
 	private String phoneNum3;
 	private String joinDate;
 	private String joinOutDate;
+	private String email;
+	private String zipcode;
 	public long getMember_no() {
 		return member_no;
 	}
@@ -47,11 +47,11 @@ public class MemberVo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getImageURL() {
-		return imageURL;
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	public String getMemberGrade() {
 		return memberGrade;
@@ -71,11 +71,11 @@ public class MemberVo {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public String getZipCode() {
-		return zipCode;
+	public String getZipcode() {
+		return zipcode;
 	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 	public String getAddress() {
 		return address;
@@ -117,9 +117,9 @@ public class MemberVo {
 	public String toString() {
 		return "MemberVo [member_no=" + member_no + ", memberId=" + memberId
 				+ ", memberName=" + memberName + ", password=" + password
-				+ ", email=" + email + ", imageURL=" + imageURL
+				+ ", email=" + email + ", imageUrl=" + imageUrl
 				+ ", memberGrade=" + memberGrade + ", memberStatus="
-				+ memberStatus + ", birth=" + birth + ", zipCode=" + zipCode
+				+ memberStatus + ", birth=" + birth + ", zipcode=" + zipcode
 				+ ", address=" + address + ", phoneNum1=" + phoneNum1
 				+ ", phoneNum2=" + phoneNum2 + ", phoneNum3=" + phoneNum3
 				+ ", joinDate=" + joinDate + ", joinOutDate=" + joinOutDate

@@ -4,7 +4,7 @@ public class ImgBoxVo {
 	
 	private long imgBox_no;
 	private long content_no;
-	private String imageURL;
+	private String imageUrl;
 	public long getImgBox_no() {
 		return imgBox_no;
 	}
@@ -17,17 +17,16 @@ public class ImgBoxVo {
 	public void setContent_no(long content_no) {
 		this.content_no = content_no;
 	}
-	public String getImageURL() {
-		return imageURL;
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	@Override
 	public String toString() {
 		return "ImgBoxVo [imgBox_no=" + imgBox_no + ", content_no="
-				+ content_no + ", imageURL=" + imageURL + "]";
+				+ content_no + ", imageUrl=" + imageUrl + "]";
 	}
-
 	
 }

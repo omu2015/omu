@@ -4,7 +4,7 @@ public class BoardImgBoxVo {
 	
 	private long boardImgBox_no;
 	private long board_no;
-	private String imageURL;
+	private String imageUrl;
 	public long getBoardImgBox_no() {
 		return boardImgBox_no;
 	}
@@ -17,16 +17,17 @@ public class BoardImgBoxVo {
 	public void setBoard_no(long board_no) {
 		this.board_no = board_no;
 	}
-	public String getImageURL() {
-		return imageURL;
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	@Override
 	public String toString() {
-		return "BoardImgBox [boardImgBox_no=" + boardImgBox_no + ", board_no="
-				+ board_no + ", imageURL=" + imageURL + "]";
+		return "BoardImgBoxVo [boardImgBox_no=" + boardImgBox_no
+				+ ", board_no=" + board_no + ", imageUrl=" + imageUrl + "]";
 	}
+
 	
 }

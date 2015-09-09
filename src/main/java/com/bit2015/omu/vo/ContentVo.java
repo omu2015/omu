@@ -8,10 +8,10 @@ public class ContentVo {
 	private long member_no;
 	private String phone;
 	private String newAddress;
-	private String imageURL;
+	private String imageUrl;
 	private String direction;
-	private String zipCode;
-	private String placeURL;
+	private String zipcode;
+	private String placeUrl;
 	private String id;
 	private String title;
 	private String category;
@@ -57,11 +57,11 @@ public class ContentVo {
 	public void setNewAddress(String newAddress) {
 		this.newAddress = newAddress;
 	}
-	public String getImageURL() {
-		return imageURL;
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	public String getDirection() {
 		return direction;
@@ -70,16 +70,16 @@ public class ContentVo {
 		this.direction = direction;
 	}
 	public String getZipcode() {
-		return zipCode;
+		return zipcode;
 	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
-	public String getPlaceURL() {
-		return placeURL;
+	public String getPlaceUrl() {
+		return placeUrl;
 	}
-	public void setPlaceURL(String placeURL) {
-		this.placeURL = placeURL;
+	public void setPlaceUrl(String placeUrl) {
+		this.placeUrl = placeUrl;
 	}
 	public String getId() {
 		return id;
@@ -140,8 +140,8 @@ public class ContentVo {
 		return "ContentVo [content_no=" + content_no + ", theme_no=" + theme_no
 				+ ", regDate=" + regDate + ", member_no=" + member_no
 				+ ", phone=" + phone + ", newAddress=" + newAddress
-				+ ", imageURL=" + imageURL + ", direction=" + direction
-				+ ", zipcode=" + zipCode + ", placeURL=" + placeURL + ", id="
+				+ ", imageUrl=" + imageUrl + ", direction=" + direction
+				+ ", zipcode=" + zipcode + ", placeUrl=" + placeUrl + ", id="
 				+ id + ", title=" + title + ", category=" + category
 				+ ", address=" + address + ", longitude=" + longitude
 				+ ", latitude=" + latitude + ", addressBCode=" + addressBCode
