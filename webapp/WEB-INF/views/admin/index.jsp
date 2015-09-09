@@ -32,8 +32,12 @@
 #adminMainTable table{
 	margin-top: 30px;
   margin-bottom: 30px;
-  width: 
 }
+
+#selectMember{
+width: 1500px;
+}
+
 </style>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -57,6 +61,7 @@
 
 		<table id="adminMainTable">
 						<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
+						<c:import url="/WEB-INF/views/admin/insertcontent.jsp"></c:import>
 		</table>
 		
 		</section>

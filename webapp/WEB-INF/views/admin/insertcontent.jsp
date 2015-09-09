@@ -4,19 +4,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	<tr>
 		<td>
-		<h1> Member 등록</h1>
+		<h1> Content 등록</h1>
 				<table border="1" >
 					<tr>
-						<td bgcolor="#CCCCCC" align="center">아이디</td>
-						<td bgcolor="#CCCCCC" align="center">이름</td>
-						<td bgcolor="#CCCCCC" align="center">패스워드</td>
-						<td bgcolor="#CCCCCC" align="center">imageUrl</td>
-						<td bgcolor="#CCCCCC" align="center">권한</td>
-						<td bgcolor="#CCCCCC" align="center">생일</td>
-						<td bgcolor="#CCCCCC" align="center">주소</td>
-						<td bgcolor="#CCCCCC" align="center" colspan="3">핸드폰 번호</td>
-						<td bgcolor="#CCCCCC" align="center">이메일</td>
+						<td bgcolor="#CCCCCC" align="center">관심사타입</td>
+						<td bgcolor="#CCCCCC" align="center">등록일자</td>
+						<td bgcolor="#CCCCCC" align="center">작성자(회원)번호</td>
+						<td bgcolor="#CCCCCC" align="center">나침반</td>
 						<td bgcolor="#CCCCCC" align="center">우편번호</td>
+						<td bgcolor="#CCCCCC" align="center">웹주소</td>
+						<td bgcolor="#CCCCCC" align="center">Daum등록번호</td>
+						<td bgcolor="#CCCCCC" align="center">상점이름</td>
+						<td bgcolor="#CCCCCC" align="center">카테고리</td>
+						<td bgcolor="#CCCCCC" align="center">주소</td>
+						<td bgcolor="#CCCCCC" align="center">위도</td>
+						<td bgcolor="#CCCCCC" align="center">경도</td>
+						<td bgcolor="#CCCCCC" align="center">BCode</td>
+						<td bgcolor="#CCCCCC" align="center">비용</td>
+						<td bgcolor="#CCCCCC" align="center">시간</td>
 						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
 					</tr>
 			<form action="/admin/insertmember" method="post">
@@ -37,7 +42,7 @@
 					</tr>
 			</form>
 				</table>
-				<h1> Member 조회</h1>
+				<h1> Content 조회</h1>
 					<table id="selectMember" border="1">
 					<tr>
 						<td bgcolor="#CCCCCC" align="center">아이디</td>
