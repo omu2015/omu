@@ -31,12 +31,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.zeroturnaround.eclipse.rebelXmlBuilder</name>
+			<name>com.dell.toadext.editors.project.ToadextProjectBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.dell.toadext.editors.project.ToadextProjectBuilder</name>
+			<name>org.zeroturnaround.eclipse.rebelXmlBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -46,9 +46,9 @@
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
-		<nature>org.zeroturnaround.eclipse.jrebelNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>com.dell.toadext.ToadextNature</nature>
+		<nature>org.zeroturnaround.eclipse.jrebelNature</nature>
 	</natures>
 </projectDescription>
