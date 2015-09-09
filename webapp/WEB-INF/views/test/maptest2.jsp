@@ -34,6 +34,7 @@
 <script type="text/javascript">
 $(function(){
   $('#loginform').submit(function(e){
+	 console.log("success")
     return false;
   });
   
