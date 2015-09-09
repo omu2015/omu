@@ -65,6 +65,7 @@ width: 1500px;
 
 		<table id="adminMainTable">
 						<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
+						<c:import url="/WEB-INF/views/admin/inserttheme.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertcontent.jsp"></c:import>
 		</table>
 		

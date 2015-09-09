@@ -28,8 +28,14 @@
 					</tr>
 			<form action="/admin/insertcontent" method="post">
 					<tr>
-						<td><input size="10" type="text" name=theme_no></td>
-						<td> - ${authUser.getMember_no()} - </td>
+						<td>
+							<select name="theme_no">
+							 <c:forEach var="vo" items="${themeList}">
+							  <option value="${vo.getTheme_no()}">${vo.getThemeName()}</option>
+							 </c:forEach>
+							</select>
+						</td>
+						<td><input size="10" type="hidden" name="member_no" value="${authUser.getMember_no()}">${authUser.getMember_no()}</td>
 						<td><input size="10" type="text" name="phone"></td>
 						<td><input size="10" type="text" name="newAddress"></td>
 						<td><input size="10" type="text" name="imageUrl"></td>
@@ -52,6 +58,7 @@
 				<h1> Content 조회</h1>
 					<table class="selectVo" border="1">
 					<tr>
+						<td bgcolor="#CCCCCC" align="center">No</td>
 						<td bgcolor="#CCCCCC" align="center">관심사타입</td>
 						<td bgcolor="#CCCCCC" align="center">등록일자</td>
 						<td bgcolor="#CCCCCC" align="center">작성자(회원)번호</td>
@@ -74,6 +81,7 @@
 					</tr>
 					<c:forEach var="vo" items="${contentList}">
 					<tr>
+						<td>${vo.content_no }</td>
 						<td>${vo.theme_no }</td>
 						<td>${vo.regDate }</td>
 						<td>${vo.member_no }</td>
@@ -92,7 +100,7 @@
 						<td>${vo.addressBCode }</td>
 						<td>${vo.cost }</td>
 						<td>${vo.time }</td>
-						<td><a href="/admin/deletemember?member_no=${vo.content_no }">삭제</a></td>
+						<td><a href="/admin/deletecontent?content_no=${vo.content_no }">삭제</a></td>
 					</tr>
 					</c:forEach>
 				</table>

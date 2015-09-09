@@ -68,17 +68,11 @@ public class AdminService {
 		memberDao.delete(member_no);
 		}
 	
-	public void modifyMember(MemberVo memberVo) {
-		//	memberDao.insert(memberVo);
-			//List<MemberVo> list=memberDao.selectAll();
-		//	System.out.println(list.toString());
-		}
-
+	
+	
+	
 	public void insertContent(ContentVo contentVo) {
 		contentDao.insert(contentVo);
-		
-		
-		
 	}
 
 	public List<ContentVo> selectContent() {
@@ -86,10 +80,25 @@ public class AdminService {
 		return contentList;
 	}
 
+	public void deleteContent(Long content_no) {
+		contentDao.delete(content_no);
+	}
+	
+	
+	
+	
+	
+	public void insertTheme(ThemeVo themeVo) {
+		themeDao.insert(themeVo);
+	}
 	public List<ThemeVo> selectTheme() {
 		List<ThemeVo> list=themeDao.selectAll();
 		return list;
 	}
+	public void deleteTheme(Long theme_no) {
+		contentDao.delete(theme_no);
+	}
+	
 	
 	
 	

@@ -39,7 +39,7 @@ public class AdminController {
 	}	
 	
 	@RequestMapping("/insertmember")
-	public String insertmember(MemberVo memberVo){
+	public String insertMember(MemberVo memberVo){
 		System.out.println(memberVo.toString());
 		adminService.insertMember(memberVo);
 		
@@ -47,18 +47,39 @@ public class AdminController {
 	}	
 	
 	@RequestMapping("/deletemember")
-	public String deletemember(@RequestParam Long member_no){
+	public String deleteMember(@RequestParam Long member_no){
 		adminService.deleteMember(member_no);
 		return "redirect:/admin";
 	}	
 	
 	@RequestMapping("/insertcontent")
-	public String insertcontent(ContentVo contentVo, HttpSession session){
+	public String insertContent(ContentVo contentVo, HttpSession session){
 		
 		System.out.println(contentVo.toString());
 		adminService.insertContent(contentVo);
 		return "redirect:/admin";
 	}	
+	
+	@RequestMapping("//deletecontent")
+	public String deleteContent(@RequestParam Long content_no){
+		adminService.deleteContent(content_no);
+		return "redirect:/admin";
+	}	
+	
+	@RequestMapping("/inserttheme")
+	public String insertTheme(ThemeVo themeVo){
+		
+		System.out.println(themeVo.toString());
+		adminService.insertTheme(themeVo);
+		return "redirect:/admin";
+	}	
+	
+	@RequestMapping("/deletetheme")
+	public String deleteTheme(@RequestParam Long theme_no){
+		adminService.deleteTheme(theme_no);
+		return "redirect:/admin";
+	}	
+	
 	
 	// 주우성이 테스트용으로 좀 쓰겠습니다.
 	@RequestMapping("/test")

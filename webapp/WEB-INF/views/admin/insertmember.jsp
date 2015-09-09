@@ -40,6 +40,7 @@
 				<h1> Member 조회</h1>
 					<table id="selectMember" border="1">
 					<tr>
+						<td bgcolor="#CCCCCC" align="center">No</td>
 						<td bgcolor="#CCCCCC" align="center">아이디</td>
 						<td bgcolor="#CCCCCC" align="center">이름</td>
 						<td bgcolor="#CCCCCC" align="center">패스워드</td>
@@ -57,6 +58,7 @@
 					</tr>
 					<c:forEach var="vo" items="${memberList}">
 					<tr>
+						<td>${vo.member_no }</td>
 						<td>${vo.memberId }</td>
 						<td>${vo.memberName }</td>
 						<td>${vo.password }</td>
