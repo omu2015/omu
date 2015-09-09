@@ -55,7 +55,7 @@
 						<td bgcolor="#CCCCCC" align="center">우편번호</td>
 						<td bgcolor="#CCCCCC" align="center">삭제</td>
 					</tr>
-					<c:forEach var="vo" items="${list}">
+					<c:forEach var="vo" items="${memberList}">
 					<tr>
 						<td>${vo.memberId }</td>
 						<td>${vo.memberName }</td>

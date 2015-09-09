@@ -34,6 +34,10 @@
   margin-bottom: 30px;
 }
 
+#adminMainTable tbody tr td table tbody tr td{
+	text-align : center;
+}
+
 #selectMember{
 width: 1500px;
 }
