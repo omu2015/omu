@@ -2,10 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<table >
 	<tr>
 		<td>
-				<table border="1">
+				<table border="1" >
 					<tr>
 						<td bgcolor="#CCCCCC" align="center">아이디</td>
 						<td bgcolor="#CCCCCC" align="center">이름</td>
@@ -19,8 +18,8 @@
 						<td bgcolor="#CCCCCC" align="center">우편번호</td>
 						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
 					</tr>
-					<tr>
 			<form action="/admin/insertmember" method="post">
+					<tr>
 						<td><input size="10" type="text" name="memberId"></td>
 						<td><input size="10" type="text" name="memberName"></td>
 						<td><input size="10" type="password" name="password"></td>
@@ -34,8 +33,8 @@
 						<td><input size="10" type="text" name="email"></td>
 						<td><input size="10" type="text" name="zipcode"></td>
 						<td><input size="10" type="submit" value="등록"></td>
-			</form>
 					</tr>
+			</form>
 				</table>
 					<table border="1">
 					<tr>
@@ -73,5 +72,4 @@
 				</table>
 		</td>
 	</tr>
-</table>
 				

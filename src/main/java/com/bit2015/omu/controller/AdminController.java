@@ -34,7 +34,7 @@ public class AdminController {
 		System.out.println(memberVo.toString());
 		adminService.insertMember(memberVo);
 		
-		return "/admin";
+		return "redirect:/admin";
 	}	
 	
 	

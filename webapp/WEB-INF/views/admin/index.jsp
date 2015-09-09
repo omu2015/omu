@@ -23,6 +23,12 @@
 <script type="text/javascript" charset="utf-8" src="../../assets/js/jquery.leanModal.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link href="../../assets/css/default.css" rel="stylesheet" />
+<style type="text/css">
+#adminMainTable{
+	margin : 0 auto;
+	padding: 0 auto;
+}
+</style>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -41,18 +47,12 @@
 	<c:import url="/WEB-INF/views/include/navigation.jsp"></c:import>
 	
 	</section>
-		<section id="content" align="center" style="{top:50%; left:50%; padding:0 auto; margin:0 auto">
+		<section id="content">
 
-
-		<table  width="100%" margin="0 auto">
-			<tr>
-				<td align="center">
-					<div >
+		<table id="adminMainTable">
 						<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
-					</div>
-				</td>
-			</tr>
 		</table>
+		
 		</section>
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>
