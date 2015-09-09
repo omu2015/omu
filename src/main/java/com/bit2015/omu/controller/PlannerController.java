@@ -11,11 +11,6 @@ import com.bit2015.omu.service.PJYTestService2;
 public class PlannerController {
 	
 	
-
-		@Autowired
-		PJYTestService2 testService2;
-
-
 		@RequestMapping("")
 		public String test(){
 			return "/planner/index";
