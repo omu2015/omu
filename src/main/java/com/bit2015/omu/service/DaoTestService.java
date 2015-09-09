@@ -25,16 +25,12 @@ import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 
 @Service
-public class TestService {
+public class DaoTestService {
 	
 	@Autowired
 	BoardImgBoxDao boardImgBoxDao;
 	
-	public void test2(){
-		
-	}
-	
-	public void test(){
+	public void boardImgBox(){
 		
 		//insert
 		/*
