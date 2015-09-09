@@ -95,6 +95,8 @@
 					<div id="join-form">
 					<table>
 					<tr>
+					
+					
 						<td id="photo" rowspan="4">사진 
 						<input type="button" name="imageUrl" style="display:block; width:100px; margin:0; text-align:center;" value="사진변경" />
 						</td>
