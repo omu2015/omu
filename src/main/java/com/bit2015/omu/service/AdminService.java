@@ -16,11 +16,30 @@ public class AdminService {
 	@Autowired
 	MemberDao memberDao;
 	
-	public void addMember(MemberVo memberVo) {
-	//	memberDao.insert(memberVo);
-		//List<MemberVo> list=memberDao.selectAll();
-	//	System.out.println(list.toString());
+	public void insertMember(MemberVo memberVo) {
+		//System.out.println(memberVo.toString());
+		memberDao.insert(memberVo);
+		List<MemberVo> list=memberDao.selectAll();
+		System.out.println(list.toString());
 	}
+	
+	public void selectMember(MemberVo memberVo) {
+		//	memberDao.insert(memberVo);
+			//List<MemberVo> list=memberDao.selectAll();
+		//	System.out.println(list.toString());
+		}
+	
+	public void deleteMember(MemberVo memberVo) {
+		//	memberDao.insert(memberVo);
+			//List<MemberVo> list=memberDao.selectAll();
+		//	System.out.println(list.toString());
+		}
+	
+	public void modifyMember(MemberVo memberVo) {
+		//	memberDao.insert(memberVo);
+			//List<MemberVo> list=memberDao.selectAll();
+		//	System.out.println(list.toString());
+		}
 	
 	
 	

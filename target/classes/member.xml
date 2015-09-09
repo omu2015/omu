@@ -5,13 +5,13 @@
 	
 	<insert id="insert" parameterClass="MemberVo">
 		<![CDATA[
-			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #imageURL#, #memberGrade#, #memberStatus#, #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null, #email#, #zipCode#)
+			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #imageUrl#, #memberGrade#, null, #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null, #email#, #zipcode#)
 		]]>
 	</insert>
 	
 	<select id="selectAll" resultClass="MemberVo">
 		<![CDATA[
-			select * from MEMBER order;
+			select * from MEMBER
 		]]>
 	</select>
 	
@@ -34,7 +34,7 @@
 			memberId=#memberId#,
 			memberName=#memberName#,
 			password= #password#,
-			imageURL= #imageURL#,
+			imageUrl= #imageUrl#,
 			memberGrade= #memberGrade#,
 			memberStatus= #memberStatus#,
 			birth= #birth#,
@@ -45,7 +45,7 @@
 			joinDate=sysdate,
 			joinOutDate=sysdate,
 			email= #email#,
-			zipCode= #zipCode#
+			zipcode= #zipcode#
 			where member_no=#member_no#
 		]]>
 	</update>

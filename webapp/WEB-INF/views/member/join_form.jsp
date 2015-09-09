@@ -53,7 +53,7 @@
 					<table>
 					<tr>
 						<td id="photo" rowspan="4">사진 
-						<input type="button" name="addPic" style="display:block; width:100px; margin:0; text-align:center;" value="사진등록" />
+						<input type="button" name="imageUrl" style="display:block; width:100px; margin:0; text-align:center;" value="사진등록" />
 						</td>
 						<td class="title">이름</td>
 						<td><input id="name" name="memberName" type="" value=""></td>
@@ -97,7 +97,7 @@
 					</tr>
 					<tr>
 						<td rowspan="2"  class="title">주소</td>
-						<td colspan="2"><input  name="zipCode" id="zipCode" class="txt" style="width: 10%; text-align: center;" maxlength="6" value="" /><input type="button" name="searchPost" value="우편번호검색" /></td>
+						<td colspan="2"><input  name="zipcode" id="zipcode" class="txt" style="width: 10%; text-align: center;" maxlength="6" value="" /><input type="button" name="searchPost" value="우편번호검색" /></td>
 					</tr>
 					<tr>
 						<td colspan="2"><input name="address" id="address" class="txt" style="width: 100%;"  value="" /></td>

@@ -18,7 +18,7 @@
 
    <insert id="insert" parameterClass="ImgBoxVo">
       <![CDATA[
-         insert INTO imgBox VALUES(imgBox_no_seq.nextval,#content_no#,#imageURL#)
+         insert INTO imgBox VALUES(imgBox_no_seq.nextval,#content_no#,#imageUrl#)
       ]]>
    </insert>
    
@@ -30,7 +30,7 @@
    
    <update id="update" parameterClass="ImgBoxVo"> 
    <![CDATA[
-    update imgBox set imageURL=#imageURL# where imgBox_no=#imgBox_no# 
+    update imgBox set imageUrl=#imageUrl# where imgBox_no=#imgBox_no# 
     ]]> 
     </update>
    

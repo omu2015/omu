@@ -21,10 +21,10 @@ public class AdminController {
 		return "/admin/index";
 	}	
 	
-	@RequestMapping("/addmember")
+	@RequestMapping("/insertmember")
 	public String addMember(MemberVo memberVo){
 		System.out.println(memberVo.toString());
-		adminService.addMember(memberVo);
+		adminService.insertMember(memberVo);
 		
 		return "/admin/index";
 	}	

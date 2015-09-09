@@ -17,8 +17,8 @@
 	
 	<insert id="insert" parameterClass="ContentVo">
 		<![CDATA[
-			insert INTO content VALUES(content_no_seq.nextval, #theme_no#,sysdate,#member_no#,#phone#,#newAddress#,#imageURL#,#direction#,#zipCode#
-			,#placeURL#,#id#,#title#,#category#,#address#,#longitude#,#latitude#,#addressBCode#,#cost#,#time#)
+			insert INTO content VALUES(content_no_seq.nextval, #theme_no#,sysdate,#member_no#,#phone#,#newAddress#,#imageUrl#,#direction#,#zipcode#
+			,#placeUrl#,#id#,#title#,#category#,#address#,#longitude#,#latitude#,#addressBCode#,#cost#,#time#)
 		]]>
 	</insert>
 	
@@ -29,7 +29,7 @@
 	</delete>
 	<update id="update" parameterClass="ContentVo">
 		<![CDATA[ 
-			update content set phone=#phone#, id=#id#, title=#title#, cost=#cost#, time=#time# where content_no=#content_no#
+			update content set regDate=sysdate, cost=#cost#, time=#time# where content_no=#content_no#
 		]]>
 	</update>
 	

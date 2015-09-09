@@ -5,7 +5,7 @@
 
 		<insert id="insert" parameterClass="BoardImgBoxVo">
 		<![CDATA[
-			insert INTO boardImgBox VALUES(boardImgBox_no_seq.nextval, #board_no#, #imageURL#)
+			insert INTO boardImgBox VALUES(boardImgBox_no_seq.nextval, #board_no#, #imageUrl#)
 		]]>
 	</insert>
 	
@@ -31,7 +31,7 @@
 		<![CDATA[
 			update boardImgBox set 
 			board_no=#board_no#,
-			imageURL=#imageURL#
+			imageUrl=#imageUrl#
 			where boardImgBox_no=#boardImgBox_no#
 		]]>
 	</update>

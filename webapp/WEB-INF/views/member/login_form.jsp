@@ -80,7 +80,7 @@
 				<form id="contactform" action="contact/contact.php" method="post" class="validateform" name="send-contact">
 					<div class="row">
 						<form id="login-form" name="loginform" method="post" action="login">
-						<label class="block-label">아이디</label> <input name="password" type="text">
+						<label class="block-label">아이디</label> <input name="memberId" type="text">
 						<label class="block-label">패스워드</label> <input name="password" type="password"> <input type="submit" value="로그인">
 
 				</form>
