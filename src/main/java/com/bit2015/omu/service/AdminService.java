@@ -17,16 +17,13 @@ public class AdminService {
 	MemberDao memberDao;
 	
 	public void insertMember(MemberVo memberVo) {
-		//System.out.println(memberVo.toString());
 		memberDao.insert(memberVo);
-		List<MemberVo> list=memberDao.selectAll();
-		System.out.println(list.toString());
 	}
 	
-	public void selectMember(MemberVo memberVo) {
-		//	memberDao.insert(memberVo);
-			//List<MemberVo> list=memberDao.selectAll();
-		//	System.out.println(list.toString());
+	public List<MemberVo> selectMember() {
+		List<MemberVo> list=memberDao.selectAll();
+		System.out.println(list.toString());
+		return list;
 		}
 	
 	public void deleteMember(MemberVo memberVo) {

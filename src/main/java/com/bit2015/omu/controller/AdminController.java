@@ -1,5 +1,7 @@
 package com.bit2015.omu.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,10 @@ public class AdminController {
 	
 	
 	@RequestMapping()
-	public String index(){
+	public String index(Model model){
+		List<MemberVo>list=adminService.selectMember();
+		model.addAttribute("list",list);
+		
 		return "/admin/index";
 	}	
 	
@@ -29,7 +34,7 @@ public class AdminController {
 		System.out.println(memberVo.toString());
 		adminService.insertMember(memberVo);
 		
-		return "/admin/index";
+		return "/admin";
 	}	
 	
 	

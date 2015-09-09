@@ -44,14 +44,11 @@
 		<section id="content" align="center" style="{top:50%; left:50%; padding:0 auto; margin:0 auto">
 
 
-		<table>
+		<table  width="100%" margin="0 auto">
 			<tr>
 				<td align="center">
-					<div>
-						<c:import url="/WEB-INF/views/admin/addmember.jsp"></c:import>
-					</div>
-					<div>
-						<c:import url="/WEB-INF/views/admin/addcontent.jsp"></c:import>
+					<div >
+						<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
 					</div>
 				</td>
 			</tr>
