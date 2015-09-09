@@ -11,7 +11,7 @@
 	
 	<select id="selectAll" resultClass="MemberVo">
 		<![CDATA[
-			select * from MEMBER
+			select * from MEMBER order by member_no desc
 		]]>
 	</select>
 	
@@ -26,7 +26,6 @@
 			delete from MEMBER where member_no=#member_no#
 		]]>
 	</delete>
-	
 	
 	<update id="update" parameterClass="MemberVo">
 		<![CDATA[

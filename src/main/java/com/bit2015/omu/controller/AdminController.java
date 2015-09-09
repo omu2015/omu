@@ -15,6 +15,9 @@ public class AdminController {
 	
 	@Autowired
 	AdminService adminService;
+	@Autowired
+	DaoTestService daoTestService;
+	
 	
 	@RequestMapping()
 	public String index(){
@@ -32,8 +35,8 @@ public class AdminController {
 	
 	// 주우성이 테스트용으로 좀 쓰겠습니다.
 	@RequestMapping("/test")
-	public String test() {
-		return "redirect:#";
+	public void test() {
+		daoTestService.test();
 	}
 	
 	
