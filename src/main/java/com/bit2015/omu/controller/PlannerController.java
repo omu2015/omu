@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bit2015.omu.service.PJYTestService2;
 
 @Controller
-@RequestMapping("/pjy")
+@RequestMapping("/planner")
 public class PlannerController {
 	
 	
@@ -16,9 +16,9 @@ public class PlannerController {
 		PJYTestService2 testService2;
 
 
-		@RequestMapping("/testAll")
-		public void test(){
-			testService2.test();
+		@RequestMapping("")
+		public String test(){
+			return "/planner/index";
 		}	
 	
 		

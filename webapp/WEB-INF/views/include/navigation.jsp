@@ -21,7 +21,7 @@
 							<div class="box-bottom">
 								<div class="icon">
 								</div>
-								<a href="#">
+								<a href="/planner">
 								<p>
 								 내 주변?
 								</p>

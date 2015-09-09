@@ -20,6 +20,8 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9"></script>
 <script>
+var marker = [];
+
 function gogo(){
 	var a = new Array();
 	var b = new Array();
@@ -59,7 +61,6 @@ function gogo(){
 			}
 		// 지도의 확대 레벨 
 		}).done(function() {
-			var marker = [];
 			var infowindow;
 			var infowindow2;
 			
@@ -96,7 +97,7 @@ function gogo(){
 				        '    <div class="boxtitle">금주 영화순위</div>' +
 				        '    <div class="first">' +
 				        '        <div class="triangle text">1</div>' +
-				        '        <div class="movietitle text"><input type="button" onclick="close()" value="X"/></div>' +
+				        '        <div class="movietitle text"><button onclick="infowindow2()">X</button></div>' +
 				        '    </div>' +
 				        '    <ul>' +
 				        '        <li class="up">' +
@@ -131,10 +132,7 @@ function gogo(){
 				  	});
 				  	infowindow2.open(map, this)
 				});
-				daum.maps.event.addListener(map, 'click', function() {
-				    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-				    infowindow2.close();
-				});
+				
 				
 				daum.maps.event.addListener(marker[i] , 'mouseover', function() {
 				  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
@@ -143,6 +141,11 @@ function gogo(){
 				  	});
 				    	infowindow.open(map, this)
 				});
+				daum.maps.event.addListener(map , 'click', function() {
+					  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+				    infowindow2.close();
+
+					});
 
 				// 마커에 마우스아웃 이벤트를 등록합니다
 				daum.maps.event.addListener(marker[i], 'mouseout', function() {
