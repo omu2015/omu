@@ -47,6 +47,7 @@
 	<c:import url="/WEB-INF/views/include/navigation.jsp"></c:import>
 		<div class="row">
 	<!-- Slider -->
+
         <div id="main-slider" class="flexslider">
             <ul class="slides">
               <li>
