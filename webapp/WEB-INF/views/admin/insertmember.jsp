@@ -2,6 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script>
+function deleteMember(){
+	console.log(this.data);
+	
+}
+
+</script>
 	<tr>
 		<td>
 				<table border="1" >
@@ -51,6 +58,7 @@
 						<td bgcolor="#CCCCCC" align="center">탈퇴날짜</td>
 						<td bgcolor="#CCCCCC" align="center">이메일</td>
 						<td bgcolor="#CCCCCC" align="center">우편번호</td>
+						<td bgcolor="#CCCCCC" align="center">삭제</td>
 					</tr>
 					<c:forEach var="vo" items="${list}">
 					<tr>
@@ -67,6 +75,7 @@
 						<td>${vo.joinOutDate }</td>
 						<td>${vo.email }</td>
 						<td>${vo.zipcode }</td>
+						<td><a href="/admin/deletemember?member_no=${vo.member_no }">삭제</a></td>
 					</tr>
 					</c:forEach>
 				</table>

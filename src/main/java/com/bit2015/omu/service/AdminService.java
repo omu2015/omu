@@ -22,14 +22,12 @@ public class AdminService {
 	
 	public List<MemberVo> selectMember() {
 		List<MemberVo> list=memberDao.selectAll();
-		System.out.println(list.toString());
+		//System.out.println(list.toString());
 		return list;
 		}
 	
-	public void deleteMember(MemberVo memberVo) {
-		//	memberDao.insert(memberVo);
-			//List<MemberVo> list=memberDao.selectAll();
-		//	System.out.println(list.toString());
+	public void deleteMember(Long member_no) {
+		memberDao.delete(member_no);
 		}
 	
 	public void modifyMember(MemberVo memberVo) {

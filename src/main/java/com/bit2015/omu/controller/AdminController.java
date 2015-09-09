@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit2015.omu.service.AdminService;
 import com.bit2015.omu.service.DaoTestService;
@@ -30,13 +31,18 @@ public class AdminController {
 	}	
 	
 	@RequestMapping("/insertmember")
-	public String addMember(MemberVo memberVo){
+	public String insertmember(MemberVo memberVo){
 		System.out.println(memberVo.toString());
 		adminService.insertMember(memberVo);
 		
 		return "redirect:/admin";
 	}	
 	
+	@RequestMapping("/deletemember")
+	public String deletemember(@RequestParam Long member_no){
+		adminService.deleteMember(member_no);
+		return "redirect:/admin";
+	}	
 	
 	// 주우성이 테스트용으로 좀 쓰겠습니다.
 	@RequestMapping("/test")
