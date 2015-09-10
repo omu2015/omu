@@ -11,7 +11,7 @@
 	
 	<select id="selectAll" resultClass="PlanVo">
 		<![CDATA[
-			select plan_no, member_no, planDate, totalCost, totalTime from plan
+			select plan_no, member_no, planDate, totalCost, totalTime from plan order by plan_no desc
 		]]>
 	</select>
 	

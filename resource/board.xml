@@ -11,7 +11,7 @@
 	
 	<select id="selectAll" resultClass="BoardVo">
 		<![CDATA[
-			select * from board
+			select * from board order by board_no desc
 		]]>
 	</select>
 	

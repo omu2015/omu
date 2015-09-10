@@ -137,8 +137,9 @@ public class AdminController {
 	
 	// 주우성이 테스트용으로 좀 쓰겠습니다.
 	@RequestMapping("/test")
-	public void test() {
-		daoTestService.test();
+	public String test() {
+		
+		return "/admin/index2";
 	}
 	
 	

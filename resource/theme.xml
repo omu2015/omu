@@ -5,7 +5,7 @@
 	
 	<select id="selectAll" resultClass="ThemeVo">
 		<![CDATA[
-			select * from theme
+			select * from theme order by theme_no desc
 		]]>
 	</select>
 	

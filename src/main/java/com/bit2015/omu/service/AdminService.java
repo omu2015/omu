@@ -69,7 +69,7 @@ public class AdminService {
     public List<ViewVo> selectView(){
     	List<ViewVo> viewList=new ArrayList<ViewVo>();
     	List<ContentBoxVo> contentBoxList=contentBoxDao.selectAll();
-/*    	
+    	
     	for (int i = 0; i < contentBoxList.size(); i++) {
     		ViewVo viewVo=new ViewVo();
     		long cbno=contentBoxList.get(i).getContentBox_no();
@@ -88,7 +88,7 @@ public class AdminService {
     		viewVo.setTotalCost(planDao.selectVo(pno).getTotalTime());
     		
     		viewList.add(i, viewVo);
-		}*/
+		}
     	
     	
     	

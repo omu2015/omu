@@ -12,7 +12,7 @@
 	
 	<select id="selectAll" resultClass="ContentBoxVo">
 		<![CDATA[
-			select * from contentBox
+			select * from contentBox order by contentBox_no desc
 		]]>
 	</select>
 	

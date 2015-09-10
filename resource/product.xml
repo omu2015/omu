@@ -5,7 +5,7 @@
 	
 		<select id="selectAll" resultClass="ProductVo">
     <![CDATA[
-       select * from product
+       select * from product order by product_no desc
     ]]>
 	</select>
 

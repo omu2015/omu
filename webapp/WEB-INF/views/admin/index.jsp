@@ -63,7 +63,7 @@ width: 1500px;
 	</section>
 		<section id="content">
 		<table id="adminMainTable">
-						<c:import url="/WEB-INF/views/admin/selectperfectview.jsp"></c:import>
+						<c:import url="/WEB-INF/views/admin/viewlist.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/inserttheme.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertcontent.jsp"></c:import>

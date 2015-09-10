@@ -12,7 +12,7 @@
 	
 	<select id="selectAll" resultClass="GoodVo">
 		<![CDATA[
-			select * from GOOD
+			select * from GOOD order by good_no desc
 		]]>
 	</select>
 	

@@ -12,7 +12,7 @@
 	
 	<select id="selectAll" resultClass="BoardCommentsVo">
 		<![CDATA[
-			select * from boardComments
+			select * from boardComments order by boardComments_no desc
 		]]>
 	</select>
 	
