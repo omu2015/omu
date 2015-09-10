@@ -1,5 +1,9 @@
 package com.bit2015.omu.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,7 @@ import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeVo;
 
 @Service
@@ -86,8 +91,6 @@ public class AdminService {
 	
 	
 	
-	
-	
 	public void insertTheme(ThemeVo themeVo) {
 		themeDao.insert(themeVo);
 	}
@@ -99,6 +102,24 @@ public class AdminService {
 		contentDao.delete(theme_no);
 	}
 	
+	
+	public void insertPlan(PlanVo planVo) {
+		System.out.println(planVo.getPlanDate());
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			//yyyy/MM/dd HH:mm:ss
+			//yyyy/mm/dd hh24:mi:ss
+			//System.out.println(strDate);
+			//planVo.setPlanDate(strDate);
+			planDao.insert(planVo);
+		
+	}
+	public List<PlanVo> selectPlan() {
+		List<PlanVo> list=planDao.selectAll();
+		return list;
+	}
+	public void deletePlan(Long plan_no) {
+		planDao.delete(plan_no);
+	}
 	
 	
 	

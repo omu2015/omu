@@ -21,7 +21,7 @@
 			select * from GOOD where good_no=#good_no#
 		]]>
 	</select>
-
+	
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
 			delete from GOOD where good_no=#good_no#

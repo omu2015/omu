@@ -14,6 +14,7 @@ import com.bit2015.omu.service.AdminService;
 import com.bit2015.omu.service.DaoTestService;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeVo;
 
 @Controller
@@ -34,6 +35,8 @@ public class AdminController {
 		model.addAttribute("contentList",contentList);
 		List<ThemeVo> themeList=adminService.selectTheme();
 		model.addAttribute("themeList",themeList);
+		List<PlanVo> planList=adminService.selectPlan();
+		model.addAttribute("planList", planList);
 		
 		return "/admin/index";
 	}	
@@ -79,6 +82,38 @@ public class AdminController {
 		adminService.deleteTheme(theme_no);
 		return "redirect:/admin";
 	}	
+	
+	@RequestMapping("/insertplan")
+	public String insertPlan(PlanVo planVo){
+		
+		System.out.println(planVo.toString());
+		adminService.insertPlan(planVo);
+		return "redirect:/admin";
+	}	
+	
+	@RequestMapping("/deleteplan")
+	public String deletePlan(@RequestParam Long plan_no){
+		adminService.deletePlan(plan_no);
+		return "redirect:/admin";
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// 주우성이 테스트용으로 좀 쓰겠습니다.

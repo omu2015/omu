@@ -5,7 +5,7 @@
 	
 	<insert id="insert" parameterClass="PlanVo">
 		<![CDATA[
-			insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(#planDate#, 'yyyy/mm/dd hh24:mi:ss') ,#totalCost#,#totalTime#)
+			insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(#planDate#, 'yyyy-MM-dd') ,#totalCost#,#totalTime#)
 		]]>
 	</insert>
 	
@@ -31,7 +31,7 @@
 		<![CDATA[
 			update plan set 
 			member_no=#member_no#,
-			planDate=to_Date(#planDate#, 'yyyy/mm/dd hh24:mi:ss'),
+			planDate=to_Date(#planDate#, 'yyyy-MM-dd'),
 			totalCost=#totalCost#,
 			totalTime=#totalTime#
 			where plan_no=#plan_no#

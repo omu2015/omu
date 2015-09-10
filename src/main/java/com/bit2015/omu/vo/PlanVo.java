@@ -53,15 +53,12 @@ public class PlanVo {
 	public void setTotalTime(long totalTime) {
 		this.totalTime = totalTime;
 	}
-
-
 	@Override
 	public String toString() {
 		return "PlanVo [plan_no=" + plan_no + ", member_no=" + member_no
 				+ ", planDate=" + planDate + ", totalCost=" + totalCost
 				+ ", totalTime=" + totalTime + "]";
 	}
-	
-	
+
 
 }
