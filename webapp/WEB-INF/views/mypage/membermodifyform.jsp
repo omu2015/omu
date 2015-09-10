@@ -129,7 +129,7 @@
 					</tr>
 					<tr>
 						<td class="title">이메일</td>
-						<td colspan="2"><input id="email" name="email" type="text" value="${authUser.email }"></td>
+						<td colspan="2"><input id="email" name="email" type="text" value="${authUser.email } "></td>
 					</tr>
 					<tr>
 						<td class="title">생년월일</td>
