@@ -4,37 +4,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	<tr>
 		<td>
-		<h1> ContentBox 등록</h1>
+		<h1>관리자 View</h1>
 				<table border="1" >
 					<tr>
+						<td bgcolor="#CCCCCC" align="center">회원 번호</td>
+						<td bgcolor="#CCCCCC" align="center">회원 이름</td>
 						<td bgcolor="#CCCCCC" align="center">plan_no</td>
 						<td bgcolor="#CCCCCC" align="center">content_no</td>
-						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
+						<td bgcolor="#CCCCCC" align="center">비용</td>
+						<td bgcolor="#CCCCCC" align="center">시간</td>
 					</tr>
-			<form action="/admin/insertcontentbox" method="post">
 					<tr>
-						<td><input size="10" type="text" name="plan_no"></td>
-						<td><input size="10" type="text" name="content_no"></td>
-						<td><input size="10" type="submit" value="등록"></td>
-					</tr>
-			</form>
-				</table>
-				<h1> ContentBox 조회</h1>
-					<table class="selectVo" border="1">
-					<tr>
-						<td bgcolor="#CCCCCC" align="center">NO</td>
-						<td bgcolor="#CCCCCC" align="center">plan_no</td>
-						<td bgcolor="#CCCCCC" align="center">content_no</td>
-						<td bgcolor="#CCCCCC" align="center">삭제</td>
-					</tr>
-					<c:forEach var="vo" items="${contentBoxList}">
-					<tr>
-						<td>${vo.contentBox_no }</td>
+					<c:forEach var="vo" items="${viewList }">
+						<td>${vo.contentBox_no}</td>
+						<td>${vo.member_no}</td>
+						<td>${vo.member_name }</td>
 						<td>${vo.plan_no }</td>
-						<td>${vo.content_no }</td>
-						<td><a href="/admin/deletecontentbox?contentBox_no=${vo.contentBox_no }">삭제</a></td>
-					</tr>
+						<td>${vo.title }</td>
+						<td>${vo.cost }</td>
+						<td>${vo.time }</td>
+						<td>${vo.totalCost }</td>
+						<td>${vo.totalTime }</td>
 					</c:forEach>
+					</tr>
 				</table>
 		</td>
 	</tr>

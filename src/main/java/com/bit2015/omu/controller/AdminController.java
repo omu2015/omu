@@ -18,6 +18,7 @@ import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeVo;
+import com.bit2015.omu.vo.ViewVo;
 
 @Controller
 @RequestMapping("/admin")
@@ -41,6 +42,8 @@ public class AdminController {
 		model.addAttribute("planList", planList);
 		List<ContentBoxVo> contentBoxList=adminService.selectContentBox();
 		model.addAttribute("contentBoxList", contentBoxList);
+		List<ViewVo> viewList=adminService.selectView();
+		model.addAttribute("viewList", viewList);
 		
 		return "/admin/index";
 	}	

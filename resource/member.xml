@@ -5,7 +5,7 @@
 	
 	<insert id="insert" parameterClass="MemberVo">
 		<![CDATA[
-			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #imageUrl#, #memberGrade#, null, #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null, #email#, #zipcode#)
+			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #imageUrl#, #memberGrade#, 'active', #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null, #email#, #zipcode#)
 		]]>
 	</insert>
 	
@@ -23,7 +23,7 @@
 
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
-			delete from MEMBER where member_no=#member_no#
+			delete from MEMBER where member_no=#member_no# cascade
 		]]>
 	</delete>
 	

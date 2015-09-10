@@ -2,6 +2,7 @@ package com.bit2015.omu.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,7 @@ import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeVo;
+import com.bit2015.omu.vo.ViewVo;
 
 @Service
 @RequestMapping("/admin")
@@ -63,6 +65,35 @@ public class AdminService {
     ThemeDao themeDao;
     
     FileUploader ful=new FileUploader();
+    
+    public List<ViewVo> selectView(){
+    	List<ViewVo> viewList=new ArrayList<ViewVo>();
+    	List<ContentBoxVo> contentBoxList=contentBoxDao.selectAll();
+/*    	
+    	for (int i = 0; i < contentBoxList.size(); i++) {
+    		ViewVo viewVo=new ViewVo();
+    		long cbno=contentBoxList.get(i).getContentBox_no();
+    		long cno=contentBoxList.get(i).getContent_no();
+    		long pno=contentBoxList.get(i).getPlan_no();
+    		long member_no=planDao.selectVo(pno).getMember_no();
+    		
+    		viewVo.setContentBox_no(cbno);
+    		viewVo.setMember_no(member_no);
+    		viewVo.setMemberName(memberDao.selectVo(member_no).getMemberName());
+    		viewVo.setPlan_no(pno);
+    		viewVo.setTitle(contentDao.selectVo(cno).getTitle());
+    		viewVo.setCost(contentDao.selectVo(cno).getCost());
+    		viewVo.setCost(contentDao.selectVo(cno).getTime());
+    		viewVo.setTotalCost(planDao.selectVo(pno).getTotalCost());
+    		viewVo.setTotalCost(planDao.selectVo(pno).getTotalTime());
+    		
+    		viewList.add(i, viewVo);
+		}*/
+    	
+    	
+    	
+    	return viewList;
+    }
     
 	public void insertMember(MemberVo memberVo, MultipartFile img) {
 		if(img==null){
