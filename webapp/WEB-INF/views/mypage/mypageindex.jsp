@@ -104,7 +104,8 @@
 			</div>
 		</div>
 	</div>
-	</section>"webapp/WEB-INF/views/mypage/mypageindex.jsp"
+	</section>
+	
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
