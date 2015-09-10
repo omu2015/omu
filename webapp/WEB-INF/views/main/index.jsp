@@ -11,18 +11,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
-<style type="text/css">
-</style>
-<!-- css -->
-<link href="../../assets/css/layout.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
-<link href="../../assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-<link href="../../assets/css/jcarousel.css" rel="stylesheet" />
-<link href="../../assets/css/flexslider.css" rel="stylesheet" />
-<link href="../../assets/css/style.css" rel="stylesheet" />
-<script type="text/javascript" src="../../assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../assets/js/jquery.leanModal.min.js"></script>
+
+<!--css -->
+<link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/layout2.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="/assets/css/jcarousel.css" rel="stylesheet" />
+<link href="/assets/css/flexslider.css" rel="stylesheet" />
+<link href="/assets/css/style.css" rel="stylesheet" />
+<link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/layout2.css" rel="stylesheet" type="text/css" />
+
+<!--javascript -->
+<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.easing.1.3.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.fancybox.pack.js"></script>
+<script src="/assets/js/jquery.fancybox-media.js"></script>
+<script src="/assets/js/google-code-prettify/prettify.js"></script>
+<script src="/assets/js/portfolio/jquery.quicksand.js"></script>
+<script src="/assets/js/portfolio/setting.js"></script>
+<script src="/assets/js/jquery.flexslider.js"></script>
+<script src="/assets/js/animate.js"></script>
+<script src="/assets/js/custom.js"></script> 
+<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 
 
 
@@ -38,7 +56,7 @@
 <body>
 <div id="wrapper">
 	<!-- start header -->
-		<c:import url="/WEB-INF/views/include/header.jsp"/>
+		<c:import url="/WEB-INF/views/include/header.jsp"/> 
 	<!-- end header -->
 	
 	<section id="featured">
@@ -82,81 +100,24 @@
 	</section>
 	<section id="content">
 	<div class="container">
-		<!-- divider -->
+	
+		<!-- divider 
 			<div class="col-lg-12">
 				<div class="solidline">
 				</div>
 			</div>
-		<!-- end divider -->
-		<!-- Portfolio Projects -->
-		<div class="row">
-			<div class="col-lg-12">
-				<h4 class="heading">접속자의 관심사</h4>
-			<c:forEach var="i" begin="1" end="10">
-				<div class="row">
-					<section id="projects">
-					<ul id="thumbs" class="portfolio">
-						<!-- Item Project and Filter Name -->
-						<li class="col-lg-3 design" data-id="id-0" data-type="web">
-						<div class="item-thumbs">
-						<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="타이틀없음" href="../../assets/img/index/noimage.gif">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-						<!-- Thumb Image and Description -->
-						<img src="../../assets/img/index/noimage.gif" alt="내용없음">
-						</div>
-						</li>
-						<!-- End Item Project -->
-						
-						<!-- Item Project and Filter Name -->
-						<li class="item-thumbs col-lg-3 design" data-id="id-1" data-type="icon">
-						<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="타이틀없음2" href="../../assets/img/index/noimage.gif">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-						<!-- Thumb Image and Description -->
-						<img src="../../assets/img/index/noimage.gif" alt="내용없음">
-						</li>
-						<!-- End Item Project -->
-						
-						<!-- Item Project and Filter Name -->
-						<li class="item-thumbs col-lg-3 photography" data-id="id-2" data-type="illustrator">
-						<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="타이틀없음3" href="../../assets/img/index/noimage.gif">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-						<!-- Thumb Image and Description -->
-						<img src="../../assets/img/index/noimage.gif" alt="내용없음">
-						</li>
-						<!-- End Item Project -->
-						
-						<!-- Item Project and Filter Name -->
-						<li class="item-thumbs col-lg-3 photography" data-id="id-2" data-type="illustrator">
-						<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="타이틀없음 4" href="../../assets/img/index/noimage.gif">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-						<!-- Thumb Image and Description -->
-						<img src="../../assets/img/index/noimage.gif" alt="내용없음">
-						</li>
-						<!-- End Item Project -->
-					</ul>
-					</section>
-				</div>
-				</c:forEach>
-			</div>
-		</div>
+			 end divider -->
+		
+	<!-- start header -->
+		<c:import url="/WEB-INF/views/main/content.jsp"/>
+	<!-- end header -->
 
-	</div>
-	
-<c:choose>
+
+
+<!-- 메인에 접속하면 로그인창 띄우기-->
+<%-- <c:choose>
 	<c:when test="${empty authUser }">		
-		<div id="loginmodal"  >
+		<div id="loginmodal"  style="margin-top:-400px" >
 		<form name = "loginform" method="post" action="member/login">
 			<h2>LOGIN</h2>
 			<div class="p_c_text">회원이 되시면 여러가지 혜택을 누리실 수 있습니다.</div>
@@ -166,34 +127,18 @@
 				<input type="password" name="password" id="pw" size="23">
 				</div>
 				<input type="submit" value="LOGIN" class="btn_login1" >
-				<!-- <a href="/member/login"><span class="btn_login1">LOGIN</span></a> -->
 			</div>
-			<div class="find_join"><a href="">아이디 / 비밀번호 찾기</a> | <a href="">회원가입</a></div>
-				<div>
-				<div id="m_close" style="width:100px; margin:auto;">close</div>
-			</div>
+			<div class="find_join"><a href="">아이디 / 비밀번호 찾기</a> | <a href="/member/joinForm">회원가입</a></div>
 			</form>
 		</div>
 	</c:when>
 	<c:otherwise>
 		<div></div>
 	</c:otherwise>
-</c:choose>
+</c:choose> --%>
 
-<script type="text/javascript">
-	leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
-    $(document).ready(function() {
-      $('#m_close').onclick(function() {
-        $('#loginmodal').hide();
-      });
-    });
-    $(function(){
-    	 $('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
-    });
 
- </script>
- 
-	
+</div>
 	</section>
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>
@@ -201,16 +146,18 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="../../assets/js/jquery.js"></script>
-<script src="../../assets/js/jquery.easing.1.3.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/jquery.fancybox.pack.js"></script>
-<script src="../../assets/js/jquery.fancybox-media.js"></script>
-<script src="../../assets/js/google-code-prettify/prettify.js"></script>
-<script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
-<script src="../../assets/js/portfolio/setting.js"></script>
-<script src="../../assets/js/jquery.flexslider.js"></script>
-<script src="../../assets/js/animate.js"></script>
-<script src="../../assets/js/custom.js"></script>
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.easing.1.3.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.fancybox.pack.js"></script>
+<script src="/assets/js/jquery.fancybox-media.js"></script>
+<script src="/assets/js/google-code-prettify/prettify.js"></script>
+<script src="/assets/js/portfolio/jquery.quicksand.js"></script>
+<script src="/assets/js/portfolio/setting.js"></script>
+<script src="/assets/js/jquery.flexslider.js"></script>
+<script src="/assets/js/animate.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 </body>
 </html>
