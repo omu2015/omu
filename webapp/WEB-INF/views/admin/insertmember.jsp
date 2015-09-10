@@ -19,12 +19,12 @@
 						<td bgcolor="#CCCCCC" align="center">우편번호</td>
 						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
 					</tr>
-			<form action="/admin/insertmember" method="post">
+			<form action="/admin/insertmember" method="post" enctype="multipart/form-data">
 					<tr>
 						<td><input size="10" type="text" name="memberId"></td>
 						<td><input size="10" type="text" name="memberName"></td>
 						<td><input size="10" type="password" name="password"></td>
-						<td><input size="10" type="text" name="imageUrl"></td>
+						<td><input size="10" type="file" name="img"></td>
 						<td><input size="10" type="text" name="memberGrade"></td>
 						<td><input size="10" type="text" name="birth"></td>
 						<td><input size="10" type="text" name="address"></td>
@@ -62,7 +62,14 @@
 						<td>${vo.memberId }</td>
 						<td>${vo.memberName }</td>
 						<td>${vo.password }</td>
-						<td>${vo.imageUrl }</td>
+						<td><c:choose>
+								<c:when test="${not empty vo.imageUrl }">
+				<img src="${vo.imageUrl }" style="width:150px">
+								</c:when>
+								<c:otherwise>
+								고객의 사진이 없습니다.								
+								</c:otherwise>
+							</c:choose>
 						<td>${vo.memberGrade }</td>
 						<td>${vo.memberStatus }</td>
 						<td>${vo.birth }</td>

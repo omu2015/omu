@@ -26,7 +26,7 @@
 						<td bgcolor="#CCCCCC" align="center">시간</td>
 						<td bgcolor="#CCCCCC" align="center"><b>등록</b></td>
 					</tr>
-			<form action="/admin/insertcontent" method="post">
+			<form action="/admin/insertcontent" method="post" enctype="multipart/form-data">
 					<tr>
 						<td>
 							<select name="theme_no">
@@ -38,7 +38,7 @@
 						<td><input size="10" type="hidden" name="member_no" value="${authUser.getMember_no()}">${authUser.getMember_no()}</td>
 						<td><input size="10" type="text" name="phone"></td>
 						<td><input size="10" type="text" name="newAddress"></td>
-						<td><input size="10" type="file" name="imageUrl"></td>
+						<td><input size="10" type="text" name="imageUrl"></td>
 						<td><input size="10" type="text" name="direction"></td>
 						<td><input size="10" type="text" name="zipcode"></td>
 						<td><input size="10" type="text" name="placeUrl"></td>

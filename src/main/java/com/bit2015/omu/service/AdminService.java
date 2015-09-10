@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.dao.BoardCommentsDao;
 import com.bit2015.omu.dao.BoardDao;
@@ -23,6 +24,7 @@ import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ProductDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
+import com.bit2015.omu.util.FileUploader;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
@@ -60,8 +62,17 @@ public class AdminService {
     @Autowired
     ThemeDao themeDao;
     
-	
-	public void insertMember(MemberVo memberVo) {
+    FileUploader ful=new FileUploader();
+    
+	public void insertMember(MemberVo memberVo, MultipartFile img) {
+		if(img==null){
+			System.out.println("!");
+			memberVo.setImageUrl("");
+		}else{
+			String member_img_url=ful.upload(img);
+			System.out.println("member_img_url = "+member_img_url);
+			memberVo.setImageUrl(member_img_url);
+		}
 		memberDao.insert(memberVo);
 	}
 	
@@ -73,9 +84,6 @@ public class AdminService {
 	public void deleteMember(Long member_no) {
 		memberDao.delete(member_no);
 		}
-	
-	
-	
 	
 	public void insertContent(ContentVo contentVo) {
 		contentDao.insert(contentVo);

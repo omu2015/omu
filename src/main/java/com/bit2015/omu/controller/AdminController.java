@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.service.AdminService;
 import com.bit2015.omu.service.DaoTestService;
@@ -45,9 +46,10 @@ public class AdminController {
 	}	
 	
 	@RequestMapping("/insertmember")
-	public String insertMember(MemberVo memberVo){
+	public String insertMember(MemberVo memberVo, @RequestParam(required=false)MultipartFile img ){
+		if(img==null)System.out.println("!!!!!!!!");
 		System.out.println(memberVo.toString());
-		adminService.insertMember(memberVo);
+		adminService.insertMember(memberVo, img);
 		
 		return "redirect:/admin";
 	}	
@@ -102,7 +104,18 @@ public class AdminController {
 	
 	
 	
+	@RequestMapping("/insertcontentbox")
+	public String insertContentBox(ContentBoxVo contentBoxVo){
+		System.out.println(contentBoxVo.toString());
+		adminService.insertContentBox(contentBoxVo);
+		return "redirect:/admin";
+	}	
 	
+	@RequestMapping("/deletecontentbox")
+	public String deleteContentBox(@RequestParam Long contentBox_no){
+		adminService.deleteContentBox(contentBox_no);
+		return "redirect:/admin";
+	}	
 	
 	
 	
