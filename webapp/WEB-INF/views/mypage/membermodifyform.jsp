@@ -97,7 +97,15 @@
 					<tr>
 					
 					
-						<td id="photo" rowspan="4">사진 
+						<td id="photo" rowspan="4">
+						<c:choose>
+                        <c:when test="${not empty authUser.imageUrl }">
+                        <img src="${authUser.imageUrl }" style="width:150px">
+                        </c:when>
+                        <c:otherwise>
+                        고객의 사진이 없습니다.                        
+                        </c:otherwise>
+                     </c:choose>
 						<input type="button" name="imageUrl" style="display:block; width:100px; margin:0; text-align:center;" value="사진변경" />
 						</td>
 						<td class="title">이름</td>
