@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploader {
 	
-	private static final String SAVE_PATH = "192.168.1.102:\\temp";
+	private static final String SAVE_PATH = "\\\\192.168.1.102\\temp";
 	
 	public String upload( MultipartFile file1 ) {
 		

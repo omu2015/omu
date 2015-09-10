@@ -23,7 +23,7 @@
 
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
-			delete from MEMBER where member_no=#member_no# cascade
+			delete from MEMBER where member_no=#member_no#
 		]]>
 	</delete>
 	
