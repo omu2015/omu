@@ -91,7 +91,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 					<div class="row">
-					<form  name="membermodifyform" method="post" action="/mypage/membermodifyformok">
+					<form  name="membermodifyform" method="post" action="/mypage/membermodifyformok" enctype="multipart/form-data">
 					<div id="join-form">
 					<table>
 					<tr>
@@ -106,10 +106,10 @@
                         고객의 사진이 없습니다.                        
                         </c:otherwise>
                      </c:choose>
-						<input type="button" name="imageUrl" style="display:block; width:100px; margin:0; text-align:center;" value="사진변경" />
+						<input type="file" name="img" style="display:block; width:100px; margin:0; text-align:center;" value="" />
 						</td>
 						<td class="title">이름</td>
-						<td><input id="name" name="memberName" type="" value="${authUser.memberName }"></td>
+						<td><input id="name"  name="memberName" type="" value="${authUser.memberName  }" ></td>
 					</tr>
 					<tr>
 						<td class="title">아이디</td>
@@ -117,15 +117,15 @@
 					</tr>
 					<tr>
 						<td class="title">지금 패스워드</td>
-						<td><input name="password" type="password" value=""></td>
+						<td><input  name="password" type="password" value=""  placeholder="무조건 입력하세요"  ></td>
 					</tr>
 					<tr>
 						<td class="title">지금 패스워드 재확인</td>
-						<td><input name="password1" type="password" value=""></td>
+						<td><input name="password1" type="password" value="" placeholder="무조건 입력하세요"></td>
 					</tr>
 					<tr>
 						<td class="title">변경 패스워드 </td>
-						<td><input id="repassword" name="repassword" type="password" value=""></td>
+						<td><input id="repassword" name="repassword" type="password" value="" placeholder="변경안할시 빈공간으로"></td>
 					</tr>
 					<tr>
 						<td class="title">이메일</td>

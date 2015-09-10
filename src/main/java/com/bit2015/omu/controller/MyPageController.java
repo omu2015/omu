@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.service.MyPageService;
 import com.bit2015.omu.vo.MemberVo;
@@ -27,8 +28,8 @@ public class MyPageController {
 	 return "/mypage/membermodifyform";
   }
 	@RequestMapping("/membermodifyformok")
-	public String modify(HttpSession session,@ModelAttribute MemberVo memberVo ,String repassword,String password1){
-	     myPageService.memberModify(session, memberVo,repassword,password1);
+	public String modify(HttpSession session,@ModelAttribute MemberVo memberVo ,String repassword,String password1,MultipartFile img){
+	     myPageService.memberModify(session, memberVo,repassword,password1, img);
 		return "redirect:/";
 	}
 	@RequestMapping("memberleave")
