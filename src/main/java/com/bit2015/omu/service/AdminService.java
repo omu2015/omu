@@ -23,6 +23,7 @@ import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ProductDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
@@ -105,11 +106,6 @@ public class AdminService {
 	
 	public void insertPlan(PlanVo planVo) {
 		System.out.println(planVo.getPlanDate());
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			//yyyy/MM/dd HH:mm:ss
-			//yyyy/mm/dd hh24:mi:ss
-			//System.out.println(strDate);
-			//planVo.setPlanDate(strDate);
 			planDao.insert(planVo);
 		
 	}
@@ -121,6 +117,20 @@ public class AdminService {
 		planDao.delete(plan_no);
 	}
 	
+	
+	
+	
+	public void insertContentBox(ContentBoxVo contentBoxVo) {
+		System.out.println(contentBoxVo.toString());
+		contentBoxDao.insert(contentBoxVo);
+	}
+	public List<ContentBoxVo> selectContentBox() {
+		List<ContentBoxVo> list=contentBoxDao.selectAll();
+		return list;
+	}
+	public void deleteContentBox(Long contentBox_no) {
+		contentBoxDao.delete(contentBox_no);
+	}
 	
 	
 	

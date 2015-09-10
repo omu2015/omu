@@ -62,14 +62,13 @@ width: 1500px;
 	
 	</section>
 		<section id="content">
-
 		<table id="adminMainTable">
 						<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/inserttheme.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertcontent.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertplan.jsp"></c:import>
+						<c:import url="/WEB-INF/views/admin/insertcontentbox.jsp"></c:import>
 		</table>
-		
 		</section>
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>

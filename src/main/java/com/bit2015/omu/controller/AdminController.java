@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit2015.omu.service.AdminService;
 import com.bit2015.omu.service.DaoTestService;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
@@ -37,6 +38,8 @@ public class AdminController {
 		model.addAttribute("themeList",themeList);
 		List<PlanVo> planList=adminService.selectPlan();
 		model.addAttribute("planList", planList);
+		List<ContentBoxVo> contentBoxList=adminService.selectContentBox();
+		model.addAttribute("contentBoxList", contentBoxList);
 		
 		return "/admin/index";
 	}	
