@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-  
+   탈퇴완료
 </body>
 </html>

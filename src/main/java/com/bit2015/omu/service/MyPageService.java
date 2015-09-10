@@ -30,9 +30,22 @@ if(memberDao.get(vo.getMemberId(), vo.getPassword()).getPassword().equals(passwo
             vo.setZipcode(memberVo.getZipcode());
             memberDao.update(vo);
             System.out.println(vo);
-}else{
-	System.out.println("password가 다름");
 }
       }
-     
+    public void memberLeave(HttpSession session,@ModelAttribute MemberVo memberVo,String password1){
+        MemberVo vo = (MemberVo) session.getAttribute("authUser");
+        System.out.println(memberDao.get(vo.getMemberId(), vo.getPassword()).getPassword());
+        System.out.println(password1);
+        System.out.println(memberDao.get(vo.getMemberId(), vo.getPassword()).getPassword().equals(password1));
+        if(memberDao.get(vo.getMemberId(), vo.getPassword()).getPassword().equals(password1)){
+        	vo.setMemberStatus(memberVo.getMemberStatus());
+        	memberDao.update(vo);
+        	System.out.println(vo);
+        }
+        else{
+        	System.out.println("비번이 서로 달라");
+        	
+        }
+    }
+    
 }

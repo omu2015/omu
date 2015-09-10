@@ -17,6 +17,11 @@ public class MyPageController {
 	 MyPageService myPageService;
 	
 	@RequestMapping("")
+	public String myPage(){
+		return "/mypage/mypageindex";
+    }
+	
+	@RequestMapping("/membermodifyform")
     public String  memberModifyForm(HttpSession session , @ModelAttribute MemberVo memberVo){
 	 MemberVo vo = (MemberVo) session.getAttribute("authUser");
 	 return "/mypage/membermodifyform";
@@ -24,7 +29,18 @@ public class MyPageController {
 	@RequestMapping("/membermodifyformok")
 	public String modify(HttpSession session,@ModelAttribute MemberVo memberVo ,String repassword,String password1){
 	     myPageService.memberModify(session, memberVo,repassword,password1);
-		return "mypage/membermodifyok";
+		return "redirect:/";
 	}
-	
+	@RequestMapping("memberleave")
+	public String memberLeave(HttpSession session , @ModelAttribute MemberVo member){
+		MemberVo vo = (MemberVo) session.getAttribute("authUSer");
+		return "/mypage/memberleave";		
+	}
+	@RequestMapping("memberleaveok")
+	public String memeberLeaveOk(HttpSession session ,@ModelAttribute MemberVo memberVo, String password1){
+	      myPageService.memberLeave(session, memberVo, password1);
+	      session.removeAttribute( "authUser" );
+			session.invalidate();
+			return "redirect:/";
+	}
 }

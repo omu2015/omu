@@ -49,6 +49,33 @@
 		]]>
 	</update>
 	
+		<update id="memberLeave" parameterClass="MemberVo">
+		<![CDATA[
+			update MEMBER set 
+			memberId=#memberId#,
+			memberName=#memberName#,
+			password= #password#,
+			imageUrl= #imageUrl#,
+			memberGrade= #memberGrade#,
+			memberStatus= #memberStatus#,
+			birth= #birth#,
+			address= #address#,
+			phoneNum1= #phoneNum1#,
+			phoneNum2= #phoneNum2#,
+			phoneNum3= #phoneNum3#,
+			joinDate=sysdate,
+			joinOutDate=sysdate,
+			email= #email#,
+			zipcode= #zipcode#
+			where member_no=#member_no#
+		]]>
+	</update>
+	
+	
+	
+	
+	
+	
 	
 	<select id="getbyIdAndPassword" resultClass="MemberVo" parameterClass="java.util.Map">
 	<![CDATA[
