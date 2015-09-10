@@ -14,7 +14,7 @@
 	<mvc:annotation-driven />
 	
 	<!-- the mvc resources tag does the magic 파일업로드 처리3 -->
- 	<mvc:resources mapping="/product-images/**" location="file:/temp/" />
+ 	<mvc:resources mapping="/product-images/**" location="file:\\192.168.1.102\temp\" />
  	
  	
 	<context:annotation-config />
