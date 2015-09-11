@@ -157,7 +157,7 @@ header .navbar-default .navbar-nav > .open > a:focus {
 
 
 header .navbar {
-    min-height: 100px;
+    min-height: 65px;
 }
 
 header .navbar-nav > li  {

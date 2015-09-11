@@ -62,11 +62,10 @@
 	<section id="featured">
 	<!-- start slider -->
 	<div class="container">
-	<c:import url="/WEB-INF/views/include/navigation.jsp"></c:import>
 		<div class="row">
 	<!-- Slider -->
 
-        <div id="main-slider" class="flexslider">
+        <div id="main-slider" class="flexslider" style="margin-top:-35px">
             <ul class="slides">
               <li>
                 <img src="../../assets/img/slides/1.jpg" alt="" />
@@ -100,7 +99,7 @@
 	</section>
 	<section id="content">
 	<div class="container">
-	
+		<div style="margin-top:-90px"><img src="/assets/img/omu.jpg"></div>
 		<!-- divider 
 			<div class="col-lg-12">
 				<div class="solidline">
@@ -108,9 +107,25 @@
 			</div>
 			 end divider -->
 		
-	<!-- start header -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
+<script>
+      var places = new daum.maps.services.Places();
+      var imggo;
+      var callback = function(status, result) {
+          if (status === daum.maps.services.Status.OK) {
+             console.log(result);
+              console.log(result.places[0].imageUrl);
+              imggo=result.places[0].imageUrl;
+              $('#gogogo').html('<img style="width:200px" src="'+imggo+'">');
+          }
+      };
+      places.keywordSearch('판교 치킨', callback,new daum.maps.LatLng(37.564968, 126.939909));
+   </script> -->
+		
+		<div id="gogogo"></div>
+	<!-- start content -->
 		<c:import url="/WEB-INF/views/main/content.jsp"/>
-	<!-- end header -->
+	<!-- end content -->
 
 
 

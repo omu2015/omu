@@ -2,11 +2,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!--css -->
 <link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/navi.css" media="screen" /> 
+
+   
+<!--javascript -->	
+<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.easing.1.3.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.fancybox.pack.js"></script>
+<script src="/assets/js/jquery.fancybox-media.js"></script>
+<script src="/assets/js/google-code-prettify/prettify.js"></script>
+<script src="/assets/js/portfolio/jquery.quicksand.js"></script>
+<script src="/assets/js/portfolio/setting.js"></script>
+<script src="/assets/js/jquery.flexslider.js"></script>
+<script src="/assets/js/animate.js"></script>
+<script src="/assets/js/custom.js"></script> 
+<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
+
+
+<!-- <style type="text/css">
+#container {width:960px;margin-left: auto;margin-right: auto;padding: 0;}
+.clear {clear: both;margin: 0;padding: 0;}
+p {margin: 1.6em 0;line-height: 1.6em;}
+h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
+</style> -->
+
+
 
 <header>
         <div class="navbar navbar-default navbar-static-top">
-            <div class="container">
+<!--             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -14,38 +45,75 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/"><span>오늘</span> 뭐하지<span>?</span></a>
-                </div>
-<c:choose>
-	<c:when test="${empty authUser }">
-                <div class="navbar-collapse collapse ">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
-                       <!--  <li class="dropdown">
-                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Features <b class=" icon-angle-down"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="components.html">Components</a></li>
-								<li><a href="pricingbox.html">Pricing box</a></li>
-                            </ul>
-                        </li> -->
-						<li><a  href="#loginmodal"  id="modaltrigger">Login</a></li>
-						<li><a href="/member/joinForm">Join</a></li>
-                    </ul>
-                </div>
-	</c:when>
-	<c:otherwise>
-				<div class="navbar-collapse collapse ">
-                    <ul class="nav navbar-nav">
-                        <li style="color:#000"><a href="/">Home</a></li>
-                        <li><a  href="/mypage" >MyPage</a></li>
-						<li><a  href="/member/logout" >Logout</a></li>
-                    </ul>
-                </div>
-				<div style="float:right;margin-top:-30px">${authUser.memberName }  님 안녕하세요 ^^;</div>	
-	</c:otherwise>
-	</c:choose>
+                </div> -->
+
+		<div id="menu_div">
+			<div id="navigation">
+				<div id="menu">
+					<c:choose>
+					<c:when test="${empty authUser }">
+					<ul id="nav">
+						<li><a href="/">HOME</a></li> 
+						<li><a href="#">오늘 뭐하지?</a></li> 
+						<li><a href="/planner">내 주변?</a></li>
+						<li><a href="#">게시판</a></li>
+						<li><a href="#">몰라</a></li>
+						
+						<li style="margin-left:450px;"><a style="color:#fb6f92"  href="#loginmodal"  id="modaltrigger">Login</a></li>
+						<li  style="color:#fb6f92"><a style="color:#fb6f92"  href="/member/joinForm">Join</a></li>
+					</ul>
+			</c:when>
+			<c:otherwise>
+					<ul id="nav">
+						<li><a href="/">HOME</a></li> 
+						<li><a href="#">오늘 뭐하지?</a></li> 
+						<li><a href="/planner">내 주변?</a></li>
+						<li><a href="#">게시판</a></li>
+						<li><a href="#">몰라</a></li>
+						
+		            	<li style="margin-left:450px"><a style="color:#fb6f92"  href="/mypage" >MyPage</a></li>
+						<li style="color:#fb6f92"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
+					</ul>
+			</c:otherwise>
+			</c:choose>
+
+		<%-- <div>
+		<c:choose>
+			<c:when test="${empty authUser }">
+		                <div>
+		                    <ul>
+								<li><a  href="#loginmodal"  id="modaltrigger">Login</a></li>
+								<li><a href="/member/joinForm">Join</a></li>
+		                    </ul>
+		                </div>
+			</c:when>
+			<c:otherwise>
+						<div class="navbar-collapse collapse ">
+		                    <ul class="nav navbar-nav">
+		                       <!--  <li style="color:#000"><a href="/">Home</a></li> -->
+		                        <li><a  href="/mypage" >MyPage</a></li>
+								<li><a  href="/member/logout" >Logout</a></li>
+		                    </ul>
+		                </div>
+						<div style="float:right;margin-top:-30px">${authUser.memberName }  님 안녕하세요 ^^;</div>	
+			</c:otherwise>
+			</c:choose>
+		</div> --%>
+
+
+					
+					<!-- Search Form -->
+					<form class="searchform" action="#" style="margin-top:10px" > 
+						<input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
+					</form>
+					<!-- / Search Form -->
+				
+				</div>
+			</div>
+		</div>
+
             </div>
-        </div>
+        <!-- </div> -->
 	</header>
 
 	

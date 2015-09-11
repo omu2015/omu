@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bit2015.omu.dao.MainDao;
+import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
 
 @Controller
@@ -18,13 +19,15 @@ public class MainController {
 	@Autowired
 	private MainDao mainDao; 
 	ContentVo contentVo;
+	CommentsVo commentsVo;
 	
 	
 	@RequestMapping()
 	public String index(Model model){
 		List<ContentVo> list = mainDao.getList();
 		model.addAttribute("list", list);
-		
+		List<CommentsVo> list2 = mainDao.getList2();
+		model.addAttribute("list2", list2);		
 		return "/main/index";
 	}	
 
