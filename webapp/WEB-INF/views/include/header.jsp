@@ -59,8 +59,8 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 						<li><a href="#">게시판</a></li>
 						<li><a href="#">몰라</a></li>
 						
-						<li style="margin-left:450px;"><a style="color:#fb6f92"  href="#loginmodal"  id="modaltrigger">Login</a></li>
-						<li  style="color:#fb6f92"><a style="color:#fb6f92"  href="/member/joinForm">Join</a></li>
+						<li style="margin-left:370px;"><a style="color:#fb6f92"  href="#loginmodal"  id="modaltrigger">Login</a></li>
+						<li style="color:#fb6f92"><a style="color:#fb6f92"  href="/member/joinForm">Join</a></li>
 					</ul>
 			</c:when>
 			<c:otherwise>
@@ -71,7 +71,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 						<li><a href="#">게시판</a></li>
 						<li><a href="#">몰라</a></li>
 						
-		            	<li style="margin-left:450px"><a style="color:#fb6f92"  href="/mypage" >MyPage</a></li>
+		            	<li style="margin-left:370px"><a style="color:#fb6f92"  href="/mypage" >MyPage</a></li>
 						<li style="color:#fb6f92"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
 					</ul>
 			</c:otherwise>
@@ -103,7 +103,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 
 					
 					<!-- Search Form -->
-					<form class="searchform" action="#" style="margin-top:10px" > 
+					<form class="searchform" action="#" style="margin-top:13px" > 
 						<input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
 					</form>
 					<!-- / Search Form -->

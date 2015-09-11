@@ -52,14 +52,15 @@ color: #000;
 #nav li a:hover, 
 #nav li ul li a:hover  {
 background: #fb6f92; 
+color:#fff;
 }
 
 /* Text Shadow */
-#nav li a, 
+/* #nav li a, 
 #nav li a:hover, 
 #nav li ul li a:hover  {
 text-shadow: 0 1px 1px #333; 
-}
+} */
 
 /* Search form colors */
 .searchform input, .searchform input:not(:focus){
@@ -142,8 +143,8 @@ line-height: 65px;
 padding:0 15px;
 text-decoration:none;
 margin:0;
-font-size:12px;
-font-weight:700;
+font-size:15px;
+font-weight:bold;
 text-transform:uppercase;
 }
 
@@ -166,13 +167,11 @@ display:block;
 #nav li ul li,#nav li ul li a {
 float:none;
 height: 35px; /* submenu item height */
-min-width: 150px; /* submenu item minimal width */
 line-height: 35px;
 border-right: 0;
 text-shadow: none;
 display:block;
 font-size:13px;
-font-weight:400;
 text-transform:inherit;
 } /* Submenu item */
 
@@ -224,7 +223,6 @@ box-shadow: inner 1px 1px 2px #A1A1A1;
 }
 
 .searchfield:focus{
-font-weight: 700;
 width: 220px;
 }
 
@@ -240,14 +238,14 @@ width: 150px;
 #nav li a:hover,
 #nav li ul li a:hover  {
 -webkit-transition-property:color, background; 
--webkit-transition-duration: 0.5s, 0.5s; 
+-webkit-transition-duration: 0.3s, 0.3s; 
 -webkit-transition-timing-function: linear, ease-out;
 }
 
 .searchfield:focus,
 .searchfield:not(:focus){
 -webkit-transition-property:width; 
--webkit-transition-duration: 0.5s, 0.5s; 
+-webkit-transition-duration: 0.3s, 0.3s; 
 -webkit-transition-timing-function: linear, ease-out;
 }
 
@@ -261,7 +259,7 @@ width: 150px;
 #navigation:not(:hover)
 {
 -webkit-transition-property:opacity; 
--webkit-transition-duration: 0.5s, 0.5s; /* duration in seconds */
+-webkit-transition-duration: 0.3s, 0.3s; /* duration in seconds */
 -webkit-transition-timing-function: linear, ease-out;
 } /* Menu transparency animation */
 

@@ -47,18 +47,22 @@ $(function(){
 					<input type="submit" value="댓글입력" style="height:50px">
 				</form>
 			</div>
+
 			<table style="width:600px;background-color:#fff;color:#000;font-size:15px;height:200px">
-			<c:forEach var="vo" items="${list2 }" varStatus="status">
+			<c:forEach var="vo2" items="${list2}" varStatus="status">
+			<c:if test="${vo.content_no == vo2.content_no}">
 				<tr>
-					<td style="float:left;margin-left:10px">${vo.message }</td>
-					<td style="float:right;margin-right:10px">${vo.regDate }</td>
+					<td style="float:left;margin-left:10px">${vo2.message }</td>
+					<td style="float:right;margin-right:10px">${vo2.regDate }</td>
 					<td style="float:right;margin-right:10px">${authUser.memberName }</td>
 				</tr>
 				<tr>
 					<td>----------------------------------------------------------------------------------------------------------------------------</td>
 				</tr>
+				</c:if>
 			</c:forEach>
 			</table>
+
 		</div>
 		</div>
 </c:forEach>
