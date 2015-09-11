@@ -2,19 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.bit2015.omu.vo.ThemeVo"%>
-<%@page import="com.bit2015.omu.vo.ThemeBoxVo"%>
-<%@page import="java.util.List"%>
-<%@page import="com.bit2015.omu.dao.ThemeBoxDao"%>
-<%@page import="com.bit2015.omu.dao.ThemeDao"%>
-<%@page import="com.bit2015.omu.vo.MemberVo"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<title>오늘 뭐하지?</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>키워드로 장소검색하고 목록으로 표출하기</title>
+    <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
 
@@ -48,14 +41,16 @@
 <script src="/assets/js/animate.js"></script>
 <script src="/assets/js/custom.js"></script> 
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
-</head>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>   
+    
+    
+    
+    
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:relative;top:0;left:0;bottom:0;width:100%;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+#menu_wrap {position:absolute;top:500px;left:0;bottom:0;width:100%;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -89,77 +84,27 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
-<style>
-#woosungMain ul li{
-	border-radius: 25px;
-    background: #F6D0DA;
-    padding: 20px; 
-}
-
-#map {
-	width:100%;
-	height:600px;
-	margin : 30px 0;
-}
-</style>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
+</head>
 <body>
-<div id="wrapper">
-	<!-- start header -->
-		<c:import url="/WEB-INF/views/include/header.jsp"/> 
-	<!-- end header -->
-<div class="container">
-	<div class="row">
-			<div class="col-lg-12">
-				<h4 class="heading">리뷰 게시판</h4>
-				<div class="row">
-					<section id="woosungMain">
-					<ul id="thumbs" class="portfolio">			
-															<div class="map_wrap">
-															    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-															<!-- map_wrap -->   </div>
-						<!-- Item Project and Filter Name -->
-						
-												    <div id="menu_wrap" class="bg_white">
-												        <div id="pagination"></div>
-												        <div class="option">
-												            <p>
-												                <form onsubmit="searchPlaces(); return false;">
-												                키워드 : <input type="text" value="노량진 맛집" id="keyword" size="15"> 
-												                <button type="submit">검색하기</button> 
-												            </p>
-												        </div>
-												        <hr>
-												        <ul id="placesList"></ul>
-													</div>
-						<!-- End Item Project -->
-					
-					</ul>
-					</section>
-				</div>
-		</div>
-</div>	
-</div><!-- main -->
-	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-</div><!-- wrapper -->
-<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-</body>
-</html>
-<!-- javascript
-    ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/assets/js/jquery.js"></script>
-<script src="/assets/js/jquery.easing.1.3.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/jquery.fancybox.pack.js"></script>
-<script src="/assets/js/jquery.fancybox-media.js"></script>
-<script src="/assets/js/google-code-prettify/prettify.js"></script>
-<script src="/assets/js/portfolio/jquery.quicksand.js"></script>
-<script src="/assets/js/portfolio/setting.js"></script>
-<script src="/assets/js/jquery.flexslider.js"></script>
-<script src="/assets/js/animate.js"></script>
-<script src="/assets/js/custom.js"></script>
-<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
+<div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+</div>
+    <div id="menu_wrap" class="bg_white">
+        <div class="option">
+            <p>
+                <form onsubmit="searchPlaces(); return false;">
+                키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
+                <button type="submit">검색하기</button> 
+            </p>
+        </div>
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+        <hr>
+    </div>
+
+
+
 	<script>
 		// 마커를 담을 배열입니다
 		var markers = [];
@@ -254,11 +199,9 @@
 					daum.maps.event.addListener(marker, 'mouseover',
 							function() {
 								displayInfowindow(marker, title);
-								hideAllMarker();
 							});
 
 					daum.maps.event.addListener(marker, 'mouseout', function() {
-						showAllMarker();
 						infowindow.close();
 					});
 
@@ -303,8 +246,7 @@
 					+ '</div>';
 
 			el.innerHTML = itemStr;
-			el.className = 'col-lg-3 design';
-
+			el.className = 'col-lg-12';
 			return el;
 		}
 
@@ -372,7 +314,7 @@
 		function displayInfowindow(marker, title) {
 			var content = '<div style="padding:5px;z-index:1;">' + title
 					+ '</div>';
-		
+
 			infowindow.setContent(content);
 			infowindow.open(map, marker);
 		}
@@ -384,18 +326,6 @@
 			}
 		}
 	</script>
-	<script>
-	function hideAllMarker() {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setVisible(false);
-		}
-	}
-	
-	function showAllMarker() {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(true);
-		}
-	}
-	
-	
-	</script>
+
+</body>
+</html>

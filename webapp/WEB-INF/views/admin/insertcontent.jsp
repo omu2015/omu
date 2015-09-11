@@ -35,7 +35,13 @@
 							 </c:forEach>
 							</select>
 						</td>
-						<td><input size="10" type="hidden" name="member_no" value="${authUser.getMember_no()}">${authUser.getMember_no()}</td>
+						<td>
+							<select name="member_no">
+							 <c:forEach var="vo" items="${memberList}">
+							  <option value="${vo.getMember_no()}">${vo.getMemberName()}</option>
+							 </c:forEach>
+							</select>
+						</td>
 						<td><input size="10" type="text" name="phone"></td>
 						<td><input size="10" type="text" name="newAddress"></td>
 						<td><input size="10" type="text" name="imageUrl"></td>

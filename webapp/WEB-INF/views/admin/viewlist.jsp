@@ -11,7 +11,7 @@
 						<td bgcolor="#CCCCCC" align="center">회원 번호</td>
 						<td bgcolor="#CCCCCC" align="center">회원 이름</td>
 						<td bgcolor="#CCCCCC" align="center">plan_no</td>
-						<td bgcolor="#CCCCCC" align="center">content_no</td>
+						<td bgcolor="#CCCCCC" align="center">제목</td>
 						<td bgcolor="#CCCCCC" align="center">비용</td>
 						<td bgcolor="#CCCCCC" align="center">시간</td>
 						<td bgcolor="#CCCCCC" align="center">totalCost</td>

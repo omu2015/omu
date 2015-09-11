@@ -23,9 +23,14 @@ public class ReviewController {
 	ReviewService reviewService;
 	
 	@RequestMapping
-	public String index(Model model, HttpSession session){
-		reviewService.index(model, session);
+	public String index(Model model){
+		reviewService.index(model);
 		return "/review/index";
+	}
+	
+	@RequestMapping("test")
+	public String test(Model model){
+		return "/review/mapp";
 	}
 	
 	

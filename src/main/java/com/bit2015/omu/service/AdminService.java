@@ -127,6 +127,7 @@ public class AdminService {
 	}
 
 	public void deleteContent(Long content_no) {
+		System.out.println("content_no = "+content_no);
 		contentDao.delete(content_no);
 	}
 	

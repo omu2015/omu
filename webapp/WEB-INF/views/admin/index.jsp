@@ -42,6 +42,9 @@
 width: 1500px;
 }
 
+#adminli {
+	align : center;
+}
 </style>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -58,20 +61,29 @@ width: 1500px;
 	<section id="featured">
 	<!-- start slider -->
 	<div class="container">
-	<c:import url="/WEB-INF/views/include/navigation.jsp"></c:import>
-	
 	</section>
-		<section id="content">
-		<table id="adminMainTable">
-						<c:import url="/WEB-INF/views/admin/viewlist.jsp"></c:import>
-						<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
-						<c:import url="/WEB-INF/views/admin/inserttheme.jsp"></c:import>
-						<c:import url="/WEB-INF/views/admin/insertthemebox.jsp"></c:import>
-						<c:import url="/WEB-INF/views/admin/insertcontent.jsp"></c:import>
-						<c:import url="/WEB-INF/views/admin/insertplan.jsp"></c:import>
-						<c:import url="/WEB-INF/views/admin/insertcontentbox.jsp"></c:import>
-		</table>
-		</section>
+	<section id="content">
+			<div class="row">
+			<div class="col-lg-12">
+				<h4 class="heading">Admin Page</h4>
+				<div class="row">
+					<section id="projects">
+						<div class="item-thumbs">
+							<table id="adminMainTable">
+								<c:import url="/WEB-INF/views/admin/viewlist.jsp"></c:import>
+								<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
+								<c:import url="/WEB-INF/views/admin/inserttheme.jsp"></c:import>
+								<c:import url="/WEB-INF/views/admin/insertthemebox.jsp"></c:import>
+								<c:import url="/WEB-INF/views/admin/insertcontent.jsp"></c:import>
+								<c:import url="/WEB-INF/views/admin/insertplan.jsp"></c:import>
+								<c:import url="/WEB-INF/views/admin/insertcontentbox.jsp"></c:import>
+							</table>
+						</div>
+					</section>
+				</div>
+		</div>
+	</div>	
+	</section>
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>
 </div>	

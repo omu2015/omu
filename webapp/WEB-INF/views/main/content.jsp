@@ -14,7 +14,7 @@ $(function(){
 				<h4 class="heading">접속자의 관심사</h4>
 				<div class="row">
 				
-				<c:forEach var="vo" items="${list }" varStatus="status">
+				<c:forEach var="vo" items="${viewList }" varStatus="status">
 					<section id="projects">
 					<ul id="thumbs" class="portfolio">					
 						<!-- Item Project and Filter Name -->

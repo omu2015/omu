@@ -5,7 +5,7 @@
 	
 	<insert id="insert" parameterClass="MemberVo">
 		<![CDATA[
-			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #imageUrl#, #memberGrade#, 'active', #birth#, #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, '-', #email#, #zipcode#)
+			insert INTO MEMBER VALUES(member_no_seq.nextval, #memberId#, #memberName#, #password#, #imageUrl#, #memberGrade#, 'active', to_Date(#birth#, 'yyyy-MM-dd'), #address#, #phoneNum1#, #phoneNum2#, #phoneNum3#, sysdate, null, #email#, #zipcode#)
 		]]>
 	</insert>
 	

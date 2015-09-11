@@ -29,12 +29,14 @@ import com.bit2015.omu.dao.ProductDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.util.FileUploader;
+import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
+import com.bit2015.omu.vo.ViewVo;
 
 @Service
 public class ReviewService {
@@ -68,7 +70,39 @@ public class ReviewService {
     
     FileUploader ful=new FileUploader();
 
-	public void index(Model model, HttpSession session) {
+	public void index(Model model) {
+		//List<BoardVo> boardList=new ArrayList<BoardVo>();
+		
+		
+		
+		
+		/*List<ViewVo> viewList=new ArrayList<ViewVo>();
+    	List<ContentBoxVo> contentBoxList=contentBoxDao.selectAll();
+    	
+    	for (int i = 0; i < contentBoxList.size(); i++) {
+    		ViewVo viewVo=new ViewVo();
+    		long cbno=contentBoxList.get(i).getContentBox_no();
+    		long cno=contentBoxList.get(i).getContent_no();
+    		long pno=contentBoxList.get(i).getPlan_no();
+    		long member_no=planDao.selectVo(pno).getMember_no();
+    		
+    		viewVo.setContentBox_no(cbno);
+    		viewVo.setMember_no(member_no);
+    		viewVo.setMemberName(memberDao.selectVo(member_no).getMemberName());
+    		viewVo.setPlan_no(pno);
+    		viewVo.setTitle(contentDao.selectVo(cno).getTitle());
+    		viewVo.setCost(contentDao.selectVo(cno).getCost());
+    		viewVo.setCost(contentDao.selectVo(cno).getTime());
+    		viewVo.setTotalCost(planDao.selectVo(pno).getTotalCost());
+    		viewVo.setTotalCost(planDao.selectVo(pno).getTotalTime());
+    		
+    		viewList.add(i, viewVo);
+		}
+    	
+    	model.addAttribute("viewList", viewList);*/
+	}
+	
+	public void mapview(Model model, HttpSession session){
 		//1.session 생성
 		MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
 		//System.out.println(memberVo.toString());
@@ -93,6 +127,8 @@ public class ReviewService {
 			list3.add(themeDao.selectVo(list2.get(i).getTheme_no()));
 		}
 		model.addAttribute("themeArray", list3);
+		
+		
 	}
 	
 }
