@@ -17,6 +17,7 @@ import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
+import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
 import com.bit2015.omu.vo.ViewVo;
 
@@ -44,6 +45,8 @@ public class AdminController {
 		model.addAttribute("contentBoxList", contentBoxList);
 		List<ViewVo> viewList=adminService.selectView();
 		model.addAttribute("viewList", viewList);
+		List<ThemeBoxVo> themeBoxList=adminService.selectThemeBox();
+		model.addAttribute("themeBoxList", themeBoxList);
 		
 		return "/admin/index";
 	}	
@@ -120,7 +123,18 @@ public class AdminController {
 		return "redirect:/admin";
 	}	
 	
+	@RequestMapping("/insertthemebox")
+	public String insertThemeBox(ThemeBoxVo themeBoxVo){
+		System.out.println(themeBoxVo.toString());
+		adminService.insertThemeBox(themeBoxVo);
+		return "redirect:/admin";
+	}	
 	
+	@RequestMapping("/deletethemebox")
+	public String deleteThemeBox(@RequestParam Long themeBox_no){
+		adminService.deleteThemeBox(themeBox_no);
+		return "redirect:/admin";
+	}	
 	
 	
 	

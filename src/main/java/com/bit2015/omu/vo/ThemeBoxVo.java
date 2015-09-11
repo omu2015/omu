@@ -5,6 +5,7 @@ public class ThemeBoxVo {
 	private long themeBox_no;
 	private long member_no;
 	private long theme_no;
+	
 	public long getThemeBox_no() {
 		return themeBox_no;
 	}

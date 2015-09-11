@@ -66,6 +66,7 @@ width: 1500px;
 						<c:import url="/WEB-INF/views/admin/viewlist.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/inserttheme.jsp"></c:import>
+						<c:import url="/WEB-INF/views/admin/insertthemebox.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertcontent.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertplan.jsp"></c:import>
 						<c:import url="/WEB-INF/views/admin/insertcontentbox.jsp"></c:import>

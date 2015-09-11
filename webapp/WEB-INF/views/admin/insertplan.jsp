@@ -16,7 +16,7 @@
 			<form action="/admin/insertplan" method="post">
 					<tr>
 						<td><input size="10" type="hidden" name="member_no" value="${authUser.getMember_no()}">   ${authUser.getMember_no()}   </td>
-						<td><input size="10" type="date" name="planDate"></td>
+						<td><input size="10" type="Date" name="planDate"></td>
 						<td><input size="10" type="text" name="totalCost"></td>
 						<td><input size="10" type="text" name="totalTime"></td>
 						<td><input size="10" type="submit" value="등록"></td>

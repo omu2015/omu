@@ -30,6 +30,7 @@ import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
+import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
 import com.bit2015.omu.vo.ViewVo;
 
@@ -170,7 +171,22 @@ public class AdminService {
 	public void deleteContentBox(Long contentBox_no) {
 		contentBoxDao.delete(contentBox_no);
 	}
+
 	
+	
+	
+	public void insertThemeBox(ThemeBoxVo themeBoxVo) {
+		System.out.println(themeBoxVo.toString());
+		themeBoxDao.insert(themeBoxVo);
+	}
+	public List<ThemeBoxVo> selectThemeBox() {
+		List<ThemeBoxVo> list=themeBoxDao.selectAll();
+		return list;
+	}
+	public void deleteThemeBox(Long themeBox_no) {
+		themeBoxDao.delete(themeBox_no);
+	}
+
 	
 	
 	

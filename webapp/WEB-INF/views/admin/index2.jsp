@@ -44,7 +44,7 @@
 	<!-- end header -->
 	<div class="container">
 	<c:import url="/WEB-INF/views/include/navigation.jsp"></c:import>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
 	<script>
 		var places = new daum.maps.services.Places();
 		var imggo;
@@ -57,8 +57,8 @@
 		    }
 		};
 		places.keywordSearch('판교 치킨', callback);
-	</script>
-<div id="gogogo"></div>
+	</script> 
+<div id="gogogo"></div>-->
 	</section>
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>
