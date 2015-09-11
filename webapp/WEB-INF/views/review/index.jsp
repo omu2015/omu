@@ -53,61 +53,41 @@
 
 </head>
 <style>
-li { margin: 0 10px; display: inline; }
+#woosungMain li { margin: 15px 10px; display: inline; float: right; border :1px solid #E26483;}
 ul { list-style: none outside none; margin:0; padding: 0; text-align: center; }
 img {width : 250px }
+
+#woosungMain{ width:100%; height:100%}
+#woosungMain ul li table {
+	background-color : #FED4DE;
+	height :250px;
+	width : 300px;
+	margin : 10 auto;
+}
 </style>
 <body>
 <div id="wrapper">
 	<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"/> 
 	<!-- end header -->
-	
-	<section id="featured">
-	<!-- start slider -->
-	<div class="container">
-	<c:import url="/WEB-INF/views/include/navigation.jsp"></c:import>
-		<div class="row">
- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
-	<script>
-	 console.log('${themeArray.size()}');
-	 var MTSize='${themeArray.size()}';
-		var places = new daum.maps.services.Places();
-		var imggo;
-		var callback = function(status, result) {
-		    if (status === daum.maps.services.Status.OK) {
-		    	console.log(result);
-		        	for (var i in result.places) {
-					console.log(i+"       "+result.places[i].imageUrl);
-					if(result.places[i].imageUrl!=""){
-					$('#go').append(
-						'<li><b>'+result.places[i].title+'</b><img src="'+result.places[i].imageUrl+'"/></li>'
-					);
-					}
-				}
-		    }
-		};
-		
-		places.keywordSearch('${themeArray.get(1).getThemeName()}', callback);
-	</script>
-<ul id="go">
-<li><img src=""/></li>
+<div class="container">
+<div id="woosungMain">
+<ul id="woosungul">
+	<li><table>   <tr><td><h5>제목</h5></td></tr>  <tr><td><h6>부제</h6></td></tr>  <tr><td>이미지</td></tr>  </table></li>
 
 </ul>
-</div></div>
-	</section>
-	<section id="content">
-	<div class="container">
 	
-	<!-- start header -->
-		<c:import url="/WEB-INF/views/main/content.jsp"/>
-	<!-- end header -->
+<!-- 
+<ul id="go"></ul>
+ -->
 
-</div>
-	</section>
+</div>	
+</div><!-- main -->
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-</div>
+</div><!-- wrapper -->
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+</body>
+</html>
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -124,5 +104,59 @@ img {width : 250px }
 <script src="/assets/js/custom.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
-</body>
-</html>
+	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
+<script>
+$(document).ready(function() {
+    	$.ajax({
+          type:"GET",
+          url:"https://apis.daum.net/local/v1/search/category.json?apikey=bbef91da99f11fe76f4b3b523d3151e9&code=CT1&location=37.514322572335935,127.06283102249932&radius=20000",
+          dataType:"JSONP", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+          success : function(response) {
+                // 통신이 성공적으로 이루어졌을 때 이 함수를 타게 된다.
+                // TODO
+    		    	console.log(response);
+    		        	for (var i in response.channel.item) {
+    		        		if(response.channel.item[i].imageUrl==""){
+    		        			response.channel.item[i].imageUrl=="사진이 없습니다";
+    		        		}else{
+    		        			/* response.channel.item[i].imageUrl=='<img src="'+response.channel.item[i].imageUrl+'"/>' */
+    		        		}
+    					$('#woosungul').append(
+    						'<li><table><tr><td><h5>'+
+    						response.channel.item[i].title+'</h5></td></tr><tr><td><h6>'+
+    						response.channel.item[i].newAddress+'</h6></td></tr><tr><td><img src="'+
+    						response.channel.item[i].imageUrl+'"/></td></tr></table></li>'
+    					);
+    				}
+          },
+          complete : function(response) {
+                // 통신이 실패했어도 완료가 되었을 때 이 함수를 타게 된다.
+                // TODO
+          },
+          error : function(xhr, status, error) {
+                alert("에러발생");
+          }
+    });
+});
+</script>
+	<script>
+	 console.log('${themeArray.size()}');
+	 var MTSize='${themeArray.size()}';
+		var places = new daum.maps.services.Places();
+		var imggo;
+		var callback = function(status, result) {
+		    if (status === daum.maps.services.Status.OK) {
+		    	//console.log(result);
+		        	for (var i in result.places) {
+					//console.log(i+"       "+result.places[i].imageUrl);
+					if(result.places[i].imageUrl!=""){
+					$('#go').append(
+						'<li><b>'+result.places[i].title+'</b><img src="'+result.places[i].imageUrl+'"/></li>'
+					);
+					}
+				}
+		    }
+		};
+		
+		places.keywordSearch('${themeArray.get(1).getThemeName()}', callback);
+	</script>
