@@ -247,27 +247,26 @@
 				// LatLngBounds 객체에 좌표를 추가합니다
 				bounds.extend(placePosition);
 
-				// 마커와 검색결과 항목에 mouseover 했을때
-				// 해당 장소에 인포윈도우에 장소명을 표시합니다
-				// mouseout 했을 때는 인포윈도우를 닫습니다
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				(function(marker, title) {
 					daum.maps.event.addListener(marker, 'mouseover',
 							function() {
 								displayInfowindow(marker, title);
-								hideAllMarker();
 							});
 
 					daum.maps.event.addListener(marker, 'mouseout', function() {
-						showAllMarker();
 						infowindow.close();
 					});
 
 					itemEl.onmouseover = function() {
 						displayInfowindow(marker, title);
+						hideAllMarker();
+						marker.setVisible(true);
 					};
 
 					itemEl.onmouseout = function() {
 						infowindow.close();
+						showAllMarker();
 					};
 				})(marker, places[i].title);
 
@@ -393,7 +392,7 @@
 	
 	function showAllMarker() {
 		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(true);
+			markers[i].setVisible(true);
 		}
 	}
 	
