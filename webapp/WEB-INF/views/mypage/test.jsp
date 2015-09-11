@@ -31,11 +31,12 @@
 						<td bgcolor="#CCCCCC" align="center">총시간</td>
 	
 					</tr>
-					<c:forEach var="vo" items="${viewList }">
+					<c:forEach var="vo" items="${viewList }">  
+			         <c:if test="${vo.member_no==authUser.member_no}">
 					<tr>
-						<td>${vo.contentBox_no}</td>
-						<td>${vo.member_no}</td>
+						<td>${vo.content_no}</td>
 						<td>${vo.regDate}</td>
+						<td>${vo.member_no}</td>
 						<td>${vo.member_no}</td>
 						<td>${vo.phone}</td>
 						<td>${vo.newAddress}</td>
@@ -60,7 +61,8 @@
 				
 		
 					</tr>
-					</c:forEach>
+				</c:if>
+				</c:forEach>
 				</table>
 		</td>
 	</tr>

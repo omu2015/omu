@@ -96,6 +96,7 @@ public class MyPageService {
 		 
 			calendarVo.setContent_no(content_no);
 			calendarVo.setRegDate(contentDao.selectVo(content_no).getRegDate());
+			calendarVo.setMember_no(member_no);
 			calendarVo.setAddress(contentDao.selectVo(content_no).getAddress());
 			calendarVo.setPhone(contentDao.selectVo(content_no).getPhone());
 			calendarVo.setNewAddress(contentDao.selectVo(content_no).getNewAddress());
