@@ -48,7 +48,7 @@ $(function(){
 				</form>
 			</div>
 
-			<table style="width:600px;background-color:#fff;color:#000;font-size:15px;height:200px">
+			<table style="width:600px;background-color:#fff;color:#000;font-size:15px;">
 			<c:forEach var="vo2" items="${list2}" varStatus="status">
 			<c:if test="${vo.content_no == vo2.content_no}">
 				<tr>

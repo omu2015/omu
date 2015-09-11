@@ -56,11 +56,11 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 						<li><a href="/">HOME</a></li> 
 						<li><a href="#">오늘 뭐하지?</a></li> 
 						<li><a href="/planner">내 주변?</a></li>
-						<li><a href="#">게시판</a></li>
+						<li><a href="/review">게시판</a></li>
 						<li><a href="#">몰라</a></li>
 						
-						<li style="margin-left:370px;"><a style="color:#fb6f92"  href="#loginmodal"  id="modaltrigger">Login</a></li>
-						<li style="color:#fb6f92"><a style="color:#fb6f92"  href="/member/joinForm">Join</a></li>
+						<li style="float:right;margin-right:180px"><a style="color:#fb6f92"  href="/member/joinForm">Join</a></li>
+						<li style="float:right"><a style="color:#fb6f92"  href="#loginmodal"  id="modaltrigger">Login</a></li>
 					</ul>
 			</c:when>
 			<c:otherwise>
@@ -68,11 +68,11 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 						<li><a href="/">HOME</a></li> 
 						<li><a href="#">오늘 뭐하지?</a></li> 
 						<li><a href="/planner">내 주변?</a></li>
-						<li><a href="#">게시판</a></li>
+						<li><a href="/review">게시판</a></li>
 						<li><a href="#">몰라</a></li>
 						
-		            	<li style="margin-left:370px"><a style="color:#fb6f92"  href="/mypage" >MyPage</a></li>
-						<li style="color:#fb6f92"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
+						<li style="float:right;margin-right:180px"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
+		            	<li style="float:right"><a style="color:#fb6f92"  href="/mypage" >MyPage</a></li>
 					</ul>
 			</c:otherwise>
 			</c:choose>
