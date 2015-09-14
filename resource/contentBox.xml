@@ -16,6 +16,12 @@
 		]]>
 	</select>
 	
+	<select id="selectAllByPno" parameterClass="java.lang.Long" resultClass="ContentBoxVo">
+		<![CDATA[
+			select * from contentBox where plan_no=#plan_no# order by contentBox_no desc
+		]]>
+	</select>
+	
 	<select id="selectAllByCno" resultClass="ContentBoxVo">
 		<![CDATA[
 			select * from contentBox where content_no=#content_no# order by contentBox_no desc

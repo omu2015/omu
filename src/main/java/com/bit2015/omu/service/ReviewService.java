@@ -133,7 +133,7 @@ public class ReviewService {
 	}
 
 	public void showboard(String plan_no) {
-		//contentBoxDao.s
+		contentBoxDao.selectAllByPno(plan_no);
 		
 		
 	}
