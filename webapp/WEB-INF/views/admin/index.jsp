@@ -11,19 +11,6 @@
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
 <style type="text/css">
-</style>
-<!-- css -->
-<link href="../../assets/css/layout.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
-<link href="../../assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-<link href="../../assets/css/jcarousel.css" rel="stylesheet" />
-<link href="../../assets/css/flexslider.css" rel="stylesheet" />
-<link href="../../assets/css/style.css" rel="stylesheet" />
-<script type="text/javascript" src="../../assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../assets/js/jquery.leanModal.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<link href="../../assets/css/default.css" rel="stylesheet" />
-<style type="text/css">
 #adminMainTable{
 	margin : 0 auto;
 	padding: 0 auto;
@@ -46,10 +33,6 @@ width: 1500px;
 	align : center;
 }
 </style>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 </head>
 <body>
 
@@ -64,11 +47,6 @@ width: 1500px;
 	</section>
 	<section id="content">
 			<div class="row">
-			<div class="col-lg-12">
-				<h4 class="heading">Admin Page</h4>
-				<div class="row">
-					<section id="projects">
-						<div class="item-thumbs">
 							<table id="adminMainTable">
 								<c:import url="/WEB-INF/views/admin/viewlist.jsp"></c:import>
 								<c:import url="/WEB-INF/views/admin/insertmember.jsp"></c:import>
@@ -78,29 +56,10 @@ width: 1500px;
 								<c:import url="/WEB-INF/views/admin/insertplan.jsp"></c:import>
 								<c:import url="/WEB-INF/views/admin/insertcontentbox.jsp"></c:import>
 							</table>
-						</div>
-					</section>
-				</div>
-		</div>
 	</div>	
 	</section>
-		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>
 </div>	
 <a href="#" class="scrollup">위로가기<i class="fa fa-angle-up active"></i></a>
-<!-- javascript
-    ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="../../assets/js/jquery.js"></script>
-<script src="../../assets/js/jquery.easing.1.3.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/jquery.fancybox.pack.js"></script>
-<script src="../../assets/js/jquery.fancybox-media.js"></script>
-<script src="../../assets/js/google-code-prettify/prettify.js"></script>
-<script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
-<script src="../../assets/js/portfolio/setting.js"></script>
-<script src="../../assets/js/jquery.flexslider.js"></script>
-<script src="../../assets/js/animate.js"></script>
-<script src="../../assets/js/custom.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -70,36 +71,16 @@ public class ReviewService {
     
     FileUploader ful=new FileUploader();
 
-	public void index(Model model) {
-		//List<BoardVo> boardList=new ArrayList<BoardVo>();
-		
-		
-		
-		
-		/*List<ViewVo> viewList=new ArrayList<ViewVo>();
-    	List<ContentBoxVo> contentBoxList=contentBoxDao.selectAll();
-    	
-    	for (int i = 0; i < contentBoxList.size(); i++) {
-    		ViewVo viewVo=new ViewVo();
-    		long cbno=contentBoxList.get(i).getContentBox_no();
-    		long cno=contentBoxList.get(i).getContent_no();
-    		long pno=contentBoxList.get(i).getPlan_no();
-    		long member_no=planDao.selectVo(pno).getMember_no();
-    		
-    		viewVo.setContentBox_no(cbno);
-    		viewVo.setMember_no(member_no);
-    		viewVo.setMemberName(memberDao.selectVo(member_no).getMemberName());
-    		viewVo.setPlan_no(pno);
-    		viewVo.setTitle(contentDao.selectVo(cno).getTitle());
-    		viewVo.setCost(contentDao.selectVo(cno).getCost());
-    		viewVo.setCost(contentDao.selectVo(cno).getTime());
-    		viewVo.setTotalCost(planDao.selectVo(pno).getTotalCost());
-    		viewVo.setTotalCost(planDao.selectVo(pno).getTotalTime());
-    		
-    		viewList.add(i, viewVo);
+	public void index(Model model, HttpSession session) {
+		List<ThemeBoxVo> memberTheme =themeBoxDao.selectAll();
+		MemberVo memberVo =(MemberVo) session.getAttribute("authUser");
+		System.out.println("memberTheme.toString()="+memberTheme.toString());
+		for (int i = 0; i < memberTheme.size(); i++) {
+			if(memberVo.getMember_no()!=memberTheme.get(i).getMember_no()){
+				memberTheme.remove(i);
+			}
 		}
-    	
-    	model.addAttribute("viewList", viewList);*/
+		model.addAttribute("memberTheme", memberTheme);
 	}
 	
 	public void mapview(Model model, HttpSession session){
@@ -129,6 +110,20 @@ public class ReviewService {
 		model.addAttribute("themeArray", list3);
 		
 		
+	}
+
+	public List<PlanVo> getPlanListById() {
+		List<PlanVo> planList = new ArrayList<PlanVo>();
+		List<ContentVo> contentList = contentDao.selectAll();
+		for (int i = 0; i < contentList.size(); i++) {
+			ContentVo contentVo=contentList.get(i);
+			//if(contentVo.getId())
+			
+			
+		}
+		
+		
+		return planList;
 	}
 	
 }
