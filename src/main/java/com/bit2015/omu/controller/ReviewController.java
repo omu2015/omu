@@ -39,14 +39,14 @@ public class ReviewController {
 	
 	@RequestMapping("/callPlanList")
 	@ResponseBody
-	public Map<String, Object> callPlanList(@RequestParam String id){
-		List<PlanVo> planList =reviewService.getPlanListById();
+	public void callPlanList(@RequestParam String id){
+		List<PlanVo> planList =reviewService.getPlanListById(id);
 		
 		//ajax-jason
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		
-		return map;
+		//return map;
 	}
 	
 }

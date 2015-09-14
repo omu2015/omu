@@ -37,5 +37,9 @@ public class ContentDao {
 		sqlMapClientTemplate.update("content.update", contentVo);
 
 	}
+	public ContentVo selectVoById(String id) {
+		ContentVo vo = (ContentVo) sqlMapClientTemplate.queryForObject("content.selectVoById",id);
+		return vo;
+	}
 	
 }

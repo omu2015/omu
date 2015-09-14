@@ -112,18 +112,19 @@ public class ReviewService {
 		
 	}
 
-	public List<PlanVo> getPlanListById() {
+	public List<PlanVo> getPlanListById(String id) {
 		List<PlanVo> planList = new ArrayList<PlanVo>();
-		List<ContentVo> contentList = contentDao.selectAll();
-		for (int i = 0; i < contentList.size(); i++) {
-			ContentVo contentVo=contentList.get(i);
-			//if(contentVo.getId())
+		System.out.println(id);
+		ContentVo contentVo = contentDao.selectVoById(id);
+		if(contentVo==null){
+			return planList;
+		}else{
+			//contentBoxDao.selectVo();
+				
 			
-			
+			return planList;
 		}
-		
-		
-		return planList;
+		//System.out.println(contentVo.toString());
 	}
 	
 }
