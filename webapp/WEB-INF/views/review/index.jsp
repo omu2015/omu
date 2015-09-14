@@ -162,7 +162,7 @@
 												        <div class="option">
 												            <p>
 												                <form onsubmit="searchPlaces(); return false;">
-												                 <input type="text" value="노량진 맛집" id="keyword" size="15"> 
+												                 <input type="text" value="비트교육센터" id="keyword" size="15"> 
 												                <button type="submit">검색</button> 
 												            </p>
 												        </div>
@@ -305,6 +305,10 @@ function planSearchCB(status, response, pagination) {
 									function() {
 									displayPlanList(marker,items);
 									});
+									
+									itemEl.onclick = function(){
+									displayPlanList(marker,items);	
+									};
 				})(marker, places[i]);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -408,7 +412,7 @@ function planSearchCB(status, response, pagination) {
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
 		function displayInfowindow(marker, title) {
-			var content = '<div style="padding:5px;z-index:1;">' + title+ '</div>';
+			var content = '<div class="col-lg-3" style="padding:5px;z-index:1;">' + title+ '</div>';
 		
 			infowindow.setContent(content);
 			infowindow.open(map, marker);
@@ -420,13 +424,14 @@ function planSearchCB(status, response, pagination) {
 				el.removeChild(el.lastChild);
 			}
 		}
-	</script>
-	<script>
+		
+		
 	function displayPlanList(marker, items) {
 		console.log(items.id+"_______"+items.title);
 		
-	var content = '아이디 없음';
-	
+	var content = '<div style="padding:5px;z-index:1;"><ul><li>'+items.title+'</li>';
+					
+		console.log(items);
 		$.ajax({
 			type: "Post",
 			url: "/review/callPlanList",
@@ -434,20 +439,28 @@ function planSearchCB(status, response, pagination) {
 				id : items.id
 			},
 			success: function(response){
-				alert("came into ajax success line");
+				console.log("came into ajax success line");
+					for ( var i in response.planList) {
+						content += '<li><a href="/review/showboard?plan_no="'+response.planList[i].plan_no+'">'+response.planList[i].plan_no+'</a></li>';
+						console.log(response.planList[i].planDate);
+					}
+				content+='</ul></div>';
 				
-					content = response;
-				
+				console.log(content);
+				planlistwindow.setContent(content);
+				planlistwindow.open(map, marker);
 			},
 			error:function(jqXHR, textStatus, errorThrown){
+	            content+='<p>후기가 없습니다</p></div>';
+				planlistwindow.setContent(content);
+				planlistwindow.open(map, marker);
+				
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
 	            self.close();
 	        }
 		});
 		
-		
-		planlistwindow.setContent(content);
-		planlistwindow.open(map, marker);
+	
 	}
 	
 	function hideAllMarker() {

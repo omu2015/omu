@@ -116,15 +116,26 @@ public class ReviewService {
 		List<PlanVo> planList = new ArrayList<PlanVo>();
 		System.out.println(id);
 		ContentVo contentVo = contentDao.selectVoById(id);
+		
 		if(contentVo==null){
+			System.out.println("해당 id로 아무것도 검색되지 않았습니다.");
 			return planList;
 		}else{
-			//contentBoxDao.selectVo();
-				
-			
+			List<ContentBoxVo> contentBoxList=contentBoxDao.selectAllById(contentVo.getContent_no());
+			for (int i = 0; i < contentBoxList.size(); i++) {
+				planList.add(planDao.selectVo(contentBoxList.get(i).getPlan_no()));
+				//plan들을 planList에 담아놈
+			}
+			System.out.println("Service----planList.toString()="+planList.toString());
 			return planList;
 		}
 		//System.out.println(contentVo.toString());
+	}
+
+	public void showboard(String plan_no) {
+		//contentBoxDao.s
+		
+		
 	}
 	
 }
