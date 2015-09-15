@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
-import com.bit2015.omu.vo.ThemeBoxVo;
-import com.bit2015.omu.vo.ThemeVo;
 
 @Repository
 public class PlanDao {
@@ -24,6 +21,11 @@ public class PlanDao {
 	@SuppressWarnings("unchecked")
 	public List<PlanVo> selectAll(){
 		List<PlanVo> list= sqlMapClientTemplate.queryForList("plan.selectAll");
+		return list;
+	}
+	
+	public List<PlanVo> getUserPlan(Long member_no){
+		List<PlanVo> list = sqlMapClientTemplate.queryForList("plan.getUserPlan", member_no);
 		return list;
 	}
 	

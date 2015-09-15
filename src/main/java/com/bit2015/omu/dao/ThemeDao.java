@@ -25,6 +25,10 @@ public class ThemeDao {
 		ThemeVo vo = (ThemeVo) sqlMapClientTemplate.queryForObject("theme.selectVo", theme_no);
 		return vo;
 	}
+	public ThemeVo getNo(String themeName){
+		ThemeVo vo = (ThemeVo) sqlMapClientTemplate.queryForObject("theme.getNo", themeName);
+		return vo;
+	}
 	
 	public void insert(ThemeVo themeVo){
 		sqlMapClientTemplate.insert("theme.insert", themeVo);

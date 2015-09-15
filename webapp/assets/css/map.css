@@ -122,15 +122,18 @@ position: relative;
 }
 
 #nav{
-width: 120px;
+width: 137px;
+height : 300px;
 margin:0;
 padding:0;
 position: relative;
 font-family: 'Arial', Helvetica, sans-serif;
+overflow: scroll;
+overflow-x: hidden;
 }
 
 #nav li a,#nav li {
-float:left;
+float:none;
 }
 
 #nav li ,.select1 ,.select2, .select3  {
@@ -143,7 +146,7 @@ line-height: 30px;
 padding:0 15px;
 text-decoration:none;
 margin:0;
-font-size:15px;
+font-size:14px;
 font-weight:bold;
 text-transform:uppercase;
 }
@@ -271,7 +274,7 @@ div.select2{
 }
 div.select3{
 	    position: fixed;
-   	 	margin: -30px 620px;
+   	 	margin: -30px 645px;
    	 	background-color:#ededed;
 }
 div#menu_div{

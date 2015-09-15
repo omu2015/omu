@@ -25,7 +25,7 @@
 <script src="../../assets/js/jquery.flexslider.js"></script>
 <script src="../../assets/js/animate.js"></script>
 <script src="../../assets/js/custom.js"></script>
-<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9"></script>
+<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 
@@ -40,67 +40,82 @@
 	<div class="plan_container">
 		<!-- 맵  	-->
 		<div id="currentLocation"><button onclick="geoFindMe();">현 위치 검색</button></div>
+		<!-- <div style="margin-top:160px; margin-left:10px; position:fixed;"><input id="addPlanDate" type="Date" value="" /></div>
+		<div style="margin-top:200px; margin-left:10px; position:fixed;"><button onclick="addPlan();">+ 일정추가</button></div>
+		<div style="margin-top:240px; margin-left:10px; position:fixed;"><button onclick="showPlan();">내 일정보기</button></div>
+		<div style="margin-top:300px; position:fixed;">
+		<table id ="addPlan" style="display:none">
+			<tr>	
+				<td style="border:1px solid #000;">일정</td>
+			</tr>
+			<tr>	
+				<td style="border:1px solid #000;"></td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #000;">계획</td>
+			</tr>
+		</table>
+		<table id ="showPlan" style="display:none">
+			<tr >	
+				<td colspan="2" style="border:1px solid #000;">
+				일정
+				</td>
+			</tr>
+			<tr>	
+				<td style="border:1px solid #000;">날짜</td>
+				<td style="border:1px solid #000;">계획1</td>
+			</tr>
+		</table>
+		</div> -->
 		<div id="map"></div>
-		<div id="local" style="display:none;">
-			 <h2>지역선택 </h2>
-			 		<c:forEach var="i" items="${jusoList}">
-			 			<button onclick="test_go()" value="${i.si}">${i.si}</button>
-			 		</c:forEach>
-		</div>
-		
-		<div id="category" style="display:none;">
-			 <h2>키워드 입력</h2>
-			 	<form method="post" action="javascript:searchKeyword()">
-			 	<input type="text" name="keyword" id="keyword"/>
-			 	<input type="submit" value="검색">
-			 	</form>
-			 	 <h2>키워드 선택</h2>
-			 	 <button>영화관</button>
-			 </div>
-		</div>
+	</div>
 	
-	<!-- <script>
-	function test_go(){
-		 var si = event.srcElement.value; 
-		 $.ajax({
+ 	<script>
+ 	function addPlan(){
+ 		$('#showPlan').hide();
+ 		$('#addPlan').show();
+ 		var planDate = $('#addPlanDate').val();
+ 		$('#addPlanDate').val($.trim($('#addPlanDate').val()));
+		if ($('#addPlanDate').val()) {
+			$.ajax({
+				type : 'get',
+			    url:'/planner/addPlan',
+			    data : {
+			    		planDate : planDate
+			    },
+			    dataType:'json',
+			    success: function(response){
+			    	$('#addPlan').html('<table id ="addPlan" style="display:none"><tr><td style="border:1px solid #000;">일정</td></tr><tr><td style="border:1px solid #000;">'+response.planDate+'</td></tr><tr><td style="border:1px solid #000;">계획</td></tr></table>');
+			    } 
+			 })
+			
+		} else
+			alert("날짜를 입력하세요");
+ 		console.log(planDate);
+ }
+	</script>
+	<script>
+ 	function showPlan(){
+ 		$('#addPlan').hide();
+ 		$('#showPlan').show();
+ 		$.ajax({
 			type : 'get',
-		    url:'/planner/test3',
+		    url:'/planner/showPlan',
 		    data : {
-		    		localValue : si
 		    },
 		    dataType:'json',
 		    success: function(response){
-		    		getGun(response, si)
-		    }
-		    
-		    	
-
-	});
-	}
+		    	var data = '<table id ="showPlan" style="display:none"><tr><td colspan="2" style="border:1px solid #000;">일정</td></tr>';
+		    	for(var i=0; i<response.length; i++){
+		    	data += '<tr><td style="border:1px solid #000;">'+response[i].planDate+'</td><td style="border:1px solid #000;">계획'+i+'</td></tr>'
+		    	}
+		    	data +='</table>';
+		    	$('#showPlan').html(data);
+		    } 
+		 })
+ 	}
 	</script>
-	<script>
-	function getGun(response, si){
-		var siView = si;
-		var gunList = response; 
-		var rData = '<h2>'+si+'><h2>'; 
-
-		try{ 
-		var option=''; 
-		var selected = false; 
-
-		for(var i in gunList){	
-
-		rData += '<button onclick="test_gogo()" value="'+gunList[i].gun+'" id="'+siView+'">'+gunList[i].gun+'</button>'; 
-
-		} 
-		   $('#local').html(rData); 
-
-		}catch(e){ 
-			alert("error")
-		} 
-
-		}
-	</script>
+	<!-- 
 	<script>
 	function test_gogo(){
 		var gun = event.srcElement.value;
@@ -314,22 +329,30 @@
 </script>
 <!-- marker 생성 -->
 <script>
-	function setMarker(lat, lng) {
+	 function setMarker(lat, lng, title,keyword,id) {
 		var markerPosition = new daum.maps.LatLng(lat, lng);
+		var title = title;
+		var keyword = keyword;
+		var id = id;
 		var marker = new daum.maps.Marker({
 			position : markerPosition,
+			title : title,
 			clickable: true
+			
 		});
 		marker.setMap(map);
-		infoMarker(marker);
-	}
+		infoMarker(marker, keyword, id);
+	} 
 </script>
 <!--  click infowindow 실행 -->
 <script>
-	function infoMarker(marker) {
-
-		var iwContent = '<div style="padding:5px;">'+this+'</div>', iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
+	 function infoMarker(marker, keyword, id) {
+		var wb = marker.getPosition().wb;
+		var vb = marker.getPosition().vb;
+		var iwContent = '<div style="padding:5px;">'+marker.getTitle()+'</div><button onclick=setCart('+wb+','+vb+',"'+keyword+'",'+id+',"${planList.plan_no}")>♥ 찜하기</button>&nbsp&nbsp&nbsp<button onclick="">후기보기</button>';
+		
+		var iwRemoveable = true;
+		
 		var infowindow = new daum.maps.InfoWindow({
 			content : iwContent,
 			removable : iwRemoveable
@@ -337,26 +360,34 @@
 		daum.maps.event.addListener(marker, 'click', function() {
 			infowindow.open(map, this);
 		})
-	}
+		
+	} 
 </script>
 <!-- 키워드 검색 -->
 <script>
 function searchKeyword(){
 	var lat = [];
 	var lng = [];
+	var title = [];
+	var id = [];
+	var location = centerLat+','+centerLng;
 	var keyword = document.getElementById("keyword").value;	// 키워드;
 	$.ajax({
 		type : 'get',
 	    url:'https://apis.daum.net/local/v1/search/keyword.json?apikey=bbef91da99f11fe76f4b3b523d3151e9&radius=20000',
 	    data : {
 	    		query : keyword,
+	    		location : location
 	    },
 	    dataType:'jsonp',
 	    success: function(response){
 	    	for(var i=0; i<response.channel.item.length; i++){
 				lat[i] = response.channel.item[i].latitude;
 				lng[i] = response.channel.item[i].longitude;
-				setMarker(lat[i],lng[i]);	
+				title[i] = response.channel.item[i].title;
+				id[i] = response.channel.item[i].id;
+				
+				setMarker(lat[i],lng[i],title[i],keyword,id[i]);
 	    	}
 	    	var moveLatLon = new daum.maps.LatLng(lat[0],lng[0]);
 		  	map.setCenter(moveLatLon);
@@ -366,4 +397,55 @@ function searchKeyword(){
 }
 
 </script>
+<script>
+function setCart(wb, vb, keyword, id, plan_no){
+	console.log(plan_no);
+	var places = new daum.maps.services.Places();
+	var lat = wb;
+	var lng = vb;
+	var keyword = keyword;
+	var id = id;
+	var content ;
+	
+	var callback = function(status, result) {
+	    if (status === daum.maps.services.Status.OK) {
+	        for(var i=0; i<result.places.length; i++){
+	        		if(id == result.places[i].id){
+	        			content = result.places[i];
+	        			
+	        		}
+	    		}
+	        	console.log(content);
+	        	$.ajax({
+	        		type : 'get',
+	        	    url:'/planner/addCart',
+	        	    data : {
+	        	    		phone : content.phone,
+	        	    		newAddress : content.newAddress,
+	        	    		imageUrl : content.imageUrl,
+	        	    		direction : content.direction,
+	        	    		zipcode : content.zipcode,
+	        	    		placeUrl : content.placeUrl,
+	        	    		id : content.id,
+	        	    		title : content.title,
+	        	    		category : content.category,
+	        	    		address : content.address,
+	        	    		longitude : content.longitude,
+	        	    		latitude :content. latitude,
+	        	    		addressBCode : content.addressBCode
+	        	    },
+	        	    dataType:'json',
+	        	    success: function(response){
+	        	    	console.log(response);
+	        	    	}
+	        	 })
+				
+	        }
+	};
+	places.keywordSearch(keyword, callback, {location : new daum.maps.LatLng(lat, lng)});
+	
+
+}
+</script>
+
 </html>

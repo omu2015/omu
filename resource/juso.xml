@@ -2,6 +2,11 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="juso">
 	<typeAlias alias="JusoVo" type="com.bit2015.omu.vo.JusoVo"/>
+		<select id="getFirstGun" resultClass="JusoVo">
+			<![CDATA[
+				select DISTINCT gun from juso where si='서울특별시' order by gun asc
+			]]>
+		</select>
 		<select id="getSi" resultClass="JusoVo">
 			<![CDATA[
 				select distinct si from juso order by si asc

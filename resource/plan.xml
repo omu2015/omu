@@ -20,6 +20,11 @@
 			select * from plan where plan_no=#plan_no#
 		]]>
 	</select>
+	<select id="getUserPlan" parameterClass="java.lang.Long" resultClass="PlanVo">
+		<![CDATA[
+			select * from plan where member_no=#member_no#
+		]]>
+	</select>
 
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[

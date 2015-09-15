@@ -14,6 +14,11 @@
 			select * from theme where theme_no=#theme_no#
 		]]>
 	</select>
+	<select id="getNo" parameterClass="java.lang.String" resultClass="ThemeVo">
+		<![CDATA[
+			select * from theme where themeName=#themeName#
+		]]>
+	</select>
 	
 	<insert id="insert" parameterClass="ThemeVo">
 		<![CDATA[

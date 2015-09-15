@@ -20,6 +20,10 @@ public class JusoDao {
 		List<JusoVo> list = sqlMapClientTemplate.queryForList("juso.getSi");
 		return list;
 	}
+	public List<JusoVo> getFirstGun(){
+		List<JusoVo> list = sqlMapClientTemplate.queryForList("juso.getFirstGun");
+		return list;
+	}
 	public List<JusoVo> getGun(String si){
 		List<JusoVo> list = sqlMapClientTemplate.queryForList("juso.getGun",si);
 		return list;

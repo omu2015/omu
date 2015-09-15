@@ -54,10 +54,8 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 					<c:when test="${empty authUser }">
 					<ul id="nav">
 						<li><a href="/">HOME</a></li> 
-						<li><a href="#">오늘 뭐하지?</a></li> 
-						<li><a href="/planner">내 주변?</a></li>
+						<li><a href="/planner">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
-						<li><a href="#">몰라</a></li>
 						
 						<li style="float:right;margin-right:180px"><a style="color:#fb6f92"  href="/member/joinForm">Join</a></li>
 						<li style="float:right"><a style="color:#fb6f92"  href="#loginmodal"  id="modaltrigger">Login</a></li>
@@ -66,10 +64,8 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 			<c:otherwise>
 					<ul id="nav">
 						<li><a href="/">HOME</a></li> 
-						<li><a href="#">오늘 뭐하지?</a></li> 
-						<li><a href="/planner">내 주변?</a></li>
+						<li><a href="/planner">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
-						<li><a href="#">몰라</a></li>
 						
 						<li style="float:right;margin-right:180px"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
 		            	<li style="float:right"><a style="color:#fb6f92"  href="/mypage" >MyPage</a></li>
@@ -127,7 +123,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 				 <div class="p_c_text" style="margin-top:20px">회원이 되시면 여러가시 혜택을 누리실 수 있습니다.</div>
 				 <div class="login_line">
 				  <div class="box_in" style="margin-top:15px">
-				  <input type="text" name="memberId" id="id" size="23" value="woosungchu">
+				  <input type="text" name="memberId" id="id" size="23" value="hani89">
 				  <input type="password" name="password" id="pw" size="23">
 				  </div>
 				  <input type="submit" value="LOGIN" class="btn_login1"  style="margin-top:12px">
