@@ -154,7 +154,7 @@
 					<ul id="thumbs" class="portfolio">
 													<div class="map_wrap">
 															    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-															<!-- map_wrap -->   </div>
+								 				 	</div><!-- map_wrap -->
 						<!-- Item Project and Filter Name -->
 						
 												    <div id="menu_wrap" class="bg_white">
@@ -173,6 +173,20 @@
 					
 					</ul>
 					</section>
+					<div class="wsTable">
+						<table>
+						<c:forEach var="vo" items="${reviewList }">
+									<c:forEach var="voc" items="${vo.contentList}">
+								<tr>
+									<td colspan="3">${voc.getTitle()}</td>
+								</tr>					
+									</c:forEach>
+								<tr>
+									<td>${vo.getTotalCost()}</td><td>${vo.getTotalTime()}</td><td>${vo.getGoodCnt() }</td>
+								</tr>
+						</c:forEach>
+						</table>
+					</div>
 				</div>
 		</div>
 </div>	
@@ -441,8 +455,8 @@ function planSearchCB(status, response, pagination) {
 			success: function(response){
 				console.log("came into ajax success line");
 					for ( var i in response.planList) {
-						content += '<li><a href="/review/showboard?plan_no="'+response.planList[i].plan_no+'">'+response.planList[i].plan_no+'</a></li>';
-						console.log(response.planList[i].planDate);
+						content += '<li><a href="/review/showboard?plan_no='+response.planList[i].plan_no+'">'+response.planList[i].plan_no+'</a></li>';
+						console.log(response.planList[i].plan_no);
 					}
 				content+='</ul></div>';
 				

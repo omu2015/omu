@@ -28,4 +28,11 @@
 		]]>
 	</delete>
 	
+	
+	<select id="selectAllByCno" parameterClass="java.lang.Long" resultClass="GoodVo">
+		<![CDATA[
+			select * from GOOD where content_no=#content_no# 
+		]]>
+	</select>
+	
 </sqlMap>

@@ -13,8 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.service.AdminService;
 import com.bit2015.omu.service.DaoTestService;
+import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
+import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
@@ -47,6 +49,10 @@ public class AdminController {
 		model.addAttribute("viewList", viewList);
 		List<ThemeBoxVo> themeBoxList=adminService.selectThemeBox();
 		model.addAttribute("themeBoxList", themeBoxList);
+		List<BoardVo> boardList = adminService.selectBoard();
+		model.addAttribute("boardList", boardList);
+		List<GoodVo> goodList = adminService.selectGood();
+		model.addAttribute("goodList", goodList);
 		
 		return "/admin/index";
 	}	
@@ -137,10 +143,32 @@ public class AdminController {
 	}	
 	
 	
+	@RequestMapping("/insertboard")
+	public String insertBoard(BoardVo boardVo){
+		System.out.println(boardVo.toString());
+		adminService.insertBoard(boardVo);
+		return "redirect:/admin";
+	}	
+	
+	@RequestMapping("/deleteboard")
+	public String deleteBoard(@RequestParam Long board_no){
+		adminService.deleteBoard(board_no);
+		return "redirect:/admin";
+	}	
 	
 	
+	@RequestMapping("/insertgood")
+	public String insertGood(GoodVo goodVo){
+		System.out.println(goodVo.toString());
+		adminService.insertGood(goodVo);
+		return "redirect:/admin";
+	}	
 	
-	
+	@RequestMapping("/deletegood")
+	public String deleteGood(@RequestParam Long good_no){
+		adminService.deleteGood(good_no);
+		return "redirect:/admin";
+	}	
 	
 	
 	

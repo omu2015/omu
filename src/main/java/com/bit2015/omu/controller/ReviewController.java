@@ -51,11 +51,10 @@ public class ReviewController {
 	
 	@RequestMapping("/showboard")
 	public String showBoard(@RequestParam String plan_no){
+		System.out.println("Controller      plan_no="+plan_no);
 		reviewService.showboard(plan_no);
 		
-		
-		
-		return "/review/board";
+		return "/review/showboard";
 	}
 	
 	

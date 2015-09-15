@@ -37,6 +37,12 @@ public class GoodDao {
 		sqlMapClientTemplate.delete("good.delete", good_no);
 	}
 	
+	
+	public List<GoodVo> selectAllByCno(Long content_no) {
+		List<GoodVo> list=sqlMapClientTemplate.queryForList("good.selectAllByCno", content_no);
+		return list;
+	}
+	
 	/*
 	GoodVo는 update식이 아닌 지우고 키는 그런 방식으로 해야함. 
 	따라서 update는 막아놈.

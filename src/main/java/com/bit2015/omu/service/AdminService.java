@@ -26,8 +26,10 @@ import com.bit2015.omu.dao.ProductDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.util.FileUploader;
+import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
+import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
@@ -190,7 +192,34 @@ public class AdminService {
 
 	
 	
+	public void insertBoard(BoardVo boardVo) {
+		System.out.println(boardVo.toString());
+		boardVo.setMember_no(planDao.selectVo(boardVo.getPlan_no()).getMember_no());
+		System.out.println(boardVo.toString());
+		boardDao.insert(boardVo);
+	}
+	public List<BoardVo> selectBoard() {
+		List<BoardVo> list=boardDao.selectAll();
+		return list;
+	}
+	public void deleteBoard(Long board_no) {
+		boardDao.delete(board_no);
+	}
 	
+	
+	
+	public void insertGood(GoodVo goodVo) {
+		System.out.println(goodVo.toString());
+		goodDao.insert(goodVo);
+	}
+	public List<GoodVo> selectGood() {
+		List<GoodVo> list=goodDao.selectAll();
+		return list;
+	}
+	public void deleteGood(Long good_no) {
+		goodDao.delete(good_no);
+	}
+
 }
 				
 		

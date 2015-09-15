@@ -1,11 +1,6 @@
 package com.bit2015.omu.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,8 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.dao.BoardCommentsDao;
 import com.bit2015.omu.dao.BoardDao;
@@ -35,9 +28,9 @@ import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
+import com.bit2015.omu.vo.ReviewVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
-import com.bit2015.omu.vo.ViewVo;
 
 @Service
 public class ReviewService {
@@ -75,12 +68,55 @@ public class ReviewService {
 		List<ThemeBoxVo> memberTheme =themeBoxDao.selectAll();
 		MemberVo memberVo =(MemberVo) session.getAttribute("authUser");
 		System.out.println("memberTheme.toString()="+memberTheme.toString());
+		
+		//사용자의 관심사 추출
 		for (int i = 0; i < memberTheme.size(); i++) {
 			if(memberVo.getMember_no()!=memberTheme.get(i).getMember_no()){
 				memberTheme.remove(i);
 			}
 		}
+		
+
+		
+		//게시판 추출
+		List<BoardVo> boardList = boardDao.selectAll();
+		List<ReviewVo> reviewList = new ArrayList<ReviewVo>();
+		for (int i = 0; i < boardList.size(); i++) {
+			ReviewVo reviewVo=new ReviewVo();
+			
+			long board_no=boardList.get(i).getBoard_no();
+			long plan_no=boardDao.selectVo(board_no).getPlan_no();
+			reviewVo.setBoard_no(board_no);
+			reviewVo.setPlan_no(plan_no);
+			
+			List<ContentVo> contentList=reviewVo.getContentList();
+			long totalCost=reviewVo.getTotalCost();
+			long totalTime=reviewVo.getTotalTime();
+			int goodCnt=reviewVo.getGoodCnt();
+			
+			
+			List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(plan_no);
+			for (int j = 0; j < contentBoxList.size(); j++) {
+				System.out.println("contentVo to String == == "+contentDao.selectVo(contentBoxList.get(j).getContent_no()).toString());
+				ContentVo tempVo=contentDao.selectVo(contentBoxList.get(j).getContent_no());
+				System.out.println("tempVo = = "+tempVo.toString());
+				contentList.add(contentDao.selectVo(contentBoxList.get(j).getContent_no()));
+			}
+			
+			for (int k = 0; k < contentList.size(); k++) {
+				totalCost += contentList.get(k).getCost();
+				totalTime += contentList.get(k).getTime();
+				goodCnt += goodDao.selectAllByCno((contentList.get(k).getContent_no())).size();
+			}
+			
+			reviewList.add(reviewVo);
+			
+		}//게시판 추출 끝 
+		
+		
+		//model
 		model.addAttribute("memberTheme", memberTheme);
+		model.addAttribute("reviewList", reviewList);
 	}
 	
 	public void mapview(Model model, HttpSession session){
@@ -132,8 +168,15 @@ public class ReviewService {
 		//System.out.println(contentVo.toString());
 	}
 
-	public void showboard(String plan_no) {
-		contentBoxDao.selectAllByPno(plan_no);
+	public void showboard(String str_plan_no) {
+		Long plan_no=Long.parseLong(str_plan_no);
+		
+		List<ContentBoxVo> contentBoxList=contentBoxDao.selectAllByPno(plan_no);
+		List<ContentVo> contentList=new ArrayList<ContentVo>();
+		for (int i = 0; i < contentBoxList.size(); i++) {
+			contentList.add(contentDao.selectVo(contentBoxList.get(i).getContent_no()));
+		}
+		
 		
 		
 	}
