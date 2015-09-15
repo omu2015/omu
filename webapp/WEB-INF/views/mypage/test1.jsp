@@ -1,60 +1,97 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-	<tr>
-		<td>
-		<h1>test good view</h1>
-				<table border="1" >
-					<tr>
-						<td bgcolor="#CCCCCC" align="center">content_no</td>
-						<td bgcolor="#CCCCCC" align="center">등록일자</td>
-						<td bgcolor="#CCCCCC" align="center">member_no</td>
-						<td bgcolor="#CCCCCC" align="center">phone</td>
-						<td bgcolor="#CCCCCC" align="center">주소</td>
-						<td bgcolor="#CCCCCC" align="center">웹주소</td>
-						<td bgcolor="#CCCCCC" align="center">나침반</td>
-						<td bgcolor="#CCCCCC" align="center">우편번호</td>
-						<td bgcolor="#CCCCCC" align="center">웹주소</td>
-						<td bgcolor="#CCCCCC" align="center">다음등록번호</td>
-						<td bgcolor="#CCCCCC" align="center">상점이름</td>
-						<td bgcolor="#CCCCCC" align="center">카테고리</td>
-						<td bgcolor="#CCCCCC" align="center">주소</td>
-						<td bgcolor="#CCCCCC" align="center">위도</td>
-						<td bgcolor="#CCCCCC" align="center">경도</td>
-						<td bgcolor="#CCCCCC" align="center">긴숫자들</td>
-						<td bgcolor="#CCCCCC" align="center">비용</td>
-						<td bgcolor="#CCCCCC" align="center">시간</td>
-						<td bgcolor="#CCCCCC" align="center">good_no</td>
-	
-					</tr>
-					<c:forEach var="vo" items="${goodViewList }">  
-			         <c:if test="${vo.member_no==authUser.member_no}">
-					<tr>
-						<td>${vo.content_no}</td>
-						<td>${vo.regDate}</td>
-						<td>${vo.member_no}</td>
-						<td>${vo.member_no}</td>
-						<td>${vo.phone}</td>
-						<td>${vo.newAddress}</td>
-						<td>${vo.imageUrl}</td>
-						<td>${vo.direction}</td>
-						<td>${vo.zipcode}</td>
-						<td>${vo.placeUrl}</td>
-						<td>${vo.id}</td>
-						<td>${vo.title}</td>
-						<td>${vo.category}</td>
-						<td>${vo.address}</td>
-						<td>${vo.longitude}</td>
-						<td>${vo.latitude}</td>
-						<td>${vo.addressBCode}</td>
-						<td>${vo.cost}</td>
-						<td>${vo.time}</td>
-			 	        <td>${vo.good_no }</td>
-					</tr>
-				</c:if>
-				</c:forEach>
-				</table>
-		</td>
-	</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>오늘 뭐하지?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="http://bootstraptaste.com" />
+<!-- css -->
+<link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../../assets/css/fancybox/jquery.fancybox.css"
+	rel="stylesheet">
+<link href="../../assets/css/jcarousel.css" rel="stylesheet" />
+<link href="../../assets/css/flexslider.css" rel="stylesheet" />
+<link href="../../assets/css/style.css" rel="stylesheet" />
+<link href="../../assets/css/table.css" rel="stylesheet" />
+
+
+
+<!-- Theme skin -->
+<link href="../../assets/css/default.css" rel="stylesheet" />
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+	<div id="wrapper">
+		<!-- start header -->
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
+		<!-- end header -->
+
+		<section id="content">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row">
+
+                       <div id="join-form">
+						<table border="1" style="margin:auto; text-align: center; width: 70%;" >
+							<tr style="background-color: pink;">
+								<td>등록일</td>
+								<td>상점이름</td>
+								<td>주소</td>
+								<td>비용</td>				
+							</tr>
+							<c:forEach var="vo" items="${goodViewList }">  
+			                <c:if test="${vo.member_no==authUser.member_no}">
+									<tr>
+									  <td>${vo.regDate}</td>
+									  <td>${vo.title}</td>
+									  <td>${vo.newAddress}</td>
+									  <td>${vo.cost}</td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+
+
+
+
+          </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</section>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+	</div>
+	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+	<!-- javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="../../assets/jsjquery.js"></script>
+	<script src="../../assets/jsjquery.easing.1.3.js"></script>
+	<script src="../../assets/jsbootstrap.min.js"></script>
+	<script src="../../assets/jsjquery.fancybox.pack.js"></script>
+	<script src="../../assets/jsjquery.fancybox-media.js"></script>
+	<script src="../../assets/jsgoogle-code-prettify/prettify.js"></script>
+	<script src="../../assets/jsportfolio/jquery.quicksand.js"></script>
+	<script src="../../assets/jsportfolio/setting.js"></script>
+	<script src="../../assets/jsjquery.flexslider.js"></script>
+	<script src="../../assets/jsanimate.js"></script>
+	<script src="../../assets/jscustom.js"></script>
+	<script src="../../assets/jsvalidate.js"></script>
+</body>
+</html>

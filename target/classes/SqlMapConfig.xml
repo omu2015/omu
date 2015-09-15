@@ -20,6 +20,7 @@
  	<sqlMap resource="themeBox.xml"/>
  	<sqlMap resource="boardComments.xml"/>
  	<sqlMap resource="boardImgBox.xml"/>
+ 	<sqlMap resource="juso.xml"/>
  	
  	
 </sqlMapConfig>

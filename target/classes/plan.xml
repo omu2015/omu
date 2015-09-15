@@ -5,19 +5,24 @@
 	
 	<insert id="insert" parameterClass="PlanVo">
 		<![CDATA[
-			insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(#planDate#, 'yyyy/mm/dd hh24:mi:ss') ,#totalCost#,#totalTime#)
+			insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(#planDate#, 'yyyy-MM-dd') ,#totalCost#,#totalTime#)
 		]]>
 	</insert>
 	
 	<select id="selectAll" resultClass="PlanVo">
 		<![CDATA[
-			select plan_no, member_no, planDate, totalCost, totalTime from plan
+			select plan_no, member_no, planDate, totalCost, totalTime from plan order by plan_no desc
 		]]>
 	</select>
 	
 	<select id="selectVo" parameterClass="java.lang.Long" resultClass="PlanVo">
 		<![CDATA[
 			select * from plan where plan_no=#plan_no#
+		]]>
+	</select>
+	<select id="getUserPlan" parameterClass="java.lang.Long" resultClass="PlanVo">
+		<![CDATA[
+			select * from plan where member_no=#member_no#
 		]]>
 	</select>
 
@@ -31,7 +36,7 @@
 		<![CDATA[
 			update plan set 
 			member_no=#member_no#,
-			planDate=to_Date(#planDate#, 'yyyy/mm/dd hh24:mi:ss'),
+			planDate=to_Date(#planDate#, 'yyyy-MM-dd'),
 			totalCost=#totalCost#,
 			totalTime=#totalTime#
 			where plan_no=#plan_no#

@@ -5,7 +5,7 @@
    
       <select id="selectAll" resultClass="ImgBoxVo">
     <![CDATA[
-       select * from imgBox
+       select * from imgBox order by imgBox_no desc
     ]]>
    </select>
 

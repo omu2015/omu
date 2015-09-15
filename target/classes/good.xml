@@ -12,7 +12,7 @@
 	
 	<select id="selectAll" resultClass="GoodVo">
 		<![CDATA[
-			select * from GOOD
+			select * from GOOD order by good_no desc
 		]]>
 	</select>
 	
@@ -21,11 +21,18 @@
 			select * from GOOD where good_no=#good_no#
 		]]>
 	</select>
-
+	
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
 			delete from GOOD where good_no=#good_no#
 		]]>
 	</delete>
+	
+	
+	<select id="selectAllByCno" parameterClass="java.lang.Long" resultClass="GoodVo">
+		<![CDATA[
+			select * from GOOD where content_no=#content_no# 
+		]]>
+	</select>
 	
 </sqlMap>

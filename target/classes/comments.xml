@@ -5,7 +5,7 @@
 
 	<select id="selectAll" resultClass="CommentsVo">
     <![CDATA[
-       select * from comments
+       select * from comments order by comments_no desc
     ]]>
 	</select>
 

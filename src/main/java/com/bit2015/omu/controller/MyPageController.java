@@ -23,10 +23,10 @@ public class MyPageController {
 	@Autowired
 	 MyPageService myPageService;
 	
-	@RequestMapping("")
+	/*@RequestMapping("test")
 	public String myPage(){
 		return "/mypage/mypageindex";
-    }
+    }*/
 	
 	@RequestMapping("/membermodifyform")
     public String  memberModifyForm(HttpSession session , @ModelAttribute MemberVo memberVo){
@@ -50,7 +50,7 @@ public class MyPageController {
 			session.invalidate();
 			return "redirect:/";
 	}
-	@RequestMapping("test")
+	@RequestMapping("")
 	 public String test(Model model){
 		List<CalendarVo> viewList=myPageService.selectView();
 		model.addAttribute("viewList", viewList);

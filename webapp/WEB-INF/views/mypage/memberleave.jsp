@@ -35,15 +35,7 @@
 <div id="wrapper">
 	<!-- start header -->
 	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-	<!-- end header -->
-	<section id="inner-headline">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-			</div>
-		</div>
-	</div>
-	</section>
+    <c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
 	<section id="content">
 
 	<div class="container">

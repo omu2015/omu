@@ -12,7 +12,7 @@
 	
 	<select id="selectAll" resultClass="ThemeBoxVo">
 		<![CDATA[
-			select * from THEMEBOX
+			select * from THEMEBOX order by themeBox_no desc
 		]]>
 	</select>
 	

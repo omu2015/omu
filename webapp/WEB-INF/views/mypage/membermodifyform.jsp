@@ -154,15 +154,9 @@
 <div id="wrapper">
 	<!-- start header -->
 	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
 	<!-- end header -->
-	<section id="inner-headline">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-			</div>
-		</div>
-	</div>
-	</section>
+
 	<section id="content">
 
 	<div class="container">

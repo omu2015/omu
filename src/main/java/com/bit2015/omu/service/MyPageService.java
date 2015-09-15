@@ -133,12 +133,12 @@ public class MyPageService {
 		List<GoodViewVo> goodViewList = new ArrayList<GoodViewVo>();
 		List<GoodVo> goodList =  goodDao.selectAll();
 		List<ContentVo> contentList = contentDao.selectAll();
-		
+		List<MemberVo>  memberList = memberDao.selectAll();
 		for(int i = 0; i<goodList.size();i++){
-			GoodViewVo goodViewVo = new GoodViewVo();
+		GoodViewVo goodViewVo = new GoodViewVo();
 			long good_no= goodList.get(i).getGood_no();
 			long content_no = contentList.get(i).getContent_no();
-			long member_no = goodList.get(i).getMember_no();
+			long member_no = memberList.get(i).getMember_no();
 		 
 			goodViewVo.setContent_no(content_no);
 			goodViewVo.setRegDate(contentDao.selectVo(content_no).getRegDate());
