@@ -8,7 +8,7 @@
 				<table border="1" >
 					<tr>
 						<td bgcolor="#CCCCCC" align="center">관심사타입</td>
-						<td bgcolor="#CCCCCC" align="center">작성자(회원)번호</td>
+						<td bgcolor="#CCCCCC" align="center">사장님(회원)번호</td>
 						<td bgcolor="#CCCCCC" align="center">phone</td>
 						<td bgcolor="#CCCCCC" align="center">newAddress</td>
 						<td bgcolor="#CCCCCC" align="center">imageUrl</td>
@@ -67,7 +67,7 @@
 						<td bgcolor="#CCCCCC" align="center">No</td>
 						<td bgcolor="#CCCCCC" align="center">관심사타입</td>
 						<td bgcolor="#CCCCCC" align="center">등록일자</td>
-						<td bgcolor="#CCCCCC" align="center">작성자(회원)번호</td>
+						<td bgcolor="#CCCCCC" align="center">사장님(회원)번호</td>
 						<td bgcolor="#CCCCCC" align="center">phone</td>
 						<td bgcolor="#CCCCCC" align="center">newAddress</td>
 						<td bgcolor="#CCCCCC" align="center">imageUrl</td>

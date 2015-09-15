@@ -91,12 +91,15 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
 <style>
-#map {
-}
-
 .PickTheme table{
     background: #FFEBEB;
     border : 1px solid #E6D4D4;
+}
+
+.wsTable {
+	 background: #FFEBEB;
+	 border : 1px solid #E6D4D4;
+
 }
 </style>
 <body>
@@ -175,15 +178,21 @@
 					</section>
 					<div class="wsTable">
 						<table>
+								<tr><td>게시판</td></tr>
 						<c:forEach var="vo" items="${reviewList }">
-									<c:forEach var="voc" items="${vo.contentList}">
 								<tr>
-									<td colspan="3">${voc.getTitle()}</td>
-								</tr>					
+									<c:forEach var="votitle" items="${vo.contentList}">
+										<td>${votitle.getTitle()}</td>
 									</c:forEach>
-								<tr>
-									<td>${vo.getTotalCost()}</td><td>${vo.getTotalTime()}</td><td>${vo.getGoodCnt() }</td>
 								</tr>
+								<tr>
+									<c:forEach var="vocate" items="${vo.contentList}">
+										<td>${vocate.getCategory()}</td>
+									</c:forEach>
+								</tr>					
+								<tr>
+									<td>$ = ${vo.getTotalCost()}</td><td>시간 = ${vo.getTotalTime()}</td><td>좋아요 버튼 -> ${vo.getGoodCnt()}</td><td>일정으로 가져오기</td>
+								</tr><tr><td><hr></td></tr>
 						</c:forEach>
 						</table>
 					</div>

@@ -90,16 +90,16 @@ public class ReviewService {
 			reviewVo.setPlan_no(plan_no);
 			
 			List<ContentVo> contentList=reviewVo.getContentList();
-			long totalCost=reviewVo.getTotalCost();
-			long totalTime=reviewVo.getTotalTime();
-			int goodCnt=reviewVo.getGoodCnt();
+			long totalCost = 0;
+			long totalTime = 0;
+			int goodCnt = 0;
 			
 			
 			List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(plan_no);
 			for (int j = 0; j < contentBoxList.size(); j++) {
-				System.out.println("contentVo to String == == "+contentDao.selectVo(contentBoxList.get(j).getContent_no()).toString());
+				//System.out.println("contentVo to String == == "+contentDao.selectVo(contentBoxList.get(j).getContent_no()).toString());
 				ContentVo tempVo=contentDao.selectVo(contentBoxList.get(j).getContent_no());
-				System.out.println("tempVo = = "+tempVo.toString());
+				//System.out.println("tempVo = = "+tempVo.toString());
 				contentList.add(contentDao.selectVo(contentBoxList.get(j).getContent_no()));
 			}
 			
@@ -107,9 +107,14 @@ public class ReviewService {
 				totalCost += contentList.get(k).getCost();
 				totalTime += contentList.get(k).getTime();
 				goodCnt += goodDao.selectAllByCno((contentList.get(k).getContent_no())).size();
+				
+				reviewVo.setTotalCost(totalCost);
+				reviewVo.setTotalTime(totalTime);
+				reviewVo.setGoodCnt(goodCnt);
 			}
 			
 			reviewList.add(reviewVo);
+			System.out.println("reviewVo.toString()=="+reviewVo.toString());
 			
 		}//게시판 추출 끝 
 		
