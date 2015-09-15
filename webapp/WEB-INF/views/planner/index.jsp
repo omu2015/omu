@@ -40,36 +40,27 @@
 	<div class="plan_container">
 		<!-- 맵  	-->
 		<div id="currentLocation"><button onclick="geoFindMe();">현 위치 검색</button></div>
-		<!-- <div style="margin-top:160px; margin-left:10px; position:fixed;"><input id="addPlanDate" type="Date" value="" /></div>
-		<div style="margin-top:200px; margin-left:10px; position:fixed;"><button onclick="addPlan();">+ 일정추가</button></div>
-		<div style="margin-top:240px; margin-left:10px; position:fixed;"><button onclick="showPlan();">내 일정보기</button></div>
-		<div style="margin-top:300px; position:fixed;">
-		<table id ="addPlan" style="display:none">
-			<tr>	
-				<td style="border:1px solid #000;">일정</td>
-			</tr>
-			<tr>	
-				<td style="border:1px solid #000;"></td>
-			</tr>
-			<tr>
-				<td style="border:1px solid #000;">계획</td>
-			</tr>
-		</table>
-		<table id ="showPlan" style="display:none">
-			<tr >	
-				<td colspan="2" style="border:1px solid #000;">
-				일정
-				</td>
-			</tr>
-			<tr>	
-				<td style="border:1px solid #000;">날짜</td>
-				<td style="border:1px solid #000;">계획1</td>
-			</tr>
-		</table>
-		</div> -->
+		<div style="margin-top:150px; margin-left:20px; position:fixed"><strong>${planVo.planDate}의 일정</strong></div>
+		<div style="margin-top:180px; margin-left:20px; position:fixed" ><button onclick="goPlan()">일정종료하기</button></div>
 		<div id="map"></div>
 	</div>
-	
+	<script>
+			
+		var mapContainer = document.getElementById('map'), 
+		mapOption = {
+			center : new daum.maps.LatLng(37.5665350, 126.9779690), 
+			level : 3
+		// 지도의 확대 레벨
+		};
+
+		var map = new daum.maps.Map(mapContainer, mapOption);
+		
+	</script>
+	<script>
+	function goPlan(){
+		location.href="/planner";
+	}
+	</script>
  	<script>
  	function addPlan(){
  		$('#showPlan').hide();
@@ -115,31 +106,7 @@
 		 })
  	}
 	</script>
-	<!-- 
-	<script>
-	function test_gogo(){
-		var gun = event.srcElement.value;
-		var siView = event.srcElement.id;
-		
-		 $.ajax({
-			type : 'get',
-		    url:'/planner/test4',
-		    data : {
-		    		localValue : siView,
-		    		localValue_test : gun
-		    },
-		    dataType:'json',
-		    success: function(response){
-		    	getDong(response,siView,gun);
-				
-		    }
-		    
-		    	
-
-	});
-		
-	}
-	</script>
+	
 	<script>
 	function getDong(response,siView, gun){
 		var dongList = response; 
@@ -166,43 +133,6 @@
 	}
 	</script>
 	
-	<script>
-	function test_goMap() {
-		
-		var siViewGunView = event.srcElement.id;
-		var dongView = event.srcElement.value;
-		var juso = siViewGunView+dongView;
-		 $.ajax({
-			type : 'get',
-		    url:'https://apis.daum.net/local/geo/addr2coord?apikey=bbef91da99f11fe76f4b3b523d3151e9&output=json',
-		    data : {
-		    		q : juso
-		    },
-		    dataType:'jsonp',
-		    success: function(response){
-		    	lat = response.channel.item[0].lat;
-		    	lng = response.channel.item[0].lng;
-		    } 
-		 }).done(function(){
-			 console.log(lat);
-			 console.log(lng);
-			 test_centerMap(lat, lng);
-		 })
-		close_modal('#local');
-		
-	}
-	</script>
-	<script>
-	function close_modal(modal_id) {
-		$("#lean_overlay").fadeOut(200);
-		$(modal_id).css({
-			"display" : "none"
-		})
-	}
-	</script>
-	
-
-	</script>
 	<script>
 	function searchKeyword(){
 		var keyword = document.getElementById("keyword").value;	// 키워드;
@@ -285,11 +215,10 @@
 	} 
 	</script>
 	
-	</div> -->
 
 
 </body>
-	<!-- 지도 생성	 -->
+	<!-- 지도 생성-->	
  	<script>
 			
 		var mapContainer = document.getElementById('map'), 
@@ -302,7 +231,7 @@
 		var map = new daum.maps.Map(mapContainer, mapOption);
 		
 	</script>
-	<!-- 현위치 검색 -->
+	<!-- 현위치 검색-->
 	<script>
 	function geoFindMe() {
 	var lat;
@@ -327,7 +256,7 @@
 	  navigator.geolocation.getCurrentPosition(success, error);
 	}
 </script>
-<!-- marker 생성 -->
+<!--  marker 생성-->
 <script>
 	 function setMarker(lat, lng, title,keyword,id) {
 		var markerPosition = new daum.maps.LatLng(lat, lng);
@@ -344,12 +273,12 @@
 		infoMarker(marker, keyword, id);
 	} 
 </script>
-<!--  click infowindow 실행 -->
+ <!-- click infowindow 실행-->
 <script>
 	 function infoMarker(marker, keyword, id) {
 		var wb = marker.getPosition().wb;
 		var vb = marker.getPosition().vb;
-		var iwContent = '<div style="padding:5px;">'+marker.getTitle()+'</div><button onclick=setCart('+wb+','+vb+',"'+keyword+'",'+id+',"${planList.plan_no}")>♥ 찜하기</button>&nbsp&nbsp&nbsp<button onclick="">후기보기</button>';
+		var iwContent = '<div style="padding:5px;">'+marker.getTitle()+'</div><button onclick=setCart('+wb+','+vb+',"'+keyword+'",'+id+',"${planVo.plan_no}")>♥ 찜하기</button>&nbsp&nbsp&nbsp<button onclick="">후기보기</button>';
 		
 		var iwRemoveable = true;
 		
@@ -399,14 +328,14 @@ function searchKeyword(){
 </script>
 <script>
 function setCart(wb, vb, keyword, id, plan_no){
-	console.log(plan_no);
+	
 	var places = new daum.maps.services.Places();
 	var lat = wb;
 	var lng = vb;
 	var keyword = keyword;
 	var id = id;
 	var content ;
-	
+	var plan_no = plan_no;
 	var callback = function(status, result) {
 	    if (status === daum.maps.services.Status.OK) {
 	        for(var i=0; i<result.places.length; i++){
@@ -415,7 +344,6 @@ function setCart(wb, vb, keyword, id, plan_no){
 	        			
 	        		}
 	    		}
-	        	console.log(content);
 	        	$.ajax({
 	        		type : 'get',
 	        	    url:'/planner/addCart',
@@ -432,11 +360,12 @@ function setCart(wb, vb, keyword, id, plan_no){
 	        	    		address : content.address,
 	        	    		longitude : content.longitude,
 	        	    		latitude :content. latitude,
-	        	    		addressBCode : content.addressBCode
+	        	    		addressBCode : content.addressBCode,
+	        	    		plan_no : plan_no
 	        	    },
 	        	    dataType:'json',
 	        	    success: function(response){
-	        	    	console.log(response);
+	        	    	alert("추가되었습니다!")
 	        	    	}
 	        	 })
 				

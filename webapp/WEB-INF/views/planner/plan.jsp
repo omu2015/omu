@@ -8,6 +8,7 @@
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
 <script src="../../assets/js/jquery.js"></script>
 <style type="text/css">
 div#newPlan, div#showPlan {	margin:30px 20px;
@@ -29,8 +30,14 @@ function addPlan(){
 	$('#selectDate').val($.trim($('#selectDate').val()));
 	if ($('#selectDate').val()) {
 		location.href="/planner/addPlan?planDate="+planDate;
-	} else
-		alert("날짜를 입력하세요");
+	} else{
+		alert("날짜를 입력하세요!");
+	}
+}
+</script>
+<script>
+function viewPlan(plan_no){
+	location.href="/planner/viewPlan?plan_no="+plan_no
 }
 </script>
 <head>
@@ -43,19 +50,17 @@ function addPlan(){
 <button onclick=""> 추천 일정 보기 </button>
 
 <div id="showPlan">
-	<form method="post" action="">
 	<table>
 		<tr>
 			<td>no</td><td>날짜</td><td>계획</td>
 		</tr>
 		<c:forEach var="i" items="${planList}" varStatus="status">
 		<tr>
-			<td>${status.count}</td><td>${i.planDate}</td><td>회원님의 ${status.count}번째 계획</td><td><button>일정보기</button></td></a>
+			<td>${status.count}</td><td>${i.planDate}</td><td>회원님의 ${status.count}번째 계획</td><td><button onclick="viewPlan('${i.plan_no}');">일정보기</button></td></a>
 			
 		</tr>
 		</c:forEach>
 	</table>
-	</form>
 </div>
 <div id="newPlan">
 	<form method="post" action="javascript:addPlan();">

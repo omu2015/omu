@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit2015.omu.service.PlannerService;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.JusoVo;
 import com.bit2015.omu.vo.MemberVo;
@@ -28,17 +29,25 @@ public class PlannerController {
 		PlannerService plannerService;
 		
 		@RequestMapping("")
-		public String test(Model model, HttpSession session){
-			/*List<JusoVo> list = plannerService.getSi();
-			model.addAttribute("jusoList", list);
-			List<JusoVo> list1 = plannerService.getFirstGun();
-			model.addAttribute("gunList", list1);*/
-			
+		public String index(Model model, HttpSession session){
 			MemberVo vo = (MemberVo)session.getAttribute("authUser");
 			List<PlanVo> list = plannerService.showPlan(vo.getMember_no());
 			model.addAttribute("planList", list);
 			
 			return "/planner/plan";
+		}
+		@RequestMapping("/map")
+		public String map(Model model, HttpSession session) {
+			MemberVo vo = (MemberVo)session.getAttribute("authUser");
+			PlanVo planVo = plannerService.getPlanNo(vo.getMember_no());
+			System.out.println(planVo);
+			model.addAttribute("planVo", planVo);
+			
+			List<JusoVo> list = plannerService.getSi();
+			model.addAttribute("jusoList", list);
+			List<JusoVo> list1 = plannerService.getFirstGun();
+			model.addAttribute("gunList", list1);
+			return "/planner/index";
 		}
 		@RequestMapping("/getGun")
 		@ResponseBody
@@ -56,12 +65,13 @@ public class PlannerController {
 		}	
 		@RequestMapping("/addCart")
 		@ResponseBody
-		public void addCart(@ModelAttribute ContentVo contentVo, HttpSession session){
+		public void addCart(@ModelAttribute ContentVo contentVo, HttpSession session, @RequestParam Long plan_no){
 			MemberVo memberVo =(MemberVo)session.getAttribute("authUser");
 			long member_no = memberVo.getMember_no();
 			String themeName = contentVo.getCategory();
 			String id = contentVo.getId();
-			plannerService.addCart(contentVo, themeName, id, member_no);
+			plannerService.addCart(contentVo, themeName, id, member_no, plan_no);
+			
 		}	
 		@RequestMapping("/addPlan")
 		public String addPlan(@RequestParam String planDate, HttpSession session,  Model model){
@@ -73,7 +83,7 @@ public class PlannerController {
 		
 		model.addAttribute("planList", planVo);
 		plannerService.addPlan(planVo);
-		return "redirect:/planner";
+		return "redirect:/planner/map";
 		}
 		@RequestMapping("/showPlan")
 		@ResponseBody
@@ -83,5 +93,14 @@ public class PlannerController {
 			
 			return list;
 			
+		}
+		@RequestMapping("/viewPlan")
+		public String viewPlan(@RequestParam Long plan_no, Model model){
+			List<ContentVo> list = plannerService.getContentNo(plan_no);
+			PlanVo planVo = plannerService.getPlanDate(plan_no);
+			model.addAttribute("contentList", list );
+			model.addAttribute("planVo", planVo );
+			
+			return "/planner/viewPlan";
 		}
 }
