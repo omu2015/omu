@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.dao.ContentBoxDao;
 import com.bit2015.omu.dao.ContentDao;
+import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.MemberDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeDao;
@@ -19,6 +20,8 @@ import com.bit2015.omu.util.FileUploader;
 import com.bit2015.omu.vo.CalendarVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
+import com.bit2015.omu.vo.GoodViewVo;
+import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.ThemeVo;
 
@@ -34,6 +37,9 @@ public class MyPageService {
 	PlanDao planDao;
 	@Autowired
 	ThemeDao themeDao;
+	@Autowired
+	GoodDao goodDao;
+	
 	
 	
 	FileUploader ful=new FileUploader();
@@ -122,4 +128,40 @@ public class MyPageService {
 		}
 		return viewList;
 	}
+	// good 조아요 표시
+	public List<GoodViewVo> selectGood(){
+		List<GoodViewVo> goodViewList = new ArrayList<GoodViewVo>();
+		List<GoodVo> goodList =  goodDao.selectAll();
+		List<ContentVo> contentList = contentDao.selectAll();
+		
+		for(int i = 0; i<goodList.size();i++){
+			GoodViewVo goodViewVo = new GoodViewVo();
+			long good_no= goodList.get(i).getGood_no();
+			long content_no = contentList.get(i).getContent_no();
+			long member_no = goodList.get(i).getMember_no();
+		 
+			goodViewVo.setContent_no(content_no);
+			goodViewVo.setRegDate(contentDao.selectVo(content_no).getRegDate());
+			goodViewVo.setMember_no(member_no);
+			goodViewVo.setPhone(contentDao.selectVo(content_no).getPhone());
+			goodViewVo.setNewAddress(contentDao.selectVo(content_no).getNewAddress());
+			goodViewVo.setImageUrl(contentDao.selectVo(content_no).getImageUrl());
+			goodViewVo.setDirection(contentDao.selectVo(content_no).getDirection());
+			goodViewVo.setZipcode(contentDao.selectVo(content_no).getZipcode());
+			goodViewVo.setPlaceUrl(contentDao.selectVo(content_no).getPlaceUrl());
+			goodViewVo.setId(contentDao.selectVo(content_no).getId());
+			goodViewVo.setTitle(contentDao.selectVo(content_no).getTitle());
+			goodViewVo.setCategory(contentDao.selectVo(content_no).getCategory());
+			goodViewVo.setAddress(contentDao.selectVo(content_no).getAddress());
+			goodViewVo.setLongitude(contentDao.selectVo(content_no).getLongitude());
+			goodViewVo.setLatitude(contentDao.selectVo(content_no).getLatitude());
+			goodViewVo.setAddressBCode(contentDao.selectVo(content_no).getAddressBCode());
+			goodViewVo.setCost(contentDao.selectVo(content_no).getCost());
+			goodViewVo.setTime(contentDao.selectVo(content_no).getTime());
+			goodViewVo.setGood_no(good_no);
+			goodViewList.add(i,goodViewVo);
+		}
+		return goodViewList;
+	}
+	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.service.MyPageService;
 import com.bit2015.omu.vo.CalendarVo;
+import com.bit2015.omu.vo.GoodViewVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.ViewVo;
 
@@ -54,6 +55,12 @@ public class MyPageController {
 		List<CalendarVo> viewList=myPageService.selectView();
 		model.addAttribute("viewList", viewList);
 		return "/mypage/test";
+	}
+	@RequestMapping("test1")
+	public String test1(Model model){
+		List<GoodViewVo> goodViewList = myPageService.selectGood();
+		 model.addAttribute("goodViewList", goodViewList);
+		return "/mypage/test1";
 	}
 	
 }

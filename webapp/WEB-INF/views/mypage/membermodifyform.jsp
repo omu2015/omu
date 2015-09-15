@@ -60,6 +60,84 @@
             }
         }).open();
     }
+    
+    $.fn.setPreview = function(opt){
+        "use strict"
+        
+        
+        var defaultOpt = {
+            inputFile: $(this),
+            img: null,
+            w: 200,
+            h: 200
+         	
+        };
+        $.extend(defaultOpt, opt);
+       /*  console.log("jjj"+JSON.stringify(defaultOpt)); */
+    /*   var obj = JSON.parse(defaultOpt);
+       console.log("jjj"+obj); 
+        */
+        var previewImage = function(){
+            if (!defaultOpt.inputFile || !defaultOpt.img) return;
+     
+            var inputFile = defaultOpt.inputFile.get(0);
+            var img       = defaultOpt.img.get(0);
+     
+            // FileReader
+            if (window.FileReader) {
+                // image 파일만
+                if (!inputFile.files[0].type.match(/image\//)) return;
+     
+                // preview
+                try {
+                    var reader = new FileReader();
+                    reader.onload = function(e){
+                        img.src = e.target.result;
+                        img.style.width  = defaultOpt.w+'px';
+                        img.style.height = defaultOpt.h+'px';
+                        img.style.display = '';
+                    }
+                    reader.readAsDataURL(inputFile.files[0]);
+              /*       console.log("jjj"+JSON.stringify(img.src)); */
+                } catch (e) {
+                    // exception...
+                }
+                 // img.filters (MSIE)
+            } else if (img.filters) {
+                inputFile.select();
+                inputFile.blur();
+                var imgSrc = document.selection.createRange().text;
+     
+                img.style.width  = defaultOpt.w+'px';
+                img.style.height = defaultOpt.h+'px';
+                img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";            
+                img.style.display = '';
+               
+            // no support
+            } else {
+                // Safari5, ...
+            }
+        };
+     
+        // onchange
+        $(this).change(function(){
+            previewImage();
+        });
+    };
+     
+     
+    $(document).ready(function(){
+        var opt = {
+            img: $('#img_preview'),
+            w: 200,
+            h: 200
+        };
+       
+        
+        $('#input_file').setPreview(opt);
+        
+        
+    });
 </script>
 
 
@@ -100,13 +178,15 @@
 						<td id="photo" rowspan="4">
 						<c:choose>
                         <c:when test="${not empty authUser.imageUrl }">
-                        <img src="${authUser.imageUrl }" style="width:150px">
+                        <%-- <img src="${authUser.imageUrl }" style="width:150px"> --%>
+                        <img id="img_preview" name ="image2" src="${authUser.imageUrl }"style="width:150px"/>
                         </c:when>
                         <c:otherwise>
-                        고객의 사진이 없습니다.                        
+                                      고객의 사진이 없습니다.                        
                         </c:otherwise>
                      </c:choose>
-						<input type="file" name="img" style="display:block; width:100px; margin:0; text-align:center;" value="" />
+                         <input type="file" id="input_file" name="img" title=""  style="display:block; width:200px; margin:0; text-align:center;" >
+						<!-- <input type="file" name="img" style="display:block; width:100px; margin:0; text-align:center;" value="" /> -->
 						</td>
 						<td class="title">이름</td>
 						<td><input id="name"  name="memberName" type="" value="${authUser.memberName  }" ></td>

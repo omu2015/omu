@@ -97,6 +97,7 @@
                         <li class="active"><a href="/mypage/membermodifyform">회원정보수정</a></li>
                         <li><a  href="/mypage/memberleave" >회원탈퇴</a></li>
                         <li><a  href="/mypage/test" >test</a></li>
+                        <li><a  href="/mypage/test1" >test1</a></li>
 
                     </ul>
                 </div>
