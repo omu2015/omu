@@ -23,7 +23,6 @@ public class PlanDao {
 		List<PlanVo> list= sqlMapClientTemplate.queryForList("plan.selectAll");
 		return list;
 	}
-	
 	public List<PlanVo> getUserPlan(Long member_no){
 		List<PlanVo> list = sqlMapClientTemplate.queryForList("plan.getUserPlan", member_no);
 		return list;

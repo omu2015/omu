@@ -1,14 +1,17 @@
 package com.bit2015.omu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit2015.omu.dao.ContentBoxDao;
 import com.bit2015.omu.dao.ContentDao;
 import com.bit2015.omu.dao.JusoDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeDao;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.JusoVo;
 import com.bit2015.omu.vo.PlanVo;
@@ -25,6 +28,8 @@ public class PlannerService {
 	ContentDao contentDao;
 	@Autowired
 	ThemeDao themeDao;
+	@Autowired
+	ContentBoxDao contentBoxDao;
 	
 	public List<JusoVo> getSi(){
 		List<JusoVo> list = jusoDao.getSi();
@@ -42,7 +47,7 @@ public class PlannerService {
 		List<JusoVo> list = jusoDao.getDong(si, gun);
 		return list;
 	}
-	public void addCart(ContentVo contentVo, String themeName, String id, long member_no){
+	public void addCart(ContentVo contentVo, String themeName, String id, Long member_no, Long plan_no){
 		ThemeVo themeVo = themeDao.getNo(themeName);
 		ContentVo testContentVo = contentDao.selectVoById(id);
 		if(testContentVo ==null){
@@ -54,15 +59,36 @@ public class PlannerService {
 			contentVo.setTheme_no(testThemeVo.getTheme_no());
 			contentVo.setMember_no(member_no);
 			contentDao.insert(contentVo);
+			
+			ContentVo cntVo = contentDao.selectVoById(id);
+			Long content_no = cntVo.getContent_no();
+			ContentBoxVo contentBoxVo = new ContentBoxVo();
+			contentBoxVo.setPlan_no(plan_no);
+			contentBoxVo.setContent_no(content_no);
+			
+			contentBoxDao.insert(contentBoxVo);
+			
 			}else{
 				contentVo.setTheme_no(themeVo.getTheme_no());
 				contentVo.setMember_no(member_no);
 				contentDao.insert(contentVo);
 				ContentVo cntVo = contentDao.selectVoById(id);
-				cntVo.getContent_no();
+				Long content_no = cntVo.getContent_no();
+				ContentBoxVo contentBoxVo = new ContentBoxVo();
+				contentBoxVo.setPlan_no(plan_no);
+				contentBoxVo.setContent_no(content_no);
+				
+				contentBoxDao.insert(contentBoxVo);
+				
 				}
 			}else{
-				System.out.println(testContentVo);
+				ContentVo cntVo = contentDao.selectVoById(id);
+				Long content_no = cntVo.getContent_no();
+				ContentBoxVo contentBoxVo = new ContentBoxVo();
+				contentBoxVo.setPlan_no(plan_no);
+				contentBoxVo.setContent_no(content_no);
+				
+				contentBoxDao.insert(contentBoxVo);
 			}
 		}
 	public void addPlan(PlanVo planVo){
@@ -71,6 +97,32 @@ public class PlannerService {
 	public List<PlanVo> showPlan(Long member_no){
 		List<PlanVo> list = planDao.getUserPlan(member_no);
 		return list ; 
+	}
+	public PlanVo getPlanNo(Long member_no){
+		List<PlanVo> list = planDao.getUserPlan(member_no);
+		PlanVo planVo = new PlanVo();
+		planVo = list.get(0);
+		String planDate = planVo.getPlanDate();
+		planVo.setPlanDate((planDate.split(" ")[0]));
+		return planVo;
+	}
+	public List<ContentVo> getContentNo(Long plan_no){
+		List<ContentBoxVo> list = contentBoxDao.selectAllByPno(plan_no);
+		List<ContentVo> contentList = new ArrayList<ContentVo>();
+		ContentVo contentVo = new ContentVo();
+		for(int i=0; i<list.size(); i++){
+			ContentBoxVo contentBoxVo = list.get(i);
+			Long cntBoxNo = contentBoxVo.getContent_no();
+			contentVo = contentDao.selectVo(cntBoxNo);
+			contentList.add(contentVo);
+		}
+		return contentList;
+	}
+	public PlanVo getPlanDate(Long plan_no){
+		PlanVo planVo = planDao.selectVo(plan_no);
+		String planDate = planVo.getPlanDate();
+		planVo.setPlanDate((planDate.split(" ")[0]));
+		return planVo;
 	}
 	
 
