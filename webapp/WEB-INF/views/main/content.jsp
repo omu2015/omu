@@ -8,61 +8,179 @@ $(function(){
   $('#hanitrigger'+i).leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
 	}
 });
+$(function(){
+	for(var i=0; i<100; i++){
+  $('#hanitrigger2'+i).leanModal2({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+	}
+});
+$(function(){
+	for(var i=0; i<100; i++){
+  $('#hanitrigger3'+i).leanModal3({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+	}
+});
 </script>
-		<div class="row">
-			<div class="col-lg-12">
-				<h4 class="heading">접속자의 관심사</h4>
-				<div class="row">
+<!-- 	<script>
+		var places = new daum.maps.services.Places();
+		var imgurl = [];
+		var contitle = [];
+		var callback = function(status, result) {
+			if (status === daum.maps.services.Status.OK) {
+				console.log(result);
 				
-				<c:forEach var="vo" items="${viewList }" varStatus="status">
-					<section id="projects">
-					<ul id="thumbs" class="portfolio">					
-						<!-- Item Project and Filter Name -->
-						<li class="col-lg-3 design" data-id="id-0" data-type="web">
-						<div class="item-thumbs">
-							<a  href="#contentView${vo.content_no}"  id="hanitrigger${vo.content_no}"  ><img src="${vo.imageUrl }"></a>
-						</div>
-						</li>
-						<!-- End Item Project -->
-					</ul>
-					</section>
-				</c:forEach>
-				</div>
-		</div>
-	</div>	
-	
-<!-- 모달팝업 로그인 -->
-<c:forEach var="vo" items="${list }" varStatus="status">
-		<div>
-		<div id="contentView${vo.content_no}" style="display:none;">
-			<div style="width:600px"><img src="${vo.imageUrl }"></div>
-			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px">
-				<div>${vo.category }</div>
-				<div>${vo.address }</div>
-				<div>${vo.title }</div>
-			</div>
-			<div style="width:600px;background-color:#fff;color:#000;font-size:15px;height:70px">
-				<form>
-					<textarea style="width:510px;margin:10px"></textarea>
-					<input type="submit" value="댓글입력" style="height:50px">
+				var data ='<img style="width:375px;margin-bottom:30px;border:solid 1px #c7c7c7" src="'+result.places[0].imageUrl+'">';
+				for(var i=1; i<10; i++){
+				if(result.places[i].imageUrl!=""){
+					
+				imgurl[i]=result.places[i].imageUrl;
+
+				data +=  '<img style="width:375px;margin-bottom:30px;border:solid 1px #c7c7c7" src="'+imgurl[i]+'">';
+				console.log(result.places[i].imageUrl);
+				}
+				 $('#con2').html(data); 
+				}
+			}
+			};
+		places.categorySearch('AD5', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
+	</script>
+	-->
+
+
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
+	<script>
+		var places = new daum.maps.services.Places();
+		var imgurl = [];
+		var data = [];
+		var datapop = [];
+		var callback = function(status, result) {
+			if (status === daum.maps.services.Status.OK) {
+				for(var i=0; i<10; i++){
+				imgurl[i]=result.places[i].imageUrl;
+				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imgurl[i]+'">';
+				$('#fd6'+[i]).html(data[i]);
+				datapop[i] =  '<img style="width:600px" src="'+imgurl[i]+'">';
+				$('#fd6pop'+[i]).html(datapop[i]);
+				}
+				}
+			};
+		places.categorySearch('FD6', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
+	</script>
+	<script>
+		var places = new daum.maps.services.Places();
+		var imgurl = [];
+		var data = [];
+		var datapop = [];
+		var callback = function(status, result) {
+			if (status === daum.maps.services.Status.OK) {
+				for(var i=0; i<10; i++){
+				imgurl[i]=result.places[i].imageUrl;
+				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imgurl[i]+'">';
+				$('#ad5'+[i]).html(data[i]);
+				datapop[i] =  '<img style="width:600px" src="'+imgurl[i]+'">';
+				$('#ad5pop'+[i]).html(datapop[i]);
+				}
+				}
+			};
+		places.categorySearch('AD5', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
+	</script>
+	<script>
+		var places = new daum.maps.services.Places();
+		var imgurl = [];
+		var data = [];
+		var datapop = [];
+		var callback = function(status, result) {
+			if (status === daum.maps.services.Status.OK) {
+				for(var i=0; i<10; i++){
+				imgurl[i]=result.places[i].imageUrl;
+				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imgurl[i]+'">';
+				$('#ce7'+[i]).html(data[i]);
+				datapop[i] =  '<img style="width:600px" src="'+imgurl[i]+'">';
+				$('#ce7pop'+[i]).html(datapop[i]);
+				}
+				}
+			};
+		places.categorySearch('CE7', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
+	</script>
+
+<!-- 컨텐츠 리스트 -->
+	<div>
+		<ul>
+			<li style="float:left;margin:10px 10px 0 0">
+			<c:forEach var="fd6" begin="0" end="5">
+			<a href="#contentfd6${fd6}" id="hanitrigger${fd6}"><div id="fd6${fd6 }"></div></a>
+			</c:forEach>
+			</li>
+		</ul>
+		<ul>
+			<li style="float:left;margin:10px 10px 0 10px">
+			<c:forEach var="ad5" begin="0" end="5">
+			<a href="#contentad5${ad5}" id="hanitrigger2${ad5}"><div id="ad5${ad5 }"></div></a>
+			</c:forEach>
+			</li>
+		</ul>
+		<ul>
+			<li style="float:left;margin:10px 0 0 10px">
+			<c:forEach var="ce7" begin="0" end="5">
+			<a href="#contentce7${ce7}" id="hanitrigger3${ce7}" ><div id="ce7${ce7 }"></div></a>
+			</c:forEach>
+			</li>
+		</ul>
+	</div>
+
+<!-- 모달 팝업 -->
+	<c:forEach var="fd6" begin="0" end="5">
+		<div id="contentfd6${fd6}" style="display:none;">
+			<div id="fd6pop${fd6 }" ></div>
+			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px"></div>
+				<div style="width:600px;background-color:#fff;font-color:#c7c7c7;font-size:15px;height:70px;padding:10px">
+				<form method="post" action="/commentwrite">
+				<input type="text" name="message" id="message" size="70" >
+				${authUser.memberName }
+				<input type="submit" value="댓글입력" style="height:50px">
 				</form>
 			</div>
-
-			<table style="width:600px;background-color:#fff;color:#000;font-size:15px;">
-			<c:forEach var="vo2" items="${list2}" varStatus="status">
-			<c:if test="${vo.content_no == vo2.content_no}">
-				<tr>
-					<td style="float:left;margin-left:10px">${vo2.message }</td>
-					<td style="float:right;margin-right:10px">${vo2.regDate }</td>
-					<td style="float:right;margin-right:10px">${authUser.memberName }</td>
-				</tr>
-				<tr>
-					<td>----------------------------------------------------------------------------------------------------------------------------</td>
-				</tr>
-				</c:if>
-			</c:forEach>
-			</table>
-
 		</div>
+	</c:forEach>
+	
+	<c:forEach var="ad5" begin="0" end="5">
+		<div id="contentad5${ad5}" style="display:none;">
+			<div id="ad5pop${ad5 }" ></div>
+			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px"></div>
+				<div style="width:600px;background-color:#fff;font-color:#c7c7c7;font-size:15px;height:70px;padding:10px">
+				<form method="post" action="/commentwrite">
+				<input type="text" name="message" id="message" size="70" >
+				${authUser.memberName }
+				<input type="submit" value="댓글입력" style="height:50px">
+				</form>
+			</div>
 		</div>
-</c:forEach>
+	</c:forEach>
+	
+	<c:forEach var="ce7" begin="0" end="5">
+		<div id="contentce7${ce7}" style="display:none;">
+			<div id="ce7pop${ce7 }" ></div>
+			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px"></div>
+				<div style="width:600px;background-color:#fff;font-color:#c7c7c7;font-size:15px;height:70px;padding:10px">
+				<form method="post" action="/commentwrite">
+				<input type="text" name="message" id="message" size="70" >
+				${authUser.memberName }
+				<input type="submit" value="댓글입력" style="height:50px">
+				</form>
+			</div>
+		</div>
+	</c:forEach>
+
+<!-- <div class="row">
+<div class="col-lg-12">
+<div class="row">
+<section id="projects">
+<ul id="thumbs" class="portfolio">
+<li class="col-lg-3 design" data-id="id-0" data-type="web">
+<div id="con" class="item-thumbs">
+</div></li>
+</ul>
+</section>
+</div>
+</div>
+</div> -->
+
+

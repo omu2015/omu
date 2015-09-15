@@ -22,6 +22,9 @@ public class MainDao {
 	public List<CommentsVo> getList2() {
 		List<CommentsVo> list2 = (List<CommentsVo>) sqlMapClientTemplate.queryForList("comments.selectAll");
 		return list2;
-
 	}
+	
+	public void insert(CommentsVo vo){
+		sqlMapClientTemplate.insert("comments.insert",vo);
+	}	
 }
