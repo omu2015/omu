@@ -59,9 +59,10 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 						<li><a href="/review">게시판</a></li>
 						<li><a href="#">몰라</a></li>
 						
-						<li style="float:right;margin-right:180px"><a style="color:#fb6f92"  href="/member/joinForm">Join</a></li>
+						<li style="float:right;margin-right:220px"><a style="color:#fb6f92" href="/member/joinForm">Join</a></li>
 						<li style="float:right"><a style="color:#fb6f92"  href="#loginmodal"  id="modaltrigger">Login</a></li>
 					</ul>
+					<div style="float:right;margin-top:-55px"><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="/assets/img/no_img.jpg"/></div>
 			</c:when>
 			<c:otherwise>
 					<ul id="nav">
@@ -71,9 +72,10 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 						<li><a href="/review">게시판</a></li>
 						<li><a href="#">몰라</a></li>
 						
-						<li style="float:right;margin-right:180px"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
+						<li style="float:right;margin-right:220px"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
 		            	<li style="float:right"><a style="color:#fb6f92"  href="/mypage" >MyPage</a></li>
 					</ul>
+					<div style="float:right;margin-top:-55px"><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="${authUser.imageUrl }"/></div>
 			</c:otherwise>
 			</c:choose>
 
@@ -103,7 +105,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 
 					
 					<!-- Search Form -->
-					<form class="searchform" action="#" style="margin-top:13px" > 
+					<form class="searchform" action="#" style="margin-top:13px;margin-right:45px" > 
 						<input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
 					</form>
 					<!-- / Search Form -->

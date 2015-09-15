@@ -69,27 +69,27 @@
             <ul class="slides">
               <li>
                 <img src="../../assets/img/slides/1.jpg" alt="" />
-                <div class="flex-caption">
+<!--                 <div class="flex-caption">
                     <h3>Modern Design</h3> 
 					<p>Duis fermentum auctor ligula ac malesuada. Mauris et metus odio, in pulvinar urna</p> 
 					<a href="#" class="btn btn-theme">Learn More</a>
-                </div>
+                </div> -->
               </li>
               <li>
                 <img src="../../assets/img/slides/2.jpg" alt="" />
-                <div class="flex-caption">
+<!--                 <div class="flex-caption">
                     <h3>Fully Responsive</h3> 
 					<p>Sodales neque vitae justo sollicitudin aliquet sit amet diam curabitur sed fermentum.</p> 
 					<a href="#" class="btn btn-theme">Learn More</a>
-                </div>
+                </div> -->
               </li>
               <li>
                 <img src="../../assets/img/slides/3.jpg" alt="" />
-                <div class="flex-caption">
+<!--                 <div class="flex-caption">
                     <h3>Clean & Fast</h3> 
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit donec mer lacinia.</p> 
 					<a href="#" class="btn btn-theme">Learn More</a>
-                </div>
+                </div> -->
               </li>
             </ul>
         </div>
@@ -107,24 +107,12 @@
 			</div>
 			 end divider -->
 		
-<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
-<script>
-      var places = new daum.maps.services.Places();
-      var imggo;
-      var callback = function(status, result) {
-          if (status === daum.maps.services.Status.OK) {
-             console.log(result);
-              console.log(result.places[0].imageUrl);
-              imggo=result.places[0].imageUrl;
-              $('#gogogo').html('<img style="width:200px" src="'+imggo+'">');
-          }
-      };
-      places.keywordSearch('판교 치킨', callback,new daum.maps.LatLng(37.564968, 126.939909));
-   </script> -->
-		
-		<div id="gogogo"></div>
 	<!-- start content -->
 		<c:import url="/WEB-INF/views/main/content.jsp"/>
+	<!-- end content -->		
+		
+	<!-- start content2 -->
+	 	<%-- <c:import url="/WEB-INF/views/main/content2.jsp"/> --%>
 	<!-- end content -->
 
 
@@ -152,10 +140,10 @@
 	</c:otherwise>
 </c:choose> --%>
 
-
 </div>
+
 	</section>
-	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+	 <c:import url="/WEB-INF/views/include/footer.jsp"></c:import> 
 </div>
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 <!-- javascript
