@@ -95,12 +95,6 @@
     background: #FFEBEB;
     border : 1px solid #E6D4D4;
 }
-
-.wsTable {
-	 background: #FFEBEB;
-	 border : 1px solid #E6D4D4;
-
-}
 </style>
 <body>
 <div id="wrapper">
@@ -176,29 +170,11 @@
 					
 					</ul>
 					</section>
-					<div class="wsTable">
-						<table>
-								<tr><td>게시판</td></tr>
-						<c:forEach var="vo" items="${reviewList }">
-								<tr>
-									<c:forEach var="votitle" items="${vo.contentList}">
-										<td>${votitle.getTitle()}</td>
-									</c:forEach>
-								</tr>
-								<tr>
-									<c:forEach var="vocate" items="${vo.contentList}">
-										<td>${vocate.getCategory()}</td>
-									</c:forEach>
-								</tr>					
-								<tr>
-									<td>$ = ${vo.getTotalCost()}</td><td>시간 = ${vo.getTotalTime()}</td><td>좋아요 버튼 -> ${vo.getGoodCnt()}</td><td>일정으로 가져오기</td>
-								</tr><tr><td><hr></td></tr>
-						</c:forEach>
-						</table>
-					</div>
+					<c:import url="/WEB-INF/views/review/planTable.jsp"></c:import>
 				</div>
 		</div>
 </div>	
+
 </div><!-- main -->
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div><!-- wrapper -->
@@ -276,6 +252,7 @@ function planSearchCB(status, response, pagination) {
 /////////////////////////////////////////////////////////////////////////////////////////////
 		// 검색 결과 목록과 마커를 표출하는 함수입니다
 		function displayPlaces(places) {
+	console.log(places);
 			var listEl = document.getElementById('placesList'),
 				menuEl = document.getElementById('menu_wrap'),
 				fragment = document.createDocumentFragment(),
@@ -454,7 +431,7 @@ function planSearchCB(status, response, pagination) {
 		
 	var content = '<div style="padding:5px;z-index:1;"><ul><li>'+items.title+'</li>';
 					
-		console.log(items);
+		console.log("items.id == " + items.id);
 		$.ajax({
 			type: "Post",
 			url: "/review/callPlanList",
@@ -474,16 +451,10 @@ function planSearchCB(status, response, pagination) {
 				planlistwindow.open(map, marker);
 			},
 			error:function(jqXHR, textStatus, errorThrown){
-	            content+='<p>후기가 없습니다</p></div>';
-				planlistwindow.setContent(content);
-				planlistwindow.open(map, marker);
-				
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
 	            self.close();
 	        }
 		});
-		
-	
 	}
 	
 	function hideAllMarker() {
