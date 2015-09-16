@@ -65,24 +65,25 @@ public class ReviewService {
     ThemeDao themeDao;
     
     FileUploader ful=new FileUploader();
+    
+    public void index(Model model) {
+    	List<ReviewVo> reviewList=getReviewList();
+    	
+    	model.addAttribute("reviewList", reviewList);
+     }
 
    public void pickTheme(Model model, HttpSession session) {
-      List<ThemeBoxVo> memberTheme =themeBoxDao.selectAll();
+      List<ThemeVo> memberTheme =themeDao.selectAll();
       MemberVo memberVo =(MemberVo) session.getAttribute("authUser");
       
-      //사용자의 관심사 추출
-      for (int i = 0; i < memberTheme.size(); i++) {
-         if(memberVo.getMember_no()!=memberTheme.get(i).getMember_no()){
-            memberTheme.remove(i);
-         }
+      List<ThemeBoxVo> themeBoxList = themeBoxDao.selectAllByMm(memberVo.getMember_no());
+      
+      for (int i = 0; i < themeBoxList.size(); i++) {
+    	  memberTheme.add(themeDao.selectVo(themeBoxList.get(i).getTheme_no()));
       }
-      
-      List<ReviewVo> reviewList=getReviewList();
-      
       
       //model
       model.addAttribute("memberTheme", memberTheme);
-      model.addAttribute("reviewList", reviewList);
    }
    
    

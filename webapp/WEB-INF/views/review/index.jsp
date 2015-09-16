@@ -113,7 +113,7 @@
 															<tr>
 															<c:if test="${not empty authUser}">
 															<c:forEach var="vo" items="${memberTheme}">
-																<td><a href="/review/sortby?a=${vo.theme_no}"></a></td>
+																<td><a href="/review/sortby?a=${vo.theme_no}">${vo.themeName}</a></td>
 															</c:forEach>
 															</c:if>
 															<td>내 관심사</td>

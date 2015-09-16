@@ -36,6 +36,7 @@ public class ReviewController {
     	  System.out.println("session!=null");
          reviewService.pickTheme(model, session);
       }
+      
       return "/review/index";
    }
    
