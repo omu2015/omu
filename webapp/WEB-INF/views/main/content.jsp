@@ -43,8 +43,6 @@ $(function(){
 		places.categorySearch('AD5', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
 	</script>
 	-->
-
-
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
 	<script>
 		var places = new daum.maps.services.Places();
@@ -64,6 +62,30 @@ $(function(){
 			};
 		places.categorySearch('FD6', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
 	</script>
+	
+	
+	 
+		<script>
+		var places = new daum.maps.services.Places();
+		var callback = function(status, result) {
+			if (status === daum.maps.services.Status.OK) {
+				console.log(result);
+				console.log("result="+result);
+				console.log("result.places[0].address="+result.places[0].address);
+				fd6address = [];
+				for(var i=0;i<10;i++){
+					console.log(result.places[i].address)
+					fd6address[i] =  result.places[i].address
+				}
+				}
+			};
+		places.categorySearch('FD6', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)});
+	</script> 
+	
+
+	
+	
+	
 	<script>
 		var places = new daum.maps.services.Places();
 		var imgurl = [];
@@ -130,7 +152,7 @@ $(function(){
 	<c:forEach var="fd6" begin="0" end="5">
 		<div id="contentfd6${fd6}" style="display:none;">
 			<div id="fd6pop${fd6 }" ></div>
-			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px"></div>
+			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px">${fd6address1 }</div>
 				<div style="width:600px;background-color:#fff;font-color:#c7c7c7;font-size:15px;height:70px;padding:10px">
 				<form method="post" action="/commentwrite">
 				<input type="text" name="message" id="message" size="70" >
