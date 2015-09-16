@@ -58,7 +58,7 @@ function deletePlan(plan_no){
 <div id="showPlan">
 	<table>
 		<tr>
-			<td>no</td><td>날짜</td><td colspan="3">계획</td>
+			<td>no</td><td>날짜</td><td colspan="3">계획</td> 
 		</tr>
 		<c:forEach var="i" items="${planList}" varStatus="status">
 		<tr>
