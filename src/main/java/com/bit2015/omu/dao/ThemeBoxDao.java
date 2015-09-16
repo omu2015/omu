@@ -26,6 +26,11 @@ public class ThemeBoxDao {
 		return list;
 	}
 	
+	public List<ThemeBoxVo> selectAllByMm(Long member_no){
+		List<ThemeBoxVo> list= sqlMapClientTemplate.queryForList("themeBox.selectAllByMm",member_no);
+		return list;
+	}
+	
 	public ThemeBoxVo selectVo(Long themeBox_no){
 		ThemeBoxVo themeBoxVo = (ThemeBoxVo) sqlMapClientTemplate.queryForObject("themeBox.selectVo", themeBox_no);
 		return themeBoxVo;

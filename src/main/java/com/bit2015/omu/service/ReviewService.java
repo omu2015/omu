@@ -66,7 +66,7 @@ public class ReviewService {
     
     FileUploader ful=new FileUploader();
 
-   public void index(Model model, HttpSession session) {
+   public void pickTheme(Model model, HttpSession session) {
       List<ThemeBoxVo> memberTheme =themeBoxDao.selectAll();
       MemberVo memberVo =(MemberVo) session.getAttribute("authUser");
       

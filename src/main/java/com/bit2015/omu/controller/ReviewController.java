@@ -31,7 +31,7 @@ public class ReviewController {
    @RequestMapping()
    public String index(Model model, HttpSession session){
       if(session!=null){
-         reviewService.index(model, session);
+         reviewService.pickTheme(model, session);
       }
       return "/review/index";
    }

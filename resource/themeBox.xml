@@ -16,6 +16,12 @@
 		]]>
 	</select>
 	
+	<select id="selectAllByMm" parameterClass="java.lang.Long" resultClass="ThemeBoxVo">
+		<![CDATA[
+			select * from THEMEBOX where member_no=#member_no# order by themeBox_no desc 
+		]]>
+	</select>
+	
 	<select id="selectVo" parameterClass="java.lang.Long" resultClass="ThemeBoxVo">
 		<![CDATA[
 			select * from THEMEBOX where themeBox_no=#themeBox_no#

@@ -109,32 +109,6 @@
 					<section id="woosungMain">
 					<ul>
 													<div class="PickTheme">
-													<script>
-													//getThemeBox();
-													function getThemeBox(index, places) {
-
-														var thB = document.createElement('table'), 
-															textStr = '<span class="markerbg marker_'+ (index + 1)+ '"></span>'
-																+ '<div class="info"><h5>' + places.title + '</h5>';
-
-														if (haveSession) {
-															itemStr += '    <tr>' + places.newAddress + '<td>'
-																	+ places.address+ '   </td>'
-																	+ '</tr>';
-														} else {
-															//#loginmodal
-														}
-
-														itemStr += '  <span class="tel">' + places.phone + '</span>'
-																+ '</div>';
-
-														el.innerHTML = itemStr;
-														el.className = 'col-lg-3 design';
-
-														return el;
-													}
-													
-													</script>
 													<table>
 															<tr>
 															<c:if test="${not empty authUser}">
@@ -275,39 +249,41 @@ function planSearchCB(status, response, pagination) {
 				// LatLngBounds 객체에 좌표를 추가합니다
 				bounds.extend(placePosition);
 
-				(function(marker, title) {
+				(function(marker, items) {
+					
+									
 									daum.maps.event.addListener(marker, 'mouseover',
 											function() {
-												displayInfowindow(marker, title);
+												displayInfowindow(marker, items.title);
 											});
 				
 									daum.maps.event.addListener(marker, 'mouseout', function() {
 										infowindow.close();
 									});
-				
+									
+									
+									//mouseover
 									itemEl.onmouseover = function() {
-										displayInfowindow(marker, title);
-										hideAllMarker();
 										marker.setVisible(true);
 									};
 				
 									itemEl.onmouseout = function() {
 										infowindow.close();
-										showAllMarker();
 									};
-				})(marker, places[i].title);
-				
-				
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				(function(marker, items) {
-							//console.log(items.title);
+
+									
+									//click
 									daum.maps.event.addListener(marker, 'click',
-									function() {
+									function(){
 									displayPlanList(marker,items);
 									});
 									
 									itemEl.onclick = function(){
+										map.setLevel(2);
+										map.setCenter(new daum.maps.LatLng(items.latitude, items.longitude));
+										
 									displayPlanList(marker,items);	
+									
 									};
 				})(marker, places[i]);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
