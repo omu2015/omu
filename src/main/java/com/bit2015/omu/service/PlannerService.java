@@ -124,6 +124,9 @@ public class PlannerService {
 		planVo.setPlanDate((planDate.split(" ")[0]));
 		return planVo;
 	}
+	public void deletePlan(Long plan_no){
+		planDao.delete(plan_no);
+	}
 	
 
 

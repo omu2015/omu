@@ -31,6 +31,9 @@ public class PlannerController {
 		@RequestMapping("")
 		public String index(Model model, HttpSession session){
 			MemberVo vo = (MemberVo)session.getAttribute("authUser");
+			if(vo == null){
+				return "/planner/plan";	
+			}
 			List<PlanVo> list = plannerService.showPlan(vo.getMember_no());
 			model.addAttribute("planList", list);
 			
@@ -83,8 +86,10 @@ public class PlannerController {
 		
 		model.addAttribute("planList", planVo);
 		plannerService.addPlan(planVo);
+		
 		return "redirect:/planner/map";
 		}
+		
 		@RequestMapping("/showPlan")
 		@ResponseBody
 		public List<PlanVo> showPlan(HttpSession session){
@@ -102,5 +107,10 @@ public class PlannerController {
 			model.addAttribute("planVo", planVo );
 			
 			return "/planner/viewPlan";
+		}
+		@RequestMapping("/deletePlan")
+		public String deletePlan(@RequestParam Long plan_no, Model model){
+			plannerService.deletePlan(plan_no);
+			return "redirect:/planner";
 		}
 }

@@ -37,7 +37,10 @@ function addPlan(){
 </script>
 <script>
 function viewPlan(plan_no){
-	location.href="/planner/viewPlan?plan_no="+plan_no
+	location.href="/planner/viewPlan?plan_no="+plan_no;
+}
+function deletePlan(plan_no){
+	location.href="/planner/deletePlan?plan_no="+plan_no;
 }
 </script>
 <head>
@@ -45,6 +48,9 @@ function viewPlan(plan_no){
 <title>Insert title here</title>
 </head>
 <body>
+<!-- start header -->
+	<c:import url="/WEB-INF/views/include/header.jsp"/>
+	<!-- end header -->
 <button onclick="showPlan()">내 일정 관리</button>
 <button onclick="addNewPlan()">새 일정 만들기</button>
 <button onclick=""> 추천 일정 보기 </button>
@@ -52,12 +58,15 @@ function viewPlan(plan_no){
 <div id="showPlan">
 	<table>
 		<tr>
-			<td>no</td><td>날짜</td><td>계획</td>
+			<td>no</td><td>날짜</td><td colspan="3">계획</td>
 		</tr>
 		<c:forEach var="i" items="${planList}" varStatus="status">
 		<tr>
-			<td>${status.count}</td><td>${i.planDate}</td><td>회원님의 ${status.count}번째 계획</td><td><button onclick="viewPlan('${i.plan_no}');">일정보기</button></td></a>
-			
+			<td>${status.count}</td>
+			<td>${i.planDate}</td>
+			<td>회원님의 ${status.count}번째 계획</td>
+			<td><button onclick="viewPlan('${i.plan_no}');">일정보기</button></td>
+			<td><button onclick="deletePlan('${i.plan_no}')">삭제</button></td>
 		</tr>
 		</c:forEach>
 	</table>

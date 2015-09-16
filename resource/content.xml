@@ -23,7 +23,7 @@
 	
 	<insert id="insert" parameterClass="ContentVo">
 		<![CDATA[
-			insert INTO content VALUES(content_no_seq.nextval, #theme_no#,sysdate,#member_no#,#phone#,#newAddress#,#imageUrl#,#direction#,#zipcode#
+			insert INTO content VALUES(content_no_seq.nextval, #theme_no#,sysdate,99999,#phone#,#newAddress#,#imageUrl#,#direction#,#zipcode#
 			,#placeUrl#,#id#,#title#,#category#,#address#,#longitude#,#latitude#,#addressBCode#,#cost#,#time#)
 		]]>
 	</insert>
