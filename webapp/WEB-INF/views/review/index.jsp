@@ -108,18 +108,18 @@
 				<div class="row">
 					<section id="woosungMain">
 					<ul>
+															<c:if test="${not empty authUser}">
 													<div class="PickTheme">
 													<table>
 															<tr>
-															<c:if test="${not empty authUser}">
 															<c:forEach var="vo" items="${memberTheme}">
 																<td><a href="/review/sortby?a=${vo.theme_no}">${vo.themeName}</a></td>
 															</c:forEach>
-															</c:if>
 															<td>내 관심사</td>
 															</tr>
 													</table>
 													</div>
+															</c:if>
 					</ul>
 					
 					<ul id="thumbs" class="portfolio">
@@ -285,6 +285,15 @@ function planSearchCB(status, response, pagination) {
 									displayPlanList(marker,items);	
 									
 									};
+									
+									daum.maps.event.addListener(map, 'click',
+											function(){
+												infowindow.close();
+												planlistwindow.close();
+											});
+									
+									
+									
 				})(marker, places[i]);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

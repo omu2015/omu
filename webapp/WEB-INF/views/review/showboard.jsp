@@ -181,6 +181,11 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 var infowindow = new daum.maps.InfoWindow({	zIndex : 1});
 var infowindow2 = new daum.maps.InfoWindow({	zIndex : 2});
 
+var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
+var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+
+
  			//console.log(JSON.parse(''));
        displayPlaces(JSON.parse('[{"content_no":2,"theme_no":2,"regDate":"2015-09-16 10:42:38.0","member_no":99999,"phone":"02-561-2627","newAddress":"서울 강남구 테헤란로2길 15","imageUrl":"http://cfile109.uf.daum.net/image/2556F95053B51B7511F680","direction":null,"zipcode":"135934","placeUrl":"http://place.map.daum.net/12557812","id":"12557812","title":"초콜릿호텔","category":"여행 > 숙박 > 여관,모텔","address":"서울 강남구 역삼동 825-29","longitude":"127.02931626635113","latitude":"37.49722015035048","addressBCode":"1168010100","cost":35000,"time":240},{"content_no":1,"theme_no":1,"regDate":"2015-09-16 10:38:43.0","member_no":99999,"phone":"02-3486-3456","newAddress":"서울 서초구 강남대로53길 8","imageUrl":null,"direction":null,"zipcode":"137858","placeUrl":"http://place.map.daum.net/14791165","id":"14791165","title":"비트교육센터","category":"교육,학문 > 학원","address":"서울 서초구 서초동 1327-15 비트아카데미빌딩 3층","longitude":"127.02809846805427","latitude":"37.49455346636902","addressBCode":"1165010800","cost":0,"time":30}]')); ///////////////////////////////////////////////////////////////////
        

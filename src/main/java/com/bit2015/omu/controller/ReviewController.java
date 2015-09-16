@@ -32,7 +32,7 @@ public class ReviewController {
    public String index(Model model, HttpSession session){
 	   reviewService.index(model);
 	   
-      if(session!=null){
+      if(session.getAttribute("authUser")!=null){
     	  System.out.println("session!=null");
          reviewService.pickTheme(model, session);
       }
