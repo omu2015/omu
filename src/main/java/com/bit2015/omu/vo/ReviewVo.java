@@ -12,96 +12,108 @@ import com.bit2015.omu.dao.GoodDao;
 
 public class ReviewVo {
 
-	private long board_no;
-	private long plan_no;
-	private List<ContentVo> contentList = new ArrayList<ContentVo>();
-	private long totalCost;
-	private long totalTime;
-	private int goodCnt;
-	
-/*	@Autowired
-	ContentDao contentDao;
-	@Autowired
-	ContentBoxDao contentBoxDao;
-	@Autowired
-	BoardDao boardDao;
-	@Autowired
-	GoodDao goodDao;
-	
-	public ReviewVo(Long board_no){
-		this.board_no=board_no;
-		System.out.println("board_no="+board_no);
-		System.out.println("boardao tostring="+boardDao.selectVo(board_no).toString());
-		this.plan_no=boardDao.selectVo(board_no).getPlan_no();
-		
-		List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(plan_no);
-		for (int i = 0; i < contentBoxList.size(); i++) {
-			this.contentList.add(contentDao.selectVo(contentBoxList.get(i).getContent_no()));
-		}
-		
-		for (int i = 0; i < this.contentList.size(); i++) {
-			this.totalCost += contentList.get(i).getCost();
-			this.totalTime += contentList.get(i).getTime();
-		}
-		
-		for (int i = 0; i < this.contentList.size(); i++) {
-			this.goodCnt += goodDao.selectAllByCno((contentList.get(i).getContent_no())).size();
-		}
-		
-	}*/
+   private long board_no;
+   private long plan_no;
+   private String memberId;
+   private List<ContentVo> contentList = new ArrayList<ContentVo>();
+   private long totalCost;
+   private long totalTime;
+   private int goodCnt;
+   
+   
+/*   @Autowired
+   ContentDao contentDao;
+   @Autowired
+   ContentBoxDao contentBoxDao;
+   @Autowired
+   BoardDao boardDao;
+   @Autowired
+   GoodDao goodDao;
+   
+   public ReviewVo(Long board_no){
+      this.board_no=board_no;
+      System.out.println("board_no="+board_no);
+      System.out.println("boardao tostring="+boardDao.selectVo(board_no).toString());
+      this.plan_no=boardDao.selectVo(board_no).getPlan_no();
+      
+      List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(plan_no);
+      for (int i = 0; i < contentBoxList.size(); i++) {
+         this.contentList.add(contentDao.selectVo(contentBoxList.get(i).getContent_no()));
+      }
+      
+      for (int i = 0; i < this.contentList.size(); i++) {
+         this.totalCost += contentList.get(i).getCost();
+         this.totalTime += contentList.get(i).getTime();
+      }
+      
+      for (int i = 0; i < this.contentList.size(); i++) {
+         this.goodCnt += goodDao.selectAllByCno((contentList.get(i).getContent_no())).size();
+      }
+      
+   }*/
 
-	public long getBoard_no() {
-		return board_no;
-	}
+   public long getBoard_no() {
+      return board_no;
+   }
 
-	public void setBoard_no(long board_no) {
-		this.board_no = board_no;
-	}
+   public String getMemberId() {
+      return memberId;
+   }
 
-	public long getPlan_no() {
-		return plan_no;
-	}
+   public void setMemberId(String memberId) {
+      this.memberId = memberId;
+   }
 
-	public void setPlan_no(long plan_no) {
-		this.plan_no = plan_no;
-	}
+   public void setBoard_no(long board_no) {
+      this.board_no = board_no;
+   }
 
-	public List<ContentVo> getContentList() {
-		return contentList;
-	}
+   public long getPlan_no() {
+      return plan_no;
+   }
 
-	public void setContentList(List<ContentVo> contentList) {
-		this.contentList = contentList;
-	}
+   public void setPlan_no(long plan_no) {
+      this.plan_no = plan_no;
+   }
 
-	public long getTotalCost() {
-		return totalCost;
-	}
+   public List<ContentVo> getContentList() {
+      return contentList;
+   }
 
-	public void setTotalCost(long totalCost) {
-		this.totalCost = totalCost;
-	}
+   public void setContentList(List<ContentVo> contentList) {
+      this.contentList = contentList;
+   }
 
-	public long getTotalTime() {
-		return totalTime;
-	}
+   public long getTotalCost() {
+      return totalCost;
+   }
 
-	public void setTotalTime(long totalTime) {
-		this.totalTime = totalTime;
-	}
+   public void setTotalCost(long totalCost) {
+      this.totalCost = totalCost;
+   }
 
-	public int getGoodCnt() {
-		return goodCnt;
-	}
+   public long getTotalTime() {
+      return totalTime;
+   }
 
-	public void setGoodCnt(int goodCnt) {
-		this.goodCnt = goodCnt;
-	}
+   public void setTotalTime(long totalTime) {
+      this.totalTime = totalTime;
+   }
 
-	@Override
-	public String toString() {
-		return "ReviewVo [board_no=" + board_no + ", plan_no=" + plan_no
-				+ ", contentList=" + contentList + ", totalCost=" + totalCost
-				+ ", totalTime=" + totalTime + ", goodCnt=" + goodCnt + "]";
-	}
+   public int getGoodCnt() {
+      return goodCnt;
+   }
+
+   public void setGoodCnt(int goodCnt) {
+      this.goodCnt = goodCnt;
+   }
+
+   @Override
+   public String toString() {
+      return "ReviewVo [board_no=" + board_no + ", plan_no=" + plan_no
+            + ", memberId=" + memberId + ", contentList=" + contentList
+            + ", totalCost=" + totalCost + ", totalTime=" + totalTime
+            + ", goodCnt=" + goodCnt + "]";
+   }
+   
 }
