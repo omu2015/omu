@@ -30,6 +30,15 @@
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	for(var i=0; i<100; i++){
+  $('#hanitrigger'+i).leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+	}
+});
+</script>
 
 </head>
 <body>
@@ -46,30 +55,44 @@
 				<div class="col-lg-12">
 					<div class="row">
 
-                       <div id="join-form">
-						<table border="1" style="margin:auto; text-align: center; width: 70%;" >
-							<tr style="background-color: pink;">
-								<td>등록일</td>
-								<td>상점이름</td>
-								<td>주소</td>
-								<td>비용</td>				
-							</tr>
-							<c:forEach var="vo" items="${goodViewList }">  
-			                <c:if test="${vo.member_no==authUser.member_no}">
-									<tr>
-									  <td>${vo.regDate}</td>
-									  <td>${vo.title}</td>
-									  <td>${vo.newAddress}</td>
-									  <td>${vo.cost}</td>
-									</tr>
-								</c:if>
+						<div id="join-form">
+							<table border="1"
+								style="margin: auto; text-align: center; width: 70%;">
+								<tr style="background-color: pink;">
+									<td>등록일</td>
+									<td>상점이름</td>
+									<td>주소</td>
+									<td>비용</td>
+								</tr>
+								<c:forEach var="vo" items="${goodViewList }">
+									<c:if test="${vo.member_no==authUser.member_no}">
+										<tr>
+											<td>${vo.regDate}</td>
+											<td><a href="#contentView${vo.content_no}" id="hanitrigger${vo.content_no}">${vo.title}</a></td>
+											<td>${vo.newAddress}</td>                  
+											<td>${vo.cost}</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</table>
+
+							<!-- 모달팝업 Content -->
+							<c:forEach var="vo" items="${goodViewList }" varStatus="status">
+								<div>
+									<div id="contentView${vo.content_no}" style="display: none;">
+										<div style="width: 600px">
+											<img src="${vo.imageUrl }">
+										</div>
+										<div
+											style="width: 600px; background-color: #2f3238; color: #fff; height: 60px; text-align: center; font-size: 15px">
+											<div>${vo.title }</div>
+											<div>${vo.address }</div>
+											<div>${vo.cost }원</div>
+										</div>
+									</div>
+								</div>
 							</c:forEach>
-						</table>
-
-
-
-
-          </div>
+						</div>
 					</div>
 				</div>
 			</div>

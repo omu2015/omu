@@ -22,7 +22,8 @@
 					
 					<ul class="nav navbar-nav" style="float: right;">
                         <li class="active" ><a  href="/mypage/" >내플랜</a></li>
-                        <li><a  href="/mypage/test1" >좋아요~</a></li>
+                        <li><a  href="/mypage/goodview" >좋아요~</a></li>
+					    <li><a href="/mypage/boardview">내가 쓴 게시판</a></li>
                         <li><a href="/mypage/membermodifyform">회원정보수정</a></li>
                         <li><a  href="/mypage/memberleave" >회원탈퇴</a></li>
                     </ul>
