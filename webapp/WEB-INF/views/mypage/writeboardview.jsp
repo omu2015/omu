@@ -44,33 +44,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="row">
+					
 
-                       <div id="join-form">
-						<table border="1" style="margin:auto; text-align: center; width: 70%;" >
-							<tr style="background-color: pink;">
-								<td>등록일</td>
-								<td>상점이름</td>
-								<td>주소</td>
-								<td>비용</td>				
-							</tr>
-							<c:forEach var="vo" items="${goodViewList }">  
-			                <c:if test="${vo.member_no==authUser.member_no}">
-									<tr>
-									  <td>${vo.regDate}</td>
-									  <td>${vo.title}</td>
-									  <td>${vo.newAddress}</td>
-									  <td>${vo.cost}</td>
-									</tr>
-								</c:if>
-							</c:forEach>
-						</table>
-
-
-
-
-          </div>
-					</div>
+						<div id="join-form">
+						<c:import url="/WEB-INF/views/mypage/boardview.jsp"></c:import>
+						</div>
+					
 				</div>
 			</div>
 		</div>

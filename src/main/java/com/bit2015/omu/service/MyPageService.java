@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit2015.omu.dao.BoardCommentsDao;
+import com.bit2015.omu.dao.BoardDao;
+import com.bit2015.omu.dao.BoardImgBoxDao;
 import com.bit2015.omu.dao.ContentBoxDao;
 import com.bit2015.omu.dao.ContentDao;
 import com.bit2015.omu.dao.GoodDao;
@@ -17,6 +20,7 @@ import com.bit2015.omu.dao.MemberDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.util.FileUploader;
+import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.CalendarVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
@@ -24,6 +28,7 @@ import com.bit2015.omu.vo.GoodViewVo;
 import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.ThemeVo;
+import com.bit2015.omu.vo.WriteBoardViewVo;
 
 @Service
 public class MyPageService {
@@ -39,7 +44,12 @@ public class MyPageService {
 	ThemeDao themeDao;
 	@Autowired
 	GoodDao goodDao;
-	
+	@Autowired
+	BoardDao boardDao;
+	@Autowired
+	BoardImgBoxDao boardImgBoxDao;
+	@Autowired
+	BoardCommentsDao boardCommentsDao;
 	
 	
 	FileUploader ful=new FileUploader();
@@ -164,4 +174,43 @@ public class MyPageService {
 		return goodViewList;
 	}
 	
+	// 내가 쓴 게시물 꺼내기
+	public List<WriteBoardViewVo> getWriteBoardList(){
+		List<BoardVo> boardList = boardDao.selectAll();
+		List<WriteBoardViewVo> writeBoardList = new ArrayList<WriteBoardViewVo>();
+		List<MemberVo>  memberList = memberDao.selectAll();
+		for(int i=0; i<boardList.size();i++){
+			WriteBoardViewVo writeBoardViewVo = new WriteBoardViewVo();
+			
+		    long member_no=boardList.get(i).getMember_no();
+		    long board_no=boardList.get(i).getBoard_no();
+		    long plan_no=boardList.get(i).getPlan_no();
+		    writeBoardViewVo.setMemberId(memberDao.selectVo(member_no).getMemberId());
+		    writeBoardViewVo.setMember_no(member_no);
+		    writeBoardViewVo.setBoard_no(board_no);
+		    writeBoardViewVo.setPlan_no(plan_no);
+		    
+		    List<ContentVo> contentList = writeBoardViewVo.getContentList();
+		    long totalCost = 0;
+		    long totalTime = 0;
+		    int goodCnt=0;
+		    
+		    List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(plan_no);
+		    for(int j=0; j<contentBoxList.size();j++){
+		    	ContentVo tempVo = contentDao.selectVo(contentBoxList.get(j).getContent_no());
+		    	contentList.add(contentDao.selectVo(contentBoxList.get(j).getContent_no()));
+		    }
+		    for (int k = 0; k < contentList.size(); k++) {
+	            totalCost += contentList.get(k).getCost();
+	            totalTime += contentList.get(k).getTime();
+	            goodCnt += goodDao.selectAllByCno((contentList.get(k).getContent_no())).size();
+		    
+	            writeBoardViewVo.setTotalCost(totalCost);
+	            writeBoardViewVo.setTotalTime(totalTime);
+	            writeBoardViewVo.setGoodCnt(goodCnt);
+		    }
+		    writeBoardList.add(writeBoardViewVo);
+		}
+		 return writeBoardList;
+	}
 }
