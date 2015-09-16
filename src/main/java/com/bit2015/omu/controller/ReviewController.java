@@ -30,7 +30,10 @@ public class ReviewController {
    
    @RequestMapping()
    public String index(Model model, HttpSession session){
+	   reviewService.index(model);
+	   
       if(session!=null){
+    	  System.out.println("session!=null");
          reviewService.pickTheme(model, session);
       }
       return "/review/index";
@@ -53,6 +56,12 @@ public class ReviewController {
       reviewService.showboard(model, plan_no);
       
       return "/review/showboard";
+   }
+   
+   @RequestMapping("/test")
+   public String test(){
+      
+      return "/review/mapp";
    }
    
     
