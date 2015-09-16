@@ -22,7 +22,7 @@
 	</select>
 	<select id="getUserPlan" parameterClass="java.lang.Long" resultClass="PlanVo">
 		<![CDATA[
-			select * from plan where member_no=#member_no#
+			select * from plan where member_no=#member_no# order by plan_no desc
 		]]>
 	</select>
 
