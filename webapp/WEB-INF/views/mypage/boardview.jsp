@@ -2,24 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<style>
-.wsTable {
-	 background: #FFEBEB;
-	 border : 1px solid #E6D4D4;
-}
-.wsTable table{
-	margin : 20px 5px;
-	text-align : center;
-}
-</style>
 
-<hr>
+
+
 <div class="wsTable">
 	<c:forEach var="vo" items="${writeBoardList }">
 	
-		<c:if test="${vo.member_no eq authUser.member_no }">ho2
+		<c:if test="${vo.member_no==authUser.member_no }">
 		<table id="plan_no_${vo.plan_no }" onclick="clickEvent(this)"
-			onmouseover="changeColor(this, '#FEE8EE', '#FFFFFF')">
+			onmouseover="changeColor(this, '#FFFFFF', '#FEE8EE')">
 			<tr>
 				<c:forEach var="votitle" items="${vo.contentList}">
 					<td>${votitle.getTitle()}</td>
