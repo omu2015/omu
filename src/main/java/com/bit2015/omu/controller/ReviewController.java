@@ -60,7 +60,9 @@ public class ReviewController {
    }
    
    @RequestMapping("/test")
-   public String test(){
+   public String test(Model model){
+	   
+	   reviewService.test(model);
       
       return "/review/mapp";
    }

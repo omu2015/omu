@@ -223,6 +223,10 @@ public class ReviewService {
       
       return reviewList;
    }
+
+public void test(Model model) {
+	//PlanVo planVo = planDao.selectVo((long) 1);
+}
    
    
    
