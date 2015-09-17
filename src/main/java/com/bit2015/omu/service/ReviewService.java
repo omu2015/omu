@@ -154,16 +154,17 @@ public class ReviewService {
       String jsonCL = "";
       try {
     	  jsonCL =objectMapper.writeValueAsString(contentList2);
-         System.out.println("json parse="+jsonCL);
-         
       } catch (JsonProcessingException e) {
-         System.out.println("json test");
          e.printStackTrace();
       }
       
+      BoardVo boardVo = boardDao.selectVoByPno(plan_no);
+      
+      
+      
       List<ReviewVo> reviewList=getReviewList();
       
-      
+      model.addAttribute("boardVo", boardVo);
       model.addAttribute("jsonCL", jsonCL);
       model.addAttribute("reviewList", reviewList);
    }

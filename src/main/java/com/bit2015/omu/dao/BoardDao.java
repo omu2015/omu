@@ -29,6 +29,11 @@ public class BoardDao {
 		BoardVo boardVo = (BoardVo) sqlMapClientTemplate.queryForObject("board.selectVo", board_no);
 		return boardVo;
 	}
+	
+	public BoardVo selectVoByPno(Long plan_no){
+		BoardVo boardVo = (BoardVo) sqlMapClientTemplate.queryForObject("board.selectVoByPno", plan_no);
+		return boardVo;
+	}
 
 	public void delete(Long board_no) {
 		sqlMapClientTemplate.delete("board.delete", board_no);

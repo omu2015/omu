@@ -182,9 +182,14 @@
 																</div>
 								</td>
 						</tr>
+						<c:if test="${not empty boardVo}">
 						<tr>
-							<td>${vo.memberId}</td><td>${vo.goodCnt}</td>
+							<td>${boardVo.getMember_no()}</td><td>${boardVo.getRegDate()}</td>
 						</tr>
+						<tr>
+							<td>${boardVo.getMessage()}</td>
+						</tr>
+						</c:if>
 						<tr>
 							<td colspan="2"><img src="" /></td>
 						</tr>

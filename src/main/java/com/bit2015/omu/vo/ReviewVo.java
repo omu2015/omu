@@ -20,38 +20,6 @@ public class ReviewVo {
    private long totalTime;
    private int goodCnt;
    
-   
-/*   @Autowired
-   ContentDao contentDao;
-   @Autowired
-   ContentBoxDao contentBoxDao;
-   @Autowired
-   BoardDao boardDao;
-   @Autowired
-   GoodDao goodDao;
-   
-   public ReviewVo(Long board_no){
-      this.board_no=board_no;
-      System.out.println("board_no="+board_no);
-      System.out.println("boardao tostring="+boardDao.selectVo(board_no).toString());
-      this.plan_no=boardDao.selectVo(board_no).getPlan_no();
-      
-      List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(plan_no);
-      for (int i = 0; i < contentBoxList.size(); i++) {
-         this.contentList.add(contentDao.selectVo(contentBoxList.get(i).getContent_no()));
-      }
-      
-      for (int i = 0; i < this.contentList.size(); i++) {
-         this.totalCost += contentList.get(i).getCost();
-         this.totalTime += contentList.get(i).getTime();
-      }
-      
-      for (int i = 0; i < this.contentList.size(); i++) {
-         this.goodCnt += goodDao.selectAllByCno((contentList.get(i).getContent_no())).size();
-      }
-      
-   }*/
-
    public long getBoard_no() {
       return board_no;
    }
