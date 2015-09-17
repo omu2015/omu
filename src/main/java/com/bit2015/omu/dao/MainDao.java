@@ -25,6 +25,6 @@ public class MainDao {
 	}
 	
 	public void insert(CommentsVo vo){
-		sqlMapClientTemplate.insert("comments.insert",vo);
+		sqlMapClientTemplate.insert("comments.insertco",vo);
 	}	
 }

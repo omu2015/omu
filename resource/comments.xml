@@ -3,6 +3,12 @@
 <sqlMap namespace="comments">
 	<typeAlias alias="CommentsVo" type="com.bit2015.omu.vo.CommentsVo" />
 
+	<insert id="insertco" parameterClass="CommentsVo">
+		<![CDATA[
+			쿼리 어려워
+		]]>
+	</insert>
+
 	<select id="selectAll" resultClass="CommentsVo">
     <![CDATA[
        select * from comments order by comments_no desc

@@ -6,57 +6,71 @@
 $(function(){
 	for(var i=0; i<100; i++){
   $('#hanitrigger'+i).leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
-	}
-});
-$(function(){
-	for(var i=0; i<100; i++){
   $('#hanitrigger2'+i).leanModal2({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
-	}
-});
-$(function(){
-	for(var i=0; i<100; i++){
   $('#hanitrigger3'+i).leanModal3({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
 	}
 });
 </script>
-<!-- 	<script>
-		var places = new daum.maps.services.Places();
-		var imgurl = [];
-		var contitle = [];
-		var callback = function(status, result) {
-			if (status === daum.maps.services.Status.OK) {
-				console.log(result);
-				
-				var data ='<img style="width:375px;margin-bottom:30px;border:solid 1px #c7c7c7" src="'+result.places[0].imageUrl+'">';
-				for(var i=1; i<10; i++){
-				if(result.places[i].imageUrl!=""){
-					
-				imgurl[i]=result.places[i].imageUrl;
+<!-- 내주변으로 검색, 카테고리 반복문으로 한개로 합치기, 덧글등록(콘텐츠까지) -->
 
-				data +=  '<img style="width:375px;margin-bottom:30px;border:solid 1px #c7c7c7" src="'+imgurl[i]+'">';
-				console.log(result.places[i].imageUrl);
-				}
-				 $('#con2').html(data); 
-				}
-			}
-			};
-		places.categorySearch('AD5', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
-	</script>
-	-->
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
 	<script>
 		var places = new daum.maps.services.Places();
-		var imgurl = [];
-		var data = [];
-		var datapop = [];
+		var phone = [];
+		var newAddress = [];
+		var imageUrl = [];
+		var direction = [];
+		var zipcode = [];
+		var placeUrl = [];
+		var id = [];
+		var title = [];
+		var category = [];
+		var address = [];
+		var longitude = [];
+		var latitude = [];
+		var addressBCode = [];		
+		var data = [];			//index의 content list
+		var datapop = [];	//index의 content list의 모달팝업
+		var hidden = [];		//덧글입력시 content table에 들어갈 정보
 		var callback = function(status, result) {
 			if (status === daum.maps.services.Status.OK) {
 				for(var i=0; i<10; i++){
-				imgurl[i]=result.places[i].imageUrl;
-				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imgurl[i]+'">';
+				phone[i]=result.places[i].phone;
+				newAddress[i]=result.places[i].newAddress;
+				imageUrl[i]=result.places[i].imageUrl;
+				direction[i]=result.places[i].direction;
+				zipcode[i]=result.places[i].zipcode;
+				placeUrl[i]=result.places[i].placeUrl;
+				id[i]=result.places[i].id;
+				title[i]=result.places[i].title;
+				category[i] =result.places[i].category;
+				address[i] =result.places[i].address;
+				longitude[i] =result.places[i].longitude;
+				latitude[i] =result.places[i].latitude;
+				addressBCode[i] =result.places[i].addressBCode;				
+				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imageUrl[i]+'">';
 				$('#fd6'+[i]).html(data[i]);
-				datapop[i] =  '<img style="width:600px" src="'+imgurl[i]+'">';
+				datapop[i] =  '<img style="width:600px" src="'+imageUrl[i]+'">'+
+				'<div style="color:#fff;font-size:15px">'+
+				'<div style="font-weight:bold;margin-top:10px;font-size:17px">'+title[i]+'</div>'+
+				'<div style="float:right;margin-top:-15px">'+category[i]+'</div>'+
+				'<div style="">'+address[i]+'</div>'+
+				'<div style="float:right;margin-top:-15px">'+phone[i]+'</div></div>';
 				$('#fd6pop'+[i]).html(datapop[i]);
+				hidden[i] = '<input type="hidden" name="phone" value="'+phone[i]+'">'+
+				'<input type="hidden" name="newAddress" value="'+newAddress[i]+'">'+	
+				'<input type="hidden" name="imageUrl" value="'+imageUrl[i]+'">'+
+				'<input type="hidden" name="direction" value="'+direction[i]+'">'+
+				'<input type="hidden" name="zipcode" value="'+zipcode[i]+'">'+
+				'<input type="hidden" name="placeUrl" value="'+placeUrl[i]+'">'+
+				'<input type="hidden" name="id" value="'+id[i]+'">'+
+				'<input type="hidden" name="title" value="'+title[i]+'">'+
+				'<input type="hidden" name="category" value="'+category[i]+'">'+
+				'<input type="hidden" name="address" value="'+address[i]+'">'+
+				'<input type="hidden" name="longitude" value="'+longitude[i]+'">'+
+				'<input type="hidden" name="latitude" value="'+latitude[i]+'">'+
+				'<input type="hidden" name="addressBCode" value="'+addressBCode[i]+'">';
+				$('#fd6hidden'+[i]).html(hidden[i]);
 				}
 				}
 			};
@@ -64,27 +78,6 @@ $(function(){
 	</script>
 	
 	
-	 
-		<script>
-		var places = new daum.maps.services.Places();
-		var callback = function(status, result) {
-			if (status === daum.maps.services.Status.OK) {
-				console.log(result);
-				console.log("result="+result);
-				console.log("result.places[0].address="+result.places[0].address);
-				fd6address = [];
-				for(var i=0;i<10;i++){
-					console.log(result.places[i].address)
-					fd6address[i] =  result.places[i].address
-				}
-				}
-			};
-		places.categorySearch('FD6', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)});
-	</script> 
-	
-
-	
-	
 	
 	<script>
 		var places = new daum.maps.services.Places();
@@ -94,10 +87,10 @@ $(function(){
 		var callback = function(status, result) {
 			if (status === daum.maps.services.Status.OK) {
 				for(var i=0; i<10; i++){
-				imgurl[i]=result.places[i].imageUrl;
-				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imgurl[i]+'">';
+				imageUrl[i]=result.places[i].imageUrl;
+				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imageUrl[i]+'">';
 				$('#ad5'+[i]).html(data[i]);
-				datapop[i] =  '<img style="width:600px" src="'+imgurl[i]+'">';
+				datapop[i] =  '<img style="width:600px" src="'+imageUrl[i]+'">';
 				$('#ad5pop'+[i]).html(datapop[i]);
 				}
 				}
@@ -112,16 +105,20 @@ $(function(){
 		var callback = function(status, result) {
 			if (status === daum.maps.services.Status.OK) {
 				for(var i=0; i<10; i++){
-				imgurl[i]=result.places[i].imageUrl;
-				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imgurl[i]+'">';
+				imageUrl[i]=result.places[i].imageUrl;
+				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imageUrl[i]+'">';
 				$('#ce7'+[i]).html(data[i]);
-				datapop[i] =  '<img style="width:600px" src="'+imgurl[i]+'">';
+				datapop[i] =  '<img style="width:600px" src="'+imageUrl[i]+'">';
 				$('#ce7pop'+[i]).html(datapop[i]);
 				}
 				}
 			};
 		places.categorySearch('CE7', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
 	</script>
+
+
+
+
 
 <!-- 컨텐츠 리스트 -->
 	<div>
@@ -148,16 +145,21 @@ $(function(){
 		</ul>
 	</div>
 
+
+
+
+
 <!-- 모달 팝업 -->
 	<c:forEach var="fd6" begin="0" end="5">
 		<div id="contentfd6${fd6}" style="display:none;">
-			<div id="fd6pop${fd6 }" ></div>
-			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px">${fd6address1 }</div>
-				<div style="width:600px;background-color:#fff;font-color:#c7c7c7;font-size:15px;height:70px;padding:10px">
+			<div id="fd6pop${fd6 }" style="background-color:#2f3238;padding:10px"></div>
+				<div style="width:620px;background-color:#fff;font-color:#c7c7c7;font-size:15px;height:50px;padding:10px">
 				<form method="post" action="/commentwrite">
+				<div id="fd6hidden${fd6 }"></div>
+				<input type="hidden" name="member_no" value="${authUser.member_no }">
 				<input type="text" name="message" id="message" size="70" >
-				${authUser.memberName }
-				<input type="submit" value="댓글입력" style="height:50px">
+				<input type="submit" value="댓글입력" style="height:30px;float:right">
+				<div style="float:right;margin:8px 13px 0 0;font-weight:bold">${authUser.memberName }</div>
 				</form>
 			</div>
 		</div>
@@ -190,19 +192,4 @@ $(function(){
 			</div>
 		</div>
 	</c:forEach>
-
-<!-- <div class="row">
-<div class="col-lg-12">
-<div class="row">
-<section id="projects">
-<ul id="thumbs" class="portfolio">
-<li class="col-lg-3 design" data-id="id-0" data-type="web">
-<div id="con" class="item-thumbs">
-</div></li>
-</ul>
-</section>
-</div>
-</div>
-</div> -->
-
 
