@@ -42,8 +42,6 @@
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 
-
-
 <!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
 

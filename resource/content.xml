@@ -20,6 +20,11 @@
 	    select * from content where id=#id#
 	  ]]>
 	</select>
+	<select id="selectContentByTheme" parameterClass="java.lang.Long" resultClass="ContentVo">
+	  <![CDATA[
+	    select * from content where theme_no=#theme_no#
+	  ]]>
+	</select>
 	
 	<insert id="insert" parameterClass="ContentVo">
 		<![CDATA[

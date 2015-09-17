@@ -70,18 +70,19 @@
 	<section id="content">
 	<div class="container">
 		
-<c:forEach var="vo" items="${list }" varStatus="status">
 		<div>
-		<div id="contentView${vo.content_no}" style="display:none;">
-			<div style="width:600px"><img src="${vo.imageUrl }"></div>
+			<div style="width:600px"><img src="${contentVo.imageUrl }"></div>
 			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px">
-				<div>${vo.category }</div>
-				<div>${vo.address }</div>
-				<div>${vo.title }</div>
+				<div>${contentVo.category }</div>
+				<div>${contentVo.address }</div>
+				<div>${contentVo.title }</div>
+				<div>${contentVo.phone }</div>
+				<div>${contentVo.newAddress }</div>
+				<div>${contentVo.category}</div>
+				<textarea rows="" cols=""></textarea>
+				
 			</div>
 			</div>
-			</div>
-			</c:forEach>
 
 
 </div>
