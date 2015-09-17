@@ -1,6 +1,8 @@
 package com.bit2015.omu.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -40,6 +42,13 @@ public class ContentBoxDao {
 	
 	public ContentBoxVo selectVo(Long contentBox_no){
 		ContentBoxVo contentBoxVo = (ContentBoxVo) sqlMapClientTemplate.queryForObject("contentBox.selectVo", contentBox_no);
+		return contentBoxVo;
+	}
+	public ContentBoxVo getContentBoxNo(Long content_no, Long plan_no){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("plan_no", plan_no);
+		map.put("content_no", content_no);
+		ContentBoxVo contentBoxVo = (ContentBoxVo) sqlMapClientTemplate.queryForObject("contentBox.getContentBoxNo", map);
 		return contentBoxVo;
 	}
 

@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+.container_plan{
+				margin : 1% auto;
+				width:500px;
+				padding:0 0 0 0;
+				position:relative;
+				background-color:#ededed;
+				height:600px;
+}
+table.viewPlan{
+		margin-top:20px;
+		
+	}
+table.viewPlan tr#ft {
+			background-color:#ededed;
+			text-align:center;
+			font : 17px bold Arial;
+			color: #656565;
+			height: 50px;
+		
+		}		
+table.viewPlan tr#st {
+			margin : 20px;
+			padding : 3px;
+			border:solid 5px #fff;
+			moz-border-radius: 75px;
+			webkit-border-radius: 75px;
+			border-radius: 75px;
+			font : 12px bold Arial;
+	}
+table.viewPlan tr#st:hover{
+			cursor:pointer;
+			background-color : #fb6f92;
+}
+#delete_button {
+				float:right
+				}
+				
+div#newPlan, div#showPlan {	margin:30px 20px;
+							display:none;
+}
+
+span.label {color:black;width:30;height:16;text-align:center;margin-top:0;font:bold 30px Arial};
+span.c1 {cursor:pointer;color:black;width:30;height:16;text-align:center;margin-top:0;font:bold 30px Arial};
+span.c2 {cursor:pointer;color:red;width:30;height:16;text-align:center;margin-top:0;font:bold 30px Arial};
+span.c3 {cursor:pointer;color:#b0b0b0;width:30;height:16;text-align:center;margin-top:0;font:bold 30px Arial};
+
+form[name=calForm] { 
+						margin-top : 50px;
+	}
+table{
+		margin-top:20px;
+}
+table:hover{
+		margin-top:20px;
+}
+table#ft tr {
+			background-color:#fb6f92;
+		
+		}
+table#st tr {
+			background-color:#ededed;
+		
+		}		
+table#ft tr td{
+			padding : 30px;
+	}
+table#st tr td{
+			margin : 20px;
+			border:solid 10px #fff;
+			moz-border-radius: 75px;
+			webkit-border-radius: 75px;
+			border-radius: 75px;
+			padding : 30px;
+			
+	}
+table#st tr td:hover{
+			cursor:Default;
+			background-color : #fb6f92;
+	}
+span { 
+		
+}
+	

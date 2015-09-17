@@ -109,10 +109,6 @@ public class PlannerController {
 			return list;
 			
 		}
-		@RequestMapping("/viewList")
-		public String viewList(@RequestParam Long member_no, Model model){
-			return "/planner";
-		}
 		
 		@RequestMapping("/viewPlan")
 		public String viewPlan(@RequestParam Long plan_no, Model model){
@@ -126,6 +122,11 @@ public class PlannerController {
 		@RequestMapping("/deletePlan")
 		public String deletePlan(@RequestParam Long plan_no, Model model){
 			plannerService.deletePlan(plan_no);
+			return "redirect:/planner";
+		}
+		@RequestMapping("/deleteContentBox")
+		public String deleteContentBox(@RequestParam Long plan_no,Long content_no){
+			plannerService.deleteContentBox(plan_no, content_no);
 			return "redirect:/planner";
 		}
 }

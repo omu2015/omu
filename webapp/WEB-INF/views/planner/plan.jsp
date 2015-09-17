@@ -10,27 +10,11 @@
 <html>
 <script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
 <script src="../../assets/js/jquery.js"></script>
-<style type="text/css">
-div#newPlan, div#showPlan {	margin:30px 20px;
-							display:none;
-}
-
-span.label {color:black;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 30px Arial};
-span.c1 {cursor:hand;color:black;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 30px Arial};
-span.c2 {cursor:hand;color:red;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 30px Arial};
-span.c3 {cursor:hand;color:#b0b0b0;width:30;height:16;text-align:center;margin-top:0;background:#ffF;font:bold 30px Arial};
-table{
-	margin-top:20px;
-}
-table tr td{
-			padding : 30px;
-			border : 1px solid #000;
-	}
-</style>
 <!-- css -->
 <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="../../assets/css/style.css" rel="stylesheet" />
 <link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/viewPlan.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 function addNewPlan(){
 	$('#showPlan').hide();
@@ -42,7 +26,24 @@ function showPlan(){
 }
 function addPlan(aa){
 	var selDay= $('#sp'+aa).html()
-	var selMonth = parseInt(document.getElementsByName('selMonth')[0].value)+1;
+	var selectedDay = $('#sp17').html();
+	var selMonth;
+	if(aa<17){
+		if(parseInt(selDay)>parseInt(selectedDay)){
+			selMonth = parseInt(document.getElementsByName('selMonth')[0].value);
+			}
+		else{
+			selMonth = parseInt(document.getElementsByName('selMonth')[0].value)+1;
+			}
+		}
+	if(aa>=17){
+		if(parseInt(selDay)<parseInt(selectedDay)){
+			selMonth = parseInt(document.getElementsByName('selMonth')[0].value)+2;
+		}
+		else{
+			selMonth = parseInt(document.getElementsByName('selMonth')[0].value)+1;
+		}
+	}
 	var selYear = document.getElementsByName('selYear')[0].value;
 	var planDate = selYear +"-"+ selMonth +"-" + selDay;
 	console.log(planDate);
@@ -52,9 +53,6 @@ function addPlan(aa){
 <script>
 function viewPlan(plan_no){
 	location.href="/planner/viewPlan?plan_no="+plan_no;
-}
-function deletePlan(plan_no){
-	location.href="/planner/deletePlan?plan_no="+plan_no;
 }
 </script>
 
@@ -83,7 +81,7 @@ function changeBg(id){
 		eval(id).style.backgroundColor = "yellow"
 	}
 	else{
-		eval(id).style.backgroundColor = "#ffffff"
+		eval(id).style.backgroundColor = "#ededed"
 	}
 }
 function writeCalendar(){
@@ -104,7 +102,7 @@ var text = ""
 text = "<form name=calForm>"
 text += "<table border=1>"
 text += "<tr><td>"
-text += "<table width=100%><tr>"
+text += "<table id='ft' width=100%><tr>"
 text += "<td align=left>"
 text += "<select name=selMonth onChange='changeCal()'>"
 	for (ii=0;ii<=11;ii++){
@@ -132,7 +130,7 @@ text += "</td>"
 text += "</tr></table>"
 text += "</td></tr>"
 text += "<tr><td>"
-text += "<table border=1>"
+text += "<table id='st' border=1>"
 text += "<tr>"
 	for (ii=0;ii<=6;ii++){
 		text += "<td align=center><span class=label>" + arrD[ii] + "</span></td>"
@@ -142,7 +140,7 @@ aa = 0
 	for (kk=0;kk<=5;kk++){
 		text += "<tr>"
 		for (ii=0;ii<=6;ii++){
-			text += "<td align=center  onClick='test("+aa+")')><span id=sp" + aa + ">1</span><a style='float:right' href='javascript:addPlan("+aa+")'>+</a></td>"
+			text += "<td  align=center ><span id=sp" + aa + ">1</span><span id=tp"+aa+"></span><a style='float:right' href='javascript:addPlan("+aa+")'><img src='/assets/img/button/plus.png'></a></td>"
 			aa += 1
 		}
 		text += "</tr>"
@@ -154,7 +152,9 @@ text += "</form>"
 document.write(text)
 changeCal()
 }
+
 function changeCal(){
+
 var now = new Date;
 var dd = now.getDate()
 var mm = now.getMonth()
@@ -193,7 +193,8 @@ var aa
 		aa += 1
 	}
 	for (ii=0;ii<=41;ii++){
-		eval("sp"+ii).style.backgroundColor = "#FFFFFF"
+		eval("sp"+ii).style.font = "20px bold";
+		eval("sp"+ii).style.color = "#bdbdbd";
 	}
 var dCount = 0
 	for (ii=0;ii<=41;ii++){
@@ -210,7 +211,9 @@ var dCount = 0
 				eval("sp"+ii).className = "c1"
 			}
 			if ((arrN[ii]==dd)&&(mm==currM)&&(yyyy==currY)){
-				eval("sp"+ii).style.backgroundColor="#90EE90"
+				eval("sp"+ii).style.border = "5px dotted #fb6f92";
+				eval("sp"+ii).style.borderRadius ="25px";
+				eval("sp"+ii).style.fontSize = "30px";
 			}
 		}
 	dCount += 1
@@ -218,17 +221,35 @@ var dCount = 0
 			dCount=0
 		}
 	}
+	
 	for(var z =0; z<42; z++){
-	test(z);
-	}
+		test(z);
+		}
 }
+
 function test(aa){
-	console.log(aa);
+	$('#tp'+aa).html("");
 	var selDay= $('#sp'+aa).html()
-	var selMonth = parseInt(document.getElementsByName('selMonth')[0].value)+1;
+	var selectedDay = $('#sp17').html();
+	var selMonth ;
+	if(aa<17){
+		if(parseInt(selDay)>parseInt(selectedDay)){
+			selMonth = parseInt(document.getElementsByName('selMonth')[0].value);
+			}
+		else{
+			selMonth = parseInt(document.getElementsByName('selMonth')[0].value)+1;
+			}
+		}
+	if(aa>=17){
+		if(parseInt(selDay)<parseInt(selectedDay)){
+			selMonth = parseInt(document.getElementsByName('selMonth')[0].value)+2;
+		}
+		else{
+			selMonth = parseInt(document.getElementsByName('selMonth')[0].value)+1;
+		}
+	}
 	var selYear = document.getElementsByName('selYear')[0].value;
 	var planDate = selYear +"-"+ selMonth +"-" + selDay;
-	
 	var jsonPlan =[];
 	jsonPlan = JSON.parse('${planList}');
 	var planList = [];
@@ -241,17 +262,16 @@ function test(aa){
 		var testMonth = parseInt(test1[1])
 		var testDay = parseInt(test1[2])
 		var testDate = testYear+"-"+testMonth+"-"+testDay;
+		var plan_no = planList[i].plan_no;
 		
 		if(planDate == testDate){
-			console.log(planList[i].planDate);
-			$("#sp"+aa).append('<a href="#"> Plan</a>')
+			$("#tp"+aa).append('<a href="javascript:viewPlan('+plan_no+');"><img src="/assets/img/button/calendar.png"></a>')
 				}
 			}
 		}
 	
 //  End -->
 </script>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -264,39 +284,6 @@ function test(aa){
 	
 	<script type="text/javascript">writeCalendar()</script>
 	
-<%-- <button onclick="showPlan()">내 일정 관리</button>
-<button onclick="addNewPlan()">새 일정 만들기</button>
-<button onclick=""> 추천 일정 보기 </button>
-
-<div id="showPlan">
-	<table>
-		<tr>
-			<td>no</td><td>날짜</td><td colspan="3">계획</td> 
-		</tr>
-		<c:forEach var="i" items="${planList}" varStatus="status">
-		<tr>
-			<td>${status.count}</td>
-			<td>${i.planDate}</td>
-			<td>회원님의 ${status.count}번째 계획</td>
-			<td><button onclick="viewPlan('${i.plan_no}');">일정보기</button></td>
-			<td><button onclick="deletePlan('${i.plan_no}')">삭제</button></td>
-		</tr>
-		</c:forEach>
-	</table>
-</div>
-<div id="newPlan">
-	<form method="post" action="javascript:addPlan();">
-	<table>
-		<tr>
-			<td>날짜를 입력하시오</td>
-		</tr>
-		<tr>
-			<td><input id="selectDate" name="planDate" type="Date"/></td>
-			<td><input type="submit" value="일정추가하기"></td>
-		</tr>
-	</table>
-	</form>
-</div> --%>
 </div>
 </body>
 </html>

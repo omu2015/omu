@@ -127,7 +127,12 @@ public class PlannerService {
 	public void deletePlan(Long plan_no){
 		planDao.delete(plan_no);
 	}
-	
-
-
+	public ContentBoxVo getContentBoxNo(Long content_no, Long plan_no){
+		ContentBoxVo contentBoxVo = contentBoxDao.getContentBoxNo(content_no, plan_no);
+		return contentBoxVo;
+	}
+	public void deleteContentBox(Long plan_no,Long content_no){
+		ContentBoxVo contentBoxVo = contentBoxDao.getContentBoxNo(content_no, plan_no);
+		contentBoxDao.delete(contentBoxVo.getContentBox_no());
+	}
 }
