@@ -29,6 +29,11 @@
 				</c:forEach>
 			</tr>
 			<tr>
+				<c:forEach var="vocate" items="${vo.contentList}">
+					<td>${vocate.getNewAddress()}</td>
+				</c:forEach>
+			</tr>
+			<tr>
 				<td>${vo.getMemberId()}</td>
 				<td>$ = ${vo.getTotalCost()}</td>
 				<td>시간 = ${vo.getTotalTime()}</td>

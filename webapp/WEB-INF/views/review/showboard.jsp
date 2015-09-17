@@ -153,12 +153,6 @@
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
 
-
-
-
-
-
-
 </body>
 </html>
 <!-- javascript
@@ -185,14 +179,15 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new daum.maps.Map(mapContainer, mapOption);
 
 var infowindow = new daum.maps.InfoWindow({	zIndex : 1});
-var planlistwindow = new daum.maps.InfoWindow({	zIndex : 1});
+var infowindow2 = new daum.maps.InfoWindow({	zIndex : 2});
 
-/* 			//console.log(JSON.stringify('${jsoned}'));
-	var pljs = JSON.parse('${jsoned}');
-	console.log(pljs);
- */	
-       displayPlaces(JSON.parse('${jsoned}')); ///////////////////////////////////////////////////////////////////
-       
+var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
+var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+
+
+ 			//console.log(JSON.parse(''));
+       displayPlaces(JSON.parse('[{"content_no":2,"theme_no":2,"regDate":"2015-09-16 10:42:38.0","member_no":99999,"phone":"02-561-2627","newAddress":"서울 강남구 테헤란로2길 15","imageUrl":"http://cfile109.uf.daum.net/image/2556F95053B51B7511F680","direction":null,"zipcode":"135934","placeUrl":"http://place.map.daum.net/12557812","id":"12557812","title":"초콜릿호텔","category":"여행 > 숙박 > 여관,모텔","address":"서울 강남구 역삼동 825-29","longitude":"127.02931626635113","latitude":"37.49722015035048","addressBCode":"1168010100","cost":35000,"time":240},{"content_no":1,"theme_no":1,"regDate":"2015-09-16 10:38:43.0","member_no":99999,"phone":"02-3486-3456","newAddress":"서울 서초구 강남대로53길 8","imageUrl":null,"direction":null,"zipcode":"137858","placeUrl":"http://place.map.daum.net/14791165","id":"14791165","title":"비트교육센터","category":"교육,학문 > 학원","address":"서울 서초구 서초동 1327-15 비트아카데미빌딩 3층","longitude":"127.02809846805427","latitude":"37.49455346636902","addressBCode":"1165010800","cost":0,"time":30}]')); ///////////////////////////////////////////////////////////////////
        
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
@@ -205,7 +200,6 @@ function displayPlaces(places) {
     listStr = '';
     
     for ( var i=0; i<places.length; i++ ) {
-		console.log(i+" 번쨰 ==" + places[i].latitude);
 		
         // 마커를 생성하고 지도에 표시합니다
         var placePosition = new daum.maps.LatLng(places[i].latitude, places[i].longitude),
@@ -217,14 +211,12 @@ function displayPlaces(places) {
         bounds.extend(placePosition);
 
             
-            console.log("places[i].title=== "+places[i].title);
-            
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
-        (function(marker, title) {
+        (function(marker, items) {
             daum.maps.event.addListener(marker, 'mouseover', function() {
-                displayInfowindow(marker, title);
+                displayInfowindow(marker, items);
             });
 
             daum.maps.event.addListener(marker, 'mouseout', function() {
@@ -232,13 +224,35 @@ function displayPlaces(places) {
             });
 
             itemEl.onmouseover =  function () {
-                displayInfowindow(marker, title);
+                displayInfowindow(marker, items);
             };
 
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
-        })(marker, places[i].title);
+            
+          //click
+			daum.maps.event.addListener(marker, 'click',
+			function(){
+				infowindow2.close();
+				displayInfowindow2(marker, items);
+			});
+          
+			itemEl.onclick = function(){
+				infowindow2.close();
+				displayInfowindow2(marker, items);
+				
+			};
+            
+			daum.maps.event.addListener(map, 'click',
+					function(){
+						infowindow.close();
+						infowindow2.close();
+					});
+			
+            
+            
+        })(marker, places[i]);
 
         fragment.appendChild(itemEl);
     }
@@ -252,11 +266,10 @@ function displayPlaces(places) {
 }
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
+
+        
 function getListItem(index, places) {
 	
-	console.log("index == "+index);
-	console.log("places == " + places)
-
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                 '<div class="info">' +
@@ -280,10 +293,6 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-	console.log("position ==" + position);
-	console.log("idx == " + idx);
-	console.log("title == "+ title);
-	
 	
     var imageSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
@@ -314,15 +323,28 @@ function removeMarker() {
 
 
 
-
-
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
-function displayInfowindow(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-
+function displayInfowindow(marker, items) {
+var content = '<div style="padding:5px; z-index:1;">'+items.title+'</div>';
+    
     infowindow.setContent(content);
     infowindow.open(map, marker);
+}
+
+function displayInfowindow2(marker, items) {
+
+    var content = '<div style="z-index:1;"><table onclick="'+items.placeUrl+'"><tr><td colspan="2">'+items.title+'</td></tr><tr>';
+
+    if(items.imageUrl == null){
+    	content += '<td colspan="2"><img height="200px" src="/product-images/2015816103038346.jpg"/></td>';
+    }else{
+    	content += '<td colspan="2"><img height="200px" src="'+items.imageUrl+'"/></td>';
+    }
+        content += '</tr><tr><td>'+items.cost+'</td><td>'+items.time+'</td></tr></table></div>';
+    
+    infowindow2.setContent(content);
+    infowindow2.open(map, marker);
 }
 
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다

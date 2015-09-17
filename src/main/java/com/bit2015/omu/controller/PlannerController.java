@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit2015.omu.service.PlannerService;
-import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.JusoVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.PlanVo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
@@ -35,7 +36,16 @@ public class PlannerController {
 				return "/planner/plan";	
 			}
 			List<PlanVo> list = plannerService.showPlan(vo.getMember_no());
-			model.addAttribute("planList", list);
+			
+			ObjectMapper objectMapper = new ObjectMapper();      
+			String jsonCL = "";      
+			try {
+		    jsonCL =objectMapper.writeValueAsString(list);
+		         
+		     } catch (JsonProcessingException e) {  
+		    	 e.printStackTrace();    
+		    }
+			model.addAttribute("planList", jsonCL);
 			
 			return "/planner/plan";
 		}
@@ -99,6 +109,11 @@ public class PlannerController {
 			return list;
 			
 		}
+		@RequestMapping("/viewList")
+		public String viewList(@RequestParam Long member_no, Model model){
+			return "/planner";
+		}
+		
 		@RequestMapping("/viewPlan")
 		public String viewPlan(@RequestParam Long plan_no, Model model){
 			List<ContentVo> list = plannerService.getContentNo(plan_no);
