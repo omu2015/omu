@@ -95,67 +95,65 @@
 
 		/////////////////////////////////////////////////////////////////////////////////
 		
-		
-		
-		places=${		};
-		
-		
-		for (var k = 0; k < places.length; k++) {
-			findWay(places[i]);
-		}
-		
-		
-function findWay(items){
-	
-	var position = new daum.maps.LatLng(items.latitude , items.longitude);
-			console.log(items.latitude , items.longitude);
-	map.setCenter(position);
-			
-		var clickLine = new daum.maps.Polyline(
+			var clickLine = new daum.maps.Polyline(
 				{
 					map : map, // 선을 표시할 지도입니다 
-					path : [
-							new daum.maps.LatLng(37.49722015035048,
-									127.02931626635113),
-							new daum.maps.LatLng(37.49455346636902,
-									127.02809846805427) ], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+					path : [], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
 					strokeWeight : 3, // 선의 두께입니다 
 					strokeColor : '#db4040', // 선의 색깔입니다
 					strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
 					strokeStyle : 'solid' // 선의 스타일입니다
 				}); // 마우스로 클릭한 좌표로 그려질 선 객체입니다
+				
+			var distance;
+			var position;
+			
+			var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+			var dots = []; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
 
-		var distance = Math.round(clickLine.getLength());
-		console.log(distance);
+			
+		///////////////////////////////////////////
+			
+		
+		var places=JSON.parse('${contentList}');
+		
+		for (var k = 0; k < places.length; k++) {
+			findWay(places[k]);
+		}
+		
+function findWay(items){
+	
+		position = new daum.maps.LatLng(items.latitude , items.longitude);
+			console.log(items.latitude , items.longitude);
+	map.setCenter(position);
+	
+		 var path = clickLine.getPath();
+        path.push(position);
+        clickLine.setPath(path);
 
-		var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
-		var dots = [ {}, {} ]; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+        distance = Math.round(clickLine.getLength());
+        
+		//console.log(distance);
+		
+	/////////////////////
 
+		
 		// 클릭 지점을 표시할 빨간 동그라미 커스텀오버레이를 생성합니다
 		var circleOverlay1 = new daum.maps.CustomOverlay({
 			content : '<span class="dot"></span>',
-			position : new daum.maps.LatLng(37.49722015035048,
-					127.02931626635113),
-			zIndex : 1
-		});
-		var circleOverlay2 = new daum.maps.CustomOverlay({
-			content : '<span class="dot"></span>',
-			position : new daum.maps.LatLng(37.49455346636902,
-					127.02809846805427),
+			position : position,
 			zIndex : 1
 		});
 
 		// 지도에 표시합니다
 		circleOverlay1.setMap(map);
-		circleOverlay2.setMap(map);
 
 		if (distance > 0) {
 			// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
 			var distanceOverlay1 = new daum.maps.CustomOverlay({
 				content : '<div class="dotOverlay">거리 <span class="number">'
 						+ distance + '</span>m</div>',
-				position : new daum.maps.LatLng(37.49722015035048,
-						127.02931626635113),
+				position : position,
 				yAnchor : 1,
 				zIndex : 2
 			});
@@ -163,80 +161,15 @@ function findWay(items){
 			// 지도에 표시합니다
 			distanceOverlay1.setMap(map);
 		}
-		if (distance > 0) {
-			// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
-			var distanceOverlay2 = new daum.maps.CustomOverlay({
-				content : '<div class="dotOverlay">거리 <span class="number">'
-						+ distance + '</span>m</div>',
-				position : new daum.maps.LatLng(37.49455346636902,
-						127.02809846805427),
-				yAnchor : 1,
-				zIndex : 2
-			});
-
-			// 지도에 표시합니다
-			distanceOverlay2.setMap(map);
-		}
 
 		// 배열에 추가합니다
 		dots.push({
 			circle : circleOverlay1,
 			distance : distanceOverlay1
 		});
-		dots.push({
-			circle : circleOverlay2,
-			distance : distanceOverlay2
-		});
 
-		var content = getTimeHTML(distance); // 커스텀오버레이에 추가될 내용입니다
-
-		console.log(content);
-		// 그려진 선의 거리정보를 지도에 표시합니다
-		showDistance(content, new daum.maps.LatLng(37.49455346636902,
-				127.02809846805427));
 
 		/////////////////////////////////////////////////////////////////////////////////
-
-		// 클릭으로 그려진 선을 지도에서 제거하는 함수입니다
-		function deleteClickLine() {
-			if (clickLine) {
-				clickLine.setMap(null);
-				clickLine = null;
-			}
-		}
-
-		// 마우스 드래그로 그려지고 있는 선의 총거리 정보를 표시하거
-		// 마우스 오른쪽 클릭으로 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 생성하고 지도에 표시하는 함수입니다
-		function showDistance(content, position) {
-
-			if (distanceOverlay) { // 커스텀오버레이가 생성된 상태이면
-
-				// 커스텀 오버레이의 위치와 표시할 내용을 설정합니다
-				distanceOverlay.setPosition(position);
-				distanceOverlay.setContent(content);
-
-			} else { // 커스텀 오버레이가 생성되지 않은 상태이면
-
-				// 커스텀 오버레이를 생성하고 지도에 표시합니다
-				distanceOverlay = new daum.maps.CustomOverlay({
-					map : map, // 커스텀오버레이를 표시할 지도입니다
-					content : content, // 커스텀오버레이에 표시할 내용입니다
-					position : position, // 커스텀오버레이를 표시할 위치입니다.
-					xAnchor : 0,
-					yAnchor : 0,
-					zIndex : 3
-				});
-			}
-		}
-
-		// 그려지고 있는 선의 총거리 정보와 
-		// 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 삭제하는 함수입니다
-		function deleteDistance() {
-			if (distanceOverlay) {
-				distanceOverlay.setMap(null);
-				distanceOverlay = null;
-			}
-		}
 
 		// 선이 그려지고 있는 상태일 때 지도를 클릭하면 호출하여 
 		// 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 표출하는 함수입니다
@@ -277,52 +210,92 @@ function findWay(items){
 		// 마우스 우클릭 하여 선 그리기가 종료됐을 때 호출하여 
 		// 그려진 선의 총거리 정보와 거리에 대한 도보, 자전거 시간을 계산하여
 		// HTML Content를 만들어 리턴하는 함수입니다
-		function getTimeHTML(distance) {
-
-			// 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
-			var walkkTime = distance / 67 | 0;
-			var walkHour = '', walkMin = '';
-
-			// 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
-			if (walkkTime > 60) {
-				walkHour = '<span class="number">' + Math.floor(walkkTime / 60)
-						+ '</span>시간 '
-			}
-			walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
-
-			// 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
-			var bycicleTime = distance / 227 | 0;
-			var bycicleHour = '', bycicleMin = '';
-
-			// 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
-			if (bycicleTime > 60) {
-				bycicleHour = '<span class="number">'
-						+ Math.floor(bycicleTime / 60) + '</span>시간 '
-			}
-			bycicleMin = '<span class="number">' + bycicleTime % 60
-					+ '</span>분'
-
-			// 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
-			var content = '<ul class="dotOverlay distanceInfo">';
-			content += '    <li>';
-			content += '        <span class="label">총거리</span><span class="number">'
-					+ distance + '</span>m';
-			content += '    </li>';
-			content += '    <li>';
-			content += '        <span class="label">도보</span>' + walkHour
-					+ walkMin;
-			content += '    </li>';
-			content += '    <li>';
-			content += '        <span class="label">자전거</span>' + bycicleHour
-					+ bycicleMin;
-			content += '    </li>';
-			content += '</ul>'
-
-			return content;
-		}
-		
 		
 };
+
+
+
+
+var contenta = getTimeHTML(distance); // 커스텀오버레이에 추가될 내용입니다
+
+//console.log(content);
+// 그려진 선의 거리정보를 지도에 표시합니다
+showDistance(contenta, position);
+		
+		
+		
+		
+		
+// 마우스 드래그로 그려지고 있는 선의 총거리 정보를 표시하거
+// 마우스 오른쪽 클릭으로 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 생성하고 지도에 표시하는 함수입니다
+function showDistance(content, position) {
+
+	if (distanceOverlay) { // 커스텀오버레이가 생성된 상태이면
+
+		// 커스텀 오버레이의 위치와 표시할 내용을 설정합니다
+		distanceOverlay.setPosition(position);
+		distanceOverlay.setContent(content);
+
+	} else { // 커스텀 오버레이가 생성되지 않은 상태이면
+
+		// 커스텀 오버레이를 생성하고 지도에 표시합니다
+		distanceOverlay = new daum.maps.CustomOverlay({
+			map : map, // 커스텀오버레이를 표시할 지도입니다
+			content : content, // 커스텀오버레이에 표시할 내용입니다
+			position : position, // 커스텀오버레이를 표시할 위치입니다.
+			xAnchor : 0,
+			yAnchor : 0,
+			zIndex : 3
+		});
+	}
+}
+		
+		
+		
+function getTimeHTML(distance) {
+
+	// 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
+	var walkkTime = distance / 67 | 0;
+	var walkHour = '', walkMin = '';
+
+	// 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
+	if (walkkTime > 60) {
+		walkHour = '<span class="number">' + Math.floor(walkkTime / 60)
+				+ '</span>시간 '
+	}
+	walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+
+	// 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+	var bycicleTime = distance / 227 | 0;
+	var bycicleHour = '', bycicleMin = '';
+
+	// 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+	if (bycicleTime > 60) {
+		bycicleHour = '<span class="number">'
+				+ Math.floor(bycicleTime / 60) + '</span>시간 '
+	}
+	bycicleMin = '<span class="number">' + bycicleTime % 60
+			+ '</span>분'
+
+	// 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
+	var content = '<ul class="dotOverlay distanceInfo">';
+	content += '    <li>';
+	content += '        <span class="label">총거리</span><span class="number">'
+			+ distance + '</span>m';
+	content += '    </li>';
+	content += '    <li>';
+	content += '        <span class="label">도보</span>' + walkHour
+			+ walkMin;
+	content += '    </li>';
+	content += '    <li>';
+	content += '        <span class="label">자전거</span>' + bycicleHour
+			+ bycicleMin;
+	content += '    </li>';
+	content += '</ul>'
+
+	return content;
+}
+
 	</script>
 
 </body>

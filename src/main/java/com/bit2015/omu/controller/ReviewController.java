@@ -44,7 +44,7 @@ public class ReviewController {
    @ResponseBody
    public Map<String, Object> callPlanList(@RequestParam String id){
       List<PlanVo> planList =reviewService.getPlanListById(id);
-      
+      System.out.println(planList.toString());
       //ajax-jason
       Map<String, Object> map = new HashMap<String, Object>();
       map.put("planList", planList);

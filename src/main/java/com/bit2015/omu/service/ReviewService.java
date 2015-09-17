@@ -132,12 +132,12 @@ public class ReviewService {
          System.out.println("contentVo.toString() == " + contentVo.toString());
          List<ContentBoxVo> contentBoxList=contentBoxDao.selectAllById(contentVo.getContent_no());
          for (int i = 0; i < contentBoxList.size(); i++) {
+        	 System.out.println(planDao.selectVo(contentBoxList.get(i).getPlan_no()));
             planList.add(planDao.selectVo(contentBoxList.get(i).getPlan_no()));
             //plan들을 planList에 담아놈
          }
          return planList;
       }
-      //System.out.println(contentVo.toString());
    }
 
    public void showboard(Model model, String str_plan_no){
@@ -147,16 +147,14 @@ public class ReviewService {
       List<ContentVo> contentList2=new ArrayList<ContentVo>();
       for (int i = 0; i < contentBoxList.size(); i++) {
          ContentVo contentVo=contentDao.selectVo(contentBoxList.get(i).getContent_no());
-         contentVo.setDirection("");
-         contentVo.setImageUrl("");
          contentList2.add(contentVo);
       }
       
       ObjectMapper objectMapper = new ObjectMapper();
-      String jsoned = "";
+      String jsonCL = "";
       try {
-         jsoned =objectMapper.writeValueAsString(contentList2);
-         System.out.println("json parse="+jsoned);
+    	  jsonCL =objectMapper.writeValueAsString(contentList2);
+         System.out.println("json parse="+jsonCL);
          
       } catch (JsonProcessingException e) {
          System.out.println("json test");
@@ -165,7 +163,8 @@ public class ReviewService {
       
       List<ReviewVo> reviewList=getReviewList();
       
-      model.addAttribute("jsoned", jsoned);
+      
+      model.addAttribute("jsonCL", jsonCL);
       model.addAttribute("reviewList", reviewList);
    }
    
@@ -225,7 +224,22 @@ public class ReviewService {
    }
 
 public void test(Model model) {
-	//PlanVo planVo = planDao.selectVo((long) 1);
+	
+	List<ContentVo> contentList2 = contentDao.selectAll();
+	
+	  ObjectMapper objectMapper = new ObjectMapper();
+      String contentList = "";
+      try {
+    	  contentList =objectMapper.writeValueAsString(contentList2);
+         System.out.println("json parse="+contentList);
+         
+      } catch (JsonProcessingException e) {
+         System.out.println("json test");
+         e.printStackTrace();
+      }
+	
+	
+	model.addAttribute("contentList" , contentList);
 }
    
    
