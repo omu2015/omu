@@ -4,17 +4,39 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
 $(function(){
-	for(var i=0; i<100; i++){
+	for(var i=0; i<1000; i++){
   $('#hanitrigger'+i).leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
-  $('#hanitrigger2'+i).leanModal2({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
-  $('#hanitrigger3'+i).leanModal3({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
 	}
 });
 </script>
 <!-- 내주변으로 검색, 카테고리 반복문으로 한개로 합치기, 덧글등록(콘텐츠까지) -->
-
+<script>
+$(function(){
+	var lat;
+	var lng;
+	  if (!navigator.geolocation){
+	    alert("사용자의 브라우저는 지오로케이션을 지원하지 않습니다.");
+	    return;
+	  }
+	  function success(position) {
+	    lat  = position.coords.latitude;
+	    lng = position.coords.longitude;
+	  }
+	  function error() {
+		   alert("사용자의 위치를 찾을 수 없습니다.");
+	  };
+	  navigator.geolocation.getCurrentPosition(success, error);
+	  insertContent(lat, lng)
+}) 
+</script>
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
 	<script>
+	function insertContent(lat, lng){
+		var lat = 37.564968;
+		var lng = 126.939909;
+		var userLat =lat;
+		var userLng =lng;
+		var interestKeyword='AD5';
 		var places = new daum.maps.services.Places();
 		var phone = [];
 		var newAddress = [];
@@ -35,51 +57,58 @@ $(function(){
 		var callback = function(status, result) {
 			if (status === daum.maps.services.Status.OK) {
 				for(var i=0; i<10; i++){
-				phone[i]=result.places[i].phone;
-				newAddress[i]=result.places[i].newAddress;
-				imageUrl[i]=result.places[i].imageUrl;
-				direction[i]=result.places[i].direction;
-				zipcode[i]=result.places[i].zipcode;
-				placeUrl[i]=result.places[i].placeUrl;
-				id[i]=result.places[i].id;
-				title[i]=result.places[i].title;
-				category[i] =result.places[i].category;
-				address[i] =result.places[i].address;
-				longitude[i] =result.places[i].longitude;
-				latitude[i] =result.places[i].latitude;
-				addressBCode[i] =result.places[i].addressBCode;				
-				data[i] =  '<img style="width:375px;border:solid 1px #c7c7c7;margin-bottom:20px" src="'+imageUrl[i]+'">';
-				$('#fd6'+[i]).html(data[i]);
-				datapop[i] =  '<img style="width:600px" src="'+imageUrl[i]+'">'+
-				'<div style="color:#fff;font-size:15px">'+
-				'<div style="font-weight:bold;margin-top:10px;font-size:17px">'+title[i]+'</div>'+
-				'<div style="float:right;margin-top:-15px">'+category[i]+'</div>'+
-				'<div style="">'+address[i]+'</div>'+
-				'<div style="float:right;margin-top:-15px">'+phone[i]+'</div></div>';
-				$('#fd6pop'+[i]).html(datapop[i]);
-				hidden[i] = '<input type="hidden" name="phone" value="'+phone[i]+'">'+
-				'<input type="hidden" name="newAddress" value="'+newAddress[i]+'">'+	
-				'<input type="hidden" name="imageUrl" value="'+imageUrl[i]+'">'+
-				'<input type="hidden" name="direction" value="'+direction[i]+'">'+
-				'<input type="hidden" name="zipcode" value="'+zipcode[i]+'">'+
-				'<input type="hidden" name="placeUrl" value="'+placeUrl[i]+'">'+
-				'<input type="hidden" name="id" value="'+id[i]+'">'+
-				'<input type="hidden" name="title" value="'+title[i]+'">'+
-				'<input type="hidden" name="category" value="'+category[i]+'">'+
-				'<input type="hidden" name="address" value="'+address[i]+'">'+
-				'<input type="hidden" name="longitude" value="'+longitude[i]+'">'+
-				'<input type="hidden" name="latitude" value="'+latitude[i]+'">'+
-				'<input type="hidden" name="addressBCode" value="'+addressBCode[i]+'">';
-				$('#fd6hidden'+[i]).html(hidden[i]);
-				}
+				testOne(result.places[i]);
+				console.log(result.places[i].category)
+					}
 				}
 			};
-		places.categorySearch('FD6', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
+		places.categorySearch(interestKeyword, callback,{location: new daum.maps.LatLng(userLat, userLng)});
+	}
+	</script>
+	<script>
+	function testOne(places){
+		var address = places.address;
+		var addressBCode = places.addressBCode;
+		var direction = places.direction;
+		var id = places.id;
+		var imageUrl = places.imageUrl;
+		var latitude = places.latitude;
+		var longitude = places.longitude;
+		var newAddress = places.newAddress;
+		var phone = places.phone;
+		var placeUrl = places.placeUrl;
+		var title = places.title;
+		var zipcode= places.zipcode;
+		var category = places.category;
+		$.ajax({
+			type : 'get',
+		    url:'/test123',
+		    data : {
+		    		address : address,
+		    		addressBCode : addressBCode,
+		    		direction : direction,
+		    		id : id,
+		    		imageUrl : imageUrl,
+		    		latitude : latitude,
+		    		longitude : longitude,
+		    		newAddress : newAddress,
+		    		phone : phone,
+		    		placeUrl : placeUrl,
+		    		title : title,
+		    		zipcode : zipcode,
+		    		category : category
+		    },
+		    dataType:'json',
+		    success: function(response){
+		    	console.log(response);
+		    } 
+		 })
+		
+	}
 	</script>
 	
 	
-	
-	<script>
+<!-- 	<script>
 		var places = new daum.maps.services.Places();
 		var imgurl = [];
 		var data = [];
@@ -115,17 +144,17 @@ $(function(){
 			};
 		places.categorySearch('CE7', callback,{location: new daum.maps.LatLng(37.564968, 126.939909)}); 
 	</script>
+ 
 
 
 
-
-
+ -->
 <!-- 컨텐츠 리스트 -->
 	<div>
 		<ul>
 			<li style="float:left;margin:10px 10px 0 0">
-			<c:forEach var="fd6" begin="0" end="5">
-			<a href="#contentfd6${fd6}" id="hanitrigger${fd6}"><div id="fd6${fd6 }"></div></a>
+			<c:forEach var="i"  items="${contentList}">
+			<a href="#contentfd${i.content_no}" id="hanitrigger${i.content_no }"><img src="${i.imageUrl }"></a>
 			</c:forEach>
 			</li>
 		</ul>
@@ -150,16 +179,22 @@ $(function(){
 
 
 <!-- 모달 팝업 -->
-	<c:forEach var="fd6" begin="0" end="5">
-		<div id="contentfd6${fd6}" style="display:none;">
-			<div id="fd6pop${fd6 }" style="background-color:#2f3238;padding:10px"></div>
-				<div style="width:620px;background-color:#fff;font-color:#c7c7c7;font-size:15px;height:50px;padding:10px">
+	<c:forEach var="i" items="${contentList }">
+		<div id="contentfd${i.content_no}" style="display:none; " >
+				<div style="width:620px;background-color:#fff;font-color:#c7c7c7;font-size:15px;height:500px;padding:10px">
 				<form method="post" action="/commentwrite">
-				<div id="fd6hidden${fd6 }"></div>
 				<input type="hidden" name="member_no" value="${authUser.member_no }">
-				<input type="text" name="message" id="message" size="70" >
-				<input type="submit" value="댓글입력" style="height:30px;float:right">
-				<div style="float:right;margin:8px 13px 0 0;font-weight:bold">${authUser.memberName }</div>
+				<table>
+					<tr>
+						<td rowspan="2"><img src="${i.imageUrl }"></td><td>상점명</td><td>${i.title}</td>
+					</tr>
+						<td></td><td>연락처</td><td>${i.phone }</td>
+					<tr>
+					</tr>
+					
+				</table>
+				
+				<a href="/contentView?content_no=${i.content_no}">상세보기</a>
 				</form>
 			</div>
 		</div>

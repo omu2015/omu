@@ -41,5 +41,9 @@ public class ContentDao {
 		ContentVo vo = (ContentVo) sqlMapClientTemplate.queryForObject("content.selectVoById",id);
 		return vo;
 	}
+	public List<ContentVo> selectContentByTheme(Long theme_no){
+		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectContentByTheme", theme_no);
+		return list;
+	}
 	
 }

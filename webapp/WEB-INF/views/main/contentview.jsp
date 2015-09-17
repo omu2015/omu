@@ -42,6 +42,8 @@
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 
+
+
 <!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
 
@@ -61,82 +63,27 @@
 	<!-- start slider -->
 	<div class="container">
 		<div class="row">
-	<!-- Slider -->
 
-        <div id="main-slider" class="flexslider" style="margin-top:-35px">
-            <ul class="slides">
-              <li>
-                <img src="../../assets/img/slides/1.jpg" alt="" />
-<!--                 <div class="flex-caption">
-                    <h3>Modern Design</h3> 
-					<p>Duis fermentum auctor ligula ac malesuada. Mauris et metus odio, in pulvinar urna</p> 
-					<a href="#" class="btn btn-theme">Learn More</a>
-                </div> -->
-              </li>
-              <li>
-                <img src="../../assets/img/slides/2.jpg" alt="" />
-<!--                 <div class="flex-caption">
-                    <h3>Fully Responsive</h3> 
-					<p>Sodales neque vitae justo sollicitudin aliquet sit amet diam curabitur sed fermentum.</p> 
-					<a href="#" class="btn btn-theme">Learn More</a>
-                </div> -->
-              </li>
-              <li>
-                <img src="../../assets/img/slides/3.jpg" alt="" />
-<!--                 <div class="flex-caption">
-                    <h3>Clean & Fast</h3> 
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit donec mer lacinia.</p> 
-					<a href="#" class="btn btn-theme">Learn More</a>
-                </div> -->
-              </li>
-            </ul>
-        </div>
-	<!-- end slider -->
 		</div>
 	</div>	
 	</section>
 	<section id="content">
 	<div class="container">
-		<div style="margin-top:-90px"><img src="/assets/img/omu.jpg"></div>
-		<!-- divider 
-			<div class="col-lg-12">
-				<div class="solidline">
-				</div>
-			</div>
-			 end divider -->
 		
-	<!-- start content -->
-		<c:import url="/WEB-INF/views/main/content.jsp"/>
-	<!-- end content -->		
-		
-	<!-- start content2 -->
-	 	<%-- <c:import url="/WEB-INF/views/main/content2.jsp"/> --%>
-	<!-- end content -->
-
-
-
-<!-- 메인에 접속하면 로그인창 띄우기-->
-<%-- <c:choose>
-	<c:when test="${empty authUser }">		
-		<div id="loginmodal"  style="margin-top:-400px" >
-		<form name = "loginform" method="post" action="member/login">
-			<h2>LOGIN</h2>
-			<div class="p_c_text">회원이 되시면 여러가지 혜택을 누리실 수 있습니다.</div>
-			<div class="login_line" >
-				<div class="box_in">
-				<input type="text" name="memberId" id="id" size="23" value="woosungchu">
-				<input type="password" name="password" id="pw" size="23">
-				</div>
-				<input type="submit" value="LOGIN" class="btn_login1" >
+		<div>
+			<div style="width:600px"><img src="${contentVo.imageUrl }"></div>
+			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px">
+				<div>${contentVo.category }</div>
+				<div>${contentVo.address }</div>
+				<div>${contentVo.title }</div>
+				<div>${contentVo.phone }</div>
+				<div>${contentVo.newAddress }</div>
+				<div>${contentVo.category}</div>
+				<textarea rows="" cols=""></textarea>
+				
 			</div>
-			<div class="find_join"><a href="">아이디 / 비밀번호 찾기</a> | <a href="/member/joinForm">회원가입</a></div>
-			</form>
-		</div>
-	</c:when>
-	<c:otherwise>
-		<div></div>
-	</c:otherwise>
-</c:choose> --%>
+			</div>
+
 
 </div>
 
