@@ -157,9 +157,10 @@ $(function(){
 				<form method="post" action="/commentwrite">
 				<div id="fd6hidden${fd6 }"></div>
 				<input type="hidden" name="member_no" value="${authUser.member_no }">
-				<input type="text" name="message" id="message" size="70" >
+				<%-- <input type="text" name="message" id="message" size="70" >
 				<input type="submit" value="댓글입력" style="height:30px;float:right">
-				<div style="float:right;margin:8px 13px 0 0;font-weight:bold">${authUser.memberName }</div>
+				<div style="float:right;margin:8px 13px 0 0;font-weight:bold">${authUser.memberName }</div> --%>
+				<a href="contentview/${fd6}">상세보기</a>
 				</form>
 			</div>
 		</div>

@@ -70,46 +70,19 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 						
 						<li style="float:right;margin-right:220px"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
 		            	<li style="float:right"><a style="color:#fb6f92"  href="/mypage" >MyPage</a></li>
+		            	<li style="float:right"><a style="color:#fb6f92"  href="#interset"  id="modaltrigger">Interest</a></li>
 					</ul>
 					<div style="float:right;margin-top:-55px"><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="${authUser.imageUrl }"/></div>
 			</c:otherwise>
-			</c:choose>
-
-		<%-- <div>
-		<c:choose>
-			<c:when test="${empty authUser }">
-		                <div>
-		                    <ul>
-								<li><a  href="#loginmodal"  id="modaltrigger">Login</a></li>
-								<li><a href="/member/joinForm">Join</a></li>
-		                    </ul>
-		                </div>
-			</c:when>
-			<c:otherwise>
-						<div class="navbar-collapse collapse ">
-		                    <ul class="nav navbar-nav">
-		                       <!--  <li style="color:#000"><a href="/">Home</a></li> -->
-		                        <li><a  href="/mypage" >MyPage</a></li>
-								<li><a  href="/member/logout" >Logout</a></li>
-		                    </ul>
-		                </div>
-						<div style="float:right;margin-top:-30px">${authUser.memberName }  님 안녕하세요 ^^;</div>	
-			</c:otherwise>
-			</c:choose>
-		</div> --%>
-
-
-					
-					<!-- Search Form -->
-					<form class="searchform" action="#" style="margin-top:13px;margin-right:45px" > 
-						<input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
-					</form>
-					<!-- / Search Form -->
-				
+			</c:choose>	
+			<!-- Search Form -->
+				<form class="searchform" action="#" style="margin-top:13px;margin-right:45px" > 
+					<input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
+				</form>
+			<!-- / Search Form -->
 				</div>
 			</div>
 		</div>
-
             </div>
         <!-- </div> -->
 	</header>
@@ -139,12 +112,36 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 	</c:otherwise>
 </c:choose>
 
+
+
+<!-- 모달팝업 Content -->
+
+		<div>
+		<div id="interset" style="display:none;margin-top:200px">
+			<div style="width:1000px;background-color:#2f3238;color:#fff;height:150px;text-align:center;font-size:15px">
+				<div style="padding:10px;font-size:18px">${authUser.memberName }님의 관심사</div>
+			<form name ="interest" method="post" action="/interest">
+	<c:forEach var="vo" items="${list3 }" varStatus="status">
+				<span style="padding:10px">${vo.themeName }</span>
+				<input type="checkbox" name="${vo.themeName }">
+	</c:forEach>
+				<input type="submit" value="관심사로검색" style="color:#000" >
+			</form>
+			</div>
+			</div>
+			</div>
+
+
+
+
  <script type="text/javascript">
 $(function(){
   $('#loginform').submit(function(e){
-	  console.log("success");
 	  return false;
   });
   $('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+});
+$(function(){
+	$('#modaltrigger2').leanModal2({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
 });
 </script>
