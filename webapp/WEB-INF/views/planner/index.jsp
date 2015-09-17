@@ -25,7 +25,7 @@
 <script src="../../assets/js/jquery.flexslider.js"></script>
 <script src="../../assets/js/animate.js"></script>
 <script src="../../assets/js/custom.js"></script>
-<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
+<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 
@@ -139,7 +139,7 @@
 		var location = lat+','+lng;
 		$.ajax({
 			type : 'get',
-		    url:'https://apis.daum.net/local/v1/search/keyword.json?apikey=bbef91da99f11fe76f4b3b523d3151e9&radius=20000',
+		    url:'https://apis.daum.net/local/v1/search/keyword.json?apikey=c12b4d88c8259cf4652b89c1f64db8e8&radius=20000',
 		    data : {
 		    		query : keyword,
 		    		location : location 
@@ -303,7 +303,7 @@ function searchKeyword(){
 	var keyword = document.getElementById("keyword").value;	// 키워드;
 	$.ajax({
 		type : 'get',
-	    url:'https://apis.daum.net/local/v1/search/keyword.json?apikey=bbef91da99f11fe76f4b3b523d3151e9&radius=20000',
+	    url:'https://apis.daum.net/local/v1/search/keyword.json?apikey=c12b4d88c8259cf4652b89c1f64db8e8&radius=20000',
 	    data : {
 	    		query : keyword,
 	    		location : location

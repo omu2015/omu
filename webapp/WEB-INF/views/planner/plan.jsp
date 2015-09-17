@@ -8,7 +8,6 @@
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
 <script src="../../assets/js/jquery.js"></script>
 <!-- css -->
 <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -48,7 +47,7 @@ function addPlan(aa){
 	var planDate = selYear +"-"+ selMonth +"-" + selDay;
 	console.log(planDate);
 	location.href="/planner/addPlan?planDate="+planDate;
-}
+	}
 </script>
 <script>
 function viewPlan(plan_no){

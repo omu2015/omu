@@ -134,7 +134,7 @@ $(function(){
 			dong=localValue;
 			 $.ajax({
 					type : 'get',
-				    url:'https://apis.daum.net/local/geo/addr2coord?apikey=bbef91da99f11fe76f4b3b523d3151e9&output=json',
+				    url:'https://apis.daum.net/local/geo/addr2coord?apikey=c12b4d88c8259cf4652b89c1f64db8e8&output=json',
 				    data : {
 				    		q : location
 				    },

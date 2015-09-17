@@ -54,7 +54,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 					<c:when test="${empty authUser }">
 					<ul id="nav">
 						<li><a href="/">HOME</a></li> 
-						<li><a href="/planner">일정짜기</a></li>
+						<li><a href="javascript:planner(1)">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
 						
 						<li style="float:right;margin-right:220px"><a style="color:#fb6f92" href="/member/joinForm">Join</a></li>
@@ -65,7 +65,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 			<c:otherwise>
 					<ul id="nav">
 						<li><a href="/">HOME</a></li> 
-						<li><a href="/planner">일정짜기</a></li>
+						<li><a href="javascript:planner(2)">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
 						
 						<li style="float:right;margin-right:220px"><a style="color:#fb6f92"  href="/member/logout" >Logout</a></li>
@@ -120,7 +120,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 <c:choose>
 	<c:when test="${empty authUser }">		
 		<div id="loginmodal" style="display:none;">
-				<form name = "loginform" method="post" action="member/login">
+				<form name = "loginform" method="post" action="/member/login">
 				 <h2>LOGIN</h2>
 				 <div class="p_c_text" style="margin-top:20px">회원이 되시면 여러가시 혜택을 누리실 수 있습니다.</div>
 				 <div class="login_line">
@@ -147,4 +147,13 @@ $(function(){
   });
   $('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
 });
+</script>
+ <script >
+function planner(num){
+	if(num==1){
+		alert("로그인하시오");
+	}if(num==2){
+		location.href="/planner";
+	}
+}
 </script>
