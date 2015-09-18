@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.dao.BoardCommentsDao;
 import com.bit2015.omu.dao.BoardDao;
@@ -73,9 +74,8 @@ public class ReviewService {
      }
 
    public void pickTheme(Model model, HttpSession session) {
-      List<ThemeVo> memberTheme =themeDao.selectAll();
+      List<ThemeVo> memberTheme = new ArrayList<ThemeVo>();
       MemberVo memberVo =(MemberVo) session.getAttribute("authUser");
-      
       List<ThemeBoxVo> themeBoxList = themeBoxDao.selectAllByMm(memberVo.getMember_no());
       
       for (int i = 0; i < themeBoxList.size(); i++) {
@@ -91,7 +91,7 @@ public class ReviewService {
    
    
    
-   public void mapview(Model model, HttpSession session){
+/*   public void mapview(Model model, HttpSession session){
       //1.session 생성
       MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
       //System.out.println(memberVo.toString());
@@ -119,26 +119,25 @@ public class ReviewService {
       
       
    }
-
+*/
    public List<PlanVo> getPlanListById(String id) {
       List<PlanVo> planList = new ArrayList<PlanVo>();
-      System.out.println("getPlanListById  ==== "+id);
       ContentVo contentVo = contentDao.selectVoById(id);
       
       if(contentVo==null){
          System.out.println("해당 id로 아무것도 검색되지 않았습니다.");
          return planList;
       }else{
-         System.out.println("contentVo.toString() == " + contentVo.toString());
          List<ContentBoxVo> contentBoxList=contentBoxDao.selectAllById(contentVo.getContent_no());
          for (int i = 0; i < contentBoxList.size(); i++) {
-        	 System.out.println(planDao.selectVo(contentBoxList.get(i).getPlan_no()));
             planList.add(planDao.selectVo(contentBoxList.get(i).getPlan_no()));
-            //plan들을 planList에 담아놈
          }
          return planList;
       }
    }
+   
+  
+   
 
    public void showboard(Model model, String str_plan_no){
       Long plan_no=Long.parseLong(str_plan_no);
@@ -150,14 +149,8 @@ public class ReviewService {
          contentList2.add(contentVo);
       }
       
-      ObjectMapper objectMapper = new ObjectMapper();
-      String jsonCL = "";
-      try {
-    	  jsonCL =objectMapper.writeValueAsString(contentList2);
-      } catch (JsonProcessingException e) {
-         e.printStackTrace();
-      }
-      
+      String jsonCL = jsonn((ArrayList<?>) contentList2);
+      System.out.println("show board jsonCL == " + jsonCL);
       BoardVo boardVo = boardDao.selectVoByPno(plan_no);
       
       
@@ -224,6 +217,76 @@ public class ReviewService {
       return reviewList;
    }
 
+
+public void createBoard(Model model, HttpSession session) {
+	MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
+	List<PlanVo> planList = planDao.getUserPlan(memberVo.getMember_no());
+	PlanVo planVo=planList.get(0);
+	
+	List<ContentBoxVo> contentBoxList =contentBoxDao.selectAllByPno(planVo.getPlan_no());
+	List<ContentVo> contentList = new ArrayList<ContentVo>();
+	for (int i = 0; i < contentBoxList.size(); i++) {
+		contentList.add(contentDao.selectVo(contentBoxList.get(i).getContent_no()));
+	}
+	
+	String jsonCL = jsonn((ArrayList<?>) contentList);
+	
+	List<ReviewVo> reviewList=getReviewList();
+	System.out.println("create board jsonCL =======  "  + jsonCL);
+	
+	
+	model.addAttribute("planList", planList);
+	model.addAttribute("contentList", contentList);
+	model.addAttribute("jsonCL", jsonCL);
+	model.addAttribute("planVo", planVo);
+	model.addAttribute("reviewList", reviewList);
+}
+
+public void insertBoard(BoardVo boardVo, MultipartFile img) {
+	
+	
+	System.out.println("insertboadr boardVo to stirng ===  "  + boardVo.toString());
+	/*if(img==null){
+		
+        imgBoxVo.setImageUrl("");
+     }else{
+        String member_img_url=ful.upload(img);
+        System.out.println("member_img_url = "+member_img_url);
+        memberVo.setImageUrl(member_img_url);
+     }
+     memberDao.insert(memberVo);
+     
+    */ 
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+public String jsonn(ArrayList<?> list){
+	   String jsonn="";
+	   
+	   ObjectMapper objectMapper = new ObjectMapper();
+	      try {
+	    	  jsonn =objectMapper.writeValueAsString(list);
+	      } catch (JsonProcessingException e) {
+	         e.printStackTrace();
+	      }
+	   
+	   return jsonn;
+}
+   
+
+
 public void test(Model model) {
 	
 	List<ContentVo> contentList2 = contentDao.selectAll();
@@ -242,10 +305,24 @@ public void test(Model model) {
 	
 	model.addAttribute("contentList" , contentList);
 }
-   
-   
-   
-   
+
+public String getMyCL(String str_plan_no) {
+	Long plan_no = Long.parseLong(str_plan_no);
+	
+	String jsonCL = "";
+	
+	List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(plan_no);
+	List<ContentVo> contentList =new ArrayList<ContentVo>(); 
+	for (int i = 0; i < contentBoxList.size(); i++) {
+		contentList.add(contentDao.selectVo(contentBoxList.get(i).getContent_no()));
+	}	
+	jsonCL = jsonn((ArrayList<?>) contentList);
+	
+	return jsonCL;
+}
+
+
+
    
 }
             

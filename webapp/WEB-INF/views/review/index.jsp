@@ -428,6 +428,7 @@ function planSearchCB(status, response, pagination) {
 					for ( var i in response.planList) {
 						content += '<li><a href="/review/showboard?plan_no='+response.planList[i].plan_no+'">'+response.planList[i].plan_no+'</a></li>';
 						console.log(response.planList[i].plan_no);
+						
 					}
 				content+='</ul></div>';
 				

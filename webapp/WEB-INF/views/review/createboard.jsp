@@ -151,6 +151,7 @@
 <style type="text/css">
 .wsTable {
 	background : #FFEFEF;
+	text-align : center;
 }
 
 .wsTable td{
@@ -164,8 +165,24 @@
 }
 </style>
 </head>
+<script>
+function newplan(plano){
+	console.log(plano);
+	$.ajax({
+		type : 'get',
+		url : "/review/getMyCL",
+		data: {
+			plan_no : plano
+		},
+		success : function(response){
+			console.log(response);
+			
+		}
+	});
+	
+}
+</script>
 <body>
-
 <div id="wrapper">
 	<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"/> 
@@ -175,9 +192,21 @@
 			<div class="col-lg-12">
 				<h4 class="heading"></h4>
 				<div class="row">
+				<hr>
+						<form action="/review/insertboard" method="post" enctype="multipart/form-data">
 					<table class="wsTable">
 						<tr>
-							<td colspan="2">
+							<td colspan="3">
+								<select name="plan_no" onchange="newplan(this.value)">
+									<option value="${planVo.getPlan_no()}">${planVo.getPlanDate()}</option>
+									<c:forEach var="vo" items="${planList}">
+									<option value="${vo.getPlan_no()}">${vo.getPlan_no()}</option>
+									</c:forEach> 
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
 																<div class="map_wrap">
 																	<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 																	<div id="menu_wrap" class="bg_white">
@@ -186,26 +215,22 @@
 																</div>
 								</td>
 						</tr>
-						<c:if test="${not empty boardVo}">
 						<tr>
-							<td id="messagebox" colspan="2" bgcolor="#FFFFFF" >${boardVo.getMessage()}</td>
+							<td>총시간 : <input type="text" name="totalTime"> 분</td><td>총비용 : <input type="text" name="totalCost"> 원</td><td><input type="file" name="img"></td>
 						</tr>
 						<tr>
-							<td>${boardVo.getMember_no()}</td><td>${boardVo.getRegDate()}</td>
-						</tr>
-						</c:if>
-						<tr>
-							<td colspan="2"><img src="" /></td>
+							<td colspan="3">사진들 </td>
 						</tr>
 						<tr>
-							<td colspan="2">textArea</td>
+							<td colspan="3"><textarea style='padding:10px;width:100%; height:200px;' name="message"></textarea></td>
 						</tr>
 						<tr>
-							<td colspan="2">
-								Comments Line
-							</td>
+							<td colspan="3">
+											<input type="hidden" name="member_no" value="${authUser.getMember_no()}">
+											<input type="submit" value="등록"></td>
 						</tr>
 					</table>
+						</form>
 					<c:import url="/WEB-INF/views/review/planTable.jsp"></c:import>
 				</div>
 		</div>
@@ -214,8 +239,6 @@
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div><!-- wrapper -->
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-
-
 </body>
 </html>
 <!-- javascript
@@ -267,17 +290,18 @@ var dots = []; // 선이 그려지고 있을때 클릭할 때마다 클릭 지�
 	
 var jsonCL = JSON.parse('${jsonCL}');
 
- 			for (var k = 0; k < jsonCL.length; k++) {
-			findWay(jsonCL[k]);
-		}
- 			
 displayPlaces(jsonCL); ///////////////////////////////////////////////////////////////////
 
        
        
-       
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
+	
+	//
+	for (var k = 0; k < jsonCL.length; k++) {
+		findWay(jsonCL[k]);
+	}
+	//
 
     var listEl = document.getElementById('placesList'), 
     menuEl = document.getElementById('menu_wrap'),
@@ -532,10 +556,6 @@ function findWay(items){
 			});
 		}
 
-		// 마우스 우클릭 하여 선 그리기가 종료됐을 때 호출하여 
-		// 그려진 선의 총거리 정보와 거리에 대한 도보, 자전거 시간을 계산하여
-		// HTML Content를 만들어 리턴하는 함수입니다
-		
 };
 
 
@@ -618,12 +638,6 @@ function getTimeHTML(distance) {
 
 	return content;
 }
-
-
-
-
-
-
 
 
 

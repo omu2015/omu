@@ -7,19 +7,17 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.bit2015.omu.dao.ThemeBoxDao;
-import com.bit2015.omu.service.DaoTestService;
 import com.bit2015.omu.service.ReviewService;
-import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.BoardVo;
+import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.PlanVo;
-import com.bit2015.omu.vo.ThemeBoxVo;
 
 @Controller
 @RequestMapping("/review")
@@ -33,7 +31,6 @@ public class ReviewController {
 	   reviewService.index(model);
 	   
       if(session.getAttribute("authUser")!=null){
-    	  System.out.println("session!=null");
          reviewService.pickTheme(model, session);
       }
       
@@ -44,7 +41,7 @@ public class ReviewController {
    @ResponseBody
    public Map<String, Object> callPlanList(@RequestParam String id){
       List<PlanVo> planList =reviewService.getPlanListById(id);
-      System.out.println(planList.toString());
+      
       //ajax-jason
       Map<String, Object> map = new HashMap<String, Object>();
       map.put("planList", planList);
@@ -55,9 +52,42 @@ public class ReviewController {
    @RequestMapping("/showboard")
    public String showBoard(Model model, @RequestParam String plan_no){
       reviewService.showboard(model, plan_no);
-      
+      System.out.println(model.toString());
       return "/review/showboard";
    }
+   
+   @RequestMapping("/createboard")
+   public String createBoard(Model model, HttpSession session){
+      if(session.getAttribute("authUser")!=null){
+    	  reviewService.createBoard(model,session);
+      }
+      return "/review/createboard";
+   }
+   
+   @RequestMapping("/insertboard")
+   public String insertBoard(BoardVo boardVo, @RequestParam(required=false) String totalCost, @RequestParam(required=false) String totalTime, @RequestParam(required=false)MultipartFile img ){
+	   System.out.println("insertboadr ctrl ===  "  + boardVo.toString());
+	   System.out.println("totalCost ==  " + totalCost);
+	   System.out.println("totalTime ==" + totalTime);
+	   
+	   reviewService.insertBoard(boardVo, img);
+	   
+	   
+      return "/review/createboard";
+   }
+   
+   @RequestMapping("/getMyCL")
+   @ResponseBody
+   public String getMyCL(@RequestParam String plan_no){
+	  
+	   String jsonCL =reviewService.getMyCL(plan_no);
+	   
+      return jsonCL;
+   }
+   
+   
+   
+   
    
    @RequestMapping("/test")
    public String test(Model model){
