@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit2015.omu.service.ReviewService;
+import com.bit2015.omu.vo.BoardCommentsVo;
 import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.PlanVo;
@@ -52,7 +53,6 @@ public class ReviewController {
    @RequestMapping("/showboard")
    public String showBoard(Model model, @RequestParam Long plan_no){
       reviewService.showboard(model, plan_no);
-      System.out.println(model.toString());
       return "/review/showboard";
    }
    
@@ -87,7 +87,37 @@ public class ReviewController {
    }
    
    */
+   @RequestMapping("/insertcomment")
+   public String insertComment(BoardCommentsVo boardCommentsVo, @RequestParam Long plan_no){
+	   System.out.println("plan_no ===  "   +  plan_no);
+	   reviewService.insertComment(boardCommentsVo);
+	   
+      return "redirect:/review/showboard?plan_no="+plan_no;
+   }
    
+   @RequestMapping("/modify")
+   public String modifyBoard(@RequestParam Long board_no, @RequestParam Long plan_no){
+	   
+	   return "redirect:/review/showboard?plan_no="+plan_no;
+   }
+   
+   @RequestMapping("/delete")
+   public String deleteBoard(@RequestParam Long board_no){
+	   //reviewService.deleteBoard(board_no);
+	   return "redirect:/review";
+   }
+   
+   @RequestMapping("/good")
+   public String good(@RequestParam Long board_no, @RequestParam Long plan_no,HttpSession session){
+	   reviewService.good(board_no,session);
+	   return "redirect:/review/showboard?plan_no="+plan_no;
+   }
+   
+   @RequestMapping("/capture")
+   public String capture(@RequestParam Long board_no, HttpSession session){
+	   reviewService.capture(board_no,session);
+	   return "redirect:/mypage";
+   }
    
    
    @RequestMapping("/test")

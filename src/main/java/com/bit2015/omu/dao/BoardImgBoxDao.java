@@ -20,6 +20,10 @@ public class BoardImgBoxDao {
 		List<BoardImgBoxVo> list= sqlMapClientTemplate.queryForList("boardImgBox.selectAll");
 		return list;
 	}
+	public List<BoardImgBoxVo> selectAllByBno(Long board_no){
+		List<BoardImgBoxVo> list= sqlMapClientTemplate.queryForList("boardImgBox.selectAllByBno", board_no);
+		return list;
+	}
 	
 	public BoardImgBoxVo selectVo(Long boardImgBox_no ) {
 		BoardImgBoxVo vo = (BoardImgBoxVo) sqlMapClientTemplate.queryForObject("boardImgBox.selectVo",boardImgBox_no);

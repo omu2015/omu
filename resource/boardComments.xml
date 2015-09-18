@@ -16,6 +16,12 @@
 		]]>
 	</select>
 	
+	<select id="selectAllByBno" parameterClass="java.lang.Long" resultClass="BoardCommentsVo">
+		<![CDATA[
+			select * from boardComments where board_no=#board_no# order by boardComments_no desc
+		]]>
+	</select>
+	
 	<select id="selectVo" parameterClass="java.lang.Long" resultClass="BoardCommentsVo">
 		<![CDATA[
 			select * from boardComments where boardComments_no=#boardComments_no#

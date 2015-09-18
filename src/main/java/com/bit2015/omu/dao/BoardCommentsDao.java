@@ -27,6 +27,10 @@ public class BoardCommentsDao {
 		List<BoardCommentsVo> list= sqlMapClientTemplate.queryForList("boardComments.selectAll");
 		return list;
 	}
+	public List<BoardCommentsVo> selectAllByBno(Long board_no){
+		List<BoardCommentsVo> list= sqlMapClientTemplate.queryForList("boardComments.selectAllByBno", board_no);
+		return list;
+	}
 	
 	public BoardCommentsVo selectVo(Long boardComments_no){
 		BoardCommentsVo boardCommentsVo = (BoardCommentsVo) sqlMapClientTemplate.queryForObject("boardComments.selectVo", boardComments_no);

@@ -15,6 +15,12 @@
 		]]>
 	</select>
 	
+	<select id="selectAllByBno" parameterClass="java.lang.Long" resultClass="BoardImgBoxVo">
+		<![CDATA[
+			select * from boardImgBox where board_no=#board_no# order by boardImgBox_no desc
+		]]>
+	</select>
+	
 	<select id="selectVo" parameterClass="java.lang.Long" resultClass="BoardImgBoxVo">
 		<![CDATA[
 			select * from boardImgBox where boardImgBox_no=#boardImgBox_no#

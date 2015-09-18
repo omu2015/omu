@@ -148,9 +148,7 @@ public class AdminService {
    
    
    public void insertPlan(PlanVo planVo) {
-      System.out.println(planVo.getPlanDate());
          planDao.insert(planVo);
-      
    }
    public List<PlanVo> selectPlan() {
       List<PlanVo> list=planDao.selectAll();

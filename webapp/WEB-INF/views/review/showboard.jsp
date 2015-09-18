@@ -148,21 +148,6 @@
 	content: none;
 }
 </style>
-<style type="text/css">
-.wsTable {
-	background : #FFEFEF;
-}
-
-.wsTable td{
-	padding : 5px;
-}
-#messagebox{
-	border: 1px solid #8AE68A;
-	height : 200px;
-	padding: 20px;
-	text-align : center;
-}
-</style>
 </head>
 <body>
 
@@ -175,7 +160,12 @@
 			<div class="col-lg-12">
 				<h4 class="heading"></h4>
 				<div class="row">
-					<table class="wsTable">
+					<div class="wsTable">
+					<table>
+						<c:if test="${not empty boardVo}">
+						<tr class="wshd">
+							<td>작성자  : ${memberId}</td><td>등록 일자 : ${boardVo.getRegDate()}</td>
+						</tr>
 						<tr>
 							<td colspan="2">
 																<div class="map_wrap">
@@ -186,26 +176,77 @@
 																</div>
 								</td>
 						</tr>
-						<c:if test="${not empty boardVo}">
-						<tr>
-							<td id="messagebox" colspan="2" bgcolor="#FFFFFF" >${boardVo.getMessage()}</td>
+						<tr class="wshd">
+							<td>총비용 : ${planVo.getTotalCost()} 원</td><td>총시간  : ${planVo.getTotalTime()} 분</td>
 						</tr>
 						<tr>
-							<td>${boardVo.getMember_no()}</td><td>${boardVo.getRegDate()}</td>
+						<c:forEach var="bibl" items="${boardImgBoxList }">
+							<td colspan="2"><img height="350px" src="${bibl.getImageUrl()}" /></td>
+						</c:forEach>
+						</tr>
+						<tr>
+							<td class="messagebox" colspan="2">${boardVo.getMessage()}</td>
+						</tr>
+						
+						<tr class="wshd">
+						<c:choose>
+						<c:when test="${authUser.getMember_no() eq boardVo.getMember_no()}">
+						<td onclick="modifyBoard(${boardVo.getBoard_no()},${planVo.getPlan_no()})">수정</td><td onclick="deleteBoard(${boardVo.getBoard_no()})">삭제</td>
+						</c:when>
+						<c:otherwise>
+						<td onclick="goodButton(${boardVo.getBoard_no()},${planVo.getPlan_no()})">좋아요</td><td onclick="capturePlan(${boardVo.getBoard_no()})">일정 가져오기</td>
+						</c:otherwise>
+						</c:choose>
 						</tr>
 						</c:if>
+					</table>
+					</div>
+					
+					<script>
+					function modifyBoard(bno,pno){
+						alert("구현하기 귀찮지롱 메롱메롱");
+						location.href="/review/modify?plan_no="+pno+"&board_no="+bno;
+						//history.back();
+					}
+					function deleteBoard(bno){
+						alert("왜그래 지우지마 구현했는데 아깝잖아 안지워줄거야");
+						location.href="/review/delete?board_no="+bno;
+					}
+					function goodButton(bno,pno){
+						location.href="/review/good?plan_no="+pno+"&board_no="+bno;
+					}
+					function capturePlan(bno){
+						location.href="/review/capture?board_no="+bno;
+					}
+					
+					
+					
+					</script>
+					<hr>
+					<div class="wsTable">
+					<table>
+						<c:forEach var="bcVo" items="${boardCommentsList }">
 						<tr>
-							<td colspan="2"><img src="" /></td>
+							<td>${bcVo.getMember_no()}</td>
+							<td colspan="7" class="nct">  :   ${   bcVo.getMessage() }</td>
 						</tr>
+						</c:forEach>
+					</table>
+					</div>
+					<div class="wsTable">
+					<form action="/review/insertcomment" method="post">
+					<table>
 						<tr>
-							<td colspan="2">textArea</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								Comments Line
-							</td>
+						<td><span>${authUser.getMemberId()}</span>
+							<input type="hidden" name="board_no" value="${boardVo.getBoard_no()}">
+							<input type="hidden" name="plan_no" value="${boardVo.getPlan_no()}">
+							<input type="hidden" name="member_no" value="${authUser.getMember_no() }"></td>
+							<td colspan="6"><textarea class="messagebox" name="message"></textarea></td>
+							<td><input type="submit" value="댓글등록"></td>						
 						</tr>
 					</table>
+					</form>
+					</div>
 					<c:import url="/WEB-INF/views/review/planTable.jsp"></c:import>
 				</div>
 		</div>

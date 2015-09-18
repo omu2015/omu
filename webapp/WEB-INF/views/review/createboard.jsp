@@ -224,7 +224,7 @@ function newplan(plano){
 							<td colspan="3">사진들 </td>
 						</tr>
 						<tr>
-							<td colspan="3"><textarea style='padding:10px;width:100%; height:200px;' name="message"></textarea></td>
+							<td colspan="3"><textarea class="messagebox" name="message"></textarea></td>
 						</tr>
 						<tr>
 							<td colspan="3">

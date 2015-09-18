@@ -58,6 +58,11 @@ width: 1500px;
 								<c:import url="/WEB-INF/views/admin/insertplan.jsp"></c:import>
 								<c:import url="/WEB-INF/views/admin/insertcontentbox.jsp"></c:import>
 							</table>
+							<script>
+							/* $('a').click(function(event){
+								event.preventDefault();
+							}); */
+							</script>
 	</div>	
 	</section>
 </div>

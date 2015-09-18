@@ -17,7 +17,7 @@
    
    <select id="selectVo" parameterClass="java.lang.Long" resultClass="PlanVo">
       <![CDATA[
-         select plan_no, member_no, to_char(planDate,'yyyy-mm-dd')as planDate, totalCost, totalTime from plan where plan_no=#plan_no#
+         select plan_no, member_no, to_char(planDate,'yyyy-mm-dd')as planDate, totalCost, totalTime from plan where plan_no=#plan_no# 
       ]]>
    </select>
    <select id="getUserPlan" parameterClass="java.lang.Long" resultClass="PlanVo">
