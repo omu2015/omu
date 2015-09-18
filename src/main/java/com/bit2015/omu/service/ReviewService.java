@@ -24,6 +24,7 @@ import com.bit2015.omu.dao.ProductDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.util.FileUploader;
+import com.bit2015.omu.vo.BoardImgBoxVo;
 import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
@@ -139,8 +140,7 @@ public class ReviewService {
   
    
 
-   public void showboard(Model model, String str_plan_no){
-      Long plan_no=Long.parseLong(str_plan_no);
+   public void showboard(Model model, Long plan_no){
       
       List<ContentBoxVo> contentBoxList=contentBoxDao.selectAllByPno(plan_no);
       List<ContentVo> contentList2=new ArrayList<ContentVo>();
@@ -218,10 +218,18 @@ public class ReviewService {
    }
 
 
-public void createBoard(Model model, HttpSession session) {
+public void createBoard(Model model, HttpSession session, Long plan_no) {
+	
 	MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
 	List<PlanVo> planList = planDao.getUserPlan(memberVo.getMember_no());
-	PlanVo planVo=planList.get(0);
+	
+	PlanVo planVo = new PlanVo();
+	System.out.println("plan_no == " +plan_no);
+	if(plan_no==-1){
+	planVo=planList.get(0);
+	}else{
+	planVo=planDao.selectVo(plan_no);
+	}
 	
 	List<ContentBoxVo> contentBoxList =contentBoxDao.selectAllByPno(planVo.getPlan_no());
 	List<ContentVo> contentList = new ArrayList<ContentVo>();
@@ -242,22 +250,31 @@ public void createBoard(Model model, HttpSession session) {
 	model.addAttribute("reviewList", reviewList);
 }
 
-public void insertBoard(BoardVo boardVo, MultipartFile img) {
+public void insertBoard(Model model, BoardVo boardVo, HttpSession session, Long totalCost, Long totalTime, MultipartFile img) {
+	MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
 	
+	Long pno=boardVo.getPlan_no();
+	PlanVo planVo = planDao.selectVo(pno);
+	planVo.setTotalCost(totalCost);
+	planVo.setTotalTime(totalTime);
+	planDao.update(planVo);
 	
+	System.out.println(planVo.toString());
+	System.out.println(memberVo.toString());
 	System.out.println("insertboadr boardVo to stirng ===  "  + boardVo.toString());
-	/*if(img==null){
-		
-        imgBoxVo.setImageUrl("");
-     }else{
-        String member_img_url=ful.upload(img);
-        System.out.println("member_img_url = "+member_img_url);
-        memberVo.setImageUrl(member_img_url);
-     }
-     memberDao.insert(memberVo);
-     
-    */ 
 	
+//	BoardImgBoxVo boardImgBoxVo = new BoardImgBoxVo();
+	//boardImgBoxVo.setBoard_no(boardDao.selectVoByPno(pno).getBoard_no());
+//	
+//	if(img!=null){
+//        String img_url=ful.upload(img);
+//        System.out.println("img_url = "+img_url);
+//        boardImgBoxVo.setImageUrl(img_url);
+//     }
+//     memberDao.insert(memberVo);
+//	
+	List<ReviewVo> reviewList=getReviewList();
+	model.addAttribute("reviewList", reviewList);
 }
 
 
@@ -305,7 +322,7 @@ public void test(Model model) {
 	
 	model.addAttribute("contentList" , contentList);
 }
-
+/*
 public String getMyCL(String str_plan_no) {
 	Long plan_no = Long.parseLong(str_plan_no);
 	
@@ -319,7 +336,7 @@ public String getMyCL(String str_plan_no) {
 	jsonCL = jsonn((ArrayList<?>) contentList);
 	
 	return jsonCL;
-}
+}*/
 
 
 

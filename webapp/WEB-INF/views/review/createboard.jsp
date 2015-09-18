@@ -168,18 +168,20 @@
 <script>
 function newplan(plano){
 	console.log(plano);
-	$.ajax({
-		type : 'get',
+	
+	location.href="/review/createboard?plan_no="+plano
+	
+/* 	$.ajax({
 		url : "/review/getMyCL",
 		data: {
 			plan_no : plano
 		},
 		success : function(response){
-			console.log(response);
-			
+		    
+			console.log(JSON.parse(response));
+			displayPlaces(JSON.parse(response));
 		}
-	});
-	
+	}); */
 }
 </script>
 <body>
@@ -226,8 +228,8 @@ function newplan(plano){
 						</tr>
 						<tr>
 							<td colspan="3">
-											<input type="hidden" name="member_no" value="${authUser.getMember_no()}">
-											<input type="submit" value="등록"></td>
+											<input type="submit" value="등록">
+							</td>
 						</tr>
 					</table>
 						</form>
@@ -296,18 +298,18 @@ displayPlaces(jsonCL); /////////////////////////////////////////////////////////
        
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
-	
-	//
-	for (var k = 0; k < jsonCL.length; k++) {
-		findWay(jsonCL[k]);
-	}
-	//
 
     var listEl = document.getElementById('placesList'), 
     menuEl = document.getElementById('menu_wrap'),
     fragment = document.createDocumentFragment(), 
     bounds = new daum.maps.LatLngBounds(), 
     listStr = '';
+    
+    for (var k = 0; k < jsonCL.length; k++) {
+		findWay(jsonCL[k]);
+	}
+    
+    ////////////////
     
     for ( var i=0; i<places.length; i++ ) {
 		
@@ -423,14 +425,6 @@ function addMarker(position, idx, title) {
     return marker;
 }
 
-// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-function removeMarker() {
-    for ( var i = 0; i < markers.length; i++ ) {
-        markers[i].setMap(null);
-    }   
-    markers = [];
-}
-
 
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
@@ -456,6 +450,18 @@ function displayInfowindow2(marker, items) {
     infowindow2.setContent(content);
     infowindow2.open(map, marker);
 }
+
+
+
+
+//지도 위에 표시되고 있는 마커를 모두 제거합니다
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+
 
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {   
@@ -637,6 +643,35 @@ function getTimeHTML(distance) {
 	content += '</ul>'
 
 	return content;
+}
+
+
+function deleteClickLine() {
+    if (clickLine) {
+        clickLine.setMap(null);    
+        clickLine = null;        
+    }
+}
+function deleteDistance () {
+    if (distanceOverlay) {
+        distanceOverlay.setMap(null);
+        distanceOverlay = null;
+    }
+}
+function deleteCircleDot() {
+    var i;
+
+    for ( i = 0; i < dots.length; i++ ){
+        if (dots[i].circle) { 
+            dots[i].circle.setMap(null);
+        }
+
+        if (dots[i].distance) {
+            dots[i].distance.setMap(null);
+        }
+    }
+
+    dots = [];
 }
 
 

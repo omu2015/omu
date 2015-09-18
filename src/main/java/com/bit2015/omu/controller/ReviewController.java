@@ -50,42 +50,43 @@ public class ReviewController {
    }
    
    @RequestMapping("/showboard")
-   public String showBoard(Model model, @RequestParam String plan_no){
+   public String showBoard(Model model, @RequestParam Long plan_no){
       reviewService.showboard(model, plan_no);
       System.out.println(model.toString());
       return "/review/showboard";
    }
    
    @RequestMapping("/createboard")
-   public String createBoard(Model model, HttpSession session){
+   public String createBoard(Model model, HttpSession session, @RequestParam(defaultValue="-1") Long plan_no){
       if(session.getAttribute("authUser")!=null){
-    	  reviewService.createBoard(model,session);
+    	  reviewService.createBoard(model,session,plan_no);
       }
       return "/review/createboard";
    }
    
    @RequestMapping("/insertboard")
-   public String insertBoard(BoardVo boardVo, @RequestParam(required=false) String totalCost, @RequestParam(required=false) String totalTime, @RequestParam(required=false)MultipartFile img ){
+   public String insertBoard(Model model, BoardVo boardVo, HttpSession session, @RequestParam(defaultValue="0") Long totalCost, @RequestParam(defaultValue="0") Long totalTime, @RequestParam(required=false)MultipartFile img ){
 	   System.out.println("insertboadr ctrl ===  "  + boardVo.toString());
 	   System.out.println("totalCost ==  " + totalCost);
 	   System.out.println("totalTime ==" + totalTime);
 	   
-	   reviewService.insertBoard(boardVo, img);
+	   reviewService.insertBoard(model, boardVo, session, totalCost, totalTime, img);
 	   
 	   
-      return "/review/createboard";
+      return "/review/index";
    }
-   
-   @RequestMapping("/getMyCL")
+/*   
+   @RequestMapping(value = "/getMyCL", produces="text/plain;charset=UTF-8")
    @ResponseBody
    public String getMyCL(@RequestParam String plan_no){
 	  
 	   String jsonCL =reviewService.getMyCL(plan_no);
+	   System.out.println("getMyCl - jsonCl =========" + jsonCL);
 	   
       return jsonCL;
    }
    
-   
+   */
    
    
    
