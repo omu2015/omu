@@ -93,7 +93,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 <c:choose>
 	<c:when test="${empty authUser }">		
 		<div id="loginmodal" style="display:none;">
-				<form name = "loginform" method="post" action="member/login">
+				<form name = "loginform" method="post" action="/member/login">
 				 <h2>LOGIN</h2>
 				 <div class="p_c_text" style="margin-top:20px">회원이 되시면 여러가시 혜택을 누리실 수 있습니다.</div>
 				 <div class="login_line">
@@ -114,8 +114,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 
 
 
-<!-- 모달팝업 Content -->
-
+<!-- 모달팝업 interset -->
 		<div>
 		<div id="interset" style="display:none;margin-top:200px">
 			<div style="width:1000px;background-color:#2f3238;color:#fff;height:150px;text-align:center;font-size:15px">

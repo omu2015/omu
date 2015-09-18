@@ -58,8 +58,8 @@ $(function(){
 			<c:if test="${vo.content_no == vo2.content_no}">
 				<tr>
 					<td style="float:left;margin-left:10px">${vo2.message }</td>
+					<td style="float:right;margin-right:10px">${vo2.memberName }</td>
 					<td style="float:right;margin-right:10px">${vo2.regDate }</td>
-					<td style="float:right;margin-right:10px">${vo2.member_no }</td>
 				</tr>
 				<tr>
 					<td>----------------------------------------------------------------------------------------------------------------------------</td>

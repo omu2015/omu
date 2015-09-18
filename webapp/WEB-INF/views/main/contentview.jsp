@@ -43,7 +43,6 @@
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 
 
-
 <!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
 
@@ -51,6 +50,8 @@
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+
 
 </head>
 <body>
@@ -71,26 +72,98 @@
 	<div class="container">
 		
 		<div>
-			<div style="width:600px"><img src="${contentVo.imageUrl }"></div>
-			<div style="width:600px;background-color:#2f3238;color:#fff;height:60px;text-align:center;font-size:15px">
-				<div>${contentVo.category }</div>
-				<div>${contentVo.address }</div>
-				<div>${contentVo.title }</div>
-				<div>${contentVo.phone }</div>
-				<div>${contentVo.newAddress }</div>
-				<div>${contentVo.category}</div>
-				<textarea rows="" cols=""></textarea>
-				
-			</div>
-			</div>
+		<form method="post" action="/commentwrite">
+		<table>
+			<tr>
+				<td><img src="${contentVo.imageUrl }"></td>
+				<td>
+					<div>Category : ${contentVo.category }</div>
+					<div>title : ${contentVo.title }</div>
+					<div>address : ${contentVo.address }</div>
+					<div>phone : ${contentVo.phone }</div>
+					<input type="hidden" name="member_no" value="${authUser.member_no }">
+					<input type="hidden" name="content_no" value="${contentVo.content_no }">
+				</td>
+			</tr>
+			<tr>
+				<td><div id="staticMap" style="width:1000px;height:350px;"></div> </td>
+			</tr>
+			<tr>
+				<td><input type="text" name="message"></td>
+				<td>${authUser.memberName }</td>
+				<td><input type="submit" value="덧글등록"></td>
+			</tr>
+		</table>
+		</form>
 
 
+		<c:forEach var="vo" items="${list2}" varStatus="status">
+		<c:if test="${contentVo.content_no eq vo.content_no }">
+		<table>
+			<tr>
+				<td>${vo.message }</td>
+				<td>${vo.member_no }</td>
+				<td>${vo.regDate }</td>
+		<c:choose>
+		<c:when test="${authUser.member_no == vo.member_no }">
+				<td><a href="/commentdelete?content_no=${contentVo.content_no }">삭제</a></td>
+		</c:when>
+		<c:otherwise>
+		</c:otherwise>
+		</c:choose>
+			</tr>
+		</table>
+		</c:if>
+		</c:forEach>
+
+
+			</div>
+	</div>
 </div>
 
 	</section>
 	 <c:import url="/WEB-INF/views/include/footer.jsp"></c:import> 
-</div>
+
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+
+
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bbef91da99f11fe76f4b3b523d3151e9&libraries=services"></script>
+<script>
+var query = window.location.search.substring(1);
+var cnt_no = query.split("=");
+var content_no = cnt_no[1];
+var lat ;
+var lng;
+$.ajax({
+	type : 'get',
+    url:'/getContent',
+    data : {
+    		content_no : content_no
+    },
+    dataType:'json',
+    success: function(response){
+    	lat = response.latitude;
+    	lng = response.longitude;
+    	
+    	 var mapContainer = document.getElementById('staticMap'), 
+ 		mapOption = {
+ 			center : new daum.maps.LatLng(lat, lng), 
+ 			level : 3
+ 		// 지도의 확대 레벨
+ 		};
+ 		var map = new daum.maps.Map(mapContainer, mapOption);
+ 			var marker = new daum.maps.Marker({
+ 				position : new daum.maps.LatLng(lat, lng)
+ 			});
+ 			marker.setMap(map);
+    } 
+ })
+ 
+
+// 이미지 지도를 생성합니다
+</script>
+
+
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
