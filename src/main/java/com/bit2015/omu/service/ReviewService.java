@@ -181,13 +181,14 @@ public class ReviewService {
          
          long board_no=boardList.get(i).getBoard_no();
          long plan_no=boardDao.selectVo(board_no).getPlan_no();
-         reviewVo.setMemberId(memberDao.selectVo(planDao.selectVo(plan_no).getMember_no()).getMemberId());
+         PlanVo planVo=planDao.selectVo(plan_no);
+         reviewVo.setMemberId(memberDao.selectVo(planVo.getMember_no()).getMemberId());
          reviewVo.setBoard_no(board_no);
          reviewVo.setPlan_no(plan_no);
          
          List<ContentVo> contentList=reviewVo.getContentList();
-         long totalCost = 0;
-         long totalTime = 0;
+         long totalCost = planVo.getTotalCost();
+         long totalTime = planVo.getTotalTime();
          int goodCnt = 0;
          
          
@@ -200,8 +201,8 @@ public class ReviewService {
          }
          
          for (int k = 0; k < contentList.size(); k++) {
-            totalCost += contentList.get(k).getCost();
-            totalTime += contentList.get(k).getTime();
+        	 if(totalCost==0)totalCost += contentList.get(k).getCost();
+            if(totalTime==0)totalTime += contentList.get(k).getTime();
             goodCnt += goodDao.selectAllByCno((contentList.get(k).getContent_no())).size();
             
             reviewVo.setTotalCost(totalCost);
@@ -253,26 +254,28 @@ public void createBoard(Model model, HttpSession session, Long plan_no) {
 public void insertBoard(Model model, BoardVo boardVo, HttpSession session, Long totalCost, Long totalTime, MultipartFile img) {
 	MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
 	
+	//plan에 totalcost, totalTime update.
 	Long pno=boardVo.getPlan_no();
 	PlanVo planVo = planDao.selectVo(pno);
 	planVo.setTotalCost(totalCost);
 	planVo.setTotalTime(totalTime);
 	planDao.update(planVo);
 	
-	System.out.println(planVo.toString());
-	System.out.println(memberVo.toString());
-	System.out.println("insertboadr boardVo to stirng ===  "  + boardVo.toString());
+	//board insert.
+	boardVo.setMember_no(memberVo.getMember_no());
+	boardDao.insert(boardVo);
 	
-//	BoardImgBoxVo boardImgBoxVo = new BoardImgBoxVo();
-	//boardImgBoxVo.setBoard_no(boardDao.selectVoByPno(pno).getBoard_no());
-//	
-//	if(img!=null){
-//        String img_url=ful.upload(img);
-//        System.out.println("img_url = "+img_url);
-//        boardImgBoxVo.setImageUrl(img_url);
-//     }
-//     memberDao.insert(memberVo);
-//	
+	//boardImgBox 생성 후 insert.
+	BoardImgBoxVo boardImgBoxVo = new BoardImgBoxVo();
+	boardImgBoxVo.setBoard_no(boardDao.selectVoByPno(pno).getBoard_no());
+	//img url 설정
+	if(img!=null){
+		String img_url=ful.upload(img);
+		boardImgBoxVo.setImageUrl(img_url);
+		boardImgBoxDao.insert(boardImgBoxVo);
+		System.out.println("boardImgBoxVo.toString() === " + boardImgBoxVo.toString());
+	}
+	
 	List<ReviewVo> reviewList=getReviewList();
 	model.addAttribute("reviewList", reviewList);
 }

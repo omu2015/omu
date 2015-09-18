@@ -36,8 +36,8 @@
 			</tr>
 			<tr>
 				<td>${vo.getMemberId()}</td>
-				<td>$ = ${vo.getTotalCost()}</td>
-				<td>시간 = ${vo.getTotalTime()}</td>
+				<td>$ = ${vo.getTotalCost()}원</td>
+				<td>시간 = ${vo.getTotalTime()}분</td>
 				<td>좋아요 수-> ${vo.getGoodCnt()}</td>
 				<td>일정으로 가져오기</td>
 			</tr>
