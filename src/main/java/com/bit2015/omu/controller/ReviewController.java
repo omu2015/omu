@@ -75,18 +75,7 @@ public class ReviewController {
 	   
       return "/review/index";
    }
-/*   
-   @RequestMapping(value = "/getMyCL", produces="text/plain;charset=UTF-8")
-   @ResponseBody
-   public String getMyCL(@RequestParam String plan_no){
-	  
-	   String jsonCL =reviewService.getMyCL(plan_no);
-	   System.out.println("getMyCl - jsonCl =========" + jsonCL);
-	   
-      return jsonCL;
-   }
-   
-   */
+
    @RequestMapping("/insertcomment")
    public String insertComment(BoardCommentsVo boardCommentsVo, @RequestParam Long plan_no){
 	   System.out.println("plan_no ===  "   +  plan_no);
@@ -117,6 +106,14 @@ public class ReviewController {
    public String capture(@RequestParam Long board_no, HttpSession session){
 	   reviewService.capture(board_no,session);
 	   return "redirect:/mypage";
+   }
+   
+   @RequestMapping("/showTheme")
+   public String showTheme(@RequestParam Long theme_no, HttpSession session){
+	   System.out.println(theme_no);
+	   
+	   
+	   return "redirect:/review";
    }
    
    

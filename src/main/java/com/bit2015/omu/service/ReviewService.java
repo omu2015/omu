@@ -87,7 +87,10 @@ public class ReviewService {
       List<ThemeBoxVo> themeBoxList = themeBoxDao.selectAllByMm(memberVo.getMember_no());
       
       for (int i = 0; i < themeBoxList.size(); i++) {
-    	  memberTheme.add(themeDao.selectVo(themeBoxList.get(i).getTheme_no()));
+    	  ThemeVo themeVo = themeDao.selectVo(themeBoxList.get(i).getTheme_no());
+    	  String[] array =themeVo.getThemeName().split(">");
+    	  themeVo.setThemeName(array[array.length-1]);
+    	  memberTheme.add(themeVo);
       }
       
       //model
@@ -98,36 +101,6 @@ public class ReviewService {
    
    
    
-   
-/*   public void mapview(Model model, HttpSession session){
-      //1.session 생성
-      MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
-      //System.out.println(memberVo.toString());
-      //Error 500-> session이 없을 시...
-      
-      //2.themeBox 다 가져오기
-      List<ThemeBoxVo> list=themeBoxDao.selectAll();
-      //System.out.println("list.toString()="+list.toString());
-      
-      //3.임시 arraylist 생성 후 가입한 회원의 관심사 목록을 가져옴
-      List<ThemeBoxVo> list2=new ArrayList<ThemeBoxVo>();
-      for (int i = 0; i < list.size(); i++) {
-         if(list.get(i).getMember_no()==memberVo.getMember_no()){
-            //System.out.println("list.get(i)="+list.get(i));
-            list2.add((ThemeBoxVo)list.get(i));
-         }
-      }
-      //4.회원의 관심사를 arraylist에다 넣기
-      List<ThemeVo> list3=new ArrayList<ThemeVo>();
-      for (int i = 0; i < list2.size(); i++) {
-         //System.out.println(themeDao.selectVo(list2.get(i).getTheme_no()).toString());
-         list3.add(themeDao.selectVo(list2.get(i).getTheme_no()));
-      }
-      model.addAttribute("themeArray", list3);
-      
-      
-   }
-*/
    public List<PlanVo> getPlanListById(String id) {
       List<PlanVo> planList = new ArrayList<PlanVo>();
       ContentVo contentVo = contentDao.selectVoById(id);
@@ -343,21 +316,7 @@ public void test(Model model) {
 	
 	model.addAttribute("contentList" , contentList);
 }
-/*
-public String getMyCL(String str_plan_no) {
-	Long plan_no = Long.parseLong(str_plan_no);
-	
-	String jsonCL = "";
-	
-	List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(plan_no);
-	List<ContentVo> contentList =new ArrayList<ContentVo>(); 
-	for (int i = 0; i < contentBoxList.size(); i++) {
-		contentList.add(contentDao.selectVo(contentBoxList.get(i).getContent_no()));
-	}	
-	jsonCL = jsonn((ArrayList<?>) contentList);
-	
-	return jsonCL;
-}*/
+
 
 public void insertComment(BoardCommentsVo boardCommentsVo) {
 	System.out.println("boardCommentsVo.toString() =====   "   +  boardCommentsVo.toString());

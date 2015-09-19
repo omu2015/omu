@@ -194,7 +194,7 @@
 						<td onclick="modifyBoard(${boardVo.getBoard_no()},${planVo.getPlan_no()})">수정</td><td onclick="deleteBoard(${boardVo.getBoard_no()})">삭제</td>
 						</c:when>
 						<c:otherwise>
-						<td onclick="goodButton(${boardVo.getBoard_no()},${planVo.getPlan_no()})">좋아요</td><td onclick="capturePlan(${boardVo.getBoard_no()})">일정 가져오기</td>
+						<td onclick="goodButton(${boardVo.getBoard_no()},${planVo.getPlan_no()}); return false;">좋아요</td><td onclick="capturePlan(${boardVo.getBoard_no()})">일정 가져오기</td>
 						</c:otherwise>
 						</c:choose>
 						</tr>
@@ -453,7 +453,7 @@ function removeMarker() {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, items) {
-var content = '<div style="padding:5px; z-index:1;">'+items.title+'</div>';
+var content = '<div style="padding:5px; z-index:1;"><table><tr><td>'+items.title+'</td></tr><tr><td>'+items.newAddress+'</td></tr></div>';
     
     infowindow.setContent(content);
     infowindow.open(map, marker);

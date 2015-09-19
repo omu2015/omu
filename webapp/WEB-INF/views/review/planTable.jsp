@@ -9,7 +9,12 @@
 .wsTable table{
 	padding : 20px 5px;
 }
-.wsTable td{
+.wsTable td {
+	padding : 5px;
+	text-align : center;
+}
+
+.wsTable th {
 	padding : 5px;
 	text-align : center;
 }
@@ -35,8 +40,8 @@
 <button onclick="createboard()">글싸기</button>
 <div class="wsTable">
 	<c:forEach var="vo" items="${reviewList }">
-		<table id="plan_no_${vo.plan_no }" onclick="clickEvent(this)"
-			onmouseover="changeColor(this, '#FFFFFF', '#E5D1D6')">
+		<table id="plan_no_${vo.plan_no }" onclick="showplan(this)"
+			onmouseover="changeColor(this)">
 			<tr>
 				<c:forEach var="votitle" items="${vo.contentList}">
 					<td>${votitle.getTitle()}</td>
@@ -65,19 +70,18 @@
 </div>
 <script>
 function createboard(){
-	var gogo="/review/createboard";
-	location.href=gogo;
+	location.href="/review/createboard";
 }
 </script>
 <script type="text/javascript">
-function changeColor(Obj, oldColor, newColor) {
-    Obj.style.backgroundColor = newColor;
+function changeColor(Obj) {
+    Obj.style.backgroundColor = '#FED4DE';
     Obj.onmouseout = function(){
-        Obj.style.backgroundColor = oldColor;
+        Obj.style.backgroundColor = '#FFFFFF';
     }
 }
 
-function clickEvent(Obj) {
+function showplan(Obj) {
 	var plan_no=Obj.id.split("_").pop();
 	console.log(plan_no);
     location.href="/review/showboard?plan_no="+plan_no;
