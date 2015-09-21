@@ -341,7 +341,6 @@ function setCart(wb, vb, keyword, id, plan_no){
 	        for(var i=0; i<result.places.length; i++){
 	        		if(id == result.places[i].id){
 	        			content = result.places[i];
-	        			
 	        		}
 	    		}
 	        	$.ajax({

@@ -53,7 +53,6 @@ public class PlannerController {
 		public String map(Model model, HttpSession session) {
 			MemberVo vo = (MemberVo)session.getAttribute("authUser");
 			PlanVo planVo = plannerService.getPlanNo(vo.getMember_no());
-			System.out.println(planVo);
 			model.addAttribute("planVo", planVo);
 			
 			List<JusoVo> list = plannerService.getSi();
@@ -79,10 +78,17 @@ public class PlannerController {
 		@RequestMapping("/addCart")
 		@ResponseBody
 		public void addCart(@ModelAttribute ContentVo contentVo, HttpSession session, @RequestParam Long plan_no){
+			System.out.println(contentVo);
 			MemberVo memberVo =(MemberVo)session.getAttribute("authUser");
 			long member_no = memberVo.getMember_no();
 			String themeName = contentVo.getCategory();
 			String id = contentVo.getId();
+			String imageUrl = contentVo.getImageUrl();
+			if(imageUrl.equals("")){
+				imageUrl = "/assets/img/noimage.jpg";
+				contentVo.setImageUrl(imageUrl);
+			}
+			System.out.println(contentVo);
 			plannerService.addCart(contentVo, themeName, id, member_no, plan_no);
 			
 		}	
