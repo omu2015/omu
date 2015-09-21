@@ -15,8 +15,8 @@
 function deletePlan(plan_no){
 	location.href="/planner/deletePlan?plan_no="+plan_no;
 }
-function viewContent(){
-	alert("view");
+function viewContent(content_no){
+	location.href="/contentView?content_no="+content_no;
 }
 function deleteContent(plan_no, content_no){
 	location.href="/planner/deleteContentBox?plan_no="+plan_no+"&content_no="+content_no;
@@ -42,10 +42,10 @@ function deleteContent(plan_no, content_no){
 	</tr>
 	<c:forEach var="i" items="${contentList}">
 	<tr id="st">
-		<td onclick="viewContent(${planVo.plan_no})">${planVo.planDate}</td>
-		<td onclick="viewContent(${planVo.plan_no}))">${i.title}</td>
-		<td colspan="2" onclick="viewContent(${planVo.plan_no}))">${i.newAddress}</td>
-		<td onclick="viewContent(${planVo.plan_no}), ${i.content_no})">${i.phone}</td>
+		<td onclick="viewContent(${i.content_no})">${planVo.planDate}</td>
+		<td onclick="viewContent(${i.content_no})">${i.title}</td>
+		<td colspan="2" onclick="viewContent(${i.content_no})">${i.newAddress}</td>
+		<td onclick="viewContent(${i.content_no})">${i.phone}</td>
 		<td ><a href="javascript:deleteContent(${planVo.plan_no}, ${i.content_no})"><img src="/assets/img/button/x.png"></a></td>
 	</tr>
 	</c:forEach>
