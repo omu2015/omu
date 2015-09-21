@@ -39,10 +39,25 @@ public class MainService {
 	MemberDao memberDao;
 	
 	
-	public void interest(HttpSession session ,Long member_no, ThemeBoxVo themeBoxVo){
+	public void interest(Long member_no, Long[] theme_no){
 		List<ThemeBoxVo> list = themeBoxDao.selectAllByMm(member_no);
-		System.out.println(themeBoxVo);
-		themeBoxDao.insert(themeBoxVo);
+		ThemeBoxVo themeBoxVo = new ThemeBoxVo();
+		if(list == null) {
+			for(int i=0; i<theme_no.length; i++){
+				themeBoxVo.setMember_no(member_no);
+				themeBoxVo.setTheme_no(theme_no[i]);
+				themeBoxDao.insert(themeBoxVo);
+				}
+		}
+			else{
+				themeBoxDao.deleteMember(member_no);
+				for(int i=0; i<theme_no.length; i++){
+				themeBoxVo.setMember_no(member_no);
+				themeBoxVo.setTheme_no(theme_no[i]);
+				themeBoxDao.insert(themeBoxVo);
+				}
+			
+		}
 	}
 	
 	public void  insert (CommentsVo commentsVo){

@@ -18,10 +18,13 @@ import com.bit2015.omu.dao.ContentDao;
 import com.bit2015.omu.dao.MainDao;
 import com.bit2015.omu.service.MainService;
 import com.bit2015.omu.vo.CommentsVo;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping()
@@ -88,8 +91,8 @@ public class MainController {
   }
  
   @RequestMapping("/interestupdate")
-	public String update(HttpSession session ,Long member_no, ThemeBoxVo themeBoxVo){
-	        mainService.interest(session, member_no, themeBoxVo);
+	public String update(HttpSession session ,Long member_no,  @RequestParam Long[] theme_no){
+		  mainService.interest(member_no, theme_no);
 		return "redirect:/";	
 	} 
 /*	@RequestMapping("/test123")
@@ -101,4 +104,11 @@ public class MainController {
 		mainService.test123(id, themeName,contentVo);
 		return contentVo;
 	}*/
+  @RequestMapping("/getInterest")
+  @ResponseBody
+  public List<ThemeBoxVo> getInterest(@RequestParam Long member_no, Model model){
+	 List<ThemeBoxVo> list = mainService.getThemeBox(member_no);
+	 
+	 return list;  
+  }
 }

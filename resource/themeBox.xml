@@ -33,8 +33,21 @@
 			delete from THEMEBOX where themeBox_no=#themeBox_no#
 		]]>
 	</delete>
+	<delete id="deleteMember" parameterClass="java.lang.Long">
+		<![CDATA[
+			delete from THEMEBOX where member_no=#member_no#
+		]]>
+	</delete>
 	
 	<update id="update" parameterClass="ThemeBoxVo">
+		<![CDATA[
+			update THEMEBOX set 
+			member_no=#member_no#,
+			theme_no=#theme_no#
+			where themeBox_no=#themeBox_no#
+		]]>
+	</update>
+	<update id="interestUpdate" parameterClass="ThemeBoxVo">
 		<![CDATA[
 			update THEMEBOX set 
 			member_no=#member_no#,

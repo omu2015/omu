@@ -39,6 +39,10 @@ public class ThemeBoxDao {
 	public void delete(Long themeBox_no) {
 		sqlMapClientTemplate.delete("themeBox.delete", themeBox_no);
 	}
+	public void deleteMember(Long member_no) {
+		sqlMapClientTemplate.delete("themeBox.deleteMember", member_no);
+	}
+
 	
 	public void update(ThemeBoxVo themeBoxVo) {
 		sqlMapClientTemplate.update("themeBox.update", themeBoxVo);

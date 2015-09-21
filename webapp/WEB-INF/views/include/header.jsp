@@ -122,24 +122,33 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 			<form name ="interest" method="post" action="/interestupdate">
 	<c:forEach var="vo" items="${themeList }" varStatus="status">
 				<input type="hidden" name="member_no" value="${authUser.member_no }">
-				<c:choose>
-				<c:when test="${vo.theme_no == authUser.member_no }">
 				<div>
-				<input type="checkbox" name="theme" value="${vo.theme_no }" checked>${vo.themeName }
+				<input type="checkbox" name="theme_no" value="${vo.theme_no }">${vo.themeName}
 				</div>
-				</c:when>
-				<c:otherwise>
-				<div>
-				<input type="checkbox" name="theme" value="${vo.theme_no }">${vo.themeName }
-				</div>
-				</c:otherwise>
-				</c:choose>
 	</c:forEach>
-				<input type="submit" value="관심사로검색" style="color:#000;margin-top:30px;width:150px;height:30px" >
+				<h4 style="color:#ed0000">5개 이하로 선택해주세요</h4>
+				<input type="submit" value="관심사로검색" style="color:#000;margin-top:20px;width:150px;height:30px" >
 			</form>
 			</div>
 			</div>
 			</div>
+			<script>
+			var userTheme_no = [];
+			$.ajax({
+				type : 'get',
+			    url:'/getInterest',
+			    data : {
+			    		member_no : '${authUser.member_no}'
+			    },
+			    dataType:'json',
+			    success: function(response){
+			    	for(var i=0; i<response.length; i++){
+			    		userTheme_no[i]=response[i].theme_no;
+			    	$("input[value="+userTheme_no[i]+"]").attr("checked", true);
+			    	}
+			    }
+			 })
+			</script>
 
 
 
