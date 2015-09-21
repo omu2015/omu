@@ -114,8 +114,7 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 
 
 
-<!-- 모달팝업 Content -->
-
+<!-- 모달팝업 interset -->
 		<div>
 		<div id="interset" style="display:none;margin-top:200px">
 			<div style="width:1000px;background-color:#2f3238;color:#fff;height:150px;text-align:center;font-size:15px">

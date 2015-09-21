@@ -1,6 +1,8 @@
 package com.bit2015.omu.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -26,6 +28,14 @@ public class GoodDao {
 	public List<GoodVo> selectAll(){
 		List<GoodVo> list= sqlMapClientTemplate.queryForList("good.selectAll");
 		return list;
+	}
+	
+	public GoodVo selectVoCnoMno(Long content_no , Long member_no){
+		Map<String, Long> map = new HashMap<String, Long>();
+		map.put( "content_no", content_no );
+		map.put( "member_no", member_no );
+		GoodVo goodVo = (GoodVo) sqlMapClientTemplate.queryForObject("good.selectVoCnoMno", map);
+		return goodVo;
 	}
 	
 	public GoodVo selectVo(Long good_no){

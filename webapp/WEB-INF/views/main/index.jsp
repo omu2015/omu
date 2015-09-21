@@ -44,12 +44,6 @@
 
 <!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
-
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
 </head>
 <body>
 <div id="wrapper">
@@ -62,32 +56,16 @@
 	<div class="container">
 		<div class="row">
 	<!-- Slider -->
-
         <div id="main-slider" class="flexslider" style="margin-top:-35px">
             <ul class="slides">
               <li>
                 <img src="../../assets/img/slides/1.jpg" alt="" />
-<!--                 <div class="flex-caption">
-                    <h3>Modern Design</h3> 
-					<p>Duis fermentum auctor ligula ac malesuada. Mauris et metus odio, in pulvinar urna</p> 
-					<a href="#" class="btn btn-theme">Learn More</a>
-                </div> -->
               </li>
               <li>
                 <img src="../../assets/img/slides/2.jpg" alt="" />
-<!--                 <div class="flex-caption">
-                    <h3>Fully Responsive</h3> 
-					<p>Sodales neque vitae justo sollicitudin aliquet sit amet diam curabitur sed fermentum.</p> 
-					<a href="#" class="btn btn-theme">Learn More</a>
-                </div> -->
               </li>
               <li>
                 <img src="../../assets/img/slides/3.jpg" alt="" />
-<!--                 <div class="flex-caption">
-                    <h3>Clean & Fast</h3> 
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit donec mer lacinia.</p> 
-					<a href="#" class="btn btn-theme">Learn More</a>
-                </div> -->
               </li>
             </ul>
         </div>
@@ -98,21 +76,11 @@
 	<section id="content">
 	<div class="container">
 		<div style="margin-top:-90px"><img src="/assets/img/omu.jpg"></div>
-		<!-- divider 
-			<div class="col-lg-12">
-				<div class="solidline">
-				</div>
-			</div>
-			 end divider -->
 		
 	<!-- start content -->
 		<c:import url="/WEB-INF/views/main/content.jsp"/>
 	<!-- end content -->		
 		
-	<!-- start content2 -->
-	 	<%-- <c:import url="/WEB-INF/views/main/content2.jsp"/> --%>
-	<!-- end content -->
-
 
 
 <!-- 메인에 접속하면 로그인창 띄우기-->

@@ -24,7 +24,6 @@ public class MainDao {
 		sqlMapClientTemplate.insert("content.insert",contentVo);
 	} 
 	
-	
 
 	public List<CommentsVo> getList2() {
 		List<CommentsVo> list2 = (List<CommentsVo>) sqlMapClientTemplate.queryForList("comments.selectAll");
@@ -36,8 +35,8 @@ public class MainDao {
 		return list3;
 	}
 	
-	public void insert(CommentsVo vo){
-		sqlMapClientTemplate.insert("comments.insert",vo);
+	public void insert(CommentsVo commentsVo){
+		sqlMapClientTemplate.insert("comments.insert",commentsVo);
 	}	
 	public ThemeVo getNo(String themeName){
 		ThemeVo vo = (ThemeVo) sqlMapClientTemplate.queryForObject("theme.getNo", themeName);

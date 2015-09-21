@@ -148,9 +148,43 @@
 	content: none;
 }
 </style>
-</head>
-<body>
+<style type="text/css">
+.wsTable {
+	background : #FFEFEF;
+	text-align : center;
+}
 
+.wsTable td{
+	padding : 5px;
+}
+#messagebox{
+	border: 1px solid #8AE68A;
+	height : 200px;
+	padding: 20px;
+	text-align : center;
+}
+</style>
+</head>
+<script>
+function newplan(plano){
+	console.log(plano);
+	
+	location.href="/review/createboard?plan_no="+plano
+	
+/* 	$.ajax({
+		url : "/review/getMyCL",
+		data: {
+			plan_no : plano
+		},
+		success : function(response){
+		    
+			console.log(JSON.parse(response));
+			displayPlaces(JSON.parse(response));
+		}
+	}); */
+}
+</script>
+<body>
 <div id="wrapper">
 	<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"/> 
@@ -160,14 +194,21 @@
 			<div class="col-lg-12">
 				<h4 class="heading"></h4>
 				<div class="row">
-					<div class="wsTable">
-					<table>
-						<c:if test="${not empty boardVo}">
-						<tr class="wshd">
-							<td>작성자  : ${memberId}</td><td>등록 일자 : ${boardVo.getRegDate()}</td>
+				<hr>
+						<form action="/review/insertboard" method="post" enctype="multipart/form-data">
+					<table class="wsTable">
+						<tr>
+							<td colspan="3">
+								<select name="plan_no" onchange="newplan(this.value)">
+									<option value="${planVo.getPlan_no()}">${planVo.getPlanDate()}</option>
+									<c:forEach var="vo" items="${planList}">
+									<option value="${vo.getPlan_no()}">${vo.getPlan_no()}</option>
+									</c:forEach> 
+								</select>
+							</td>
 						</tr>
 						<tr>
-							<td colspan="2">
+							<td colspan="3">
 																<div class="map_wrap">
 																	<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 																	<div id="menu_wrap" class="bg_white">
@@ -176,77 +217,22 @@
 																</div>
 								</td>
 						</tr>
-						<tr class="wshd">
-							<td>총비용 : ${planVo.getTotalCost()} 원</td><td>총시간  : ${planVo.getTotalTime()} 분</td>
+						<tr>
+							<td>총시간 : <input type="text" name="totalTime"> 분</td><td>총비용 : <input type="text" name="totalCost"> 원</td><td><input type="file" name="img"></td>
 						</tr>
 						<tr>
-						<c:forEach var="bibl" items="${boardImgBoxList }">
-							<td colspan="2"><img height="350px" src="${bibl.getImageUrl()}" /></td>
-						</c:forEach>
+							<td colspan="3">사진들 </td>
 						</tr>
 						<tr>
-							<td class="messagebox" colspan="2">${boardVo.getMessage()}</td>
+							<td colspan="3"><textarea class="messagebox" name="message"></textarea></td>
 						</tr>
-						
-						<tr class="wshd">
-						<c:choose>
-						<c:when test="${authUser.getMember_no() eq boardVo.getMember_no()}">
-						<td onclick="modifyBoard(${boardVo.getBoard_no()},${planVo.getPlan_no()})">수정</td><td onclick="deleteBoard(${boardVo.getBoard_no()})">삭제</td>
-						</c:when>
-						<c:otherwise>
-						<td onclick="goodButton(${boardVo.getBoard_no()},${planVo.getPlan_no()}); return false;">좋아요</td><td onclick="capturePlan(${boardVo.getBoard_no()})">일정 가져오기</td>
-						</c:otherwise>
-						</c:choose>
-						</tr>
-						</c:if>
-					</table>
-					</div>
-					
-					<script>
-					function modifyBoard(bno,pno){
-						alert("구현하기 귀찮지롱 메롱메롱");
-						location.href="/review/modify?plan_no="+pno+"&board_no="+bno;
-						//history.back();
-					}
-					function deleteBoard(bno){
-						alert("왜그래 지우지마 구현했는데 아깝잖아 안지워줄거야");
-						location.href="/review/delete?board_no="+bno;
-					}
-					function goodButton(bno,pno){
-						location.href="/review/good?plan_no="+pno+"&board_no="+bno;
-					}
-					function capturePlan(bno){
-						location.href="/review/capture?board_no="+bno;
-					}
-					
-					
-					
-					</script>
-					<hr>
-					<div class="wsTable">
-					<table>
-						<c:forEach var="bcVo" items="${boardCommentsList }">
 						<tr>
-							<td>${bcVo.getMember_no()}</td>
-							<td colspan="7" class="nct">  :   ${   bcVo.getMessage() }</td>
-						</tr>
-						</c:forEach>
-					</table>
-					</div>
-					<div class="wsTable">
-					<form action="/review/insertcomment" method="post">
-					<table>
-						<tr>
-						<td><span>${authUser.getMemberId()}</span>
-							<input type="hidden" name="board_no" value="${boardVo.getBoard_no()}">
-							<input type="hidden" name="plan_no" value="${boardVo.getPlan_no()}">
-							<input type="hidden" name="member_no" value="${authUser.getMember_no() }"></td>
-							<td colspan="6"><textarea class="messagebox" name="message"></textarea></td>
-							<td><input type="submit" value="댓글등록"></td>						
+							<td colspan="3">
+											<input type="submit" value="등록">
+							</td>
 						</tr>
 					</table>
-					</form>
-					</div>
+						</form>
 					<c:import url="/WEB-INF/views/review/planTable.jsp"></c:import>
 				</div>
 		</div>
@@ -255,8 +241,6 @@
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div><!-- wrapper -->
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-
-
 </body>
 </html>
 <!-- javascript
@@ -308,13 +292,8 @@ var dots = []; // 선이 그려지고 있을때 클릭할 때마다 클릭 지�
 	
 var jsonCL = JSON.parse('${jsonCL}');
 
- 			for (var k = 0; k < jsonCL.length; k++) {
-			findWay(jsonCL[k]);
-		}
- 			
 displayPlaces(jsonCL); ///////////////////////////////////////////////////////////////////
 
-       
        
        
 // 검색 결과 목록과 마커를 표출하는 함수입니다
@@ -325,6 +304,12 @@ function displayPlaces(places) {
     fragment = document.createDocumentFragment(), 
     bounds = new daum.maps.LatLngBounds(), 
     listStr = '';
+    
+    for (var k = 0; k < jsonCL.length; k++) {
+		findWay(jsonCL[k]);
+	}
+    
+    ////////////////
     
     for ( var i=0; i<places.length; i++ ) {
 		
@@ -440,20 +425,12 @@ function addMarker(position, idx, title) {
     return marker;
 }
 
-// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-function removeMarker() {
-    for ( var i = 0; i < markers.length; i++ ) {
-        markers[i].setMap(null);
-    }   
-    markers = [];
-}
-
 
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, items) {
-var content = '<div style="padding:5px; z-index:1;"><table><tr><td>'+items.title+'</td></tr><tr><td>'+items.newAddress+'</td></tr></div>';
+var content = '<div style="padding:5px; z-index:1;">'+items.title+'</div>';
     
     infowindow.setContent(content);
     infowindow.open(map, marker);
@@ -473,6 +450,18 @@ function displayInfowindow2(marker, items) {
     infowindow2.setContent(content);
     infowindow2.open(map, marker);
 }
+
+
+
+
+//지도 위에 표시되고 있는 마커를 모두 제거합니다
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+
 
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {   
@@ -573,10 +562,6 @@ function findWay(items){
 			});
 		}
 
-		// 마우스 우클릭 하여 선 그리기가 종료됐을 때 호출하여 
-		// 그려진 선의 총거리 정보와 거리에 대한 도보, 자전거 시간을 계산하여
-		// HTML Content를 만들어 리턴하는 함수입니다
-		
 };
 
 
@@ -661,10 +646,33 @@ function getTimeHTML(distance) {
 }
 
 
+function deleteClickLine() {
+    if (clickLine) {
+        clickLine.setMap(null);    
+        clickLine = null;        
+    }
+}
+function deleteDistance () {
+    if (distanceOverlay) {
+        distanceOverlay.setMap(null);
+        distanceOverlay = null;
+    }
+}
+function deleteCircleDot() {
+    var i;
 
+    for ( i = 0; i < dots.length; i++ ){
+        if (dots[i].circle) { 
+            dots[i].circle.setMap(null);
+        }
 
+        if (dots[i].distance) {
+            dots[i].distance.setMap(null);
+        }
+    }
 
-
+    dots = [];
+}
 
 
 
