@@ -38,7 +38,7 @@
     <c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
 	<section id="content">
 
-	<div class="container">
+	<div class="container" style="height: 700px">
 		<div class="row">
 			<div class="col-lg-12">
 					<div class="row">

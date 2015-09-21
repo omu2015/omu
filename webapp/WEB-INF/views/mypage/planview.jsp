@@ -39,7 +39,7 @@
 
 		<section id="content">
 
-		<div class="container">
+		<div class="container" style="height: 700px">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="row">
@@ -51,7 +51,6 @@
 									<td>일정</td>
 									<td>상점이름</td>
 									<td>주소</td>
-									<td>비용</td>
 								</tr>
 								<c:forEach var="vo" items="${viewList }">
 									<c:if test="${vo.member_no==authUser.member_no}">
@@ -61,7 +60,6 @@
 											</td>
 											<td>${vo.title}</td>
 											<td>${vo.newAddress}</td>
-											<td>${vo.cost}</td>
 										</tr>
 									</c:if>
 								</c:forEach>

@@ -50,7 +50,7 @@ $(function(){
 
 		<section id="content">
 
-		<div class="container">
+		<div class="container" style="height: 700px">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="row">
@@ -62,7 +62,7 @@ $(function(){
 									<td>등록일</td>
 									<td>상점이름</td>
 									<td>주소</td>
-									<td>비용</td>
+									<td>좋아요 수</td>
 								</tr>
 								<c:forEach var="vo" items="${goodViewList }">
 									<c:if test="${vo.member_no==authUser.member_no}">
@@ -82,11 +82,11 @@ $(function(){
 									<div id="contentView${vo.content_no}" style="display: none;">
 								<c:choose>
 								<c:when test="${vo.imageUrl eq null }">
-										<div style="width: 600px">	<img src="http://www.starcity4000.com/network_new/network/home/bmamul/image/no_img413.gif" style="width: 600px"></div>
+										<div style="width: 620px">	<img src="http://www.starcity4000.com/network_new/network/home/bmamul/image/no_img413.gif" style="width: 600px"></div>
 								 </c:when>			
 							
 							    <c:otherwise>
-										<div style="width: 600px">
+										<div style="width: 650px">
 											<img src="${vo.imageUrl }">
 										</div>
 								 </c:otherwise>

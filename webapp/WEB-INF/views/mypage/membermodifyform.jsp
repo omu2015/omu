@@ -157,7 +157,7 @@
 	<c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
 	<!-- end header -->
 
-	<section id="content">
+	<section id="content" style="height: 700px">
 
 	<div class="container">
 		<div class="row">
