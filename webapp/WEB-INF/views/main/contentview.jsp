@@ -83,6 +83,7 @@
 					<div style="margin-top:10px">time : ${contentVo.time }</div>
 					<input type="hidden" name="member_no" value="${authUser.member_no }">
 					<input type="hidden" name="content_no" value="${contentVo.content_no }">
+					<a href="javascript:likegg(${contentVo.content_no },${authUser.member_no })">♥좋아요${good}</a>
 			</div>
 				<div id="staticMap" style="width:1170px;height:350px;margin-top:60px"></div> 
 				<h4 style="margin-top:40px">댓글</h4>
@@ -170,6 +171,21 @@ $.ajax({
  
 
 // 이미지 지도를 생성합니다
+</script>
+<script>
+function likegg( content_no, member_no){
+	$.ajax({
+		type : 'get',
+	    url:'/like',
+	    data : {
+	    		content_no : content_no,
+	    		member_no : member_no
+	    },
+	    dataType:'json',
+	    success: function(){
+	    },
+})
+}
 </script>
 
 

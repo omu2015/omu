@@ -47,9 +47,11 @@ public class GoodDao {
 		sqlMapClientTemplate.delete("good.delete", good_no);
 	}
 	
-	
 	public List<GoodVo> selectAllByCno(Long content_no) {
 		List<GoodVo> list=sqlMapClientTemplate.queryForList("good.selectAllByCno", content_no);
+		return list;
+	}public List<GoodVo> selectMno(Long member_no) {
+		List<GoodVo> list=sqlMapClientTemplate.queryForList("good.selectVoMno", member_no);
 		return list;
 	}
 	

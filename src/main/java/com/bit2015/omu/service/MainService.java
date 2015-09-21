@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.bit2015.omu.dao.CommentsDao;
 import com.bit2015.omu.dao.ContentDao;
+import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.MainDao;
 import com.bit2015.omu.dao.MemberDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
+import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
@@ -34,6 +36,8 @@ public class MainService {
 	CommentsDao commentsDao;
 	@Autowired
 	ThemeBoxDao themeBoxDao;
+	@Autowired
+	GoodDao goodDao;
 /*---------------------------------*/	
 	@Autowired
 	MemberDao memberDao;
@@ -111,5 +115,19 @@ public class MainService {
 		ContentVo contentVo = contentDao.selectVo(content_no);
 		return contentVo;
 	}
-	
+	public void insertGood(Long content_no, Long member_no){
+		GoodVo goodVo = new GoodVo();
+		goodVo.setContent_no(content_no);
+		goodVo.setMember_no(member_no);
+		goodDao.insert(goodVo);
+	}
+	public GoodVo selectMno(Long member_no, Long content_no){
+		GoodVo goodVo = goodDao.selectVoCnoMno(content_no, member_no);
+		return goodVo;
+	}
+	public List<GoodVo> selectCntNo(Long content_no){
+		List<GoodVo> list = goodDao.selectAllByCno(content_no);
+		return list;
+	}
+
 }

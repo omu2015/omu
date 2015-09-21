@@ -27,6 +27,11 @@
 			select * from GOOD where content_no=#content_no# and member_no=#member_no#
 		]]>
 	</select>
+	<select id="selectVoMno" parameterClass="java.lang.Long" resultClass="GoodVo">
+		<![CDATA[
+			select * from GOOD where member_no=#member_no#
+		]]>
+	</select>
 	
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[

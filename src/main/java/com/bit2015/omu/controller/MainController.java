@@ -18,13 +18,11 @@ import com.bit2015.omu.dao.ContentDao;
 import com.bit2015.omu.dao.MainDao;
 import com.bit2015.omu.service.MainService;
 import com.bit2015.omu.vo.CommentsVo;
-import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
+import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping()
@@ -52,6 +50,7 @@ public class MainController {
 			model.addAttribute("list3", list3);
 		}else{
 			List<ThemeVo> list3 = mainDao.getList3();
+			
 			model.addAttribute("themeList", list3);
 			Long member_no = memberVo.getMember_no();
 			Object[] getContent =mainService.selectContentByTheme(member_no);
@@ -68,6 +67,8 @@ public class MainController {
 		model.addAttribute("commentsList", list2);
 		ContentVo contentVo = mainService.getContent(content_no);
 		model.addAttribute("contentVo", contentVo);
+		List<GoodVo> list1 = mainService.selectCntNo(content_no);
+		model.addAttribute("good", list1.size());
 		return "/main/contentview";
 	}
 	
@@ -110,5 +111,16 @@ public class MainController {
 	 List<ThemeBoxVo> list = mainService.getThemeBox(member_no);
 	 
 	 return list;  
+  }
+  @RequestMapping("/like")
+  @ResponseBody
+  public void like(@RequestParam Long member_no, @RequestParam Long content_no, Model model){
+	  GoodVo goodVo = mainService.selectMno(member_no, content_no);
+	  if(goodVo == null){
+		  System.out.println("!");
+		  mainService.insertGood(content_no, member_no);
+		  List<GoodVo> list1 = mainService.selectCntNo(content_no);
+		  model.addAttribute("good", list1.size());
+	  }
   }
 }

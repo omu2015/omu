@@ -123,10 +123,9 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 	<c:forEach var="vo" items="${themeList }" varStatus="status">
 				<input type="hidden" name="member_no" value="${authUser.member_no }">
 				<div>
-				<input type="checkbox" name="theme_no" value="${vo.theme_no }">${vo.themeName}
+				<input class="checkTheme" type="checkbox" name="theme_no" value="${vo.theme_no }">${vo.themeName}
 				</div>
 	</c:forEach>
-				<h4 style="color:#ed0000">5개 이하로 선택해주세요</h4>
 				<input type="submit" value="관심사로검색" style="color:#000;margin-top:20px;width:150px;height:30px" >
 			</form>
 			</div>
@@ -148,6 +147,18 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 			    	}
 			    }
 			 })
+			 
+			</script>
+			<script>
+			$(function(){
+			    var max = 5;
+			    var checkboxes = $('input[type="checkbox"]');
+
+			    checkboxes.change(function(){
+			        var current = checkboxes.filter(':checked').length;
+			        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
+			    });
+			});
 			</script>
 
 
