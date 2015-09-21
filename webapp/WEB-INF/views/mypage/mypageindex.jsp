@@ -65,17 +65,19 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="../../assets/jsjquery.js"></script>
-<script src="../../assets/jsjquery.easing.1.3.js"></script>
-<script src="../../assets/jsbootstrap.min.js"></script>
-<script src="../../assets/jsjquery.fancybox.pack.js"></script>
-<script src="../../assets/jsjquery.fancybox-media.js"></script>
-<script src="../../assets/jsgoogle-code-prettify/prettify.js"></script>
-<script src="../../assets/jsportfolio/jquery.quicksand.js"></script>
-<script src="../../assets/jsportfolio/setting.js"></script>
-<script src="../../assets/jsjquery.flexslider.js"></script>
-<script src="../../assets/jsanimate.js"></script>
-<script src="../../assets/jscustom.js"></script>
-<script src="../../assets/jsvalidate.js"></script>
+	<script src="../../assets/js/jquery.js"></script>
+<script src="../../assets/js/jquery.easing.1.3.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="../../assets/js/jquery.fancybox.pack.js"></script>
+<script src="../../assets/js/jquery.fancybox-media.js"></script>
+<script src="../../assets/js/google-code-prettify/prettify.js"></script>
+<script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
+<script src="../../assets/js/portfolio/setting.js"></script>
+<script src="../../assets/js/jquery.flexslider.js"></script>
+<script src="../../assets/js/animate.js"></script>
+<script src="../../assets/js/custom.js"></script>
+<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
+<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 </body>
 </html>

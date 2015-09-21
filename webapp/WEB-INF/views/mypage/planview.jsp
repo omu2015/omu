@@ -21,8 +21,6 @@
 <link href="../../assets/css/style.css" rel="stylesheet" />
 <link href="../../assets/css/table.css" rel="stylesheet" />
 
-
-
 <!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
 
@@ -46,32 +44,30 @@
 				<div class="col-lg-12">
 					<div class="row">
 
-                       <div id="join-form">
-						<table border="1" style="margin:auto; text-align: center; width: 70%;" >
-							<tr style="background-color: pink;">
-								<td>등록일</td>
-								<td>상점이름</td>
-								<td>주소</td>
-								<td>비용</td>
-								<td>총비용</td>
-							</tr>
-							<c:forEach var="vo" items="${viewList }">
-								<c:if test="${vo.member_no==authUser.member_no}">
-									<tr>
-									  <td>${vo.regDate}</td>
-									  <td>${vo.title}</td>
-									  <td>${vo.newAddress}</td>
-									  <td>${vo.cost}</td>
-									  <td>${vo.totalCost}</td>
-									</tr>
-								</c:if>
-							</c:forEach>
-						</table>
+						<div id="join-form">
+							<table border="1"
+								style="margin: auto; text-align: center; width: 70%;">
+								<tr style="background-color: pink;">
+									<td>일정</td>
+									<td>상점이름</td>
+									<td>주소</td>
+									<td>비용</td>
+								</tr>
+								<c:forEach var="vo" items="${viewList }">
+									<c:if test="${vo.member_no==authUser.member_no}">
+										<tr id="${vo.contentBox_no}"  onclick= "clickEvent(${vo.plan_no})"	onmouseover="datecolor(this.className)"	class="${vo.planDate }">
+											<td>
+												<%-- <a href="/contentView?content_no=${vo.content_no}"> --%>${vo.planDate}<!-- </a> -->
+											</td>
+											<td>${vo.title}</td>
+											<td>${vo.newAddress}</td>
+											<td>${vo.cost}</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</table>
 
-
-
-
-          </div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -83,17 +79,38 @@
 	<!-- javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="../../assets/jsjquery.js"></script>
-	<script src="../../assets/jsjquery.easing.1.3.js"></script>
-	<script src="../../assets/jsbootstrap.min.js"></script>
-	<script src="../../assets/jsjquery.fancybox.pack.js"></script>
-	<script src="../../assets/jsjquery.fancybox-media.js"></script>
-	<script src="../../assets/jsgoogle-code-prettify/prettify.js"></script>
-	<script src="../../assets/jsportfolio/jquery.quicksand.js"></script>
-	<script src="../../assets/jsportfolio/setting.js"></script>
-	<script src="../../assets/jsjquery.flexslider.js"></script>
-	<script src="../../assets/jsanimate.js"></script>
-	<script src="../../assets/jscustom.js"></script>
-	<script src="../../assets/jsvalidate.js"></script>
+	<script src="../../assets/js/jquery.js"></script>
+	<script src="../../assets/js/jquery.easing.1.3.js"></script>
+	<script src="../../assets/js/bootstrap.min.js"></script>
+	<script src="../../assets/js/jquery.fancybox.pack.js"></script>
+	<script src="../../assets/js/jquery.fancybox-media.js"></script>
+	<script src="../../assets/js/google-code-prettify/prettify.js"></script>
+	<script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
+	<script src="../../assets/js/portfolio/setting.js"></script>
+	<script src="../../assets/js/jquery.flexslider.js"></script>
+	<script src="../../assets/js/animate.js"></script>
+	<script src="../../assets/js/custom.js"></script>
+	<script type="text/javascript"
+		src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
+	<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="/assets/js/jquery.leanModal.min.js"></script>
+
+	<script>
+		function datecolor(Obj) {
+			$('.' + Obj).css("background-color", "pink");
+			$('.' + Obj).mouseout(function() {
+				$('.' + Obj).css("background-color", "#fff");
+			})
+		};
+		
+		function clickEvent(plan_no) {
+			 location.href="/mypage/selectplanview?plan_no="+plan_no;
+		}
+	</script>
+
+
+
+
 </body>
 </html>

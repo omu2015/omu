@@ -132,7 +132,8 @@ public class MyPageService {
 		    calendarVo.setPlanDate(planDao.selectVo(plan_no).getPlanDate());
 		    calendarVo.setTotalCost(planDao.selectVo(plan_no).getTotalCost());
 		    calendarVo.setTotalTime(planDao.selectVo(plan_no).getTotalTime());
-		    
+		    calendarVo.setContentBox_no(contentBox_no);
+		    calendarVo.setPlan_no(plan_no);
 		    viewList.add(i, calendarVo);
 			
 		}
@@ -212,5 +213,15 @@ public class MyPageService {
 		    writeBoardList.add(writeBoardViewVo);
 		}
 		 return writeBoardList;
+	}
+	public Object[] getContentNo(Long plan_no){
+		List<ContentBoxVo> list = contentBoxDao.selectAllByPno(plan_no);
+		Object[] cntVo = new Object[list.size()];
+		for(int i=0; i<list.size(); i++){
+			ContentBoxVo contentBoxVo = new ContentBoxVo();
+			contentBoxVo = list.get(i);
+			cntVo[i] = contentDao.selectVo(contentBoxVo.getContent_no());
+		}
+		return cntVo;
 	}
 }
