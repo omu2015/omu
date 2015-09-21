@@ -59,18 +59,16 @@ $(function(){
 							<table border="1"
 								style="margin: auto; text-align: center; width: 70%;">
 								<tr style="background-color: pink;">
-									<td>등록일</td>
 									<td>상점이름</td>
 									<td>주소</td>
 									<td>좋아요 수</td>
 								</tr>
 								<c:forEach var="vo" items="${goodViewList }">
 									<c:if test="${vo.member_no==authUser.member_no}">
-										<tr>
-											<td>${vo.regDate}</td>
+										<tr  id="color" onmouseover="datecolor(this.className)"	class="${vo.content_no }" onclick="clickEvent" >
 											<td><a href="#contentView${vo.content_no}" id="hanitrigger${vo.content_no}">${vo.title}</a></td>
 											<td>${vo.newAddress}</td>                  
-											<td>${vo.cost}</td>
+											<td>${vo.member_no }</td>
 										</tr>
 									</c:if>
 								</c:forEach>
@@ -125,5 +123,16 @@ $(function(){
 <script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
+
+<script type="text/javascript">
+function datecolor(Obj) {
+			$('.' + Obj).css("background-color", "pink");
+			$('.' + Obj).mouseout(function() {
+				$('.' + Obj).css("background-color", "#fff");
+			})
+		};
+
+   
+</script>
 </body>
 </html>
