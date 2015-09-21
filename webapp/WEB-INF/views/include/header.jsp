@@ -116,15 +116,26 @@ h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
 
 <!-- 모달팝업 interset -->
 		<div>
-		<div id="interset" style="display:none;margin-top:200px">
-			<div style="width:1000px;background-color:#2f3238;color:#fff;height:150px;text-align:center;font-size:15px">
-				<div style="padding:10px;font-size:18px">${authUser.memberName }님의 관심사</div>
-			<form name ="interest" method="post" action="/interest">
-	<c:forEach var="vo" items="${list3 }" varStatus="status">
-				<span style="padding:10px">${vo.themeName }</span>
-				<input type="checkbox" name="${vo.themeName }">
+		<div id="interset" style="display:none;margin-top:50px">
+			<div style="width:800px;background-color:#2f3238;color:#fff;height:600px;text-align:center;font-size:15px">
+				<div style="padding:10px;font-size:18px;margin-bottom:20px">${authUser.memberName }님의 관심사</div>
+			<form name ="interest" method="post" action="/interestupdate">
+	<c:forEach var="vo" items="${themeList }" varStatus="status">
+				<input type="hidden" name="member_no" value="${authUser.member_no }">
+				<c:choose>
+				<c:when test="${vo.theme_no == authUser.member_no }">
+				<div>
+				<input type="checkbox" name="theme" value="${vo.theme_no }" checked>${vo.themeName }
+				</div>
+				</c:when>
+				<c:otherwise>
+				<div>
+				<input type="checkbox" name="theme" value="${vo.theme_no }">${vo.themeName }
+				</div>
+				</c:otherwise>
+				</c:choose>
 	</c:forEach>
-				<input type="submit" value="관심사로검색" style="color:#000" >
+				<input type="submit" value="관심사로검색" style="color:#000;margin-top:30px;width:150px;height:30px" >
 			</form>
 			</div>
 			</div>

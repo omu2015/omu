@@ -38,6 +38,13 @@ public class MainService {
 	@Autowired
 	MemberDao memberDao;
 	
+	
+	public void interest(HttpSession session ,Long member_no, ThemeBoxVo themeBoxVo){
+		List<ThemeBoxVo> list = themeBoxDao.selectAllByMm(member_no);
+		System.out.println(themeBoxVo);
+		themeBoxDao.insert(themeBoxVo);
+	}
+	
 	public void  insert (CommentsVo commentsVo){
 		commentsDao.insert(commentsVo);
 	}

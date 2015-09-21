@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +20,7 @@ import com.bit2015.omu.service.MainService;
 import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
 
 @Controller
@@ -48,6 +48,8 @@ public class MainController {
 			List<ThemeVo> list3 = mainDao.getList3();
 			model.addAttribute("list3", list3);
 		}else{
+			List<ThemeVo> list3 = mainDao.getList3();
+			model.addAttribute("themeList", list3);
 			Long member_no = memberVo.getMember_no();
 			Object[] getContent =mainService.selectContentByTheme(member_no);
 			for(int i = 0; i<getContent.length; i++){
@@ -60,7 +62,7 @@ public class MainController {
 	@RequestMapping("/contentView")
 	public String contentView(Model model, HttpSession session ,  @RequestParam Long content_no){
 		List<CommentsVo> list2 = mainDao.getList2();
-		model.addAttribute("list2", list2);
+		model.addAttribute("commentsList", list2);
 		ContentVo contentVo = mainService.getContent(content_no);
 		model.addAttribute("contentVo", contentVo);
 		return "/main/contentview";
@@ -85,11 +87,11 @@ public class MainController {
 	  return contentVo;	  
   }
  
-/*  @RequestMapping("/interest")
-	public String update(HttpSession session ,@ModelAttribute CommentsVo commentsVo){
-	        mainService.insert(session,commentsVo);
+  @RequestMapping("/interestupdate")
+	public String update(HttpSession session ,Long member_no, ThemeBoxVo themeBoxVo){
+	        mainService.interest(session, member_no, themeBoxVo);
 		return "redirect:/";	
-	} */
+	} 
 /*	@RequestMapping("/test123")
 	@ResponseBody
 	public ContentVo test123(@ModelAttribute ContentVo contentVo, HttpSession session, Model model){

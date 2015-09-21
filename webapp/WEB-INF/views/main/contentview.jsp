@@ -71,35 +71,43 @@
 	<section id="content">
 	<div class="container">
 		
-		<div>
+		<div style="margin:0">
 		<form method="post" action="/commentwrite">
-		<table>
-			<tr>
-				<td><img src="${contentVo.imageUrl }"></td>
-				<td>
-					<div>Category : ${contentVo.category }</div>
-					<div>title : ${contentVo.title }</div>
-					<div>address : ${contentVo.address }</div>
-					<div>phone : ${contentVo.phone }</div>
+			<img src="${contentVo.imageUrl }" style="width:300px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
+			<div style="font-size:15px;float:left;width:830px;margin-left:30px;margin-top:20px;">
+					<h4>title : ${contentVo.title }</h4>
+					<div style="margin-top:10px">Category : ${contentVo.category }</div>
+					<div style="margin-top:10px">address : ${contentVo.address }</div>
+					<div style="margin-top:10px">phone : ${contentVo.phone }</div>
+					<div style="margin-top:10px">cost : ${contentVo.cost }</div>
+					<div style="margin-top:10px">time : ${contentVo.time }</div>
 					<input type="hidden" name="member_no" value="${authUser.member_no }">
 					<input type="hidden" name="content_no" value="${contentVo.content_no }">
-				</td>
-			</tr>
+			</div>
+				<div id="staticMap" style="width:1170px;height:350px;margin-top:60px"></div> 
+				<h4 style="margin-top:40px">댓글</h4>
+			<div style="margin-top:10px">
+			<table style="margin-left:0">
 			<tr>
-				<td><div id="staticMap" style="width:1000px;height:350px;"></div> </td>
+				<td style="width:85%"><input type="text" name="message" maxlength="135" size="155"  ></td>
+				<td style="width:9%"><input type="text" value="${authUser.memberName }" size="10"></td>
+				<td style="width:6%"><input type="submit" value="덧글등록"></td>
 			</tr>
-			<tr>
-				<td><input type="text" name="message"></td>
-				<td>${authUser.memberName }</td>
-				<td><input type="submit" value="덧글등록"></td>
-			</tr>
-		</table>
+			</table>
+			</div>	
 		</form>
 
+<!-- 덧글 리스트 -->
 
-		<c:forEach var="vo" items="${list2}" varStatus="status">
+		<table style="margin-top:20px;font-size:15px;border:1px solid #e1e1e1">
+		<tr>
+			<th style="width:69%">댓글</th>
+			<th style="width:8%">이름</th>
+			<th style="width:15%">날짜</th>
+			<th style="width:8%">삭제</th>
+		</tr>
+		<c:forEach var="vo" items="${commentsList}" varStatus="status">
 		<c:if test="${contentVo.content_no eq vo.content_no }">
-		<table>
 			<tr>
 				<td>${vo.message }</td>
 				<td>${vo.member_no }</td>
@@ -109,13 +117,14 @@
 				<td><a href="/commentdelete?content_no=${contentVo.content_no }">삭제</a></td>
 		</c:when>
 		<c:otherwise>
+				<td></td>
 		</c:otherwise>
 		</c:choose>
 			</tr>
-		</table>
-		</c:if>
+					</c:if>
 		</c:forEach>
-
+			
+		</table>
 
 			</div>
 	</div>
