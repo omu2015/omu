@@ -24,6 +24,10 @@ public class MemberDao {
 		List<MemberVo> list= sqlMapClientTemplate.queryForList("member.selectAll");
 		return list;
 	}
+	public List<MemberVo> selectId(String memberId){
+		List<MemberVo> list= sqlMapClientTemplate.queryForList("member.selectId", memberId);
+		return list;
+	}
 	
 	public MemberVo selectVo(Long member_no){
 		MemberVo memberVo = (MemberVo) sqlMapClientTemplate.queryForObject("member.selectVo", member_no);

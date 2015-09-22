@@ -1,5 +1,9 @@
 package com.bit2015.omu.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit2015.omu.service.MemberService;
 import com.bit2015.omu.vo.MemberVo;
@@ -54,5 +59,18 @@ public class MemberController {
 		session.removeAttribute( "authUser" );
 		session.invalidate();
 		return "redirect:/";
+	}
+	@RequestMapping("/checkId")
+	@ResponseBody
+	public Map checkId(@RequestParam String memberId){
+		List<MemberVo> list = memberService.selectId(memberId);
+		Map<String, String> map = new HashMap<String, String>();
+		if(list.isEmpty()){
+			map.put("exist", "no exist");
+			return map;
+		}else{
+			map.put("exist" , "exist");
+			return map;
+		}
 	}
 }

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html >
 <head>
 <meta charset="utf-8">
 <title>오늘 뭐하지?</title>
@@ -14,19 +14,13 @@
 <!-- css -->
 <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="../../assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-<link href="../../assets/css/jcarousel.css" rel="stylesheet" />
 <link href="../../assets/css/flexslider.css" rel="stylesheet" />
 <link href="../../assets/css/style.css" rel="stylesheet" />
 <link href="../../assets/css/table.css" rel="stylesheet" />
 
 
-<!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
 
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 
 </head>
 <body>
@@ -56,12 +50,12 @@
 						<input type="button" name="imageUrl" style="display:block; width:100px; margin:0; text-align:center;" value="사진등록" />
 						</td>
 						<td class="title">이름</td>
-						<td><input id="name" name="memberName" type="" value=""></td>
+						<td><input type ="text" id="name" name="memberName" value=""></td>
 					</tr>
 					<tr>
 						<td class="title">아이디</td>
-						<td><input name="memberId" type="id" value="">
-							<input type="button" value="id 중복체크" ></td>
+						<td><input name="memberId" type="text" value="">
+							<input type="button" id="checkId" value="id 중복체크" ></td>
 					</tr>
 					<tr>
 						<td class="title"> 페스워드</td>
@@ -139,17 +133,43 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="../../assets/jsjquery.js"></script>
-<script src="../../assets/jsjquery.easing.1.3.js"></script>
-<script src="../../assets/jsbootstrap.min.js"></script>
-<script src="../../assets/jsjquery.fancybox.pack.js"></script>
-<script src="../../assets/jsjquery.fancybox-media.js"></script>
-<script src="../../assets/jsgoogle-code-prettify/prettify.js"></script>
-<script src="../../assets/jsportfolio/jquery.quicksand.js"></script>
-<script src="../../assets/jsportfolio/setting.js"></script>
-<script src="../../assets/jsjquery.flexslider.js"></script>
-<script src="../../assets/jsanimate.js"></script>
-<script src="../../assets/jscustom.js"></script>
-<script src="../../assets/jsvalidate.js"></script>
+<script src="../../assets/js/jquery.js"></script>
+<script src="../../assets/js/jquery.easing.1.3.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="../../assets/js/jquery.fancybox.pack.js"></script>
+<script src="../../assets/js/jquery.fancybox-media.js"></script>
+<script src="../../assets/js/google-code-prettify/prettify.js"></script>
+<script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
+<script src="../../assets/js/portfolio/setting.js"></script>
+<script src="../../assets/js/jquery.flexslider.js"></script>
+<script src="../../assets/js/animate.js"></script>
+<script src="../../assets/js/custom.js"></script>
+<script src="../../assets/js/validate.js"></script>
+<script>
+$('#checkId').click(function(){
+var checkId = document.getElementsByName('memberId')[1].value;
+var availId;
+	$.ajax({
+		type : 'get',
+	    url:'/member/checkId',
+	    data : {
+	    		memberId : checkId
+	    },
+	    dataType:'json',
+	    success: function(response){
+	    	console.log(response)
+			if(response.exist == "exist"){
+				alert("이미 존재합니다.");
+				availId = "no";
+				
+			}if(response.exist == "no exist"){
+				alert("사용가능합니다.");
+				availId = "yes";
+			}
+	    } 
+	 })
+})
+
+</script>
 </body>
 </html>

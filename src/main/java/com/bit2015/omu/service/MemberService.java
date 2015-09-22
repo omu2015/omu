@@ -1,5 +1,7 @@
 package com.bit2015.omu.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +22,8 @@ public class MemberService {
 		MemberVo vo = memberDao.get(memberVo.getMemberId(), memberVo.getPassword());
 		return vo;	
 	}
+	public List<MemberVo> selectId(String memberId){
+		List<MemberVo> list = memberDao.selectId(memberId);
+		return list;
+	} 
 }
