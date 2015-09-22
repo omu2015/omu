@@ -51,6 +51,11 @@ public class MainController {
 		}else{
 			List<ThemeVo> list3 = mainDao.getList3();
 			
+			for (int i = 0; i < list3.size(); i++) {
+				String[] array = list3.get(i).getThemeName().split(">");
+				list3.get(i).setThemeName(array[array.length-1]);
+			}
+			
 			model.addAttribute("themeList", list3);
 			Long member_no = memberVo.getMember_no();
 			Object[] getContent =mainService.selectContentByTheme(member_no);
@@ -69,9 +74,9 @@ public class MainController {
 		ContentVo contentVo = mainService.getContent(content_no);
 		model.addAttribute("contentVo", contentVo);
 		
-/*		List<MemberVo> list3 = mainService.selectVo(member_no);
-		model.addAttribute("memberVo", list3);
-		*/
+		/*MemberVo memberVo = mainService.selectVo(member_no);
+		model.addAttribute("memberVo", memberVo);*/
+		
 		List<GoodVo> list1 = mainService.selectCntNo(content_no);
 		model.addAttribute("good", list1.size());
 		return "/main/contentview";
@@ -85,7 +90,6 @@ public class MainController {
   
   @RequestMapping("/commentdelete")
   	public String delete(long comments_no){
-	  System.out.println(comments_no);
 	  commentsDao.delete(comments_no);
 	  return "redirect:/";
   }

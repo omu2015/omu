@@ -130,9 +130,9 @@ public class MainService {
 		return list;
 	}
 	
-/*	public List<MemberVo> selectVo(Long member_no){
-		List<MemberVo> list3 = memberDao.selectVo(member_no);
-		return list3;
+/*	public MemberVo selectVo(Long member_no){
+		MemberVo memberVo = memberDao.selectVo(member_no);
+		return memberVo;
 	}*/
 
 }

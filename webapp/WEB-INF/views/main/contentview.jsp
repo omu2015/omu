@@ -116,7 +116,7 @@
 				<td>${vo.regDate }</td>
 		<c:choose>
 		<c:when test="${authUser.member_no == vo.member_no }">
-				<td><a href="/commentdelete?content_no=${contentVo.content_no }">삭제</a></td>
+				<td><a href="/commentdelete?comments_no=${vo.comments_no }">삭제</a></td>
 		</c:when>
 		<c:otherwise>
 				<td></td>
