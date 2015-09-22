@@ -79,7 +79,7 @@ public class MyPageController {
 	
 	
 	@RequestMapping("goodview")
-	public String goodView(Model model){
+	public String goodView(Model model,Long content_no){
 		List<GoodViewVo> goodViewList = myPageService.selectGood();
 		 model.addAttribute("goodViewList", goodViewList);
 		return "/mypage/goodview";

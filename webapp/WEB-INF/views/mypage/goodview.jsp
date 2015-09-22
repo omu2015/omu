@@ -68,7 +68,7 @@ $(function(){
 										<tr  id="color" onmouseover="datecolor(this.className)"	class="${vo.content_no }" onclick="clickEvent" >
 											<td><a href="#contentView${vo.content_no}" id="hanitrigger${vo.content_no}">${vo.title}</a></td>
 											<td>${vo.newAddress}</td>                  
-											<td>${vo.member_no }</td>
+											<td>${vo.good_no }</td>
 										</tr>
 									</c:if>
 								</c:forEach>

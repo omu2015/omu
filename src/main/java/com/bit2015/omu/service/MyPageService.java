@@ -53,6 +53,7 @@ public class MyPageService {
 	
 	
 	FileUploader ful=new FileUploader();
+	 
 
 	/* 회원수정 */
 	public void memberModify(HttpSession session,
@@ -143,14 +144,23 @@ public class MyPageService {
 	public List<GoodViewVo> selectGood(){
 		List<GoodViewVo> goodViewList = new ArrayList<GoodViewVo>();
 		List<GoodVo> goodList =  goodDao.selectAll();
-		List<ContentVo> contentList = contentDao.selectAll();
-		List<MemberVo>  memberList = memberDao.selectAll();
+		//List<ContentVo> contentList = contentDao.selectAll();
+		//List<MemberVo>  memberList = memberDao.selectAll();
+	   
+		int sum = 0;
+		long count=0;
+		
 		for(int i = 0; i<goodList.size();i++){
 		GoodViewVo goodViewVo = new GoodViewVo();
-			long good_no= goodList.get(i).getGood_no();
+			//long good_no= goodList.get(i).getGood_no();
+			
 			long content_no = goodList.get(i).getContent_no();
 			long member_no = goodList.get(i).getMember_no();
 		 
+			//
+			long goodCnt =goodDao.selectAllByCno(content_no).size();
+			//
+			
 			goodViewVo.setContent_no(content_no);
 			goodViewVo.setRegDate(contentDao.selectVo(content_no).getRegDate());
 			goodViewVo.setMember_no(member_no);
@@ -169,9 +179,10 @@ public class MyPageService {
 			goodViewVo.setAddressBCode(contentDao.selectVo(content_no).getAddressBCode());
 			goodViewVo.setCost(contentDao.selectVo(content_no).getCost());
 			goodViewVo.setTime(contentDao.selectVo(content_no).getTime());
-			goodViewVo.setGood_no(good_no);
+			goodViewVo.setGood_no(goodCnt);
 			goodViewList.add(i,goodViewVo);
 		}
+	    System.out.println(count);
 		return goodViewList;
 	}
 	
