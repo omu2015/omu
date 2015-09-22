@@ -26,13 +26,28 @@
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 
 
-<!-- <style type="text/css">
-#container {width:960px;margin-left: auto;margin-right: auto;padding: 0;}
-.clear {clear: both;margin: 0;padding: 0;}
-p {margin: 1.6em 0;line-height: 1.6em;}
-h2 {font-size: 20px;line-height: 20px;margin: 22px 0 18px 0;}
-</style> -->
-
+<script>
+$(function(){
+	//사용자 입력값에 대한 Validation
+	$("form[name='loginform']").submit(function(){
+		//1. 아이디
+		var $memberId = $("#id")
+		var memberId = $memberId.val();
+		if(memberId ==""){
+			alert("아이디를 입력해주세요");
+			$memberId.focus();
+			return false;
+		}
+		var $password = $("#pw");
+		var password = $password.val();
+		if(password ==""){
+			alert("비밀번호를 입력해주세요");
+			$password.focus();
+			return false;		
+		}
+		return true;
+	});
+</script>
 
 
 <header>

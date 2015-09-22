@@ -75,7 +75,8 @@
 		<form method="post" action="/commentwrite">
 			<img src="${contentVo.imageUrl }" style="width:300px;padding:0px;border:solid 1px #e1e1e1;float:left;margin-bottom:20px">
 			<div style="font-size:15px;float:left;width:830px;margin-left:30px;margin-top:20px;">
-					<h4>title : ${contentVo.title }</h4>
+					
+					<h4 style="float:left">title : ${contentVo.title }</h4><img style="width:30px;margin:-2px 0 0 10px" src="/assets/img/like2.jpg"><span style="margin-left:-12px;color:#fff;font-weight:bold">${good }</span>
 					<div style="margin-top:10px">Category : ${contentVo.category }</div>
 					<div style="margin-top:10px">address : ${contentVo.address }</div>
 					<div style="margin-top:10px">phone : ${contentVo.phone }</div>
@@ -83,7 +84,7 @@
 					<div style="margin-top:10px">time : ${contentVo.time }</div>
 					<input type="hidden" name="member_no" value="${authUser.member_no }">
 					<input type="hidden" name="content_no" value="${contentVo.content_no }">
-					<a href="javascript:likegg(${contentVo.content_no },${authUser.member_no })">♥좋아요${good}</a>
+					<a href="javascript:likegg(${contentVo.content_no },${authUser.member_no })" ><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
 			</div>
 				<div id="staticMap" style="width:1170px;height:350px;margin-top:60px"></div> 
 				<h4 style="margin-top:40px">댓글</h4>
@@ -159,7 +160,6 @@ $.ajax({
  		mapOption = {
  			center : new daum.maps.LatLng(lat, lng), 
  			level : 3
- 		// 지도의 확대 레벨
  		};
  		var map = new daum.maps.Map(mapContainer, mapOption);
  			var marker = new daum.maps.Marker({
@@ -169,8 +169,6 @@ $.ajax({
     } 
  })
  
-
-// 이미지 지도를 생성합니다
 </script>
 <script>
 function likegg( content_no, member_no){
@@ -183,6 +181,7 @@ function likegg( content_no, member_no){
 	    },
 	    dataType:'json',
 	    success: function(){
+	    	alert("좋아요를 누르셨습니다.");
 	    },
 })
 }

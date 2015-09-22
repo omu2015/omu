@@ -65,8 +65,13 @@ public class MainController {
 	public String contentView(Model model, HttpSession session ,  @RequestParam Long content_no){
 		List<CommentsVo> list2 = mainDao.getList2();
 		model.addAttribute("commentsList", list2);
+		
 		ContentVo contentVo = mainService.getContent(content_no);
 		model.addAttribute("contentVo", contentVo);
+		
+/*		List<MemberVo> list3 = mainService.selectVo(member_no);
+		model.addAttribute("memberVo", list3);
+		*/
 		List<GoodVo> list1 = mainService.selectCntNo(content_no);
 		model.addAttribute("good", list1.size());
 		return "/main/contentview";

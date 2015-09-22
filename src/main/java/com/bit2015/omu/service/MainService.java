@@ -129,5 +129,10 @@ public class MainService {
 		List<GoodVo> list = goodDao.selectAllByCno(content_no);
 		return list;
 	}
+	
+/*	public List<MemberVo> selectVo(Long member_no){
+		List<MemberVo> list3 = memberDao.selectVo(member_no);
+		return list3;
+	}*/
 
 }
