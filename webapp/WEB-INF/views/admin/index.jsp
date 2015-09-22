@@ -10,6 +10,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
+<script>
+// var userAgent = navigator.userAgent;
+// alert(userAgent);
+
+var smartPhones = [ 'iphone', 'ipod', 'windows ce', 'android', 'blackberry', 'nokia',
+                    'webos', 'opera mini', 'sonyericsson', 'opera mobi', 'iemobile'];
+for(var i in smartPhones){
+	if(navigator.userAgent.toLowerCase().match(new RegExp(smartPhones[i]))){
+		alert('This is Smart Phones..!');
+		document.location='/mobile';
+	}
+}
+
+</script>
 <style type="text/css">
 #adminMainTable{
 	margin : 0 auto;
