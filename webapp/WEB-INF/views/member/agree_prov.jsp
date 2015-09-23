@@ -1,22 +1,201 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <style type="text/css">
-div{		width : 500px;	
-			border: 1px solid #000;
-			
+div.title a {
+	padding: 10px;
 }
-div.content{
-		height : 100px;
-		overflow-y: scroll;
+div.joinForm input[type=submit]{
+			float: right;
+}
+div input#phoneNum, select{
+width: 20%;
+font-size: 13px;
+  border-radius:5px;
+  font-family: 'Arial', Helvetica, sans-serif;
+}
+input[type="text"],input[type="password"] {
+  display: block;
+  margin: 0;
+  width: 50%;
+  font-family: 'Arial', Helvetica, sans-serif;
+  font-size: 13px;
+  border-radius: 5px;
+}
 
-	}
-div.agree, div.join {
+div input[type=submit] {
+	margin-top:5px;
+	padding: 5px 50px;
+	background: #FDB7C8;
+	border: 0 none;
+	cursor: pointer;
+	font-weight:bold;
+	color:#fff;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div input[type=button]{
+	margin:5px 10px;
+	padding: 5px 8px;
+	background: #FDB7C8;
+	border: 0 none;
+	cursor: pointer;
+	font-weight:bold;
+	color:#fff;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div input#checkId{
+	margin-top:-20px;
+	margin-left:120px;
+	position: fixed;
+}
+div input#photo{
+	margin-top:50px;
+}
+div.background-image {
+	width: 100%;
+	height: 100%;
+	background-image: url(/assets/img/joinback.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: fixed;
+	-webkit-filter: blur(2px);
+	z-index: 1;
+}
+
+div.subContent, div.joinForm {
+	padding: 10px;
+	margin: 300px 600px;
+	background: rgba(234, 234, 234, 0.6);
+	position: fixed;
+	z-index: 5;
+	width: 500px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	color: rgb(43, 43, 43);
+	border-radius: 5px;
+}
+
+div.title{
+	font-weight:bold;
+}
+div.content {
+	height: 100px;
+	overflow-y: scroll;
+	font-size: 10px;
+}
+
+div.agree {
+	font-size: 11px;
 	text-align: right;
+}
+div.join {
+	border-top: 2px solid #fff;
+	text-align: center;
 }
 </style>
 <script src="../../assets/js/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	//사용자 입력값에 대한 Validation
+	$("#joinForm").submit(function(){
+		//1.이름
+		var $name = $("#name");
+		var name = $name.val();
+		if(name==""){
+				alert("이름이 비어있습니다. 필수입력 사항입니다.");
+				$name.focus();
+				return false;
+		}
+		//2.id 체크
+		var $memberId = $("#memberId");
+		var memberId = $memberId.val();
+		if(memberId ==""){
+			alert("아이디가 비어있습니다. 필수입력 사항입니다.");
+			$memberId.focus();
+			return false;
+		}
+		// 4 ~ 12 자리 영(대,소), 숫자 만 입력 받기
+		var pattern = /^[A-Za-z0-9]{4,12}$/;
+		if( pattern.test(memberId) ==false){
+    		alert("유효한 형식이 아닙니다.");
+			$memberId.focus();
+			return false;
+    	} 
+		 
+		//3. 페스워드
+		var $password = $("#password");
+		var password = $password.val();
+		var $password1 = $("#password1");
+		var password1 = $password1.val();
+		if(password==""){
+			alert("페스워드가 비어있습니다.. 필수입력 사항입니다.");
+			$password.focus();
+			return false;
+			
+		}if(password !=password1){
+			alert("페스워드가 일치하지 않습니다.");
+			$password1.focus();
+			return false;
+			}
+		//4. email
+		var $email = $("#email");
+		var email = $email.val();
+		if(email ==""){
+			alert("이메일이 비어있습니다. 필수입력 사항입니다.");
+			$email.focus();
+			return false;
+		}
+	 	//정규표현식 [a-zA-z0-9]
+	 	var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    	if( re.test(email) ==false){
+    		alert("유효한 이메일 형식이 아닙니다.");
+			$email.focus();
+			return false;
+    	}
+		return true;
+	}) 
+		  // 이메일 중복 체크
+        $("#email").change(function(){
+           $("input[type='button']").show();
+           $("#email-checked").hide();
+           
+        });
+	// 이메일 중복 체크
+
+	$("#chackId").click(function() {
+			var $memberId = $("#memberId");
+			var memberId = $memberId.val();
+			if (memberId == "") {
+				return;
+			}
+			$.ajax({
+				type : 'get',
+				url : '/member/checkId',
+				data : {
+					memberId : memberId
+				},
+				dataType : 'json',
+				success : function(response) {
+					console.log(response)
+					if (response.exist == "exist") {
+						alert("이미 존재합니다.");
+						availId = "no";
+					}
+					if (response.exist == "no exist") {
+						alert("사용가능합니다.");
+						availId = "yes";
+					}
+				}
+			});
+		});
+	}) // 이메일 중복 체크
+</script>
 <script>
 $(function(){
 	$("#agreeProv").submit(function(){
@@ -25,33 +204,66 @@ $(function(){
 		var agree1 = $(':radio[name="agree1"]:checked').val();
 		if(agree1=="no"){
 				alert("서비스 이용약관 동의가 필요 합니다.");
-				$agree1.focus();
 				return false;
 		}
 		var agree2 = $(':radio[name="agree2"]:checked').val();
 		if(agree2=="no"){
 				alert("개인정보 취급방침 동의가 필요 합니다.");
-				$agree2.focus();
 				return false;
 		}
 		var agree3 = $(':radio[name="agree3"]:checked').val();
 		if(agree3=="no"){
 				alert("위치 정보 이용 약관 동의가 필요 합니다.");
-				$agree3.focus();
 				return false;
 		}
 	})
 })
+function showAgree1(){
+	$('#agree1').toggle();
+	}
+function showAgree2(){
+	$('#agree2').toggle();
+	}
+function showAgree3(){
+	$('#agree3').toggle();
+	}
+
+function agreeChange(){
+	var agree1 = $(':radio[name="agree1"]:checked').val();
+	if(agree1=="yes"){
+		$("#agree1").hide();
+	}
+	var agree2 = $(':radio[name="agree2"]:checked').val();
+	if(agree2=="yes"){
+		$("#agree2").hide();
+	}
+	var agree3 = $(':radio[name="agree3"]:checked').val();
+	if(agree3=="yes"){
+		$("#agree3").hide();
+	}
+	
+}
+function joinForm(){
+	$(".subContent").hide();
+	$(".joinForm").show();
+}
 </script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>오늘 뭐하지?</title>
 </head>
-<body>	<form id="agreeProv" method="post" action="/member/joinForm">
+<body>	
+<div id="wrapper">
+	<!-- start header -->
+	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+	<!-- end header -->
+	<div class="background-image"></div>
+		<div class="subContent">
+		<form id="agreeProv" method="post" action="javascript:joinForm();">
 		<div class="title">
-			서비스 이용약관
+			서비스 이용약관<a href="javascript:showAgree1();"><img src="/assets/img/button/view.png"></a>
 		</div>
-		<div class="content">
+		<div class="content" id="agree1" style="display:none">
 			제 1 장 총 칙 제 1 조 (목적) 이 이용약관(이하 '약관'이라 합니다.)은 (주)야놀자(이하 '회사'라
 				합니다.)와 이용 고객(이하 '회원'이라 합니다.)간에 회사가 제공하는 서비스(이하 '서비스'라 합니다.)를 이용함에 있어
 				회원과 회사간의 권리, 의무 및 책임사항, 이용조건 및 절차 등 기본적인 사항을 규정함을 목적으로 합니다. 제 2 조
@@ -300,13 +512,13 @@ $(function(){
 				복제나 배포 등 기타 저작권 침해행위를 일체 금합니다.
 		</div>
 		<div class="agree">
-			동의<input type="radio" name="agree1" value="yes">
-			동의 안함<input type="radio" name="agree1" value="no" checked>
+			동의<input type="radio" name="agree1" value="yes" onchange="agreeChange()">
+			동의 안함<input type="radio" name="agree1" value="no" onchange="agreeChange()" checked>
 		</div>
 		<div class="title">
-			개인정보 취급방침
+			개인정보 취급방침<a href="javascript:showAgree2();"><img src="/assets/img/button/view.png"></a>
 		</div>
-		<div class="content">
+		<div class="content" id="agree2" style="display:none">
 				본 개인정보취급방침에서 사용하는 용어의 정의는 다음과 같습니다. 개인정보 : 생존하는 개인에 관한 정보로서
 				당해 정보에 포함되어 있는 성명, 주민등록번호 등의 사항에 의하여 당해 개인을 식별할 수 있는 정보(당해 정보만으로는 특정
 				개인을 식별할 수 없더라도 다른 정보와 용이하게 결합하여 식별할 수 있는 것을 포함합니다.)를 말합니다. 회원 : 회사에
@@ -440,13 +652,13 @@ $(function(){
 				고지할 것입니다. 2.공고일자 : 2013년 8월 19일 3.시행일자 : 2013년 8월 29일</td>
 		</div>
 		<div class="agree">
-			동의<input type="radio" name="agree2" value="yes">
-			동의 안함<input type="radio" name="agree2" value="no" checked>
+			동의<input type="radio" name="agree2" value="yes" onchange="agreeChange()">
+			동의 안함<input type="radio" name="agree2" value="no" onchange="agreeChange()" checked>
 		</div>
 		<div class="title">
-			위치 정보 이용 약관
+			위치 정보 이용 약관<a href="javascript:showAgree3();"><img src="/assets/img/button/view.png"></a>
 		</div>
-		<div class="content">
+		<div class="content" id="agree3" style="display:none">
 				제 1 장 총칙 제 1 조 (목적) 본 약관은 야놀자(이하 "회사"라 합니다)가 운영, 제공하는
 				위치기반서비스(이하 “서비스”)를 이용함에 있어 회사와 고객 및 개인위치정보주체의 권리,의무 및 책임사항에 따른 이용조건
 				및 절차 등 기본적인 사항을 규정함을 목적으로 합니다. 제 2 조 (이용약관의 효력 및 변경) 1. 본 약관은 서비스를
@@ -576,12 +788,90 @@ $(function(){
 				적용됩니다.
 		</div>
 		<div class="agree">
-			동의<input type="radio" name="agree3" value="yes">
-			동의 안함<input type="radio" name="agree3" value="no" checked>
+			동의<input type="radio" name="agree3" value="yes" onchange="agreeChange()">
+			동의 안함<input type="radio" name="agree3" value="no" onchange="agreeChange()" checked>
 		</div>
 		<div class="join"><input type="submit" value="가입하기">
 		</div>
 		</form>
-
+		</div>
+		
+		<div class="joinForm" style="display:none">
+		<form id="joinForm" method="post" action="/member/join">
+							<div id="join-form">
+								<table>
+									<tr>
+										<td id="photo" rowspan="4">Photo <input id="photo" type="button"
+											name="imageUrl"
+											value="사진등록" />
+										</td>
+										<td class="title">이 름</td>
+										<td><input type="text" id="name" name="memberName"
+											value=""></td>
+									</tr>
+									<tr>
+										<td class="title">아이디</td>
+										<td><input name="memberId" id="memberId" type="text" value="">
+											<input type="button" id="checkId" value="id 중복체크"></td>
+									</tr>
+									<tr>
+										<td class="title">패스워드</td>
+										<td><input name="password" id="password" type="password" value=""></td>
+									</tr>
+									<tr>
+										<td class="title">패스워드 확인</td>
+										<td><input name="password1" id="password1" type="password" value=""></td>
+									</tr>
+									<tr>
+										<td class="title">이메일</td>
+										<td colspan="2"><input id="email" name="email"
+											type="text" value=""></td>
+									</tr>
+									<tr>
+										<td class="title">생년월일</td>
+										<td colspan="2"><select name="year">
+												<c:forEach var="i" begin="1960" end="2015">
+													<option value="${i}">${i}</option>
+												</c:forEach>
+										</select> <select name="month">
+												<c:forEach var="i" begin="1" end="12">
+													<option value="${i}">${i}</option>
+												</c:forEach>
+										</select> <select name="day">
+												<c:forEach var="i" begin="1" end="31">
+													<option value="${i}">${i}</option>
+												</c:forEach>
+										</select></td>
+									</tr>
+									<tr>
+										<td rowspan="2" class="title">주소</td>
+										<td colspan="2"><input type="text "name="zipcode" id="zipcode"
+											class="txt" style="width: 10%; text-align: center;"
+											maxlength="6" value="" readonly="readonly"/><input type="button"
+											name="searchPost" value="우편번호검색" /></td>
+									</tr>
+									<tr>
+										<td colspan="2"><input type="text" name="address" id="address"
+											class="txt" style="width: 100%;" value="" readonly="readonly" /></td>
+									</tr>
+									<tr>
+										<td class="title">연락처</td>
+										<td colspan="2"><select name="phoneNum1">
+												<option value="010" selected>010</option>
+												<option value="011">011</option>
+												<option value="016">016</option>
+												<option value="017">017</option>
+												<option value="019">019</option>
+												<option value="">없음</option>
+										</select> <input id="phoneNum"  name="phoneNum2" maxlength="4" /> 
+													<input id="phoneNum" name="phoneNum3" maxlength="4" /></td>
+									</tr>
+									</table>
+										<input type="submit" value="가입하기">
+							</div>
+						</form>
+		
+		</div>
+</div>
 </body>
 </html>
