@@ -202,7 +202,6 @@ function newplan(plano){
 								<select name="plan_no" onchange="newplan(this.value)">
 									<c:choose>
 										<c:when test="${planVo.getPlan_no() ne 0}">
-											<option>true</option>
 											<option value="${planVo.getPlan_no()}">${planVo.getPlanDate()}</option>
 											<c:forEach var="vo" items="${planList}">
 											<option value="${vo.getPlan_no()}">${vo.getPlanDate()}_${vo.getPlan_no()}번</option>

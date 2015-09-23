@@ -24,7 +24,7 @@
 }
 
 .wsTable .messagebox{
-	height : 200px;
+	height : 100px;
 	padding: 15px 10px;
 	text-align : center;
 	width : 100%;
@@ -44,8 +44,10 @@
 
 <hr>
 <div style="text-align:right">
+<c:if test="${not empty authUser }">
 <button class="wsButton" onclick="location.href='/review/createboard'"><strong>후기 올리기</strong></button>
-<button class="wsButton"" onclick="location.href='/review'"><strong>목록</strong></button>
+</c:if>
+<button class="wsButton" onclick="location.href='/review'"><strong>목록</strong></button>
 </div>
 <div class="wsTable">
 	<c:forEach var="vo" items="${reviewList }">
