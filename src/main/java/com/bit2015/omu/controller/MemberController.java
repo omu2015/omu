@@ -27,10 +27,6 @@ public class MemberController {
 	public String joinForm(){
 		return "/member/join_form";
 	}
-	@RequestMapping("/agreeForm")
-	public String agreeForm(){
-		return "/member/agree_prov";
-	}
 	
 	@RequestMapping("/join")
 	public String join(@ModelAttribute MemberVo memberVo,

@@ -1,0 +1,99 @@
+@CHARSET "UTF-8";
+
+input::-webkit-input-placeholder { font-size: 7pt; color: #555; }
+
+div.title a {
+	padding: 10px;
+}
+div.joinForm input[type=submit]{
+			float: right;
+}
+div input#phoneNum, select{
+width: 20%;
+font-size: 13px;
+  border-radius:5px;
+  font-family: 'Arial', Helvetica, sans-serif;
+}
+input[type="text"],input[type="password"] {
+  display: block;
+  margin: 0;
+  width: 50%;
+  font-family: 'Arial', Helvetica, sans-serif;
+  font-size: 13px;
+  border-radius: 5px;
+}
+
+div input[type=submit] {
+	margin-top:5px;
+	padding: 5px 50px;
+	background: #FDB7C8;
+	border: 0 none;
+	cursor: pointer;
+	font-weight:bold;
+	color:#fff;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div input[type=button]{
+	margin:5px 10px;
+	padding: 5px 8px;
+	background: #FDB7C8;
+	border: 0 none;
+	cursor: pointer;
+	font-weight:bold;
+	color:#fff;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div input#checkId{
+	margin-top:-20px;
+	margin-left:120px;
+	position: fixed;
+}
+div input#photo{
+	margin-top:50px;
+}
+div input#zip{
+	margin-top:-20px;
+	margin-left: 50px;
+}
+div.background-image {
+	width: 100%;
+	height: 100%;
+	background-image: url(/assets/img/joinback.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: fixed;
+	-webkit-filter: blur(2px);
+	z-index: 1;
+}
+
+div.subContent, div.joinForm {
+	padding: 10px;
+	margin: 300px 600px;
+	background: rgba(234, 234, 234, 0.6);
+	position: fixed;
+	z-index: 5;
+	width: 500px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	color: rgb(43, 43, 43);
+	border-radius: 5px;
+}
+
+div.title{
+	font-weight:bold;
+}
+div.content {
+	height: 100px;
+	overflow-y: scroll;
+	font-size: 10px;
+}
+
+div.agree {
+	font-size: 11px;
+	text-align: right;
+}
+div.join {
+	border-top: 2px solid #fff;
+	text-align: center;
+}
