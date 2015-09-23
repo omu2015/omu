@@ -20,6 +20,12 @@
 			select * from board where board_no=#board_no#
 		]]>
 	</select>
+	
+	<select id="selectVoByPno" parameterClass="java.lang.Long" resultClass="BoardVo">
+		<![CDATA[
+			select * from board where plan_no=#plan_no#
+		]]>
+	</select>
 
 	<delete id="delete" parameterClass="java.lang.Long">
 		<![CDATA[
