@@ -41,7 +41,7 @@
 
 		<section id="content">
 
-		<div class="container" style="height: 700px">
+		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="row">
@@ -57,12 +57,9 @@
 								<c:forEach var="vo" items="${viewList }">
 									<c:if test="${vo.member_no==authUser.member_no}">
 										<tr id="${vo.contentBox_no}"  onclick= "clickEvent(${vo.plan_no})"	onmouseover="datecolor(this.className)"	class="${vo.plan_no }">
-											<td>
-												<%-- <a href="/contentView?content_no=${vo.content_no}"> --%>${vo.planDate}<!-- </a> -->
-											</td>
+											<td>${vo.planDate}</td>
 											<td>${vo.title}</td>
 											<td>${vo.newAddress}</td>
-											<td>${vo.plan_no }</td>
 										</tr>
 									</c:if>
 								</c:forEach>
