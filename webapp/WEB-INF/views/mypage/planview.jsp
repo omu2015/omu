@@ -47,19 +47,20 @@
 						<div id="join-form">
 							<table border="1"
 								style="margin: auto; text-align: center; width: 70%;">
-								<tr style="background-color: pink;">
+								<tr style="background-color: #FDB7C8;">
 									<td>일정</td>
 									<td>상점이름</td>
 									<td>주소</td>
 								</tr>
 								<c:forEach var="vo" items="${viewList }">
 									<c:if test="${vo.member_no==authUser.member_no}">
-										<tr id="${vo.contentBox_no}"  onclick= "clickEvent(${vo.plan_no})"	onmouseover="datecolor(this.className)"	class="${vo.planDate }">
+										<tr id="${vo.contentBox_no}"  onclick= "clickEvent(${vo.plan_no})"	onmouseover="datecolor(this.className)"	class="${vo.plan_no }">
 											<td>
 												<%-- <a href="/contentView?content_no=${vo.content_no}"> --%>${vo.planDate}<!-- </a> -->
 											</td>
 											<td>${vo.title}</td>
 											<td>${vo.newAddress}</td>
+											<td>${vo.plan_no }</td>
 										</tr>
 									</c:if>
 								</c:forEach>

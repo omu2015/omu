@@ -51,6 +51,10 @@ public class MemberDao {
 		return vo;
 	}
 	
+	public  void memberLeave (MemberVo memberVo){
+		sqlMapClientTemplate.update("member.memberLeave",memberVo);
+	}
+	
 	
 	
 	

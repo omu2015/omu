@@ -46,7 +46,7 @@
 					<div id="join-form">
 					<table>
 					 <tr>
-					     ${authUser.memberName }님 정말 탈퇴 하실껀가요?
+					     <td>${authUser.memberName }님 정말 탈퇴 하실껀가요?</td>
 					 </tr>
 			        <tr>
 						<td class="title">패스워드</td>

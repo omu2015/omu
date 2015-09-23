@@ -46,8 +46,8 @@ public class MyPageController {
 		return "/mypage/memberleave";		
 	}
 	@RequestMapping("memberleaveok")
-	public String memeberLeaveOk(HttpSession session ,@ModelAttribute MemberVo memberVo, String password1){
-	      myPageService.memberLeave(session, memberVo, password1);
+	public String memeberLeaveOk(HttpSession session ,@ModelAttribute MemberVo memberVo, String password1 ,String joinOutDate){
+	      myPageService.memberLeave(session, memberVo, password1, joinOutDate);
 	      session.removeAttribute( "authUser" );
 			session.invalidate();
 			return "redirect:/";
