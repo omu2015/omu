@@ -6,38 +6,99 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-</head>
+
+<html>
 <body>
 
 
-<header>
-        <div class="navbar navbar-default navbar-static-top">
-
-
-		<div id="menu_div">
-			<div id="navigation">
-				<div id="menu">
-			   		
-				 
-					
-					<ul class="nav navbar-nav" style="float: right;">
-                        <li class="active" ><a  href="/mypage/" >내플랜</a></li>
-                        <li><a  href="/mypage/goodview" >좋아요~</a></li>
-					    <li><a href="/mypage/boardview">내가 쓴 게시판</a></li>
-                        <li><a href="/mypage/membermodifyform">회원정보수정</a></li>
-                        <li><a  href="/mypage/memberleave" >회원탈퇴</a></li>
-                    </ul>
-                  
-               
-					
-				
-				
+	<header>
+	
+		<c:choose>
+			<c:when test="${param.pageName=='planView' }">
+				<div id="menu_div">
+					<div id="menu">
+						<ul class="nav navbar-nav" style="float: right;">
+							<li class="active"><a href="/mypage/">내플랜</a></li>
+							<li><a href="/mypage/goodview">좋아요~</a></li>
+							<li><a href="/mypage/boardview">내가 쓴 게시판</a></li>
+							<li><a href="/mypage/membermodifyform">회원정보수정</a></li>
+							<li><a href="/mypage/memberleave">회원탈퇴</a></li>
+						</ul>
+					</div>
 				</div>
-			</div>
-		</div>
+			</c:when>
 
-            </div>
-        <!-- </div> -->
+			<c:when test="${param.pageName=='goodView' }">
+				<div id="menu_div">
+					<div id="menu">
+						<ul class="nav navbar-nav" style="float: right;">
+							<li><a href="/mypage/">내플랜</a></li>
+							<li class="active"><a href="/mypage/goodview">좋아요~</a></li>
+							<li><a href="/mypage/boardview">내가 쓴 게시판</a></li>
+							<li><a href="/mypage/membermodifyform">회원정보수정</a></li>
+							<li><a href="/mypage/memberleave">회원탈퇴</a></li>
+						</ul>
+					</div>
+				</div>
+			</c:when>
+
+			<c:when test="${param.pageName=='selectPlanView' }">
+				<div id="menu_div">
+					<div id="menu">
+						<ul class="nav navbar-nav" style="float: right;">
+							<li><a href="/mypage/">내플랜</a></li>
+							<li><a href="/mypage/goodview">좋아요~</a></li>
+							<li class="active"><a href="/mypage/boardview">내가 쓴 게시판</a></li>
+							<li><a href="/mypage/membermodifyform">회원정보수정</a></li>
+							<li><a href="/mypage/memberleave">회원탈퇴</a></li>
+						</ul>
+					</div>
+				</div>
+			</c:when>
+
+			<c:when test="${param.pageName=='memberModify' }">
+				<div id="menu_div">
+					<div id="menu">
+						<ul class="nav navbar-nav" style="float: right;">
+							<li><a href="/mypage/">내플랜</a></li>
+							<li><a href="/mypage/goodview">좋아요~</a></li>
+							<li><a href="/mypage/boardview">내가 쓴 게시판</a></li>
+							<li class="active"><a href="/mypage/membermodifyform">회원정보수정</a></li>
+							<li><a href="/mypage/memberleave">회원탈퇴</a></li>
+						</ul>
+					</div>
+				</div>
+			</c:when>
+
+			<c:when test="${param.pageName=='memberLeave' }">
+				<div id="menu_div">
+					<div id="menu">
+						<ul class="nav navbar-nav" style="float: right;">
+							<li><a href="/mypage/">내플랜</a></li>
+							<li><a href="/mypage/goodview">좋아요~</a></li>
+							<li><a href="/mypage/boardview">내가 쓴 게시판</a></li>
+							<li><a href="/mypage/membermodifyform">회원정보수정</a></li>
+							<li class="active"><a href="/mypage/memberleave">회원탈퇴</a></li>
+						</ul>
+					</div>
+				</div>
+			</c:when>
+
+			 <c:otherwise>
+				<div id="menu_div">
+					<div id="menu">
+						<ul class="nav navbar-nav" style="float: right;">
+							<li><a href="/mypage/">내플랜</a></li>
+							<li><a href="/mypage/goodview">좋아요~</a></li>
+							<li><a href="/mypage/boardview">내가 쓴 게시판</a></li>
+							<li><a href="/mypage/membermodifyform">회원정보수정</a></li>
+							<li><a href="/mypage/memberleave">회원탈퇴</a></li>
+						</ul>
+					</div>
+				</div>
+			</c:otherwise> 
+		</c:choose>
+
 	</header>
 
 

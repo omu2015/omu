@@ -34,7 +34,9 @@
 	<div id="wrapper">
 		<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-		<c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/header_mypage.jsp">
+		<c:param name="pageName" value="planView"/>
+		</c:import>
 		<!-- end header -->
 
 		<section id="content">

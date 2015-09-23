@@ -154,10 +154,12 @@
 <div id="wrapper">
 	<!-- start header -->
 	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-	<c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
+	<c:import url="/WEB-INF/views/include/header_mypage.jsp">
+	  <c:param name="pageName" value="memberModify"/>
+	</c:import>
 	<!-- end header -->
 
-	<section id="content" style="height: 700px">
+	<section id="content" style="height: 790px">
 
 	<div class="container">
 		<div class="row">

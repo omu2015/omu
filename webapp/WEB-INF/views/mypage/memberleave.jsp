@@ -35,7 +35,9 @@
 <div id="wrapper">
 	<!-- start header -->
 	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-    <c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
+    <c:import url="/WEB-INF/views/include/header_mypage.jsp">
+    <c:param name="pageName" value="memberLeave"/>
+    </c:import>
 	<section id="content">
 
 	<div class="container" style="height: 700px">
