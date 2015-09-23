@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -131,6 +133,10 @@ public class ReviewService {
 		String jsonCL = jsonn((ArrayList<?>) contentList2);
 		// System.out.println("show board jsonCL == " + jsonCL);
 		BoardVo boardVo = boardDao.selectVoByPno(plan_no);
+		if(boardVo.getMessage()!=null){
+			//엔터키 바까주기
+		boardVo.setMessage(boardVo.getMessage().replaceAll("\r\n", "\r\n<br>"));
+		}
 		PlanVo planVo = planDao.selectVo(plan_no);
 		// imgbox 가져오기
 		List<BoardImgBoxVo> boardImgBoxList = boardImgBoxDao
@@ -141,12 +147,25 @@ public class ReviewService {
 				.getMemberId();
 
 		// 댓글리스트 갖고오기
+		Map<String, ArrayList<?>> commentsMap= new HashMap<String, ArrayList<?>>();
 		List<BoardCommentsVo> boardCommentsList = boardCommentsDao
 				.selectAllByBno(boardVo.getBoard_no());
-
+		commentsMap.put("boardCommentsList", (ArrayList<?>) boardCommentsList);
+		// memberList 가져오기
+		List<MemberVo> memberList=new ArrayList<MemberVo>();
+		for (int i = 0; i < boardCommentsList.size(); i++) {
+			memberList.add(memberDao.selectVo(boardCommentsList.get(i).getMember_no()));
+		}
+		commentsMap.put("memberList", (ArrayList<?>) memberList);
+		
+		
+		//commentsMap.get("boardCommentsList");
+		
+		
+		//reviewList
 		List<ReviewVo> reviewList = getReviewList();
 
-		model.addAttribute("boardCommentsList", boardCommentsList);
+		model.addAttribute("commentsMap", commentsMap);
 		model.addAttribute("planVo", planVo);
 		model.addAttribute("memberId", memberId);
 		model.addAttribute("boardImgBoxList", boardImgBoxList);

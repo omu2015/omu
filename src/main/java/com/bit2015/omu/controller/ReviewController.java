@@ -67,8 +67,6 @@ public class ReviewController {
    @RequestMapping("/insertboard")
    public String insertBoard(Model model, BoardVo boardVo, HttpSession session, @RequestParam(defaultValue="0") Long totalCost, @RequestParam(defaultValue="0") Long totalTime, @RequestParam(required=false)MultipartFile img ){
 	   System.out.println("insertboadr ctrl ===  "  + boardVo.toString());
-	   System.out.println("totalCost ==  " + totalCost);
-	   System.out.println("totalTime ==" + totalTime);
 	   
 	   reviewService.insertBoard(model, boardVo, session, totalCost, totalTime, img);
 	   
