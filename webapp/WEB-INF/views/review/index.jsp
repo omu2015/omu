@@ -123,8 +123,8 @@ function addTheme(Obj) {
     	sort : daum.maps.services.SortBy.DISTANCE
      }); */
 }
-
-
+</script>
+<script>
 </script>
 <body>
 <div id="wrapper">
@@ -164,7 +164,7 @@ function addTheme(Obj) {
 												        <div class="option">
 												            <p>
 												                <form onsubmit="searchPlaces(); return false;">
-												                 <input type="text" value="서울특별시청" id="keyword" size="15">
+												                 <input type="text" value="" id="keyword" size="15">
 												                 <strong></strong> 
 												                <button type="submit">주소,장소 검색</button> 
 												            </p>
@@ -204,18 +204,42 @@ function addTheme(Obj) {
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 <script>
+			var options = {
+		  enableHighAccuracy: true,
+		  timeout: 5000,
+		  maximumAge: 0
+		};
+
+		function success(pos) {
+		  var crd = pos.coords;
+ 		  map.setCenter(new daum.maps.LatLng(crd.latitude, crd.longitude));
+
+		  console.log('Your current position is:');
+		  console.log('Latitude : ' + crd.latitude);
+		  console.log('Longitude: ' + crd.longitude);
+		  console.log('More or less ' + crd.accuracy + ' meters.');
+		  
+		};
+
+		function error(err) {
+		  console.warn('ERROR(' + err.code + '): ' + err.message);
+		};
+
+
+
 		var markers = [];
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			mapOption = {center : new daum.maps.LatLng(37.566826, 126.9786567),	level : 6};
+			mapOption = {center : new daum.maps.LatLng(37.566826, 126.9786567),	level : 3};
 		var map = new daum.maps.Map(mapContainer, mapOption);
+		navigator.geolocation.getCurrentPosition(success, error, options);
 		
 		var ps = new daum.maps.services.Places();
 		var infowindow = new daum.maps.InfoWindow({	zIndex : 1});
 		var planlistwindow = new daum.maps.InfoWindow({	zIndex : 1});
-
+		
 		
 		// 키워드 검색을 요청하는 함수입니다
-		searchPlaces();
+		//searchPlaces();
 		function searchPlaces() {
 			var keyword = document.getElementById('keyword').value;
 				if (!keyword.replace(/^\s+|\s+$/g, '')) {
@@ -240,7 +264,6 @@ function addTheme(Obj) {
 			}
 		}
 		
-///////////////////////////////		//////////////////////////////////////////////////////////////
 function planSearchCB(status, response, pagination) {
 	if (status === daum.maps.services.Status.OK) {
 		// 정상적으로 검색이 완료됐으면
@@ -253,9 +276,6 @@ function planSearchCB(status, response, pagination) {
 	}
 }
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////
 		// 검색 결과 목록과 마커를 표출하는 함수입니다
 		function displayPlaces(places) {
 	console.log(places);
@@ -275,10 +295,7 @@ function planSearchCB(status, response, pagination) {
 				var placePosition = new daum.maps.LatLng(places[i].latitude,places[i].longitude),
 					marker = addMarker(placePosition, i),
 					itemEl = getListItem(i, places[i], marker);
-				// 검색 결과 항목 Element를 생성합니다
 
-				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-				// LatLngBounds 객체에 좌표를 추가합니다
 				bounds.extend(placePosition);
 
 				(function(marker, items) {
@@ -483,3 +500,5 @@ function planSearchCB(status, response, pagination) {
 	
 	
 	</script>
+
+	

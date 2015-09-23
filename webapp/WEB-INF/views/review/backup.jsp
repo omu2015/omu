@@ -96,6 +96,36 @@
     border : 1px solid #E6D4D4;
 }
 </style>
+<script>
+function showTheme(Obj) {
+	var themeName=Obj.id.split("_").pop();
+	console.log(themeName);
+	console.log(map.getCenter());
+    //location.href="/review/showTheme?theme_no="+theme_no;
+    
+     ps.keywordSearch(themeName , planSearchCB, {
+     	location : map.getCenter(),
+    	radius : 1000,
+    	sort : daum.maps.services.SortBy.DISTANCE
+     });
+}
+function addTheme(Obj) {
+	location.href="#interset";
+	
+	/* var themeName=Obj.id.split("_").pop();
+	console.log(themeName);
+	console.log(map.getCenter());
+    //location.href="/review/showTheme?theme_no="+theme_no;
+    
+     ps.keywordSearch(themeName , planSearchCB, {
+     	location : map.getCenter(),
+    	radius : 1000,
+    	sort : daum.maps.services.SortBy.DISTANCE
+     }); */
+}
+</script>
+<script>
+</script>
 <body>
 <div id="wrapper">
 	<!-- start header -->
@@ -108,18 +138,19 @@
 				<div class="row">
 					<section id="woosungMain">
 					<ul>
-													<div class="PickTheme">
+															<c:if test="${not empty authUser}">
+													<div class="wsTable">
 													<table>
 															<tr>
-															<c:if test="${not empty authUser}">
 															<c:forEach var="vo" items="${memberTheme}">
-																<td><a href="/review/sortby?a=${vo.theme_no}">${vo.themeName}</a></td>
+																<td id="theme_Name_${vo.themeName}" onclick="showTheme(this)"
+																onmouseover="changeColor(this)">${vo.themeName}</td>
 															</c:forEach>
-															</c:if>
-															<td>내 관심사</td>
+																<td style="color:#fb6f92" onclick="addTheme(this)" onmouseover="changeColor(this)">테마 추가하기</td>
 															</tr>
 													</table>
 													</div>
+															</c:if>
 					</ul>
 					
 					<ul id="thumbs" class="portfolio">
@@ -133,8 +164,9 @@
 												        <div class="option">
 												            <p>
 												                <form onsubmit="searchPlaces(); return false;">
-												                 <input type="text" value="비트교육센터" id="keyword" size="15"> 
-												                <button type="submit">검색</button> 
+												                 <input type="text" value="" id="keyword" size="15">
+												                 <strong></strong> 
+												                <button type="submit">주소,장소 검색</button> 
 												            </p>
 												        </div>
 												        <hr>
@@ -172,6 +204,29 @@
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 <script>
+			var options = {
+		  enableHighAccuracy: true,
+		  timeout: 5000,
+		  maximumAge: 0
+		};
+
+		function success(pos) {
+		  var crd = pos.coords;
+
+		  console.log('Your current position is:');
+		  console.log('Latitude : ' + crd.latitude);
+		  console.log('Longitude: ' + crd.longitude);
+		  console.log('More or less ' + crd.accuracy + ' meters.');
+		  
+		  map.setCenter(new daum.maps.LatLng(crd.latitude, crd.longitude));
+		};
+
+		function error(err) {
+		  console.warn('ERROR(' + err.code + '): ' + err.message);
+		};
+
+
+
 		var markers = [];
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {center : new daum.maps.LatLng(37.566826, 126.9786567),	level : 6};
@@ -180,10 +235,11 @@
 		var ps = new daum.maps.services.Places();
 		var infowindow = new daum.maps.InfoWindow({	zIndex : 1});
 		var planlistwindow = new daum.maps.InfoWindow({	zIndex : 1});
-
 		
+		
+		navigator.geolocation.getCurrentPosition(success, error, options);
 		// 키워드 검색을 요청하는 함수입니다
-		searchPlaces();
+		//searchPlaces();
 		function searchPlaces() {
 			var keyword = document.getElementById('keyword').value;
 				if (!keyword.replace(/^\s+|\s+$/g, '')) {
@@ -208,7 +264,6 @@
 			}
 		}
 		
-///////////////////////////////		//////////////////////////////////////////////////////////////
 function planSearchCB(status, response, pagination) {
 	if (status === daum.maps.services.Status.OK) {
 		// 정상적으로 검색이 완료됐으면
@@ -221,9 +276,6 @@ function planSearchCB(status, response, pagination) {
 	}
 }
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////
 		// 검색 결과 목록과 마커를 표출하는 함수입니다
 		function displayPlaces(places) {
 	console.log(places);
@@ -243,10 +295,7 @@ function planSearchCB(status, response, pagination) {
 				var placePosition = new daum.maps.LatLng(places[i].latitude,places[i].longitude),
 					marker = addMarker(placePosition, i),
 					itemEl = getListItem(i, places[i], marker);
-				// 검색 결과 항목 Element를 생성합니다
 
-				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-				// LatLngBounds 객체에 좌표를 추가합니다
 				bounds.extend(placePosition);
 
 				(function(marker, items) {
@@ -254,7 +303,7 @@ function planSearchCB(status, response, pagination) {
 									
 									daum.maps.event.addListener(marker, 'mouseover',
 											function() {
-												displayInfowindow(marker, items.title);
+												displayInfowindow(marker, items);
 											});
 				
 									daum.maps.event.addListener(marker, 'mouseout', function() {
@@ -271,7 +320,6 @@ function planSearchCB(status, response, pagination) {
 										infowindow.close();
 									};
 
-									
 									//click
 									daum.maps.event.addListener(marker, 'click',
 									function(){
@@ -285,10 +333,17 @@ function planSearchCB(status, response, pagination) {
 									displayPlanList(marker,items);	
 									
 									};
+									
+									daum.maps.event.addListener(map, 'click',
+											function(){
+												infowindow.close();
+												planlistwindow.close();
+											});
+									
+									
+									
 				})(marker, places[i]);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 				fragment.appendChild(itemEl);
@@ -387,8 +442,8 @@ function planSearchCB(status, response, pagination) {
 
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
-		function displayInfowindow(marker, title) {
-			var content = '<div class="col-lg-3" style="padding:5px;z-index:1;">' + title+ '</div>';
+		function displayInfowindow(marker, items) {
+			var content = '<div style="padding:5px; z-index:1;"><table><tr><td>'+items.title+'</td></tr><tr><td>'+items.newAddress+'</td></tr></div>';
 		
 			infowindow.setContent(content);
 			infowindow.open(map, marker);
@@ -415,10 +470,8 @@ function planSearchCB(status, response, pagination) {
 				id : items.id
 			},
 			success: function(response){
-				console.log("came into ajax success line");
 					for ( var i in response.planList) {
-						content += '<li><a href="/review/showboard?plan_no='+response.planList[i].plan_no+'">'+response.planList[i].plan_no+'</a></li>';
-						console.log(response.planList[i].plan_no);
+						content += '<li onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"> --> '+response.planList[i].plan_no+'번 일정으로 이동</li>';
 					}
 				content+='</ul></div>';
 				
@@ -447,3 +500,5 @@ function planSearchCB(status, response, pagination) {
 	
 	
 	</script>
+
+	

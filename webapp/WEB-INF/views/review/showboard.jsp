@@ -323,7 +323,6 @@
 					</script>
 </head>
 <body>
-${commentsMap.boardCommentsList }
 <div id="wrapper">
 	<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"/> 
