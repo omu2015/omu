@@ -200,10 +200,18 @@ function newplan(plano){
 						<tr>
 							<td colspan="3">
 								<select name="plan_no" onchange="newplan(this.value)">
-									<option value="${planVo.getPlan_no()}">${planVo.getPlanDate()}</option>
-									<c:forEach var="vo" items="${planList}">
-									<option value="${vo.getPlan_no()}">${vo.getPlan_no()}</option>
-									</c:forEach> 
+									<c:choose>
+										<c:when test="${planVo.getPlan_no() ne 0}">
+											<option>true</option>
+											<option value="${planVo.getPlan_no()}">${planVo.getPlanDate()}</option>
+											<c:forEach var="vo" items="${planList}">
+											<option value="${vo.getPlan_no()}">${vo.getPlanDate()}_${vo.getPlan_no()}번</option>
+											</c:forEach> 
+										</c:when>
+										<c:otherwise>
+											<option value="-1">등록 가능한 plan이 없습니다</option>
+										</c:otherwise>
+									</c:choose>
 								</select>
 							</td>
 						</tr>

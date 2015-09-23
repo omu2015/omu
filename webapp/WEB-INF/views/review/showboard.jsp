@@ -209,8 +209,12 @@
 						//history.back();
 					}
 					function deleteBoard(bno){
-						alert("왜그래 지우지마 구현했는데 아깝잖아 안지워줄거야");
-						location.href="/review/delete?board_no="+bno;
+								 if(confirm("정말 삭제하시겠습니까?")){
+								  location.href="/review/delete?board_no="+bno;
+								 }
+								 else{
+								 //취소
+								 }
 					}
 					function goodButton(bno,pno){
 						location.href="/review/good?plan_no="+pno+"&board_no="+bno;

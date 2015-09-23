@@ -37,9 +37,11 @@
 </style>
 
 <hr>
-<button onclick="createboard()">글싸기</button>
+<button onclick="location.href='/review/createboard'">후기 올리기</button>
+<button onclick="location.href='/review'">목록</button>
 <div class="wsTable">
 	<c:forEach var="vo" items="${reviewList }">
+			<hr style="border:none;border:5px double pink;">
 		<table id="plan_no_${vo.plan_no }" onclick="showplan(this)"
 			onmouseover="changeColor(this)">
 			<tr>
@@ -59,13 +61,13 @@
 			</tr>
 			<tr>
 				<td>${vo.getMemberId()}</td>
-				<td>$ = ${vo.getTotalCost()}원</td>
-				<td>시간 = ${vo.getTotalTime()}분</td>
 				<td>좋아요 수-> ${vo.getGoodCnt()}</td>
-				<td>일정으로 가져오기</td>
+			</tr>
+			<tr>
+				<td>시간 = ${vo.getTotalTime()}분</td>
+				<td>$ = ${vo.getTotalCost()}원</td>
 			</tr>
 		</table>
-		<hr>
 	</c:forEach>
 </div>
 <script>

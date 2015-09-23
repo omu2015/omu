@@ -73,7 +73,7 @@ public class ReviewController {
 	   reviewService.insertBoard(model, boardVo, session, totalCost, totalTime, img);
 	   
 	   
-      return "/review/index";
+      return "redirect:/review";
    }
 
    @RequestMapping("/insertcomment")
@@ -92,7 +92,7 @@ public class ReviewController {
    
    @RequestMapping("/delete")
    public String deleteBoard(@RequestParam Long board_no){
-	   //reviewService.deleteBoard(board_no);
+	   reviewService.deleteBoard(board_no);
 	   return "redirect:/review";
    }
    
