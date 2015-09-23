@@ -72,7 +72,7 @@ $(function(){
 						<li><a href="javascript:planner(1)">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
 						
-						<li style="float:right;margin-right:220px"><a style="color:#fb6f92" href="/member/joinForm">Join</a></li>
+						<li style="float:right;margin-right:220px"><a style="color:#fb6f92" href="/member/agreeForm">Join</a></li>
 						<li style="float:right"><a style="color:#fb6f92"  href="#loginmodal"  id="modaltrigger">Login</a></li>
 					</ul>
 					<div style="float:right;margin-top:-55px"><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="/assets/img/no_img.jpg"/></div>
