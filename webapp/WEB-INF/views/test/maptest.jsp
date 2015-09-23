@@ -10,7 +10,6 @@
 <script src="../../assets/js/jquery.easing.1.3.js"></script>
 <script src="../../assets/js/bootstrap.min.js"></script>
 <script src="../../assets/js/jquery.fancybox.pack.js"></script>
-<script src="../../assets/js/jquery.fancybox-media.js"></script>
 <script src="../../assets/js/google-code-prettify/prettify.js"></script>
 <script src="../../assets/js/jquery.flexslider.js"></script>
 <script src="../../assets/js/animate.js"></script>
