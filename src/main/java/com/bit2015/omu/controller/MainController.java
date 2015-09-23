@@ -21,6 +21,7 @@ import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
 
@@ -85,7 +86,7 @@ public class MainController {
   @RequestMapping("/commentwrite")
 	public String insert(@ModelAttribute CommentsVo commentsVo){
 	  mainService.insert(commentsVo);
-		return "redirect:/";	
+		return "redirect:/contentView";	
 	}
   
   @RequestMapping("/commentdelete")
@@ -121,6 +122,17 @@ public class MainController {
 	 
 	 return list;  
   }
+  
+  @RequestMapping("/jjim")
+  @ResponseBody
+  public String jjim(@RequestParam Long member_no, @RequestParam Long content_no, Model model){
+	  /*PlanVo planVo = mainService.getUserPlan(member_no);*/
+	  mainService.insertPlan(member_no);
+	  return "redirect:/";
+  }
+  
+  
+  
   @RequestMapping("/like")
   @ResponseBody
   public void like(@RequestParam Long member_no, @RequestParam Long content_no, Model model){
@@ -131,5 +143,6 @@ public class MainController {
 		  List<GoodVo> list1 = mainService.selectCntNo(content_no);
 		  model.addAttribute("good", list1.size());
 	  }
+	  
   }
 }

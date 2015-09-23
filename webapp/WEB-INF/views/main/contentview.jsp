@@ -84,49 +84,46 @@
 					<div style="margin-top:10px">time : ${contentVo.time }</div>
 					<input type="hidden" name="member_no" value="${authUser.member_no }">
 					<input type="hidden" name="content_no" value="${contentVo.content_no }">
-					<a href="javascript:likegg(${contentVo.content_no },${authUser.member_no })" ><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
+<!-- 좋아요 -->
+					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" ><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
+<!-- 찜하기 -->
+					<a href="javascript:jjimCon(${contentVo.content_no },${authUser.member_no })" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
 			</div>
-				<div id="staticMap" style="width:1170px;height:350px;margin-top:60px"></div> 
-				<h4 style="margin-top:40px">댓글</h4>
-			<div style="margin-top:10px">
-			<table style="margin-left:0">
-			<tr>
-				<td style="width:85%"><input type="text" name="message" maxlength="135" size="155"  ></td>
-				<td style="width:9%"><input type="text" value="${authUser.memberName }" size="10"></td>
-				<td style="width:6%"><input type="submit" value="덧글등록"></td>
-			</tr>
-			</table>
+				<div id="staticMap" style="width:1170px;height:350px;margin-top:60px"></div>
+<!-- 댓글 -->
+			<div style="width:1000px;margin:auto;border:solid 2px #FDB7C8;padding:15px;margin-top:20px">
+				<c:choose>
+				<c:when test="${empty authUser }">
+				<span><img style="width:55px;border-radius:55px;height:55px" src="/assets/img/no_img.jpg"></span>
+				</c:when>
+				<c:otherwise>
+				<span><img style="width:55px;border-radius:55px;height:55px" src="${authUser.imageUrl }"></span>
+				</c:otherwise>
+				</c:choose>
+				<span style="margin-left:20px"><textarea name="message" cols=127 rows=3></textarea></span>
+				<span style="margin-left:20px"><input style="width:60px;height:60px" type="submit" value="덧글등록"></span>
 			</div>	
 		</form>
 
 <!-- 덧글 리스트 -->
-
-		<table style="margin-top:20px;font-size:15px;border:1px solid #e1e1e1">
-		<tr>
-			<th style="width:69%">댓글</th>
-			<th style="width:8%">이름</th>
-			<th style="width:15%">날짜</th>
-			<th style="width:8%">삭제</th>
-		</tr>
+		<div style="width:1000px;margin:auto;border:solid 1px #FDB7C8;padding:15px;font-size:15px;margin-top:20px">
 		<c:forEach var="vo" items="${commentsList}" varStatus="status">
 		<c:if test="${contentVo.content_no eq vo.content_no }">
-			<tr>
-				<td>${vo.message }</td>
-				<td>${vo.member_no }</td>
-				<td>${vo.regDate }</td>
+			<span>${vo.message }</span>
 		<c:choose>
 		<c:when test="${authUser.member_no == vo.member_no }">
-				<td><a href="/commentdelete?comments_no=${vo.comments_no }">삭제</a></td>
+			<span style="float:right;width:30px"><a href="/commentdelete?comments_no=${vo.comments_no }">삭제</a></span>
 		</c:when>
 		<c:otherwise>
-				<td></td>
+			<span style="float:right;width:30px"></span>
 		</c:otherwise>
 		</c:choose>
-			</tr>
-					</c:if>
+			<span style="float:right;margin-right:15px">${vo.regDate }</span>
+			<span style="float:right;margin-right:15px"">${vo.member_no }</span>
+		</c:if>
+		<c:if test="${empty commentsList }"><span style="margin-left:320px">덧글이 없습니다.  처음으로 덧글을 남겨보세요.</span></c:if>
 		</c:forEach>
-			
-		</table>
+		</div>
 
 			</div>
 	</div>
@@ -171,7 +168,7 @@ $.ajax({
  
 </script>
 <script>
-function likegg( content_no, member_no){
+function likeCon( content_no, member_no){
 	$.ajax({
 		type : 'get',
 	    url:'/like',
@@ -186,7 +183,22 @@ function likegg( content_no, member_no){
 })
 }
 </script>
-
+<script>
+function jjimCon( content_no, member_no){
+	$.ajax({
+		type : 'get',
+	    url:'/jjim',
+	    data : {
+	    		content_no : content_no,
+	    		member_no : member_no
+	    },
+	    dataType:'json',
+	    success: function(){
+	    	alert("오늘페이지에 저장되었습니다");
+	    },
+})
+}
+</script>
 
 <!-- javascript
     ================================================== -->

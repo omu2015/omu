@@ -14,12 +14,14 @@ import com.bit2015.omu.dao.ContentDao;
 import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.MainDao;
 import com.bit2015.omu.dao.MemberDao;
+import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeBoxVo;
 import com.bit2015.omu.vo.ThemeVo;
 
@@ -38,6 +40,8 @@ public class MainService {
 	ThemeBoxDao themeBoxDao;
 	@Autowired
 	GoodDao goodDao;
+	@Autowired
+	PlanDao planDao;
 /*---------------------------------*/	
 	@Autowired
 	MemberDao memberDao;
@@ -128,6 +132,17 @@ public class MainService {
 	public List<GoodVo> selectCntNo(Long content_no){
 		List<GoodVo> list = goodDao.selectAllByCno(content_no);
 		return list;
+	}
+	
+	public PlanVo getUserPlan(Long member_no){
+		PlanVo planVo = mainDao.getUserPlan(member_no);
+		return planVo;
+	}
+	
+	public void insertPlan(Long member_no){
+		PlanVo planVo = new PlanVo();
+		planVo.setMember_no(member_no);
+		planDao.insert(planVo);
 	}
 	
 /*	public MemberVo selectVo(Long member_no){

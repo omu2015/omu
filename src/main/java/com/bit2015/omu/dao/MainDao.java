@@ -1,6 +1,8 @@
 package com.bit2015.omu.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bit2015.omu.vo.CommentsVo;
 import com.bit2015.omu.vo.ContentVo;
+import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeVo;
 
 @Repository
@@ -42,4 +45,12 @@ public class MainDao {
 		ThemeVo vo = (ThemeVo) sqlMapClientTemplate.queryForObject("theme.getNo", themeName);
 		return vo;
 	}	
+	
+	
+	public PlanVo getUserPlan(Long member_no){
+		Map<String, Long> map = new HashMap<String, Long>();
+		map.put( "member_no", member_no );
+		PlanVo planVo = (PlanVo) sqlMapClientTemplate.queryForObject("plan.getUserPlan", map);
+		return planVo;
+	}
 }

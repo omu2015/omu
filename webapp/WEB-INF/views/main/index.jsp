@@ -18,7 +18,6 @@
 <link href="/assets/css/layout2.css" rel="stylesheet" type="text/css" />
 <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-<link href="/assets/css/jcarousel.css" rel="stylesheet" />
 <link href="/assets/css/flexslider.css" rel="stylesheet" />
 <link href="/assets/css/style.css" rel="stylesheet" />
 <link href="/assets/css/common.css" rel="stylesheet" type="text/css" />

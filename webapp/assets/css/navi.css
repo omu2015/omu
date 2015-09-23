@@ -47,14 +47,24 @@ background: #ededed;
 #nav li ul li a:hover  {
 color: #000; 
 }
-
+#nav li a.pink, 
+#nav li a.pink:hover, 
+#nav li ul li .pink,
+#nav li ul li a.pink,
+#nav li ul li a.pink:hover  {
+color: #fb6f92; 
+}
 /* Menu Item background color on hover */
 #nav li a:hover, 
 #nav li ul li a:hover  {
 background: #fb6f92; 
 color:#fff;
 }
-
+#nav li a.pink:hover, 
+#nav li ul li a.pink:hover  {
+background: #fb6f92; 
+color:#fff;
+}
 /* Text Shadow */
 /* #nav li a, 
 #nav li a:hover, 
