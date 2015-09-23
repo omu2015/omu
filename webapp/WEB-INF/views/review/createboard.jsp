@@ -236,7 +236,14 @@ function newplan(plano){
 						</tr>
 						<tr>
 							<td colspan="3">
+									<c:choose>
+										<c:when test="${planVo.getPlan_no() ne 0}">
 											<input type="submit" value="등록">
+										</c:when>
+										<c:otherwise>
+											<div style="margin-bottom:10px">등록가능한 plan이 없습니다</div><button onclick="location.href='/review''">돌아가기</button>
+										</c:otherwise>
+									</c:choose>
 							</td>
 						</tr>
 					</table>

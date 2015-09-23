@@ -34,14 +34,22 @@
 	color: #fff;
  	background: #FDB7C8;
 }
+.wsButton {
+	background-color:#FEE8EE;
+	padding:5px 10px; 
+	margin:3px; 
+	border:2px solid #FDB7C8;
+}
 </style>
 
 <hr>
-<button onclick="location.href='/review/createboard'">후기 올리기</button>
-<button onclick="location.href='/review'">목록</button>
+<div style="text-align:right">
+<button class="wsButton" onclick="location.href='/review/createboard'"><strong>후기 올리기</strong></button>
+<button class="wsButton"" onclick="location.href='/review'"><strong>목록</strong></button>
+</div>
 <div class="wsTable">
 	<c:forEach var="vo" items="${reviewList }">
-			<hr style="border:none;border:5px double pink;">
+			<hr style="border:none;border:3px double pink;">
 		<table id="plan_no_${vo.plan_no }" onclick="showplan(this)"
 			onmouseover="changeColor(this)">
 			<tr>
