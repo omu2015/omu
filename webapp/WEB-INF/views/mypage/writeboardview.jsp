@@ -21,8 +21,6 @@
 <link href="../../assets/css/style.css" rel="stylesheet" />
 <link href="../../assets/css/table.css" rel="stylesheet" />
 
-
-
 <!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
 
@@ -33,23 +31,28 @@
 
 </head>
 <body>
-	<div id="wrapper">
-		<!-- start header -->
+	<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-		<c:import url="/WEB-INF/views/include/header_mypage.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/header_mypage.jsp">
+		<c:param name="pageName" value="planView"/>
+		</c:import>
 		<!-- end header -->
+	<div id="wrapper">
 
 		<section id="content">
 
-		<div class="container" style="height: 700px">
+		<div class="container">
+	
 			<div class="row">
 				<div class="col-lg-12">
-					
+					<div class="row">
 
 						<div id="join-form">
-						<c:import url="/WEB-INF/views/mypage/boardview.jsp"></c:import>
+							
+							<c:import url="/WEB-INF/views/mypage/boardview.jsp"></c:import>
+
 						</div>
-					
+					</div>
 				</div>
 			</div>
 		</div>
@@ -61,18 +64,20 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="../../assets/js/jquery.js"></script>
-<script src="../../assets/js/jquery.easing.1.3.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/jquery.fancybox.pack.js"></script>
-<script src="../../assets/js/jquery.fancybox-media.js"></script>
-<script src="../../assets/js/google-code-prettify/prettify.js"></script>
-<script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
-<script src="../../assets/js/portfolio/setting.js"></script>
-<script src="../../assets/js/jquery.flexslider.js"></script>
-<script src="../../assets/js/animate.js"></script>
-<script src="../../assets/js/custom.js"></script>
-<script type="text/javascript"	src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
-<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
+	<script src="../../assets/js/jquery.easing.1.3.js"></script>
+	<script src="../../assets/js/bootstrap.min.js"></script>
+	<script src="../../assets/js/jquery.fancybox.pack.js"></script>
+	<script src="../../assets/js/jquery.fancybox-media.js"></script>
+	<script src="../../assets/js/google-code-prettify/prettify.js"></script>
+	<script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
+	<script src="../../assets/js/portfolio/setting.js"></script>
+	<script src="../../assets/js/jquery.flexslider.js"></script>
+	<script src="../../assets/js/animate.js"></script>
+	<script src="../../assets/js/custom.js"></script>
+	<script type="text/javascript"
+		src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
+	<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="/assets/js/jquery.leanModal.min.js"></script>
 </body>
 </html>

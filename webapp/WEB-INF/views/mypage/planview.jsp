@@ -31,17 +31,18 @@
 
 </head>
 <body>
-	<div id="wrapper">
-		<!-- start header -->
+	<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<c:import url="/WEB-INF/views/include/header_mypage.jsp">
 		<c:param name="pageName" value="planView"/>
 		</c:import>
 		<!-- end header -->
+	<div id="wrapper">
 
 		<section id="content">
 
 		<div class="container">
+	
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="row">

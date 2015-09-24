@@ -1,12 +1,15 @@
 package com.bit2015.omu.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +23,8 @@ import com.bit2015.omu.dao.MemberDao;
 import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.util.FileUploader;
+import com.bit2015.omu.vo.BoardCommentsVo;
+import com.bit2015.omu.vo.BoardImgBoxVo;
 import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.CalendarVo;
 import com.bit2015.omu.vo.ContentBoxVo;
@@ -27,6 +32,8 @@ import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.GoodViewVo;
 import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.PlanVo;
+import com.bit2015.omu.vo.ReviewVo;
 import com.bit2015.omu.vo.ThemeVo;
 import com.bit2015.omu.vo.WriteBoardViewVo;
 
@@ -238,4 +245,68 @@ public class MyPageService {
 		}
 		return cntVo;
 	}
+	
+	public void showboard(Model model, Long plan_no) {
+
+		List<ContentBoxVo> contentBoxList = contentBoxDao
+				.selectAllByPno(plan_no);
+		List<ContentVo> contentList2 = new ArrayList<ContentVo>();
+		for (int i = 0; i < contentBoxList.size(); i++) {
+			ContentVo contentVo = contentDao.selectVo(contentBoxList.get(i)
+					.getContent_no());
+			contentList2.add(contentVo);
+		}
+
+		String jsonCL = jsonn((ArrayList<?>) contentList2);
+		// System.out.println("show board jsonCL == " + jsonCL);
+		BoardVo boardVo = boardDao.selectVoByPno(plan_no);
+		if(boardVo.getMessage()!=null){
+			//엔터키 바까주기
+		boardVo.setMessage(boardVo.getMessage().replaceAll("\r\n", "\r\n<br>"));
+		}
+		PlanVo planVo = planDao.selectVo(plan_no);
+		// imgbox 가져오기
+		List<BoardImgBoxVo> boardImgBoxList = boardImgBoxDao
+				.selectAllByBno(boardVo.getBoard_no());
+
+		// 사용자 아이디 가져오기
+		String memberId = memberDao.selectVo(boardVo.getMember_no())
+				.getMemberId();
+
+		// 댓글리스트 갖고오기
+		Map<String, ArrayList<?>> commentsMap= new HashMap<String, ArrayList<?>>();
+		List<BoardCommentsVo> boardCommentsList = boardCommentsDao
+				.selectAllByBno(boardVo.getBoard_no());
+		commentsMap.put("boardCommentsList", (ArrayList<?>) boardCommentsList);
+		// memberList 가져오기
+		List<MemberVo> memberList=new ArrayList<MemberVo>();
+		for (int i = 0; i < boardCommentsList.size(); i++) {
+			memberList.add(memberDao.selectVo(boardCommentsList.get(i).getMember_no()));
+		}
+		commentsMap.put("memberList", (ArrayList<?>) memberList);
+		
+		
+		//commentsMap.get("boardCommentsList");
+		
+		
+		//reviewList
+		List<ReviewVo> reviewList = getReviewList();
+
+		model.addAttribute("commentsMap", commentsMap);
+		model.addAttribute("planVo", planVo);
+		model.addAttribute("memberId", memberId);
+		model.addAttribute("boardImgBoxList", boardImgBoxList);
+		model.addAttribute("boardVo", boardVo);
+		model.addAttribute("jsonCL", jsonCL);
+		model.addAttribute("reviewList", reviewList);
+	}
+	private List<ReviewVo> getReviewList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private String jsonn(ArrayList<?> contentList2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

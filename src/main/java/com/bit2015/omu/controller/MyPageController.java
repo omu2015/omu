@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit2015.omu.dao.MainDao;
 import com.bit2015.omu.service.MyPageService;
 import com.bit2015.omu.service.PlannerService;
 import com.bit2015.omu.service.ReviewService;
+import com.bit2015.omu.vo.BoardCommentsVo;
+import com.bit2015.omu.vo.BoardVo;
 import com.bit2015.omu.vo.CalendarVo;
 import com.bit2015.omu.vo.GoodViewVo;
 import com.bit2015.omu.vo.MemberVo;
+import com.bit2015.omu.vo.ThemeVo;
 import com.bit2015.omu.vo.WriteBoardViewVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,6 +33,8 @@ public class MyPageController {
 	 MyPageService myPageService;
 	@Autowired
 	ReviewService reviewService;
+	@Autowired
+	MainDao  mainDao;
 	
 	@RequestMapping("/membermodifyform")
     public String  memberModifyForm(HttpSession session , @ModelAttribute MemberVo memberVo){
@@ -56,7 +62,15 @@ public class MyPageController {
 	 public String planView(Model model){
 		List<CalendarVo> viewList=myPageService.selectView();
 		model.addAttribute("viewList", viewList);
+		// 헤더의 카테고리 나오게하기      
+	      List<ThemeVo> list3 = mainDao.getList3();
+	      for (int i = 0; i < list3.size(); i++) {
+	         String[] array = list3.get(i).getThemeName().split(">");
+	         list3.get(i).setThemeName(array[array.length-1]);
+	      }
+	      model.addAttribute("themeList", list3);
 		return "/mypage/planview";
+	
 	}
 	
 	@RequestMapping("selectplanview")
@@ -93,5 +107,20 @@ public class MyPageController {
 		return "/mypage/writeboardview";
 	}
 	
+	
+	
+	 @RequestMapping("/myboard")
+	   public String showBoard(Model model, @RequestParam Long plan_no){
+	      reviewService.showboard(model, plan_no);
+	      return "/mypage/boardviewmap";
+	   }
+	 
+	 @RequestMapping("/insertcomment")
+	   public String insertComment(BoardCommentsVo boardCommentsVo, @RequestParam Long plan_no){
+		   System.out.println("plan_no ===  "   +  plan_no);
+		   reviewService.insertComment(boardCommentsVo);
+		   
+	      return "redirect:/mypage/myboard?plan_no="+plan_no;
+	   }
 
 }

@@ -11,13 +11,13 @@
 <body>
 
 
-	<header>
-	
-		<c:choose>
-			<c:when test="${param.pageName=='planView' }">
-				<div id="menu_div">
+	<header> <c:choose>
+		<c:when test="${param.pageName=='planView' }">
+
+			<div id="menu_div" style="z-index: 10000;">
+				<div id="navigation">
 					<div id="menu">
-						<ul class="nav navbar-nav" style="float: right;">
+						<ul class="nav navbar-nav" style="float: right; ">
 							<li class="active"><a href="/mypage/">내플랜</a></li>
 							<li><a href="/mypage/goodview">좋아요~</a></li>
 							<li><a href="/mypage/boardview">내가 쓴 게시판</a></li>
@@ -26,10 +26,12 @@
 						</ul>
 					</div>
 				</div>
-			</c:when>
+			</div>
+		</c:when>
 
-			<c:when test="${param.pageName=='goodView' }">
-				<div id="menu_div">
+		<c:when test="${param.pageName=='goodView' }">
+			<div id="menu_div"  style="z-index: 10000;">
+				<div id="navigation">
 					<div id="menu">
 						<ul class="nav navbar-nav" style="float: right;">
 							<li><a href="/mypage/">내플랜</a></li>
@@ -40,10 +42,12 @@
 						</ul>
 					</div>
 				</div>
-			</c:when>
+			</div>
+		</c:when>
 
-			<c:when test="${param.pageName=='selectPlanView' }">
-				<div id="menu_div">
+		<c:when test="${param.pageName=='selectPlanView' }">
+			<div id="menu_div"  style="z-index: 10000;">
+				<div id="navigation">
 					<div id="menu">
 						<ul class="nav navbar-nav" style="float: right;">
 							<li><a href="/mypage/">내플랜</a></li>
@@ -54,10 +58,12 @@
 						</ul>
 					</div>
 				</div>
-			</c:when>
+			</div>
+		</c:when>
 
-			<c:when test="${param.pageName=='memberModify' }">
-				<div id="menu_div">
+		<c:when test="${param.pageName=='memberModify' }">
+			<div id="menu_div"  style="z-index: 10000;">
+				<div id="navigation">
 					<div id="menu">
 						<ul class="nav navbar-nav" style="float: right;">
 							<li><a href="/mypage/">내플랜</a></li>
@@ -68,10 +74,12 @@
 						</ul>
 					</div>
 				</div>
-			</c:when>
+				</div>
+		</c:when>
 
-			<c:when test="${param.pageName=='memberLeave' }">
-				<div id="menu_div">
+		<c:when test="${param.pageName=='memberLeave' }">
+			<div id="menu_div"  style="z-index: 10000;">
+				<div id="navigation">
 					<div id="menu">
 						<ul class="nav navbar-nav" style="float: right;">
 							<li><a href="/mypage/">내플랜</a></li>
@@ -82,10 +90,12 @@
 						</ul>
 					</div>
 				</div>
-			</c:when>
+			</div>
+		</c:when>
 
-			 <c:otherwise>
-				<div id="menu_div">
+		<c:otherwise>
+			<div id="menu_div"  style="z-index: 10000;">
+				<div id="navigation">
 					<div id="menu">
 						<ul class="nav navbar-nav" style="float: right;">
 							<li><a href="/mypage/">내플랜</a></li>
@@ -96,10 +106,9 @@
 						</ul>
 					</div>
 				</div>
-			</c:otherwise> 
-		</c:choose>
-
-	</header>
+			</div>
+		</c:otherwise>
+	</c:choose> </header>
 
 
 
