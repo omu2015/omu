@@ -44,4 +44,32 @@
 		]]>
 	</update>
 	
+<!-- 	<select id="selectAllByDist" parameterMap="java.util.Map" resultClass="ContentVo"> -->
+<!-- 	  <![CDATA[ -->
+<!-- 	    SELECT * FROM content  -->
+	    
+<!-- 	    where 6371 * ACOS(COS( #lat# * 0.017453293 ) * COS( LATITUDE * 0.017453293 )* COS( (LONGITUDE * 0.017453293) -->
+<!-- 	     - (#lng# * 0.017453293))+ SIN( #lat# * 0.017453293 )* SIN( LATITUDE * 0.017453293 ))  -->
+	     
+<!-- 	     < #distance# -->
+<!-- 	  ]]> -->
+<!-- 	</select> -->
+	
+	<select id="selectAllNear" parameterClass="java.util.Map" resultClass="ContentVo">
+	  <![CDATA[
+	    SELECT 	* 
+		FROM 	(select c.*
+				from 	content c, 
+				(select cb.content_no from contentbox cb, board b where cb.plan_no = b.plan_no) f 
+				where 	f.content_no=c.content_no) r
+		where 6371 * ACOS(
+        		COS( #lat# * 0.017453293 )
+        		* COS( r.LATITUDE * 0.017453293 )
+        		* COS( (r.LONGITUDE * 0.017453293) - (#lng# * 0.017453293))
+        		+ SIN( #lat# * 0.017453293 )
+        		* SIN( r.LATITUDE * 0.017453293 )
+    	) < #distance#
+	  ]]>
+	</select>
+	
 </sqlMap>

@@ -323,7 +323,7 @@ function planSearchCB(status, response, pagination) {
 											});
 				
 									daum.maps.event.addListener(marker, 'mouseout', function() {
-										infowindow.close();
+// 											infowindow.close();
 									});
 									
 									
@@ -333,27 +333,29 @@ function planSearchCB(status, response, pagination) {
 									};
 				
 									itemEl.onmouseout = function() {
-										infowindow.close();
+										//infowindow.close();
 									};
 
 									//click
 									daum.maps.event.addListener(marker, 'click',
 									function(){
-									displayPlanList(marker,items);
+									//displayPlanList(marker,items);
+									infowindow.close();
+										displayInfowindow(marker, items);
 									});
 									
 									itemEl.onclick = function(){
-										map.setLevel(2);
 										map.setCenter(new daum.maps.LatLng(items.latitude, items.longitude));
 										
-									displayPlanList(marker,items);	
+									//displayPlanList(marker,items);	
+										displayInfowindow(marker, items);
 									
 									};
 									
 									daum.maps.event.addListener(map, 'click',
 											function(){
 												infowindow.close();
-												planlistwindow.close();
+											//	planlistwindow.close();
 											});
 									
 									
@@ -459,8 +461,8 @@ function planSearchCB(status, response, pagination) {
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
 		function displayInfowindow(marker, items) {
-//			var content = '<div class="wsTable"><table><tr><th class="wshd">'+items.title+'</th></tr><tr><td>'+items.newAddress+'</td></tr><tr><td><img style="height:150px" src="'+items.imageUrl+'"/></td></tr></table><hr style="border:none;border:1px double pink;"></div>';
-			var content = '<div class="wsTable"><table><tr><th colspan="2" class="wshd">'+items.title+'</th></tr><tr><td rowspan="4"><img style="height:150px" src="'+items.imageUrl+'"/></td></tr><tr><td>'+items.newAddress+'</td></tr><tr><td>'+items.phone+'</td></tr><tr><td><a href="'+items.placeUrl+'">웹 주소로 이동하기</a></td></tr>';
+			if(items.imageUrl=="") items.imageUrl ="/product-images/201582401441814.jpg";
+			var content = '<div class="wsTable"><table><tr><th colspan="2" class="wshd">'+items.title+'</th></tr><tr><td rowspan="4"><img style="height:150px" src="'+items.imageUrl+'"/></td></tr><tr><td>'+items.newAddress+'</td></tr><tr><td>'+items.phone+'</td></tr><tr><td><a href="'+items.placeUrl+'">웹 주소로 이동하기</a></td></tr><tr><th colspan="2" class="wshd">후기 게시판</th></tr>';
 			
 			$.ajax({
 				type: "Post",
@@ -469,11 +471,29 @@ function planSearchCB(status, response, pagination) {
 					id : items.id
 				},
 				success: function(response){
-					alert("success");
-					console.log(response.planList.toString());
-						for ( var i in response.planList) {
-							content += '<tr><td colspan="2" onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"> --> '+response.planList[i].plan_no+'번 일정으로 이동</td></tr>';
-						}
+							if(response.planList.length%2==0){
+								for ( var i in response.planList) {
+											if(i%2==0){
+											content += '<tr><td onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
+											}else{
+												content += '<td onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
+											}
+								}
+							}else{
+								for ( var i in response.planList) {
+											if(i%2==0){
+											content += '<tr><td onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td>';
+											}else{
+												content += '<td onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"><b>'+response.planList[i].plan_no+'</b> 번 후기</td></tr>';
+											}
+								}
+									content += '</tr>';
+							}
+											//content += '<tr><td colspan="2" onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"> --> '+response.planList[i].plan_no+'번 일정으로 이동</td></tr>';
+						content+='</table><hr style="border:none;border:1px double pink;"></div>';
+			
+						infowindow.setContent(content);
+						infowindow.open(map, marker);
 				},
 				error:function(jqXHR, textStatus, errorThrown){
 		            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -481,10 +501,6 @@ function planSearchCB(status, response, pagination) {
 		        }
 			});
 			
-			content+='</table><hr style="border:none;border:1px double pink;"></div>';
-			
-			infowindow.setContent(content);
-			infowindow.open(map, marker);
 		}
 
 		// 검색결과 목록의 자식 Element를 제거하는 함수입니다
