@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bit2015.omu.vo.CommentsVo;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.PlanVo;
 import com.bit2015.omu.vo.ThemeVo;
@@ -55,6 +56,10 @@ public class MainDao {
 	}
 	
 	public void insert(PlanVo planVo){
-		sqlMapClientTemplate.insert("plan.insertpsk", planVo);
+		sqlMapClientTemplate.insert("plan.inserttoday", planVo);
+	}
+	
+	public void insert(ContentBoxVo contentBoxVo){
+		sqlMapClientTemplate.insert("contentBox.insert", contentBoxVo);
 	}
 }

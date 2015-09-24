@@ -18,6 +18,7 @@ import com.bit2015.omu.dao.PlanDao;
 import com.bit2015.omu.dao.ThemeBoxDao;
 import com.bit2015.omu.dao.ThemeDao;
 import com.bit2015.omu.vo.CommentsVo;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
@@ -140,14 +141,13 @@ public class MainService {
 	}
 	
 	public void insertPlan(PlanVo planVo){
-		planDao.insert(planVo);
+		mainDao.insert(planVo);
+	}
+	
+	public void insertContentBox(ContentBoxVo contentBoxVo){
+		mainDao.insert(contentBoxVo);
 	}
 	
 	
-	
-/*	public MemberVo selectVo(Long member_no){
-		MemberVo memberVo = memberDao.selectVo(member_no);
-		return memberVo;
-	}*/
-
 }
+

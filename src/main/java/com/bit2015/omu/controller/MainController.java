@@ -18,6 +18,7 @@ import com.bit2015.omu.dao.ContentDao;
 import com.bit2015.omu.dao.MainDao;
 import com.bit2015.omu.service.MainService;
 import com.bit2015.omu.vo.CommentsVo;
+import com.bit2015.omu.vo.ContentBoxVo;
 import com.bit2015.omu.vo.ContentVo;
 import com.bit2015.omu.vo.GoodVo;
 import com.bit2015.omu.vo.MemberVo;
@@ -132,6 +133,8 @@ public class MainController {
 	  MemberVo memberVo =(MemberVo)session.getAttribute("authUser");
 	  planVo.setMember_no(memberVo.getMember_no());
 	  mainService.insertPlan(planVo);
+	  ContentBoxVo contentBoxVo = new ContentBoxVo();
+	  mainService.insertContentBox(contentBoxVo);
 	  return "redirect:/";
   }
   

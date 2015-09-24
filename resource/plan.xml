@@ -11,7 +11,7 @@
 
    <insert id="inserttoday" parameterClass="PlanVo">
       <![CDATA[
-         insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(#planDate#, 'yyyy-MM-dd') ,#totalCost#,#totalTime#)
+         insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(sysdate, 'yyyy-MM-dd'),#totalCost#,#totalTime#)
       ]]>
    </insert>
 
