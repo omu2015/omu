@@ -96,10 +96,8 @@ public class PlannerController {
 		public String addPlan(@RequestParam String planDate, HttpSession session,  Model model){
 		PlanVo planVo = new PlanVo();
 		MemberVo memberVo =(MemberVo)session.getAttribute("authUser");
-		
 		planVo.setPlanDate(planDate);
 		planVo.setMember_no(memberVo.getMember_no());
-		
 		model.addAttribute("planList", planVo);
 		plannerService.addPlan(planVo);
 		
@@ -108,22 +106,21 @@ public class PlannerController {
 		
 		@RequestMapping("/showPlan")
 		@ResponseBody
-		public List<PlanVo> showPlan(HttpSession session){
+		public List<PlanVo> showPlan(HttpSession session,@RequestParam String planDate){
 			MemberVo memberVo =(MemberVo)session.getAttribute("authUser");
-			List<PlanVo> list = plannerService.showPlan(memberVo.getMember_no());
+			List<PlanVo> list = plannerService.showPlan(memberVo.getMember_no(), planDate);
+			System.out.println(planDate);
 			
 			return list;
 			
 		}
 		
 		@RequestMapping("/viewPlan")
-		public String viewPlan(@RequestParam Long plan_no, Model model){
+		@ResponseBody
+		public List<ContentVo> viewPlan(@RequestParam Long plan_no){
 			List<ContentVo> list = plannerService.getContentNo(plan_no);
-			PlanVo planVo = plannerService.getPlanDate(plan_no);
-			model.addAttribute("contentList", list );
-			model.addAttribute("planVo", planVo );
 			
-			return "/planner/viewPlan";
+			return list;
 		}
 		@RequestMapping("/deletePlan")
 		public String deletePlan(@RequestParam Long plan_no, Model model){

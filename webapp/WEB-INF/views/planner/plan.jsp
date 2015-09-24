@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -45,8 +43,7 @@ function addPlan(aa){
 	}
 	var selYear = document.getElementsByName('selYear')[0].value;
 	var planDate = selYear +"-"+ selMonth +"-" + selDay;
-	console.log(planDate);
-	location.href="/planner/addPlan?planDate="+planDate;
+	location.href="/planner/map?planDate="+planDate;
 	}
 </script>
 <script>
@@ -269,7 +266,7 @@ function test(aa){
 			}
 		}
 	
-//  End -->
+//  End -->z
 </script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

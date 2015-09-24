@@ -94,6 +94,30 @@ public class PlannerService {
 	public void addPlan(PlanVo planVo){
 		planDao.insert(planVo);
 	}
+	public List<PlanVo> showPlan(Long member_no, String planDate){
+		String planDay [] = planDate.split("-");
+		String planDay0 = planDay[0];
+		String planDay1 = planDay[1];
+		if(planDay1.length()==1){
+			planDay1 = "0"+ planDay1;
+		}
+		String planDay2 = planDay[2];
+		if(planDay2.length()==1){
+			planDay2 = "0"+ planDay2;
+		}
+		planDate = planDay0 +"-"+ planDay1 +"-"+ planDay2;
+			
+		List<PlanVo> list = planDao.getUserPlan(member_no);
+		List<PlanVo> list1 = new ArrayList<PlanVo>();
+		for(int i=0; i<list.size(); i++){
+			PlanVo planVo = new PlanVo();
+			planVo = list.get(i);
+			if(planDate.equals(planVo.getPlanDate())){
+				list1.add(planVo);
+			}
+		}
+		return list1 ; 
+	}
 	public List<PlanVo> showPlan(Long member_no){
 		List<PlanVo> list = planDao.getUserPlan(member_no);
 		return list ; 
