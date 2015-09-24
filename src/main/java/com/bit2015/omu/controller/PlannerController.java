@@ -123,9 +123,8 @@ public class PlannerController {
 			return list;
 		}
 		@RequestMapping("/deletePlan")
-		public String deletePlan(@RequestParam Long plan_no, Model model){
+		public void deletePlan(@RequestParam Long plan_no, Model model){
 			plannerService.deletePlan(plan_no);
-			return "redirect:/planner";
 		}
 		@RequestMapping("/deleteContentBox")
 		public String deleteContentBox(@RequestParam Long plan_no,Long content_no){

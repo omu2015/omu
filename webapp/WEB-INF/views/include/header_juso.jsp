@@ -15,7 +15,6 @@ h1.plan {
 	background-color: #ededed;
 	padding: 10px;
 }
-
 div.header_seacrh {
 	margin-top: -40px;
 	margin-left: 220px;
@@ -154,7 +153,7 @@ div.header_seacrh div.select1 a:hover, div.header_seacrh div.select2 a:hover,
 			<div class="header_seacrh">
 				<input type="text" id="keyword" name="keyword"
 					placeholder="키워드를 검색해보세요!" value=""> <a
-					href="javascript:searchKeyword()" id="searchButton"> <span class="p_hide"><img
+					href="#" id="searchButton"> <span class="p_hide"><img
 						src="/assets/img/button/viewPink.jpg"></span>
 				</a>
 				<div class="select1">
@@ -192,7 +191,7 @@ div.header_seacrh div.select1 a:hover, div.header_seacrh div.select2 a:hover,
 				$('#searchButton').click(function() {
 					$('#keyword').val($.trim($('#keyword').val()));
 					if ($('#keyword').val()) {
-						location.href = 'javascript:searchKeyword()';
+						location.href = 'javascript:searchPlaces()';
 					} else
 						alert("검색어가 입력되지 않았습니다.\n\n다시 입력바랍니다.");
 				});
@@ -288,11 +287,8 @@ div.header_seacrh div.select1 a:hover, div.header_seacrh div.select2 a:hover,
 						$('.dong').hide();
 
 					}
-
 				}
 			</script>
-
 		</div>
 	</div>
-
 </div>

@@ -10,9 +10,9 @@ public class TestController {
 	public String test(){
 		return "/mobile/index";
 	}
-	@RequestMapping("/test1")
+	@RequestMapping("/test2")
 	public String test1(){
-		return "/test/maptest";
+		return "/test/maptest2";
 	}
 	@RequestMapping("/test3")
 	public String test3(){
