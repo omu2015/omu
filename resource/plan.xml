@@ -15,6 +15,11 @@
       ]]>
    </insert>
 
+   <select id="planMax" parameterClass="PlanVo">
+      <![CDATA[
+         select max(plan_no) from plan where member_no=#member_no#
+      ]]>
+   </select>
    
    <select id="selectAll" resultClass="PlanVo">
       <![CDATA[

@@ -128,13 +128,13 @@ public class MainController {
   }
   
   @RequestMapping("/jjim")
-  public String jjim(HttpSession session, Model model){
+  public String jjim(HttpSession session, Model model, Long plan_no, Long content_no){
 	  PlanVo planVo = new PlanVo();
 	  MemberVo memberVo =(MemberVo)session.getAttribute("authUser");
 	  planVo.setMember_no(memberVo.getMember_no());
 	  mainService.insertPlan(planVo);
-	  ContentBoxVo contentBoxVo = new ContentBoxVo();
-	  mainService.insertContentBox(contentBoxVo);
+	  
+	  mainService.insertContentBox(plan_no, content_no);
 	  return "redirect:/";
   }
   

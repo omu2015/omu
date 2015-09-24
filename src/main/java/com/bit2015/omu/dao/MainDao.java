@@ -62,4 +62,6 @@ public class MainDao {
 	public void insert(ContentBoxVo contentBoxVo){
 		sqlMapClientTemplate.insert("contentBox.insert", contentBoxVo);
 	}
+
+
 }

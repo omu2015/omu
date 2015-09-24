@@ -144,7 +144,11 @@ public class MainService {
 		mainDao.insert(planVo);
 	}
 	
-	public void insertContentBox(ContentBoxVo contentBoxVo){
+	public void insertContentBox(Long plan_no, Long content_no){
+		ContentBoxVo contentBoxVo = new ContentBoxVo();
+		
+		contentBoxVo.setPlan_no(plan_no);
+		contentBoxVo.setContent_no(content_no);
 		mainDao.insert(contentBoxVo);
 	}
 	

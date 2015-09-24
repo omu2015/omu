@@ -120,7 +120,7 @@
 		</c:otherwise>
 		</c:choose>
 			<span style="float:right;margin-right:15px">${vo.regDate }</span>
-			<span style="float:right;margin-right:15px"">${vo.member_no }</span>
+			<span style="float:right;margin-right:15px"></span>
 		</div>
 		</c:if>
 		<c:if test="${empty commentsList }"><span style="margin-left:320px">덧글이 없습니다.  처음으로 덧글을 남겨보세요.</span></c:if>
