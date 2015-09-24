@@ -111,8 +111,6 @@
 
 	function showTheme(Obj) {
 		var themeName = Obj.id.split("_").pop();
-		console.log("themeName="+themeName);
-		console.log(placesArray);
 		for (var i = 0; i < placesArray.length; i++) {
 				markers[i].setVisible(true);
 			if(placesArray[i].category.split(">").pop()!=themeName){
@@ -254,9 +252,6 @@ function placesNear(distance){
 		//주변 3km내에 있는 content getcha! 		  
 		placesNear(1);
 			
-		  console.log('Your current position is:');
-		  console.log('Lat : ' + crd.latitude + '  Lng : ' + crd.longitude + ' ( accuracy ' + crd.accuracy + 'm )');
-		  
 		};
 
 		function error(err) {
@@ -312,7 +307,6 @@ function placesNear(distance){
 		function displayPlaces(places) {
 			placesArray = places;
 			
-			console.log(places);
 			var listEl = document.getElementById('placesList'),
 				menuEl = document.getElementById('menu_wrap'),
 				fragment = document.createDocumentFragment(),
