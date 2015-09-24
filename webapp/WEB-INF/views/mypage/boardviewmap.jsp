@@ -300,12 +300,38 @@
 	content: none;
 }
 </style>
-
+<script>
+					function modifyBoard(bno,pno){
+						alert("구현하기 귀찮지롱 메롱메롱");
+						location.href="/review/modify?plan_no="+pno+"&board_no="+bno;
+						//history.back();
+					}
+					function deleteBoard(bno){
+								 if(confirm("정말 삭제하시겠습니까?")){
+								  location.href="/review/delete?board_no="+bno;
+								 }
+								 else{
+								 //취소
+								 }
+					}
+					function goodButton(bno,pno){
+						location.href="/review/good?plan_no="+pno+"&board_no="+bno;
+					}
+					function capturePlan(bno){
+						location.href="/review/capture?board_no="+bno;
+					}
+					</script>
 </head>
 <body>
 <div id="wrapper">
 	<!-- start header -->
-		<c:import url="/WEB-INF/views/include/header.jsp"/> 
+			<!-- start header -->
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/header_mypage.jsp">
+		<c:param name="pageName" value="selectPlanView"/>
+		</c:import>
+		<!-- end header -->
+		
 	<!-- end header -->
 <div class="container">
 	<div class="row">
@@ -355,14 +381,14 @@
 					</div>
 					<hr>
 					<div class="wsTable">
-					<table>
+				<table>
 								<c:forEach var="bcVo" items="${commentsMap.boardCommentsList}" varStatus="status">
 									<tr>
 										<td>${commentsMap.memberList.get(status.index).getMemberId()}</td>
 										<td colspan="6" class="nct">  :   ${   bcVo.getMessage() }</td>
 									</tr>
 								</c:forEach>
-					</table>
+					</table> 
 					</div>
 					<div class="wsTable">
 					<form action="/mypage/insertcomment" method="post">
@@ -375,10 +401,15 @@
 							<td colspan="6"><textarea class="messagebox" name="message"></textarea></td>
 							<td><input type="submit" value="댓글등록"></td>						
 						</tr>
+						<tr>
+						    <td>
+						       <a href="/mypage/boardview"><input type="button" value="되돌아가기" ></a>
+						    </td>
+						</tr>
 					</table>
 					</form>
 					</div>
-					<c:import url="/WEB-INF/views/mypage/writeboardview.jsp"></c:import>
+					<c:import url="/WEB-INF/views/mypage/boardview.jsp"></c:import>
 				</div>
 		</div>
 </div>	

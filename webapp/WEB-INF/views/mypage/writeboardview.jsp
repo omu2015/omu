@@ -44,17 +44,16 @@
 		<div class="container">
 	
 			<div class="row">
-				<div class="col-lg-12">
+			
 					<div class="row">
 
-						<div id="join-form">
+						
 							
 							<c:import url="/WEB-INF/views/mypage/boardview.jsp"></c:import>
 
 						</div>
 					</div>
-				</div>
-			</div>
+				
 		</div>
 		</section>
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
