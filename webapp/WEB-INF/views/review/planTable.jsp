@@ -51,33 +51,36 @@
 </div>
 <div class="wsTable">
 	<c:forEach var="vo" items="${reviewList }">
-			<hr style="border:none;border:3px double pink;">
-		<table id="plan_no_${vo.plan_no }" onclick="showplan(this)"
-			onmouseover="changeColor(this)">
-			<tr>
-				<c:forEach var="votitle" items="${vo.contentList}">
-					<td>${votitle.getTitle()}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="vocate" items="${vo.contentList}">
-					<td>${vocate.getCategory()}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="vocate" items="${vo.contentList}">
-					<td>${vocate.getNewAddress()}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<td>${vo.getMemberId()}</td>
-				<td>좋아요 수-> ${vo.getGoodCnt()}</td>
-			</tr>
-			<tr>
-				<td>시간 = ${vo.getTotalTime()}분</td>
-				<td>$ = ${vo.getTotalCost()}원</td>
-			</tr>
-		</table>
+<!-- 			<hr style="border:none;border:3px double pink;"> -->
+			<div id="plan_no_${vo.plan_no }" onclick="showplan(this)"
+					onmouseover="changeColor(this)">
+				<table>
+					<tr class="wshd">
+						<td><b>${vo.getMemberId()}</b></td>
+						<td><b>좋아요 수-> ${vo.getGoodCnt()}</b></td>
+						<td><b>시간 = ${vo.getTotalTime()}분</b></td>
+						<td><b>$ = ${vo.getTotalCost()}원</b></td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<c:forEach var="votitle" items="${vo.contentList}">
+							<td>${votitle.getTitle()}</td>
+						</c:forEach>
+					</tr>
+					<tr>
+						<c:forEach var="vocate" items="${vo.contentList}">
+							<td>${vocate.getCategory()}</td>
+						</c:forEach>
+					</tr>
+					<tr>
+						<c:forEach var="vocate" items="${vo.contentList}">
+							<td>${vocate.getNewAddress()}</td>
+						</c:forEach>
+					</tr>
+				</table>
+				<hr>
+			</div>
 	</c:forEach>
 </div>
 <script>

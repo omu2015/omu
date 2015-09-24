@@ -109,19 +109,10 @@ function showTheme(Obj) {
     	sort : daum.maps.services.SortBy.DISTANCE
      });
 }
-function addTheme(Obj) {
+function addTheme() {
+	//alert("관심사고르기");
 	//location.href="#interset";
 	
-	/* var themeName=Obj.id.split("_").pop();
-	console.log(themeName);
-	console.log(map.getCenter());
-    //location.href="/review/showTheme?theme_no="+theme_no;
-    
-     ps.keywordSearch(themeName , planSearchCB, {
-     	location : map.getCenter(),
-    	radius : 1000,
-    	sort : daum.maps.services.SortBy.DISTANCE
-     }); */
 }
 </script>
 <script>
@@ -137,8 +128,7 @@ function addTheme(Obj) {
 				<h4 class="heading"></h4>
 				<div class="row">
 					<section id="woosungMain">
-					<ul>
-															<c:if test="${not empty authUser}">
+												<c:if test="${not empty authUser}">
 													<div class="wsTable">
 													<table>
 															<tr>
@@ -146,35 +136,38 @@ function addTheme(Obj) {
 																<td id="theme_Name_${vo.themeName}" onclick="showTheme(this)"
 																onmouseover="changeColor(this)">${vo.themeName}</td>
 															</c:forEach>
-																<td style="color:#fb6f92" onclick="addTheme(this)" onmouseover="changeColor(this)">테마 추가하기</td>
+																<td id="modaltrigger" style="color:#fb6f92" onclick="addTheme()" onmouseover="changeColor(this)">테마 추가하기</td>
 															</tr>
 													</table>
 													</div>
-															</c:if>
-					</ul>
+												</c:if>
 					
-					<ul id="thumbs" class="portfolio">
 													<div class="map_wrap">
 															    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 								 				 	</div><!-- map_wrap -->
+								 				 		<div class="wsTable">
+													<table>
+															<tr>
+																<td onclick="placesNear(2)" onmouseover="changeColor(this)"><b>2km</b> 주변 후기</td>
+																<td onclick="placesNear(3)" onmouseover="changeColor(this)"><b>3km</b> 주변 후기</td>
+																<td onclick="placesNear(5)" onmouseover="changeColor(this)"><b>5km</b> 주변 후기</td>
+															</tr>
+													</table>
+													</div>
 						<!-- Item Project and Filter Name -->
-						
 												    <div id="menu_wrap" class="bg_white">
 												        <div id="pagination"></div>
 												        <div class="option">
-												            <p>
-												                <form onsubmit="searchPlaces(); return false;">
+												                <form style="text-align:right; margin-right:18px;" onsubmit="searchPlaces(); return false;">
 												                 <input type="text" value="" id="keyword" size="15">
-												                 <strong></strong> 
-												                <button type="submit">주소,장소 검색</button> 
-												            </p>
+												                <input type="submit" value="검색"> 
+												                </form>
 												        </div>
 												        <hr>
 												        <ul id="placesList"></ul>
 													</div>
 						<!-- End Item Project -->
 					
-					</ul>
 					</section>
 					<c:import url="/WEB-INF/views/review/planTable.jsp"></c:import>
 				</div>
@@ -204,6 +197,32 @@ function addTheme(Obj) {
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 <script>
+function placesNear(distance){
+	console.log("전방 "+distance+"km");
+	//console.log("map.getCenter() == " +map.getCenter().getLat());
+	console.log("map.getLevel() == " + map.getLevel());
+	var latlng=map.getCenter();
+	var lvl=map.getLevel();
+	$.ajax({
+		  url: "/review/getnear",
+		  data: {
+			lat : map.getCenter().getLat(),
+			lng : map.getCenter().getLng(),
+			distance : distance 
+		  },
+			success : function(response){
+					displayPlaces(response.contentList);
+					//map.setCenter(latlng);
+					if(map.getLevel() < lvl){
+						map.setLevel(lvl);
+					}
+			},
+			error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); }
+		});
+}
+
+</script>
+<script>
 		var options = {
 		  enableHighAccuracy: true,
 		  timeout: 5000,
@@ -214,25 +233,11 @@ function addTheme(Obj) {
 		  var crd = pos.coords;
  		  map.setCenter(new daum.maps.LatLng(crd.latitude, crd.longitude));
  		  
- 		 $.ajax({
-			  url: "/review/getnear",
-			  data: {
-				 lat : "37.494670899999996",
-				lng : "127.0273402",
-				distance : 10 
-			  },
-				success : function(response){
-						//console.log(response.contentList.toString());
-						displayPlaces(response.contentList);
-				},
-				error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); }
-			});
- 		
+		//주변 3km내에 있는 content getcha! 		  
+ 		placesNear(3);
 			
 		  console.log('Your current position is:');
-		  console.log('Latitude : ' + crd.latitude);
-		  console.log('Longitude: ' + crd.longitude);
-		  console.log('More or less ' + crd.accuracy + ' meters.');
+		  console.log('Lat : ' + crd.latitude + '  Lng : ' + crd.longitude + ' ( accuracy ' + crd.accuracy + 'm )');
 		  
 		};
 
@@ -244,7 +249,7 @@ function addTheme(Obj) {
 
 		var markers = [];
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			mapOption = {center : new daum.maps.LatLng(37.566826, 126.9786567),	level : 4};
+			mapOption = {center : new daum.maps.LatLng(37.566826, 126.9786567),	level : 5};
 		var map = new daum.maps.Map(mapContainer, mapOption);
 		
 		navigator.geolocation.getCurrentPosition(success, error, options);
@@ -263,47 +268,30 @@ function addTheme(Obj) {
 					return false;
 				}
 			// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-			//ps.keywordSearch(keyword, placesSearchCB);
 				ps.keywordSearch(keyword, planSearchCB);
 				//ps.categorySearch('PO3', planSearchCB, {location: new daum.maps.LatLng(37.564968, 126.939909)});
 		}
-		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-		function placesSearchCB(status, data, pagination) {
+				
+		function planSearchCB(status, response, pagination) {
 			if (status === daum.maps.services.Status.OK) {
-				// 정상적으로 검색이 완료됐으면
-				// 검색 목록과 마커를 표출합니다
-				displayPlaces(data.places);
-				// 페이지 번호를 표출합니다
+				
+				displayPlaces(response.places);
 				displayPagination(pagination);
+				
 			} else if (status === daum.maps.services.Status.ZERO_RESULT) {alert('검색 결과가 존재하지 않습니다.');return;
-			} else if (status === daum.maps.services.Status.ERROR) {	alert('검색 결과 중 오류가 발생했습니다.');	return;
+			} else if (status === daum.maps.services.Status.ERROR) {	lert('검색 결과 중 오류가 발생했습니다.');	return;
 			}
 		}
-		
-function planSearchCB(status, response, pagination) {
-	if (status === daum.maps.services.Status.OK) {
-		// 정상적으로 검색이 완료됐으면
-		// 검색 목록과 마커를 표출합니다
-		displayPlaces(response.places);
-		// 페이지 번호를 표출합니다
-		displayPagination(pagination);
-	} else if (status === daum.maps.services.Status.ZERO_RESULT) {alert('검색 결과가 존재하지 않습니다.');return;
-	} else if (status === daum.maps.services.Status.ERROR) {	lert('검색 결과 중 오류가 발생했습니다.');	return;
-	}
-}
 
-		// 검색 결과 목록과 마커를 표출하는 함수입니다
 		function displayPlaces(places) {
-	console.log(places);
+			console.log(places);
 			var listEl = document.getElementById('placesList'),
 				menuEl = document.getElementById('menu_wrap'),
 				fragment = document.createDocumentFragment(),
 				bounds = new daum.maps.LatLngBounds(),
 				listStr = '';
 
-			// 검색 결과 목록에 추가된 항목들을 제거합니다
 			removeAllChildNods(listEl);
-			// 지도에 표시되고 있는 마커를 제거합니다
 			removeMarker();
 
 			for (var i = 0; i < places.length; i++) {
@@ -361,21 +349,17 @@ function planSearchCB(status, response, pagination) {
 									
 									
 				})(marker, places[i]);
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 				fragment.appendChild(itemEl);
 			}
 
-			// 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
 			listEl.appendChild(fragment);
 			menuEl.scrollTop = 0;
 
-			// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 			map.setBounds(bounds);
 		}
 
-		// 검색결과 항목을 Element로 반환하는 함수입니다
 		function getListItem(index, places) {
 
 			var el = document.createElement('li'), 
@@ -383,7 +367,7 @@ function planSearchCB(status, response, pagination) {
 						+ '<div class="info"><h5>' + places.title + '</h5>';
 
 			if (places.newAddress) {
-				itemStr += ' span>' + places.newAddress + '</span>'
+				itemStr += '<span>' + places.newAddress + '</span>'
 						+ '<span class="jibun gray">' + places.address
 						+ '</span>';
 			} else {
@@ -399,7 +383,6 @@ function planSearchCB(status, response, pagination) {
 			return el;
 		}
 
-		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 		function addMarker(position, idx, title) {
 			var imageSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
 			imageSize = new daum.maps.Size(36, 37), // 마커 이미지의 크기
@@ -407,7 +390,7 @@ function planSearchCB(status, response, pagination) {
 				spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
 				spriteOrigin : new daum.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
 				offset : new daum.maps.Point(13, 37)
-			// 마커 좌표에 일치시킬 이미지 내에서의 좌표
+			
 			}, markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,
 					imgOptions), marker = new daum.maps.Marker({
 				position : position, // 마커의 위치
@@ -420,7 +403,6 @@ function planSearchCB(status, response, pagination) {
 			return marker;
 		}
 
-		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 		function removeMarker() {
 			for (var i = 0; i < markers.length; i++) {
 				markers[i].setMap(null);
@@ -428,12 +410,10 @@ function planSearchCB(status, response, pagination) {
 			markers = [];
 		}
 
-		// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
 		function displayPagination(pagination) {
 			var paginationEl = document.getElementById('pagination'), 
 				fragment = document.createDocumentFragment(), i;
 
-			// 기존에 추가된 페이지번호를 삭제합니다
 			while (paginationEl.hasChildNodes()) {
 				paginationEl.removeChild(paginationEl.lastChild);
 			}
@@ -458,8 +438,6 @@ function planSearchCB(status, response, pagination) {
 			paginationEl.appendChild(fragment);
 		}
 
-		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
-		// 인포윈도우에 장소명을 표시합니다
 		function displayInfowindow(marker, items) {
 			if(items.imageUrl=="") items.imageUrl ="/product-images/201582401441814.jpg";
 			var content = '<div class="wsTable"><table><tr><th colspan="2" class="wshd">'+items.title+'</th></tr><tr><td rowspan="4"><img style="height:150px" src="'+items.imageUrl+'"/></td></tr><tr><td>'+items.newAddress+'</td></tr><tr><td>'+items.phone+'</td></tr><tr><td><a href="'+items.placeUrl+'">웹 주소로 이동하기</a></td></tr><tr><th colspan="2" class="wshd">후기 게시판</th></tr>';
@@ -489,7 +467,6 @@ function planSearchCB(status, response, pagination) {
 								}
 									content += '</tr>';
 							}
-											//content += '<tr><td colspan="2" onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"> --> '+response.planList[i].plan_no+'번 일정으로 이동</td></tr>';
 						content+='</table><hr style="border:none;border:1px double pink;"></div>';
 			
 						infowindow.setContent(content);
