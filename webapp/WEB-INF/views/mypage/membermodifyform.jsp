@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -19,9 +19,16 @@
 <link href="../../assets/css/flexslider.css" rel="stylesheet" />
 <link href="../../assets/css/style.css" rel="stylesheet" />
 <link href="../../assets/css/table.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+
 
 <!-- 다음우편번호api -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+
+
+
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -64,6 +71,114 @@
     
 </script>
 
+<!-- =================== -->
+<script>
+(function ($) {
+	
+
+	$.fn.setPreview = function(opt) {
+		"use strict"
+
+		var defaultOpt = {
+			inputFile : $(this),
+			img : null,
+			w : 200,
+			h : 200
+
+		};
+		$.extend(defaultOpt, opt);
+	
+		var previewImage = function() {
+			if (!defaultOpt.inputFile || !defaultOpt.img)
+				return;
+
+			var inputFile = defaultOpt.inputFile.get(0);
+			var img = defaultOpt.img.get(0);
+
+			// FileReader
+			if (window.FileReader) {
+				// image 파일만
+				if (!inputFile.files[0].type.match(/image\//))
+					return;
+
+				// preview
+				try {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						img.src = e.target.result;
+						img.style.width = defaultOpt.w + 'px';
+						img.style.height = defaultOpt.h + 'px';
+						img.style.display = '';
+					}
+					reader.readAsDataURL(inputFile.files[0]);
+				} catch (e) {
+				}
+				// img.filters (MSIE)
+			} else if (img.filters) {
+				inputFile.select();
+				inputFile.blur();
+				var imgSrc = document.selection.createRange().text;
+
+				img.style.width = defaultOpt.w + 'px';
+				img.style.height = defaultOpt.h + 'px';
+				img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""
+						+ imgSrc + "\")";
+				img.style.display = '';
+
+				// no support
+			} else {
+				// Safari5, ...
+			}
+		};
+
+		// onchange
+		$(this).change(function() {
+			previewImage();
+		});
+	};
+
+	$(document).ready(function() {
+		var opt = {
+			img : $('#img_preview'),
+			w : 200,
+			h : 200
+		};
+
+		$('#input_file').setPreview(opt);
+
+	});
+
+	$(document).ready(function() {
+		var opt = {
+			img : $('#img_preview'),
+			w : 200,
+			h : 200
+		};
+
+		$('#input_file').setPreview(opt);
+	});
+	(function ($) {
+ 	
+	/* $(function() {
+
+		$(".datepicker").datepicker({
+			dateFormat : "yy-mm-dd"
+		});
+		
+	 	}(jQuery));	 */
+		
+		$("input[name=img]").on("change", function() {
+			alert(this.value); //선택된 파일의 경로가 나온다.
+			document.getElementById("img2").value = this.value;
+			$("#img2").text(this.value);
+		});
+
+	});
+	
+ 	}(jQuery));	
+</script>
+
+
 
 <!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
@@ -75,195 +190,198 @@
 
 </head>
 <body>
-	<div id="wrapper">
-		<!-- start header -->
-		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-		<c:import url="/WEB-INF/views/include/header_mypage.jsp">
-			<c:param name="pageName" value="memberModify" />
-		</c:import>
-		<!-- end header -->
+${authUser.imageUrl.split("/")[2] }
+   <div id="wrapper">
+      <!-- start header -->
+      <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+      <c:import url="/WEB-INF/views/include/header_mypage.jsp">
+         <c:param name="pageName" value="memberModify" />
+      </c:import>
+      <!-- end header -->
 
-		<section id="content" style="height: 790px">
+      <section id="content" style="height: 790px">
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="row">
-						<form id="join-modify" name="membermodifyform" method="post"
-							action="/mypage/membermodifyformok" enctype="multipart/form-data">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="row">
+                  <form id="join-modify" name="membermodifyform" method="post"
+                     action="/mypage/membermodifyformok" enctype="multipart/form-data">
 
-							
+                     
 
-							<div id="join-form">
-								<table>
-									<tr>
+                     <div id="join-form">
+                        <table>
+                           <tr>
 
 
-										<td id="photo" rowspan="4"><c:choose>
-												<c:when test="${not empty authUser.imageUrl }">
-													<%-- <img src="${authUser.imageUrl }" style="width:150px"> --%>
-													<img id="img_preview" name="image2"
-														src="${authUser.imageUrl }" style="width: 150px" />
-												</c:when>
-												<c:otherwise>
+                              <td id="photo" rowspan="4"><c:choose>
+                                    <c:when test="${not empty authUser.imageUrl }">
+                                       <%-- <img src="${authUser.imageUrl }" style="width:150px"> --%>
+                                       <img id="img_preview" name="image2"
+                                          src="${authUser.imageUrl }" style="width: 150px" />
+                                    </c:when>
+                                    <c:otherwise>
                                       고객의 사진이 없습니다.                        
                         </c:otherwise>
-											</c:choose> <input type="file" id="input_file" name="img" title=""
-											style="display: block; width: 200px; margin: 0; text-align: center;">
-											<!-- <input type="file" name="img" style="display:block; width:100px; margin:0; text-align:center;" value="" /> -->
-										</td>
-										<td class="title">이름</td>
-										<td><input id="name" name="memberName" type=""
-											value="${authUser.memberName  }"></td>
-									</tr>
-									<tr>
-										<td class="title">아이디</td>
-										<td><input id="memberId" name="memberId" type=""
-											value="${authUser.memberId }" readonly="readonly">
-									</tr>
-									<tr>
-										<td class="title">지금 패스워드</td>
-										<td><input id="password" name="password" type="password"
-											value="" placeholder="무조건 입력하세요"></td>
-									</tr>
-									<tr>
-										<td class="title">지금 패스워드 재확인</td>
-										<td><input id="password1" name="password1"
-											type="password" value="" placeholder="무조건 입력하세요"></td>
-									</tr>
-									<tr>
-										<td class="title">변경 패스워드</td>
-										<td><input id="repassword" name="repassword"
-											type="password" value="" placeholder="변경안할시 빈공간으로"></td>
-									</tr>
-									<tr>
-										<td class="title">이메일</td>
-										<td colspan="2"><input id="email" name="email"
-											type="text" value="${authUser.email } "></td>
-									</tr>
-									<tr>
-										<td class="title">생년월일</td>
-										<td colspan="2"><input type="text" id="birth"
-											name="birth" value="${authUser.birth }" readonly="readonly">
-										</td>
-									</tr>
-									<tr>
-										<td rowspan="2" class="title">주소</td>
-										<td colspan="2"><input name="zipcode" id="zipcode"
-											class="txt" style="width: 20%; text-align: center;"
-											maxlength="6" value="${authUser.zipcode }" /><input
-											type="button" onclick="sample6_execDaumPostcode()"
-											value="우편번호 찾기"></td>
-									</tr>
-									<tr>
-										<td colspan="2"><input name="address" id="address"
-											class="txt" style="width: 100%; text-align: center;"
-											value="${authUser.address }" /></td>
-									</tr>
-									<tr>
-										<td class="title">연락처</td>
-										<td colspan="2"><input name="phoneNum1"
-											value="${authUser.phoneNum1 }" maxlength="4"
-											style="width: 15%" />- <input name="phoneNum2"
-											value="${authUser.phoneNum2 }" maxlength="4"
-											style="width: 15%" />- <input name="phoneNum3"
-											value="${authUser.phoneNum3 }" maxlength="4"
-											style="width: 15%" /></td>
+                                 </c:choose>
+                                   <input type="file" id="input_file" name="img" title="사진 수정"	value="">
+                            <img id="img_preview" name="img2" src="" width="120" height="140" border="0" />
+							<input type="hidden" name="img2" value="${authUser.imageUrl }">
+                             
+                             
+                                <td class="title">이름</td>
+                              <td><input id="name" name="memberName" type=""
+                                 value="${authUser.memberName  }"></td>
+                           </tr>
+                           <tr>
+                              <td class="title">아이디</td>
+                              <td><input id="memberId" name="memberId" type=""
+                                 value="${authUser.memberId }" readonly="readonly">
+                           </tr>
+                           <tr>
+                              <td class="title">지금 패스워드</td>
+                              <td><input id="password" name="password" type="password"
+                                 value="" placeholder="무조건 입력하세요"></td>
+                           </tr>
+                           <tr>
+                              <td class="title">지금 패스워드 재확인</td>
+                              <td><input id="password1" name="password1"
+                                 type="password" value="" placeholder="무조건 입력하세요"></td>
+                           </tr>
+                           <tr>
+                              <td class="title">변경 패스워드</td>
+                              <td><input id="repassword" name="repassword"
+                                 type="password" value="" placeholder="변경안할시 빈공간으로"></td>
+                           </tr>
+                           <tr>
+                              <td class="title">이메일</td>
+                              <td colspan="2"><input id="email" name="email"
+                                 type="text" value="${authUser.email } "></td>
+                           </tr>
+                           <tr>
+                              <td class="title">생년월일</td>
+                              <td colspan="2"><input type="text" id="birth"
+                                 name="birth" value="${authUser.birth }" readonly="readonly">
+                              </td>
+                           </tr>
+                           <tr>
+                              <td rowspan="2" class="title">주소</td>
+                              <td colspan="2"><input name="zipcode" id="zipcode"
+                                 class="txt" style="width: 20%; text-align: center;"
+                                 maxlength="6" value="${authUser.zipcode }" /><input
+                                 type="button" onclick="sample6_execDaumPostcode()"
+                                 value="우편번호 찾기"></td>
+                           </tr>
+                           <tr>
+                              <td colspan="2"><input name="address" id="address"
+                                 class="txt" style="width: 100%; text-align: center;"
+                                 value="${authUser.address }" /></td>
+                           </tr>
+                           <tr>
+                              <td class="title">연락처</td>
+                              <td colspan="2"><input name="phoneNum1"
+                                 value="${authUser.phoneNum1 }" maxlength="4"
+                                 style="width: 15%" />- <input name="phoneNum2"
+                                 value="${authUser.phoneNum2 }" maxlength="4"
+                                 style="width: 15%" />- <input name="phoneNum3"
+                                 value="${authUser.phoneNum3 }" maxlength="4"
+                                 style="width: 15%" /></td>
 
-									</tr>
+                           </tr>
 
-								</table>
-							</div>
+                        </table>
+                     </div>
 
-							<input type="button" value="취소" /> <input type="submit"
-								value="수정완료" />
-						</form>
+                     <input type="button" value="취소" /> <input type="submit"
+                        value="수정완료" />
+                  </form>
 
-					</div>
-				</div>
-			</div>
-		</div>
-		</section>
-		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-	</div>
-	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+               </div>
+            </div>
+         </div>
+      </div>
+      </section>
+      <c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+   </div>
+   <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
-	
+   
 
-	<!-- javascript -->
-	================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="../../assets/js/jquery.js"></script>
-	<script src="../../assets/js/jquery.easing.1.3.js"></script>
-	<script src="../../assets/js/bootstrap.min.js"></script>
-	<script src="../../assets/js/jquery.fancybox.pack.js"></script>
-	<script src="../../assets/js/jquery.fancybox-media.js"></script>
-	<script src="../../assets/js/google-code-prettify/prettify.js"></script>
-	<script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
-	<script src="../../assets/js/portfolio/setting.js"></script>
-	<script src="../../assets/js/jquery.flexslider.js"></script>
-	<script src="../../assets/js/animate.js"></script>
-	<script src="../../assets/js/custom.js"></script>
-	<script type="text/javascript"
-		src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
-	<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" charset="utf-8"
-		src="/assets/js/jquery.leanModal.min.js"></script>
-		
-		<script type="text/javascript">
-		
-		$(function(){
-			   //사용자 입력값에 대한 Validation
-			   $("#join-modify").submit(function(){
-			      //1. 이름
-			      var $memberName = $("#name")
-			      var memberName = $memberName.val();
-			      if(memberName ==""){
-			         alert("이름을 입력해주세요");
-			         $memberName.focus();
-			         return false;
-			      }
-			      //2. 이메일
-			      var $email = $("#email");
-			      var email = $email.val();
-			      if(email ==""){
-			         alert("이메일을 입력해주세요");
-			         $email.focus();
-			         return false;      
-			      }
-			       var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-			      if( re.test(email)==false){
-			         alert("유효한 이메일 형식이 아닙니다");
-			         $email.focus();
-			         return false;   
-			      }
-			  
-			      
-			      //3. 패스워드
-			      var $password = $("#password");
-			      var password = $password.val();
-			      if(password ==""){
-			      alert("패스워드를 입력해주세요");
-			      $password.focus();
-			      return false;   
-			      }
-			      
-			      var $password1 = $("#password1");
-			      var password1 = $password1.val();
-			      if(password1 ==""){
-			      alert("패스워드를 입력해주세요");
-			      $password1.focus();
-			      return false;   
-			      }
-			      if(password != password1){
-			    	 alert("패스워드가 서로 일치 하지 않습니다");
-			      $password.focus();
-			      return false;
-			      }
-			      return true;
-			   });
-		});
-		</script>
-	
+   <!-- javascript -->
+   ================================================== -->
+   <!-- Placed at the end of the document so the pages load faster -->
+   <script src="../../assets/js/jquery.js"></script>
+   <script src="../../assets/js/jquery.easing.1.3.js"></script>
+   <script src="../../assets/js/bootstrap.min.js"></script>
+   <script src="../../assets/js/jquery.fancybox.pack.js"></script>
+   <script src="../../assets/js/jquery.fancybox-media.js"></script>
+   <script src="../../assets/js/google-code-prettify/prettify.js"></script>
+   <script src="../../assets/js/portfolio/jquery.quicksand.js"></script>
+   <script src="../../assets/js/portfolio/setting.js"></script>
+   <script src="../../assets/js/jquery.flexslider.js"></script>
+   <script src="../../assets/js/animate.js"></script>
+   <script src="../../assets/js/custom.js"></script>
+   <script type="text/javascript"
+      src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
+   <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+   <script type="text/javascript" charset="utf-8"
+      src="/assets/js/jquery.leanModal.min.js"></script>
+      
+      <script type="text/javascript">
+      
+      $(function(){
+            //사용자 입력값에 대한 Validation
+            $("#join-modify").submit(function(){
+               //1. 이름
+               var $memberName = $("#name")
+               var memberName = $memberName.val();
+               if(memberName ==""){
+                  alert("이름을 입력해주세요");
+                  $memberName.focus();
+                  return false;
+               }
+               //2. 이메일
+               var $email = $("#email");
+               var email = $email.val();
+               if(email ==""){
+                  alert("이메일을 입력해주세요");
+                  $email.focus();
+                  return false;      
+               }
+                var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+               if( re.test(email)==false){
+                  alert("유효한 이메일 형식이 아닙니다");
+                  $email.focus();
+                  return false;   
+               }
+           
+               
+               //3. 패스워드
+               var $password = $("#password");
+               var password = $password.val();
+               if(password ==""){
+               alert("패스워드를 입력해주세요");
+               $password.focus();
+               return false;   
+               }
+               
+               var $password1 = $("#password1");
+               var password1 = $password1.val();
+               if(password1 ==""){
+               alert("패스워드를 입력해주세요");
+               $password1.focus();
+               return false;   
+               }
+               if(password != password1){
+                 alert("패스워드가 서로 일치 하지 않습니다");
+               $password.focus();
+               return false;
+               }
+               return true;
+            });
+      });
+      </script>
+   
 </body>
 </html>

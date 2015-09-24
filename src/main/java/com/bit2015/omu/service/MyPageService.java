@@ -60,15 +60,21 @@ public class MyPageService {
 			@ModelAttribute MemberVo memberVo, String repassword,
 			String password1 ,MultipartFile img) {
 		MemberVo vo = (MemberVo) session.getAttribute("authUser");
-		System.out.println(memberDao.get(vo.getMemberId(), vo.getPassword())
-				.getPassword().equals(password1));
 		if (memberDao.get(vo.getMemberId(), vo.getPassword()).getPassword()
 				.equals(password1)) {
 			vo.setMemberName(memberVo.getMemberName());
 			vo.setAddress(memberVo.getAddress());
-			vo.setPassword(repassword);
+		   /* vo.setPassword(repassword);*/
 			String member_img_url=ful.upload(img);
+			System.out.println("member_img_url===="+member_img_url);
+			if(member_img_url!=""){
 			vo.setImageUrl(member_img_url);
+			}
+			if(repassword !=""){
+				vo.setPassword(password1);
+			}else{
+				vo.setPassword(repassword);
+			}
 			vo.setPhoneNum1(memberVo.getPhoneNum1());
 			vo.setPhoneNum2(memberVo.getPhoneNum2());
 			vo.setPhoneNum3(memberVo.getPhoneNum3());
@@ -86,7 +92,7 @@ public class MyPageService {
 		if (memberDao.get(vo.getMemberId(), vo.getPassword()).getPassword()
 				.equals(password1)) {
 			vo.setMemberStatus(memberVo.getMemberStatus());
-			/*vo.setJoinOutDate(memberVo.getJoinOutDate());*/
+			
 			memberDao.memberLeave(vo);
 			System.out.println(vo);
 		} else {

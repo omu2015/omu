@@ -36,7 +36,7 @@ public class MyPageController {
 	 return "/mypage/membermodifyform";
   }
 	@RequestMapping("/membermodifyformok")
-	public String modify(HttpSession session,@ModelAttribute MemberVo memberVo ,String repassword,String password1,MultipartFile img){
+	public String modify(HttpSession session,@ModelAttribute MemberVo memberVo ,String repassword,String password1,@RequestParam(required=false)MultipartFile img){
 	     myPageService.memberModify(session, memberVo,repassword,password1, img);
 		return "redirect:/";
 	}
