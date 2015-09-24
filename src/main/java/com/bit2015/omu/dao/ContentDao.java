@@ -1,6 +1,8 @@
 package com.bit2015.omu.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -45,5 +47,22 @@ public class ContentDao {
 		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectContentByTheme", theme_no);
 		return list;
 	}
-	
+	public List<ContentVo> selectAllByDist(Long lat, Long lng, Long distance){
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("lat", lat);
+		map.put("lng", lng);
+		map.put("distance", distance);
+		
+		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectAllByDist", map);
+		return list;
+	}
+	public List<ContentVo> selectAllNear(Double lat, Double lng, double d){
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("lat", lat);
+		map.put("lng", lng);
+		map.put("distance", d);
+		
+		List<ContentVo> list= sqlMapClientTemplate.queryForList("content.selectAllNear", map);
+		return list;
+	}
 }

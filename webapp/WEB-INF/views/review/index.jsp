@@ -110,7 +110,7 @@ function showTheme(Obj) {
      });
 }
 function addTheme(Obj) {
-	location.href="#interset";
+	//location.href="#interset";
 	
 	/* var themeName=Obj.id.split("_").pop();
 	console.log(themeName);
@@ -204,7 +204,7 @@ function addTheme(Obj) {
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 <script>
-			var options = {
+		var options = {
 		  enableHighAccuracy: true,
 		  timeout: 5000,
 		  maximumAge: 0
@@ -213,7 +213,22 @@ function addTheme(Obj) {
 		function success(pos) {
 		  var crd = pos.coords;
  		  map.setCenter(new daum.maps.LatLng(crd.latitude, crd.longitude));
-
+ 		  
+ 		 $.ajax({
+			  url: "/review/getnear",
+			  data: {
+				 lat : "37.494670899999996",
+				lng : "127.0273402",
+				distance : 10 
+			  },
+				success : function(response){
+						//console.log(response.contentList.toString());
+						displayPlaces(response.contentList);
+				},
+				error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); }
+			});
+ 		
+			
 		  console.log('Your current position is:');
 		  console.log('Latitude : ' + crd.latitude);
 		  console.log('Longitude: ' + crd.longitude);
@@ -229,8 +244,9 @@ function addTheme(Obj) {
 
 		var markers = [];
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			mapOption = {center : new daum.maps.LatLng(37.566826, 126.9786567),	level : 3};
+			mapOption = {center : new daum.maps.LatLng(37.566826, 126.9786567),	level : 4};
 		var map = new daum.maps.Map(mapContainer, mapOption);
+		
 		navigator.geolocation.getCurrentPosition(success, error, options);
 		
 		var ps = new daum.maps.services.Places();
@@ -443,8 +459,30 @@ function planSearchCB(status, response, pagination) {
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
 		function displayInfowindow(marker, items) {
-			var content = '<div style="padding:5px; z-index:1;"><table><tr><td>'+items.title+'</td></tr><tr><td>'+items.newAddress+'</td></tr></div>';
-		
+//			var content = '<div class="wsTable"><table><tr><th class="wshd">'+items.title+'</th></tr><tr><td>'+items.newAddress+'</td></tr><tr><td><img style="height:150px" src="'+items.imageUrl+'"/></td></tr></table><hr style="border:none;border:1px double pink;"></div>';
+			var content = '<div class="wsTable"><table><tr><th colspan="2" class="wshd">'+items.title+'</th></tr><tr><td rowspan="4"><img style="height:150px" src="'+items.imageUrl+'"/></td></tr><tr><td>'+items.newAddress+'</td></tr><tr><td>'+items.phone+'</td></tr><tr><td><a href="'+items.placeUrl+'">웹 주소로 이동하기</a></td></tr>';
+			
+			$.ajax({
+				type: "Post",
+				url: "/review/callPlanList",
+				data:{
+					id : items.id
+				},
+				success: function(response){
+					alert("success");
+					console.log(response.planList.toString());
+						for ( var i in response.planList) {
+							content += '<tr><td colspan="2" onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"> --> '+response.planList[i].plan_no+'번 일정으로 이동</td></tr>';
+						}
+				},
+				error:function(jqXHR, textStatus, errorThrown){
+		            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+		            self.close();
+		        }
+			});
+			
+			content+='</table><hr style="border:none;border:1px double pink;"></div>';
+			
 			infowindow.setContent(content);
 			infowindow.open(map, marker);
 		}
@@ -462,7 +500,6 @@ function planSearchCB(status, response, pagination) {
 		
 	var content = '<div style="padding:5px;z-index:1;"><ul><li>'+items.title+'</li>';
 					
-		console.log("items.id == " + items.id);
 		$.ajax({
 			type: "Post",
 			url: "/review/callPlanList",
@@ -475,7 +512,6 @@ function planSearchCB(status, response, pagination) {
 					}
 				content+='</ul></div>';
 				
-				console.log(content);
 				planlistwindow.setContent(content);
 				planlistwindow.open(map, marker);
 			},
