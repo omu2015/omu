@@ -230,21 +230,15 @@ public class ReviewService {
 		MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
 		List<PlanVo> planAll = planDao.getUserPlan(memberVo.getMember_no());
 		List<PlanVo> planList = new ArrayList<PlanVo>();
-		System.out.println("planAll.size()  = = = " + planAll.size());
 		
 		for (int i = 0; i < planAll.size(); i++) {
 			System.out.println("plan_no"+planAll.get(i).getPlan_no()+"   size ===="+contentBoxDao.selectAllByPno(planAll.get(i).getPlan_no()).size());
 			
 			if(planHasBoard(planAll.get(i).getPlan_no())){
-				System.out.println(planAll.get(i).getPlan_no()+"번   ---  1번에서 탈락");
-				//board 이미 있는지 없는지 조사
 				continue;
 			}else if(contentBoxDao.selectAllByPno(planAll.get(i).getPlan_no()).size()==0){
-				System.out.println(planAll.get(i).getPlan_no()+"번   ---  2번에서 탈락");
-			//content가 하나라도 있는지 없는지 조사
 				continue;
 			}else{
-				System.out.println("planAll.get(i).toString()  ==  " + planAll.get(i).toString());
 				planList.add(planAll.get(i));
 			}
 		}//for문 끝
@@ -304,8 +298,6 @@ public class ReviewService {
 				String img_url = ful.upload(img);
 				boardImgBoxVo.setImageUrl(img_url);
 				boardImgBoxDao.insert(boardImgBoxVo);
-				System.out.println("boardImgBoxVo.toString() === "
-						+ boardImgBoxVo.toString());
 			}
 		}
 
@@ -334,10 +326,8 @@ public class ReviewService {
 		String contentList = "";
 		try {
 			contentList = objectMapper.writeValueAsString(contentList2);
-			System.out.println("json parse=" + contentList);
 
 		} catch (JsonProcessingException e) {
-			System.out.println("json test");
 			e.printStackTrace();
 		}
 
@@ -388,15 +378,11 @@ public class ReviewService {
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String s = formatter.format(new Date());
 		planVo.setPlanDate(s);
-		System.out.println("planVo.getPlanDate()  = == == = ="
-				+ planVo.getPlanDate());
 
 		// planDao insert
 		planDao.insert(planVo);
-		System.out.println("1." + planVo.toString());
 		// pno뽑기
 		List<PlanVo> planList = planDao.getUserPlan(memberVo.getMember_no());
-		System.out.println("2." + planList.toString());
 		// order by desc 이므로 0번째 인덱스가 가장 최신
 		PlanVo lastplan = planList.get(0);
 

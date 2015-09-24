@@ -97,23 +97,36 @@
 }
 </style>
 <script>
-function showTheme(Obj) {
-	var themeName=Obj.id.split("_").pop();
-	console.log(themeName);
-	console.log(map.getCenter());
-    //location.href="/review/showTheme?theme_no="+theme_no;
+// function showTheme(Obj) {
+// 	var themeName=Obj.id.split("_").pop();
     
-     ps.keywordSearch(themeName , planSearchCB, {
-     	location : map.getCenter(),
-    	radius : 1000,
-    	sort : daum.maps.services.SortBy.DISTANCE
-     });
-}
-function addTheme() {
-	//alert("관심사고르기");
-	//location.href="#interset";
-	
-}
+// 	//marker안에 places정보 없음    
+//     console.log(markers[0]);
+//      ps.keywordSearch(themeName , planSearchCB, {
+//      	location : map.getCenter(),
+//     	radius : 1000,
+//     	sort : daum.maps.services.SortBy.DISTANCE
+//      });
+// }
+
+	function showTheme(Obj) {
+		var themeName = Obj.id.split("_").pop();
+		console.log("themeName="+themeName);
+		console.log(placesArray);
+		for (var i = 0; i < placesArray.length; i++) {
+				markers[i].setVisible(true);
+			if(placesArray[i].category.split(">").pop()!=themeName){
+				markers[i].setVisible(false);
+			}
+		}
+
+	}
+
+	function addTheme() {
+		//alert("관심사고르기");
+		//location.href="#interset";
+
+	}
 </script>
 <script>
 </script>
@@ -128,7 +141,19 @@ function addTheme() {
 				<h4 class="heading"></h4>
 				<div class="row">
 					<section id="woosungMain">
-												<c:if test="${not empty authUser}">
+													<div class="wsTable">
+														<table>
+																<tr>
+																	<td onclick="placesNear(0.5)" onmouseover="changeColor(this)"><b>500m</b> 주변 후기</td>
+																	<td onclick="placesNear(1)" onmouseover="changeColor(this)"><b>1km</b> 주변 후기</td>
+																	<td onclick="placesNear(3)" onmouseover="changeColor(this)"><b>3km</b> 주변 후기</td>
+																</tr>
+														</table>
+													</div>
+													<div class="map_wrap">
+															    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+								 				 	</div><!-- map_wrap -->
+								 				 <c:if test="${not empty authUser}">
 													<div class="wsTable">
 													<table>
 															<tr>
@@ -141,19 +166,6 @@ function addTheme() {
 													</table>
 													</div>
 												</c:if>
-					
-													<div class="map_wrap">
-															    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-								 				 	</div><!-- map_wrap -->
-								 				 		<div class="wsTable">
-													<table>
-															<tr>
-																<td onclick="placesNear(2)" onmouseover="changeColor(this)"><b>2km</b> 주변 후기</td>
-																<td onclick="placesNear(3)" onmouseover="changeColor(this)"><b>3km</b> 주변 후기</td>
-																<td onclick="placesNear(5)" onmouseover="changeColor(this)"><b>5km</b> 주변 후기</td>
-															</tr>
-													</table>
-													</div>
 						<!-- Item Project and Filter Name -->
 												    <div id="menu_wrap" class="bg_white">
 												        <div id="pagination"></div>
@@ -198,11 +210,15 @@ function addTheme() {
 <script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 <script>
 function placesNear(distance){
-	console.log("전방 "+distance+"km");
-	//console.log("map.getCenter() == " +map.getCenter().getLat());
-	console.log("map.getLevel() == " + map.getLevel());
 	var latlng=map.getCenter();
 	var lvl=map.getLevel();
+	
+	circle.setMap(null);
+	circle.setPosition(latlng);
+	circle.setRadius(distance*1000);
+	circle.setMap(map);	
+	
+	
 	$.ajax({
 		  url: "/review/getnear",
 		  data: {
@@ -211,18 +227,20 @@ function placesNear(distance){
 			distance : distance 
 		  },
 			success : function(response){
+				if(response.contentList.length!=0){
 					displayPlaces(response.contentList);
-					//map.setCenter(latlng);
 					if(map.getLevel() < lvl){
 						map.setLevel(lvl);
 					}
+				}else{
+					alert("선택 범위안에 후기글이 없습니다. \n\n\t 다시선택해주세요");
+				}
 			},
 			error: function (xhr, textStatus, errorThrown) { console.log(errorThrown); }
 		});
 }
 
-</script>
-<script>
+//geo
 		var options = {
 		  enableHighAccuracy: true,
 		  timeout: 5000,
@@ -231,10 +249,10 @@ function placesNear(distance){
 
 		function success(pos) {
 		  var crd = pos.coords;
- 		  map.setCenter(new daum.maps.LatLng(crd.latitude, crd.longitude));
- 		  
+		  map.setCenter(new daum.maps.LatLng(crd.latitude, crd.longitude));
+		  
 		//주변 3km내에 있는 content getcha! 		  
- 		placesNear(3);
+		placesNear(1);
 			
 		  console.log('Your current position is:');
 		  console.log('Lat : ' + crd.latitude + '  Lng : ' + crd.longitude + ' ( accuracy ' + crd.accuracy + 'm )');
@@ -244,10 +262,11 @@ function placesNear(distance){
 		function error(err) {
 		  console.warn('ERROR(' + err.code + '): ' + err.message);
 		};
-
-
+</script>
+<script>
 
 		var markers = [];
+		var placesArray =[];
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {center : new daum.maps.LatLng(37.566826, 126.9786567),	level : 5};
 		var map = new daum.maps.Map(mapContainer, mapOption);
@@ -256,8 +275,15 @@ function placesNear(distance){
 		
 		var ps = new daum.maps.services.Places();
 		var infowindow = new daum.maps.InfoWindow({	zIndex : 1});
-		var planlistwindow = new daum.maps.InfoWindow({	zIndex : 1});
-		
+		var infowindow2 = new daum.maps.InfoWindow({	zIndex : 1});
+		var circle = new daum.maps.Circle({
+			strokeWeight: 3, // 선의 두께입니다 
+		    strokeColor: '#FDB7C8', // 선의 색깔입니다
+		    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'shortdashdot', // 선의 스타일 입니다
+		    fillColor: '#FFFAFC', // 채우기 색깔입니다
+		    fillOpacity: 0.2  // 채우기 불투명도 입니다  
+		});
 		
 		// 키워드 검색을 요청하는 함수입니다
 		//searchPlaces();
@@ -279,11 +305,13 @@ function placesNear(distance){
 				displayPagination(pagination);
 				
 			} else if (status === daum.maps.services.Status.ZERO_RESULT) {alert('검색 결과가 존재하지 않습니다.');return;
-			} else if (status === daum.maps.services.Status.ERROR) {	lert('검색 결과 중 오류가 발생했습니다.');	return;
+			} else if (status === daum.maps.services.Status.ERROR) {	alert('검색 결과 중 오류가 발생했습니다.');	return;
 			}
 		}
 
 		function displayPlaces(places) {
+			placesArray = places;
+			
 			console.log(places);
 			var listEl = document.getElementById('placesList'),
 				menuEl = document.getElementById('menu_wrap'),
@@ -303,17 +331,15 @@ function placesNear(distance){
 				bounds.extend(placePosition);
 
 				(function(marker, items) {
-					
 									
 									daum.maps.event.addListener(marker, 'mouseover',
 											function() {
-												displayInfowindow(marker, items);
+												displayinfo2(marker,items);
 											});
 				
 									daum.maps.event.addListener(marker, 'mouseout', function() {
-// 											infowindow.close();
+ 											infowindow2.close();
 									});
-									
 									
 									//mouseover
 									itemEl.onmouseover = function() {
@@ -321,21 +347,21 @@ function placesNear(distance){
 									};
 				
 									itemEl.onmouseout = function() {
+										
+										
 										//infowindow.close();
 									};
 
 									//click
 									daum.maps.event.addListener(marker, 'click',
 									function(){
-									//displayPlanList(marker,items);
-									infowindow.close();
+										infowindow.close();
 										displayInfowindow(marker, items);
 									});
 									
 									itemEl.onclick = function(){
 										map.setCenter(new daum.maps.LatLng(items.latitude, items.longitude));
 										
-									//displayPlanList(marker,items);	
 										displayInfowindow(marker, items);
 									
 									};
@@ -343,7 +369,7 @@ function placesNear(distance){
 									daum.maps.event.addListener(map, 'click',
 											function(){
 												infowindow.close();
-											//	planlistwindow.close();
+											//	infowindow2.close();
 											});
 									
 									
@@ -358,7 +384,9 @@ function placesNear(distance){
 			menuEl.scrollTop = 0;
 
 			map.setBounds(bounds);
-		}
+			
+			
+		}//ends displayplaces()
 
 		function getListItem(index, places) {
 
@@ -488,31 +516,12 @@ function placesNear(distance){
 		}
 		
 		
-	function displayPlanList(marker, items) {
-		console.log(items.id+"_______"+items.title);
+	function displayinfo2(marker, items) {
 		
-	var content = '<div style="padding:5px;z-index:1;"><ul><li>'+items.title+'</li>';
+		var content = '<div class="wsTable"><table><tr><th class="wshd">'+items.title+'</th></tr><table></div>';
 					
-		$.ajax({
-			type: "Post",
-			url: "/review/callPlanList",
-			data:{
-				id : items.id
-			},
-			success: function(response){
-					for ( var i in response.planList) {
-						content += '<li onmouseover="changeColor(this)" id="'+response.planList[i].plan_no+'" onclick="showplan(this)"> --> '+response.planList[i].plan_no+'번 일정으로 이동</li>';
-					}
-				content+='</ul></div>';
-				
-				planlistwindow.setContent(content);
-				planlistwindow.open(map, marker);
-			},
-			error:function(jqXHR, textStatus, errorThrown){
-	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
-	            self.close();
-	        }
-		});
+		infowindow2.setContent(content);
+		infowindow2.open(map, marker);
 	}
 	
 	function hideAllMarker() {

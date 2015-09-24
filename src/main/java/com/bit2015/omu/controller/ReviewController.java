@@ -41,10 +41,8 @@ public class ReviewController {
    @RequestMapping("/getnear")
    @ResponseBody
    public Map<String, Object> getNear(@RequestParam Double lat, @RequestParam Double lng, @RequestParam(required=false, defaultValue="5") Double distance){
-	   System.out.println("lat ==" + lat + "        lng  == " +lng   +  "                 distance = " + distance);
 	   
       List<ContentVo> contentList =reviewService.getNear(lat,lng,distance);
-      System.out.println("contentList.toString()==== " + contentList.toString());
       
       //ajax-jason
       Map<String, Object> map = new HashMap<String, Object>();
