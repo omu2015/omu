@@ -53,4 +53,8 @@ public class MainDao {
 		PlanVo planVo = (PlanVo) sqlMapClientTemplate.queryForObject("plan.getUserPlan", map);
 		return planVo;
 	}
+	
+	public void insert(PlanVo planVo){
+		sqlMapClientTemplate.insert("plan.insertpsk", planVo);
+	}
 }

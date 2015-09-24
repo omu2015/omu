@@ -132,17 +132,18 @@ $(function(){
 
 <!-- 모달팝업 interset -->
 		<div>
-		<div id="interset" style="display:none;margin-top:50px">
-			<div style="width:800px;background-color:#2f3238;color:#fff;height:600px;text-align:center;font-size:15px">
+		<div id="interset" style="display:none;margin-top:10px">
+			<div style="width:900px;background-color:#2f3238;color:#fff;height:600px;text-align:center;font-size:15px">
 				<div style="padding:10px;font-size:18px;margin-bottom:20px">${authUser.memberName }님의 관심사</div>
 			<form name ="interest" method="post" action="/interestupdate">
 	<c:forEach var="vo" items="${themeList }" varStatus="status">
 				<input type="hidden" name="member_no" value="${authUser.member_no }">
-				<div>
+				<div style="float:left;width:120px;height:100px;margin:10px">
+				<img style="width:120px;height:100px" src="/assets/img/noimage.jpg">
 				<input class="checkTheme" type="checkbox" name="theme_no" value="${vo.theme_no }">${vo.themeName}
 				</div>
 	</c:forEach>
-				<input type="submit" value="관심사로검색" style="color:#000;margin-top:20px;width:150px;height:30px" >
+				<input type="submit" value="관심사로검색" style="color:#000;width:150px;height:30px" >
 			</form>
 			</div>
 			</div>

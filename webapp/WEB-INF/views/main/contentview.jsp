@@ -87,28 +87,29 @@
 <!-- 좋아요 -->
 					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" ><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
 <!-- 찜하기 -->
-					<a href="javascript:jjimCon(${contentVo.content_no },${authUser.member_no })" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
+					<a href="/jjim" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
 			</div>
 				<div id="staticMap" style="width:1170px;height:350px;margin-top:60px"></div>
 <!-- 댓글 -->
-			<div style="width:1000px;margin:auto;border:solid 2px #FDB7C8;padding:15px;margin-top:20px">
+			<div style="width:1000px;margin:auto;border:solid 2px #FDB7C8;padding:15px;margin-top:20px;margin-bottom:20px">
 				<c:choose>
 				<c:when test="${empty authUser }">
-				<span><img style="width:55px;border-radius:55px;height:55px" src="/assets/img/no_img.jpg"></span>
+				<span style="font-weight:bold">비회원</span>
 				</c:when>
 				<c:otherwise>
-				<span><img style="width:55px;border-radius:55px;height:55px" src="${authUser.imageUrl }"></span>
+				<span style="font-weight:bold">${authUser.memberName }</span>
 				</c:otherwise>
 				</c:choose>
-				<span style="margin-left:20px"><textarea name="message" cols=127 rows=3></textarea></span>
+				<span style="margin-left:15px"><textarea name="message" cols=132 rows=3></textarea></span>
 				<span style="margin-left:20px"><input style="width:60px;height:60px" type="submit" value="덧글등록"></span>
 			</div>	
 		</form>
 
 <!-- 덧글 리스트 -->
-		<div style="width:1000px;margin:auto;border:solid 1px #FDB7C8;padding:15px;font-size:15px;margin-top:20px">
+		
 		<c:forEach var="vo" items="${commentsList}" varStatus="status">
 		<c:if test="${contentVo.content_no eq vo.content_no }">
+		<div style="width:1000px;margin:auto;border:solid 1px #FDB7C8;padding:15px;font-size:15px;margin-top:10px">
 			<span>${vo.message }</span>
 		<c:choose>
 		<c:when test="${authUser.member_no == vo.member_no }">
@@ -120,10 +121,10 @@
 		</c:choose>
 			<span style="float:right;margin-right:15px">${vo.regDate }</span>
 			<span style="float:right;margin-right:15px"">${vo.member_no }</span>
+		</div>
 		</c:if>
 		<c:if test="${empty commentsList }"><span style="margin-left:320px">덧글이 없습니다.  처음으로 덧글을 남겨보세요.</span></c:if>
 		</c:forEach>
-		</div>
 
 			</div>
 	</div>

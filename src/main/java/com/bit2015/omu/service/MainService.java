@@ -139,11 +139,11 @@ public class MainService {
 		return planVo;
 	}
 	
-	public void insertPlan(Long member_no){
-		PlanVo planVo = new PlanVo();
-		planVo.setMember_no(member_no);
+	public void insertPlan(PlanVo planVo){
 		planDao.insert(planVo);
 	}
+	
+	
 	
 /*	public MemberVo selectVo(Long member_no){
 		MemberVo memberVo = memberDao.selectVo(member_no);

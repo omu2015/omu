@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <footer>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-3">
-				<div class="widget">
-					<h5 class="widgetheading">Get in touch with us</h5>
+		<div class="row" style="margin-top:-25px">
+			<div class="col-lg-3" >
+				<div class="widget" >
+					<h5 class="widgetheading" >Get in touch with us</h5>
 					<address>
 					<strong>Moderna company Inc</strong><br>
 					 Modernbuilding suite V124, AB 01<br>
@@ -58,11 +58,11 @@
 				</div>
 				<div class="col-lg-6">
 					<ul class="social-network" style="margin-left:-30px">
-						<li><a href="#" data-placement="top" title="Facebook"><img style="width:20px" src="https://cdn3.iconfinder.com/data/icons/social-media-9/512/1-128.png"></a></li>
-						<li><a href="#" data-placement="top" title="Twitter"><img style="width:20px" src="https://cdn3.iconfinder.com/data/icons/social-media-9/512/2-128.png"></a></li>
-						<li><a href="#" data-placement="top" title="Linkedin"><img style="width:20px" src="https://cdn3.iconfinder.com/data/icons/social-media-9/512/5-128.png"></a></li>
-						<li><a href="#" data-placement="top" title="Pinterest"><img style="width:20px" src="https://cdn3.iconfinder.com/data/icons/social-media-9/512/3-128.png"></a></li>
-						<li><a href="#" data-placement="top" title="Google plus"><img style="width:20px" src="https://cdn1.iconfinder.com/data/icons/social-media-9/512/29-128.png"></a></li>
+						<li><a href="#" data-placement="top" title="Facebook"><img style="width:20px" src="/assets/img/button/facebook.png"></a></li>
+						<li><a href="#" data-placement="top" title="Twitter"><img style="width:20px" src="/assets/img/button/twitter.png"></a></li>
+						<li><a href="#" data-placement="top" title="Linkedin"><img style="width:20px" src="/assets/img/button/in.png"></a></li>
+						<li><a href="#" data-placement="top" title="Pinterest"><img style="width:20px" src="/assets/img/button/pinterest.png"></a></li>
+						<li><a href="#" data-placement="top" title="Google plus"><img style="width:20px" src="/assets/img/button/google.png"></a></li>
 					</ul>
 				</div>
 			</div>

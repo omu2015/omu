@@ -51,13 +51,12 @@ public class MainController {
 			model.addAttribute("list3", list3);
 		}else{
 			List<ThemeVo> list3 = mainDao.getList3();
-			
 			for (int i = 0; i < list3.size(); i++) {
 				String[] array = list3.get(i).getThemeName().split(">");
 				list3.get(i).setThemeName(array[array.length-1]);
 			}
-			
 			model.addAttribute("themeList", list3);
+			
 			Long member_no = memberVo.getMember_no();
 			Object[] getContent =mainService.selectContentByTheme(member_no);
 			for(int i = 0; i<getContent.length; i++){
@@ -74,21 +73,25 @@ public class MainController {
 		
 		ContentVo contentVo = mainService.getContent(content_no);
 		model.addAttribute("contentVo", contentVo);
-		
-		/*MemberVo memberVo = mainService.selectVo(member_no);
-		model.addAttribute("memberVo", memberVo);*/
+// 헤더의 카테고리 나오게하기		
+		List<ThemeVo> list3 = mainDao.getList3();
+		for (int i = 0; i < list3.size(); i++) {
+			String[] array = list3.get(i).getThemeName().split(">");
+			list3.get(i).setThemeName(array[array.length-1]);
+		}
+		model.addAttribute("themeList", list3);
 		
 		List<GoodVo> list1 = mainService.selectCntNo(content_no);
 		model.addAttribute("good", list1.size());
 		return "/main/contentview";
 	}
-	
+
   @RequestMapping("/commentwrite")
-	public String insert(@ModelAttribute CommentsVo commentsVo){
+	public String insert(@ModelAttribute CommentsVo commentsVo, long content_no){
 	  mainService.insert(commentsVo);
-		return "redirect:/contentView";	
+	  return "redirect:/contentView?content_no="+content_no;
 	}
-  
+
   @RequestMapping("/commentdelete")
   	public String delete(long comments_no){
 	  commentsDao.delete(comments_no);
@@ -124,10 +127,11 @@ public class MainController {
   }
   
   @RequestMapping("/jjim")
-  @ResponseBody
-  public String jjim(@RequestParam Long member_no, @RequestParam Long content_no, Model model){
-	  /*PlanVo planVo = mainService.getUserPlan(member_no);*/
-	  mainService.insertPlan(member_no);
+  public String jjim(HttpSession session, Model model){
+	  PlanVo planVo = new PlanVo();
+	  MemberVo memberVo =(MemberVo)session.getAttribute("authUser");
+	  planVo.setMember_no(memberVo.getMember_no());
+	  mainService.insertPlan(planVo);
 	  return "redirect:/";
   }
   

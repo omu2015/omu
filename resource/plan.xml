@@ -8,6 +8,13 @@
          insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(#planDate#, 'yyyy-MM-dd') ,#totalCost#,#totalTime#)
       ]]>
    </insert>
+
+   <insert id="inserttoday" parameterClass="PlanVo">
+      <![CDATA[
+         insert INTO plan VALUES(plan_no_seq.nextval, #member_no#, to_Date(#planDate#, 'yyyy-MM-dd') ,#totalCost#,#totalTime#)
+      ]]>
+   </insert>
+
    
    <select id="selectAll" resultClass="PlanVo">
       <![CDATA[
