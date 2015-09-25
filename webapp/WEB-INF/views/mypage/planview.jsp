@@ -97,7 +97,7 @@
 
 	<script>
 		function datecolor(Obj) {
-			$('.' + Obj).css("background-color", "pink");
+			$('.' + Obj).css("background-color", "#FEE8EE");
 			$('.' + Obj).mouseout(function() {
 				$('.' + Obj).css("background-color", "#fff");
 			})

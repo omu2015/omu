@@ -19,7 +19,52 @@
 <link href="../../assets/css/style.css" rel="stylesheet" />
 <link href="../../assets/css/table.css" rel="stylesheet" />
 
-
+<style type="text/css">
+.back {
+   text-align:center;
+	-moz-box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fdb7c8), color-stop(1, #fdb7c8) );
+	background:-moz-linear-gradient( center top, #fdb7c8 5%, #fdb7c8 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdb7c8', endColorstr='#fdb7c8');
+	background-color:#fdb7c8;
+	-webkit-border-top-left-radius:42px;
+	-moz-border-radius-topleft:42px;
+	border-top-left-radius:42px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:42px;
+	-moz-border-radius-bottomright:42px;
+	border-bottom-right-radius:42px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0px;
+	border:1px solid #fdb7c8;
+	display:inline-block;
+	color:#fff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:42px;
+	line-height:42px;
+	width:91px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #fdb7c8;
+}
+.back:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fdb7c8), color-stop(1, #fdb7c8) );
+	background:-moz-linear-gradient( center top, #fdb7c8 5%, #fdb7c8 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdb7c8', endColorstr='#fdb7c8');
+	background-color:#fdb7c8;
+}.back:active {
+	position:relative;
+	top:1px;
+}</style>
 
 
 <!-- Theme skin -->
@@ -41,7 +86,7 @@
 	<section id="content">
 
 	<div class="container" style="height: 700px">
-		<div class="row">
+	
 			<div class="col-lg-12">
 					<div class="row">
 					<form  name="memberleave" method="post" action="/mypage/memberleaveok">
@@ -57,9 +102,11 @@
 					<tr>
 						<td class="title">패스워드 재확인</td>
 						<td><input  id=password1 name="password1" type="password" value=""></td>
+						
 					</tr>
                       <tr>
                           <td>
+                            <input type="hidden" id="realPassword" name="memberStatus" value="${authUser.password }" >
                             <input type="hidden" id="memberStatus" name="memberStatus" value="탈퇴" >
                             <input type="hidden" id="joinOutDate" name="joinOutDate" value="" >
                           </td>
@@ -68,16 +115,59 @@
 					</table>
 					</div>
 				
-					<input type="submit" value="탈퇴완료">
+				   <div style="float: right; margin-right: 40%;">
+					<input type="submit" class="back" value="탈퇴완료">
+					<a href="/mypage"><input type="button" class="back" value="취소" ></a>
+				   </div>
 				</form>
 				
 				</div>
 			</div>
-		</div>
+		
 	</div>
 	</section>
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div>
+<script>
+   $(function(){
+	   $(".row").submit(function(){
+		   var $password = $("#password");
+		   var password  = $password.val();
+		   if(password==""){
+			  alert("password를 입력하세요");
+			  $password.focus();
+              return false;
+		   }
+		   var $password1 = $("#password1");
+		   var password1 = $password1.val();
+		    if(password1==""){
+		    	alert("password를 입력하세요");
+		    	  $password1.focus();
+	              return false;
+		   }  
+		    var $realPassword = $("#realPassword");
+			var realPassword = $realPassword.val();
+			   
+			   
+		    
+		  if(password !=password1){
+			  alert("비밀번호가 일치하지 않습니다.")
+			  return false;
+		  }
+		  
+		  if(realPassword !=password && realPassword!=$password1  ){
+			  alert("기존 회원 비밀번호와 같지 않습니다.")
+			  return false;
+		  }
+		  alert("탈퇴 되었습니다.ㅠㅠㅠㅠㅠㅠ")
+		  return true;
+		  
+		  
+	   });
+   });
+</script>
+   
+
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 <!-- javascript
     ================================================== -->

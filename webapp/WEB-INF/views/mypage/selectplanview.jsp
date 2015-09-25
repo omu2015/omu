@@ -30,6 +30,53 @@
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+<style type="text/css">
+.back {
+   text-align:center;
+	-moz-box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fdb7c8), color-stop(1, #fdb7c8) );
+	background:-moz-linear-gradient( center top, #fdb7c8 5%, #fdb7c8 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdb7c8', endColorstr='#fdb7c8');
+	background-color:#fdb7c8;
+	-webkit-border-top-left-radius:42px;
+	-moz-border-radius-topleft:42px;
+	border-top-left-radius:42px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:42px;
+	-moz-border-radius-bottomright:42px;
+	border-bottom-right-radius:42px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0px;
+	border:1px solid #fdb7c8;
+	display:inline-block;
+	color:#fff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:42px;
+	line-height:42px;
+	width:91px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #fdb7c8;
+}
+.back:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fdb7c8), color-stop(1, #fdb7c8) );
+	background:-moz-linear-gradient( center top, #fdb7c8 5%, #fdb7c8 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdb7c8', endColorstr='#fdb7c8');
+	background-color:#fdb7c8;
+}.back:active {
+	position:relative;
+	top:1px;
+}</style>
+
 
 </head>
 <body>
@@ -53,8 +100,8 @@
 						<c:import url="/WEB-INF/views/mypage/selectplanview1.jsp"></c:import>
 						</div>
 	</form>	
-					    <a href="/mypage"><input type="button" value="되돌아가기" ></a>
 				</div>
+					    <a href="/mypage"><input class="back" type="button" value="되돌아가기"  ></a>
 			</div>
 		</div>
 		</section>

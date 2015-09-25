@@ -177,7 +177,52 @@
 	
  	}(jQuery));	
 </script>
-
+<style type="text/css">
+.back {
+   text-align:center;
+	-moz-box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	box-shadow:inset 0px 1px 0px 0px #fdb7c8;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fdb7c8), color-stop(1, #fdb7c8) );
+	background:-moz-linear-gradient( center top, #fdb7c8 5%, #fdb7c8 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdb7c8', endColorstr='#fdb7c8');
+	background-color:#fdb7c8;
+	-webkit-border-top-left-radius:42px;
+	-moz-border-radius-topleft:42px;
+	border-top-left-radius:42px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:42px;
+	-moz-border-radius-bottomright:42px;
+	border-bottom-right-radius:42px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0px;
+	border:1px solid #fdb7c8;
+	display:inline-block;
+	color:#fff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:42px;
+	line-height:42px;
+	width:91px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #fdb7c8;
+}
+.back:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fdb7c8), color-stop(1, #fdb7c8) );
+	background:-moz-linear-gradient( center top, #fdb7c8 5%, #fdb7c8 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdb7c8', endColorstr='#fdb7c8');
+	background-color:#fdb7c8;
+}.back:active {
+	position:relative;
+	top:1px;
+}</style>
 
 
 <!-- Theme skin -->
@@ -190,7 +235,6 @@
 
 </head>
 <body>
-${authUser.imageUrl.split("/")[2] }
    <div id="wrapper">
       <!-- start header -->
       <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
@@ -225,9 +269,9 @@ ${authUser.imageUrl.split("/")[2] }
                                       고객의 사진이 없습니다.                        
                         </c:otherwise>
                                  </c:choose>
-                                   <input type="file" id="input_file" name="img" title="사진 수정"	value="">
-                            <img id="img_preview" name="img2" src="" width="120" height="140" border="0" />
-							<input type="hidden" name="img2" value="${authUser.imageUrl }">
+                                   <input type="file" id="input_file" name="img" title="사진 수정"	value="" >
+                                    <img id="img_preview" name="img2" src="" width="120" height="140" border="0" />
+						        	<input type="hidden" name="img2" value="${authUser.imageUrl }">
                              
                              
                                 <td class="title">이름</td>
@@ -292,9 +336,12 @@ ${authUser.imageUrl.split("/")[2] }
 
                         </table>
                      </div>
-
-                     <input type="button" value="취소" /> <input type="submit"
-                        value="수정완료" />
+                    <div>
+                     </div>
+                     <div style="float: right; margin-right: 10%">
+                     <input type="button" class="back"  value="취소" /> 
+                     <input type="submit" class="back" value="수정완료" />
+                     </div>
                   </form>
 
                </div>

@@ -62,13 +62,6 @@ public class MyPageController {
 	 public String planView(Model model){
 		List<CalendarVo> viewList=myPageService.selectView();
 		model.addAttribute("viewList", viewList);
-		// 헤더의 카테고리 나오게하기      
-	      List<ThemeVo> list3 = mainDao.getList3();
-	      for (int i = 0; i < list3.size(); i++) {
-	         String[] array = list3.get(i).getThemeName().split(">");
-	         list3.get(i).setThemeName(array[array.length-1]);
-	      }
-	      model.addAttribute("themeList", list3);
 		return "/mypage/planview";
 	
 	}
