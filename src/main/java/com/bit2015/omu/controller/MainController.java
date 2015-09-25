@@ -123,23 +123,16 @@ public class MainController {
   @ResponseBody
   public List<ThemeBoxVo> getInterest(@RequestParam Long member_no, Model model){
 	 List<ThemeBoxVo> list = mainService.getThemeBox(member_no);
-	 
 	 return list;  
   }
   
   @RequestMapping("/jjim")
-  public String jjim(HttpSession session, Model model, Long plan_no, Long content_no){
-	  PlanVo planVo = new PlanVo();
-	  MemberVo memberVo =(MemberVo)session.getAttribute("authUser");
-	  planVo.setMember_no(memberVo.getMember_no());
-	  mainService.insertPlan(planVo);
-	  
-	  mainService.insertContentBox(plan_no, content_no);
-	  return "redirect:/";
+  public String jjim(HttpSession session, @RequestParam Long content_no){
+	  mainService.saveItem(session, content_no);
+	  return "redirect:/contentView?content_no="+content_no;
   }
   
-  
-  
+
   @RequestMapping("/like")
   @ResponseBody
   public void like(@RequestParam Long member_no, @RequestParam Long content_no, Model model){

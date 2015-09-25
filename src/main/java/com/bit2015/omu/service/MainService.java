@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.bit2015.omu.dao.CommentsDao;
+import com.bit2015.omu.dao.ContentBoxDao;
 import com.bit2015.omu.dao.ContentDao;
 import com.bit2015.omu.dao.GoodDao;
 import com.bit2015.omu.dao.MainDao;
@@ -43,6 +44,8 @@ public class MainService {
 	GoodDao goodDao;
 	@Autowired
 	PlanDao planDao;
+	@Autowired
+	ContentBoxDao contentBoxDao;
 /*---------------------------------*/	
 	@Autowired
 	MemberDao memberDao;
@@ -140,16 +143,23 @@ public class MainService {
 		return planVo;
 	}
 	
-	public void insertPlan(PlanVo planVo){
-		mainDao.insert(planVo);
-	}
-	
-	public void insertContentBox(Long plan_no, Long content_no){
-		ContentBoxVo contentBoxVo = new ContentBoxVo();
+	public void saveItem(HttpSession session, Long content_no) {
+		MemberVo memberVo =(MemberVo) session.getAttribute("authUser");
 		
-		contentBoxVo.setPlan_no(plan_no);
+		//plan 만듬
+		PlanVo tempVo = new PlanVo();
+		 tempVo.setMember_no(memberVo.getMember_no());
+		mainDao.inserttoday(tempVo);
+		
+		//제일 최신것 갖고옴
+		List<PlanVo> planList =planDao.getUserPlan(memberVo.getMember_no());
+		PlanVo planVo =planList.get(planList.size()-1);
+		
+		//insertContentBox
+		ContentBoxVo contentBoxVo = new ContentBoxVo();
+		contentBoxVo.setPlan_no(planVo.getPlan_no());
 		contentBoxVo.setContent_no(content_no);
-		mainDao.insert(contentBoxVo);
+		contentBoxDao.insert(contentBoxVo);
 	}
 	
 	

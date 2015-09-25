@@ -55,7 +55,7 @@ public class MainDao {
 		return planVo;
 	}
 	
-	public void insert(PlanVo planVo){
+	public void inserttoday(PlanVo planVo){
 		sqlMapClientTemplate.insert("plan.inserttoday", planVo);
 	}
 	

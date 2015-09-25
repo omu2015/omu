@@ -20,7 +20,8 @@ $(function(){
 			<ul>
 			<li style="float:left;margin:10px;">
 			<c:forEach var="i"  items="${contentList}">
-			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
+			<span style="float:right;position:absolute;margin-top:290px;text-align:center;margin-left:10px;background-color:#525252;color:#fff;padding:0 10px 0 10px;">${i.title }</span>
+			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;height:300px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
 			</c:forEach>
 			</li>
 		</ul>
@@ -30,35 +31,40 @@ $(function(){
 			<ul>
 			<li style="float:left;margin:10px;">
 			<c:forEach var="i"  items="${contentList0}">
-			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
+			<span style="float:right;position:absolute;margin-top:290px;text-align:center;margin-left:10px;background-color:#525252;color:#fff;padding:0 10px 0 10px;">${i.title }</span>
+			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;height:300px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
 			</c:forEach>
 			</li>
 		</ul>
 			<ul>
 			<li style="float:left;margin:10px;">
 			<c:forEach var="i"  items="${contentList1}">
-			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
+			<span style="float:right;position:absolute;margin-top:290px;text-align:center;margin-left:10px;background-color:#525252;color:#fff;padding:0 10px 0 10px;">${i.title }</span>
+			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;height:300px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
 			</c:forEach>
 			</li>
 		</ul>
 			<ul>
 			<li style="float:left;margin:10px;">
 			<c:forEach var="i"  items="${contentList2}">
-			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
+			<span style="float:right;position:absolute;margin-top:290px;text-align:center;margin-left:10px;background-color:#525252;color:#fff;padding:0 10px 0 10px;">${i.title }</span>
+			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;height:300px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
 			</c:forEach>
 			</li>
 		</ul>
 			<ul>
 			<li style="float:left;margin:10px;">
 			<c:forEach var="i"  items="${contentList3}">
-			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
+			<span style="float:right;position:absolute;margin-top:290px;text-align:center;margin-left:10px;background-color:#525252;color:#fff;padding:0 10px 0 10px;">${i.title }</span>
+			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;height:300px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
 			</c:forEach>
 			</li>
 		</ul>
 			<ul>
 			<li style="float:left;margin:10px;">
 			<c:forEach var="i"  items="${contentList4}">
-			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
+			<span style="float:right;position:absolute;margin-top:290px;text-align:center;margin-left:10px;background-color:#525252;color:#fff;padding:0 10px 0 10px;">${i.title }</span>
+			<a href="#content${i.content_no}" id="guest${i.content_no }"><img style="border:1px solid #e1e1e1;width:360px;height:300px;margin:10px;opacity:1" onmouseover="this.style.opacity='0.5'" onmouseout="this.style.opacity='1'" src="${i.imageUrl }"></a>
 			</c:forEach>
 			</li>
 		</ul>

@@ -85,9 +85,9 @@
 					<input type="hidden" name="member_no" value="${authUser.member_no }">
 					<input type="hidden" name="content_no" value="${contentVo.content_no }">
 <!-- 좋아요 -->
-					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" ><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
+					<a href="javascript:likeCon(${contentVo.content_no },${authUser.member_no })" id="like"><img src="/assets/img/like.jpg" style="width:70px;margin:10px 0 0 -5px"></a>
 <!-- 찜하기 -->
-					<a href="/jjim" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
+					<a href="/jjim?content_no=${param.content_no}" id="jjim" ><img src="/assets/img/jjim.jpg" style="width:70px;margin:10px 0 0 10px"></a>
 			</div>
 				<div id="staticMap" style="width:1170px;height:350px;margin-top:60px"></div>
 <!-- 댓글 -->
@@ -123,7 +123,7 @@
 			<span style="float:right;margin-right:15px"></span>
 		</div>
 		</c:if>
-		<c:if test="${empty commentsList }"><span style="margin-left:320px">덧글이 없습니다.  처음으로 덧글을 남겨보세요.</span></c:if>
+		<c:if test="${empty commentsList }"><span style="margin-left:320px">댓글이 없습니다.  처음으로 덧글을 남겨보세요.</span></c:if>
 		</c:forEach>
 
 			</div>
@@ -185,22 +185,13 @@ function likeCon( content_no, member_no){
 }
 </script>
 <script>
-function jjimCon( content_no, member_no){
-	$.ajax({
-		type : 'get',
-	    url:'/jjim',
-	    data : {
-	    		content_no : content_no,
-	    		member_no : member_no
-	    },
-	    dataType:'json',
-	    success: function(){
-	    	alert("오늘페이지에 저장되었습니다");
-	    },
-})
-}
+$('#jjim').click(function(){
+	alert("오늘 날짜로 등록되었습니다.");
+});
+$('#like').click(function(){
+	alert("좋아요를 누르셨습니다 새로고침하면 적용됩니다.");
+});
 </script>
-
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

@@ -69,10 +69,9 @@ $(function(){
 					<c:choose>
 					<c:when test="${empty authUser }">
 					<ul id="nav">
-						<li><a href="/">HOME</a></li> 
-						<li><a href="javascript:planner(1)">일정짜기</a></li>
+						<li><a href="/"  style="margin:15px 0 0 -15px;width:150px"><img style="width:150px;margin-left:-15px" src="/assets/img/logo.jpg"></a></li> 
+						<li style="margin-left:10px"><a href="javascript:planner(1)">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
-						
 						<li style="float:right;margin-right:220px"><a class="pink" href="/member/joinForm">Join</a></li>
 						<li style="float:right"><a class="pink" href="#loginmodal"  id="modaltrigger">Login</a></li>
 					</ul>
@@ -80,13 +79,19 @@ $(function(){
 			</c:when>
 			<c:otherwise>
 					<ul id="nav">
-						<li><a href="/">HOME</a></li> 
-						<li><a href="javascript:planner(2)">일정짜기</a></li>
+						<li><a href="/"  style="margin:15px 0 0 -15px;width:150px"><img style="width:150px;margin-left:-15px" src="/assets/img/logo.jpg"></a></li> 
+						<li style="margin-left:10px"><a href="javascript:planner(2)">일정짜기</a></li>
 						<li><a href="/review">게시판</a></li>
-						
 						<li style="float:right;margin-right:220px"><a class="pink" href="/member/logout" >Logout</a></li>
 		            	<li style="float:right"><a class="pink" href="/mypage" >MyPage</a></li>
+		            	<c:choose>
+		            	<c:when test="${not empty themeList }">
 		            	<li style="float:right"><a class="pink" href="#interset"  id="modaltrigger">Interest</a></li>
+		            	</c:when>
+		            	<c:otherwise>
+		            	<li style="float:right"><a class="pink" href="#interset"  id="modaltrigger"></a></li>
+		            	</c:otherwise>
+		            	</c:choose>
 					</ul>
 					<div style="float:right;margin-top:-55px"><img style="width:45px;height:45px;border-radius:45px;overflow:hidden" src="${authUser.imageUrl }"/></div>
 			</c:otherwise>
@@ -133,8 +138,8 @@ $(function(){
 <!-- 모달팝업 interset -->
 		<div>
 		<div id="interset" style="display:none;">
-			<div style="width:300px;background-color:#2f3238;color:#fff;height:700px;text-align:center;font-size:15px">
-				<div style="font-weight:bold;padding:10px;font-size:16px;margin-bottom:20px;margin-top:10px">${authUser.memberName }님의 관심사</div>
+			<div style="width:250px;background-color:#fff;color:#2f3238;height:680px;text-align:center;font-size:15px;border-radius:10px;border:solid 6px #FDB7C8">
+				<div style="font-weight:bold;padding:10px;font-size:16px;height:50px;margin-top:10px">${authUser.memberName }님의 관심사</div>
 			<form name ="interest" method="post" action="/interestupdate">
 	<c:forEach var="vo" items="${themeList }" varStatus="status">
 				<input type="hidden" name="member_no" value="${authUser.member_no }">
