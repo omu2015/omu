@@ -27,7 +27,7 @@
 	height : 100px;
 	padding: 15px 10px;
 	text-align : center;
-	width : 100%;
+	width : 632px;
 	bgcolor : #FFFFFF;
 }
 .wshd{

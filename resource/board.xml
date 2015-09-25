@@ -36,8 +36,6 @@
 	<update id="update" parameterClass="BoardVo">
 		<![CDATA[
 			update board set 
-			plan_no=#plan_no#,
-			member_no=#member_no#,
 			message=#message#,
 			regDate=sysdate
 			where board_no=#board_no#

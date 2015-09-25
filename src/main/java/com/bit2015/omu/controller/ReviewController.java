@@ -79,26 +79,29 @@ public class ReviewController {
    
    @RequestMapping("/insertboard")
    public String insertBoard(Model model, BoardVo boardVo, HttpSession session, @RequestParam(defaultValue="0") Long totalCost, @RequestParam(defaultValue="0") Long totalTime, @RequestParam(required=false)MultipartFile img ){
-	   System.out.println("insertboadr ctrl ===  "  + boardVo.toString());
-	   
 	   reviewService.insertBoard(model, boardVo, session, totalCost, totalTime, img);
-	   
-	   
       return "redirect:/review";
    }
-
+   
+   @RequestMapping("/updateboard")
+   public String updateboard(Model model, BoardVo boardVo, HttpSession session, @RequestParam(defaultValue="0") Long totalCost, @RequestParam(defaultValue="0") Long totalTime, @RequestParam(required=false)MultipartFile img ){
+	   System.out.println(boardVo.toString());
+	   System.out.println("img = "+img.toString());
+	   reviewService.updateboard(model, boardVo, session, totalCost, totalTime, img);
+      return "redirect:/review/showboard?plan_no="+boardVo.getPlan_no();
+   }
    @RequestMapping("/insertcomment")
    public String insertComment(BoardCommentsVo boardCommentsVo, @RequestParam Long plan_no){
-	   System.out.println("plan_no ===  "   +  plan_no);
 	   reviewService.insertComment(boardCommentsVo);
-	   
       return "redirect:/review/showboard?plan_no="+plan_no;
    }
    
    @RequestMapping("/modify")
-   public String modifyBoard(@RequestParam Long board_no, @RequestParam Long plan_no){
-	   
-	   return "redirect:/review/showboard?plan_no="+plan_no;
+   public String modifyBoard(Model model, HttpSession session, @RequestParam Long board_no){
+	   if(session.getAttribute("authUser")!=null){
+	    	  reviewService.modifyBoard(model,board_no);
+	      }
+	   return "/review/modifyboard";
    }
    
    @RequestMapping("/delete")
@@ -133,7 +136,7 @@ public class ReviewController {
 	   
 	   reviewService.test(model);
       
-      return "/review/mapp";
+      return "/review/multifileuploadpractice";
    }
    
     

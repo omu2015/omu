@@ -289,7 +289,7 @@ function placesNear(distance){
 					return false;
 				}
 			// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-				ps.keywordSearch(keyword, planSearchCB);
+				ps.keywordSearch(keyword, planSearchCB, {location: map.getCenter()});
 				//ps.categorySearch('PO3', planSearchCB, {location: new daum.maps.LatLng(37.564968, 126.939909)});
 		}
 				
@@ -354,16 +354,16 @@ function placesNear(distance){
 									});
 									
 									itemEl.onclick = function(){
+										map.setLevel(4);
 										map.setCenter(new daum.maps.LatLng(items.latitude, items.longitude));
-										
-										displayInfowindow(marker, items);
+										displayinfo2(marker,items);
 									
 									};
 									
 									daum.maps.event.addListener(map, 'click',
 											function(){
 												infowindow.close();
-											//	infowindow2.close();
+												infowindow2.close();
 											});
 									
 									
@@ -490,7 +490,7 @@ function placesNear(distance){
 									content += '</tr>';
 							}
 						content+='</table><hr style="border:none;border:1px double pink;"></div>';
-			
+			console.log(content);
 						infowindow.setContent(content);
 						infowindow.open(map, marker);
 				},

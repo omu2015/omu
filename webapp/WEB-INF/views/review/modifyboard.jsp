@@ -28,13 +28,14 @@
 <link href="/assets/css/style.css" rel="stylesheet" />
 <link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/assets/css/layout2.css" rel="stylesheet" type="text/css" />
+<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 <!-- Theme skin -->
 <link href="../../assets/css/default.css" rel="stylesheet" />
 
 <!--javascript -->
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="/assets/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="/assets/js/jquery.easing.1.3.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
@@ -45,200 +46,49 @@
 <script src="/assets/js/portfolio/setting.js"></script>
 <script src="/assets/js/jquery.flexslider.js"></script>
 <script src="/assets/js/animate.js"></script>
-<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/custom.js"></script> 
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="/assets/js/jquery.leanModal.min.js"></script>
-<script type="text/javascript"
-	src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
-<style>
-.map_wrap, .map_wrap * {
-	margin: 0;
-	padding: 0;
-	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
-	font-size: 12px;
-}
-
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
-	color: #000;
-	text-decoration: none;
-}
-
-.map_wrap {
-	position: relative;
-	width: 100%;
-	height: 500px;
-}
-
-#menu_wrap {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	width: 250px;
-	margin: 10px 0 30px 10px;
-	padding: 5px;
-	overflow-y: auto;
-	background: rgba(255, 255, 255, 0.7);
-	z-index: 1;
-	font-size: 12px;
-	border-radius: 10px;
-}
-
-.bg_white {
-	background: #fff;
-}
-
-#menu_wrap hr {
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 2px solid #5F5F5F;
-	margin: 3px 0;
-}
-
-#menu_wrap .option {
-	text-align: center;
-}
-
-#menu_wrap .option p {
-	margin: 10px 0;
-}
-
-#menu_wrap .option button {
-	margin-left: 5px;
-}
-
-#placesList li {
-	list-style: none;
-}
-
-#placesList .item {
-	position: relative;
-	border-bottom: 1px solid #888;
-	overflow: hidden;
-	cursor: pointer;
-	min-height: 65px;
-}
-
-#placesList .item span {
-	display: block;
-	margin-top: 4px;
-}
-
-#placesList .item h5, #placesList .item .info {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-#placesList .item .info {
-	padding: 10px 0 10px 55px;
-}
-
-#placesList .info .gray {
-	color: #8a8a8a;
-}
-
-#placesList .info .jibun {
-	padding-left: 26px;
-	background:
-		url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
-		no-repeat;
-}
-
-#placesList .info .tel {
-	color: #009900;
-}
-
-#placesList .item .markerbg {
-	float: left;
-	position: absolute;
-	width: 36px;
-	height: 37px;
-	margin: 10px 0 0 10px;
-	background:
-		url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
-		no-repeat;
-}
-
-#placesList .item .marker_1 {
-	background-position: 0 -10px;
-}
-
-#placesList .item .marker_2 {
-	background-position: 0 -56px;
-}
-
-#placesList .item .marker_3 {
-	background-position: 0 -102px
-}
-
-#placesList .item .marker_4 {
-	background-position: 0 -148px;
-}
-
-#placesList .item .marker_5 {
-	background-position: 0 -194px;
-}
-
-#placesList .item .marker_6 {
-	background-position: 0 -240px;
-}
-
-#placesList .item .marker_7 {
-	background-position: 0 -286px;
-}
-
-#placesList .item .marker_8 {
-	background-position: 0 -332px;
-}
-
-#placesList .item .marker_9 {
-	background-position: 0 -378px;
-}
-
-#placesList .item .marker_10 {
-	background-position: 0 -423px;
-}
-
-#placesList .item .marker_11 {
-	background-position: 0 -470px;
-}
-
-#placesList .item .marker_12 {
-	background-position: 0 -516px;
-}
-
-#placesList .item .marker_13 {
-	background-position: 0 -562px;
-}
-
-#placesList .item .marker_14 {
-	background-position: 0 -608px;
-}
-
-#placesList .item .marker_15 {
-	background-position: 0 -654px;
-}
-
-#pagination {
-	margin: 10px auto;
-	text-align: center;
-}
-
-#pagination a {
-	display: inline-block;
-	margin-right: 10px;
-}
-
-#pagination .on {
-	font-weight: bold;
-	cursor: default;
-	color: #777;
-}
+<script type="text/javascript" charset="utf-8" src="/assets/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c12b4d88c8259cf4652b89c1f64db8e8&libraries=services"></script>
+ <style>
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
-<style>
+	<style>
 .dot {
 	overflow: hidden;
 	float: left;
@@ -300,25 +150,60 @@
 	content: none;
 }
 </style>
+<style type="text/css">
+.wsTable {
+	background : #FFEFEF;
+	text-align : center;
+}
+
+.wsTable td{
+	padding : 5px;
+}
+#messagebox{
+	border: 1px solid #8AE68A;
+	padding: 20px;
+	text-align : center;
+}
+</style>
 <script>
-					function modifyBoard(bno){
-						location.href="/review/modify?board_no="+bno;
-					}
-					function deleteBoard(bno){
-								 if(confirm("정말 삭제하시겠습니까?")){
-								  location.href="/review/delete?board_no="+bno;
-								 }
-								 else{
-								 //취소
-								 }
-					}
-					function goodButton(bno,pno){
-						location.href="/review/good?plan_no="+pno+"&board_no="+bno;
-					}
-					function capturePlan(bno){
-						location.href="/review/capture?board_no="+bno;
-					}
-					</script>
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function validateForm(obj){
+      var $message = $("#messagecheck");
+      var message = $message.val();
+      //alert(message);
+      if(message==""){
+         alert("글이 없으면 안대요");
+         return false;
+      }
+      return true;
+}
+
+//    $(function(){
+// 	   $("#aaa").submit(function() {
+// 			var $message = $("#messagecheck");
+// 			var message = $message.val();
+// 			if (message == "") {
+// 				alert("글이 입력되지 않았습니다");
+// 				return false;
+// 			}
+// 			return true;
+// 		});
+//    });
+  
+ 
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -330,78 +215,54 @@
 			<div class="col-lg-12">
 				<h4 class="heading"></h4>
 				<div class="row">
-					<div class="wsTable">
-					<table>
-						<c:if test="${not empty boardVo}">
-						<tr class="wshd">
-							<td>작성자  : ${memberId}</td><td>등록 일자 : ${boardVo.getRegDate()}</td>
+				<hr>
+						<form action="/review/updateboard" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+					<table class="wsTable">
+						<tr>
+							<td colspan="3">
+										<div class="map_wrap">
+											<div id="map"
+												style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+											<div id="menu_wrap" class="bg_white">
+												<ul id="placesList"></ul>
+											</div>
+										</div>
+									</td>
 						</tr>
 						<tr>
-							<td colspan="2">
-																<div class="map_wrap">
-																	<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-																	<div id="menu_wrap" class="bg_white">
-																		<ul id="placesList"></ul>
-																	</div>
-																</div>
-								</td>
+							<td>총시간 : <input type="text" name="totalTime" value="${planVo.getTotalTime()}"> 분</td><td>총비용 : <input type="text" name="totalCost" value="${planVo.getTotalCost()}"> 원</td>
+<!-- 							<td><input type="file" name="img" onchange="readURL(this)" multiple></td> -->
+<!-- 							<td><input type='file' name="img" onchange="readURL(this)"/></td> -->
+								<td><input type='file' name="img"/></td>
 						</tr>
-						<tr class="wshd">
-							<td>총비용 : ${planVo.getTotalCost()} 원</td><td>총시간  : ${planVo.getTotalTime()} 분</td>
-						</tr>
-					<c:if test="${not empty boardImgBoxList[0].getImageUrl()}">
 						<tr>
-							<td colspan="2">
-						<c:forEach var="bibl" items="${boardImgBoxList }" varStatus="status">
-									<img height="250px" src="${bibl.getImageUrl()}" />
-						</c:forEach>
+<!-- 							이미지박스 -->
+							<td colspan="3" id="blah">
+								<c:forEach var="bibl" items="${boardImgBoxList }">
+											<img height="250px" src="${bibl.getImageUrl()}" />
+								</c:forEach>
 							</td>
 						</tr>
-					</c:if>
 						<tr>
-							<td class="messagebox" colspan="2">${boardVo.getMessage()}</td>
+							<td colspan="3"><textarea id="messagecheck" style="height:350px;" class="messagebox" name="message">${boardVo.getMessage()}</textarea></td>
 						</tr>
-						
-						<tr class="wshd">
-						<c:choose>
-						<c:when test="${authUser.getMember_no() eq boardVo.getMember_no()}">
-						<td onclick="modifyBoard(${boardVo.getBoard_no()})">수정</td><td onclick="deleteBoard(${boardVo.getBoard_no()})">삭제</td>
-						</c:when>
-						<c:otherwise>
-							<c:if test="${not empty authUser}">
-								<td onclick="goodButton(${boardVo.getBoard_no()},${planVo.getPlan_no()}); return false;">좋아요</td><td onclick="capturePlan(${boardVo.getBoard_no()})">일정 가져오기</td>
-							</c:if>
-						</c:otherwise>
-						</c:choose>
-						</tr>
-						</c:if>
-					</table>
-					</div>
-					<hr>
-					<div class="wsTable">
-					<table>
-								<c:forEach var="bcVo" items="${commentsMap.boardCommentsList}" varStatus="status">
-									<tr>
-										<td>${commentsMap.memberList.get(status.index).getMemberId()}</td>
-										<td colspan="6" class="nct">  :   ${   bcVo.getMessage() }</td>
-									</tr>
-								</c:forEach>
-					</table>
-					</div>
-					<div class="wsTable">
-					<form action="/review/insertcomment" method="post">
-					<table>
 						<tr>
-						<td><span>${authUser.getMemberId()}</span>
-							<input type="hidden" name="board_no" value="${boardVo.getBoard_no()}">
-							<input type="hidden" name="plan_no" value="${boardVo.getPlan_no()}">
-							<input type="hidden" name="member_no" value="${authUser.getMember_no() }"></td>
-							<td colspan="6"><textarea style="height:200px;" class="messagebox" name="message"></textarea></td>
-							<td><input type="submit" value="댓글등록"></td>						
+							<td colspan="3">
+									<c:choose>
+										<c:when test="${planVo.getPlan_no() ne 0}">
+											<input type="hidden" name="board_no" value="${boardVo.getBoard_no() }">
+											<input type="hidden" name="plan_no" value="${boardVo.getPlan_no() }">
+											<input type="hidden" name="member_no" value="${boardVo.getMember_no()}">
+											<input type="submit" value="등록">
+										</c:when>
+										<c:otherwise>
+											<div style="margin-bottom:10px">수정 가능한 권한이 없습니다.</div><button onclick="location.href='/review'">돌아가기</button>
+										</c:otherwise>
+									</c:choose>
+							</td>
 						</tr>
 					</table>
-					</form>
-					</div>
+						</form>
 					<c:import url="/WEB-INF/views/review/planTable.jsp"></c:import>
 				</div>
 		</div>
@@ -410,8 +271,6 @@
 	<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 </div><!-- wrapper -->
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-
-
 </body>
 </html>
 <!-- javascript
@@ -463,13 +322,8 @@ var dots = []; // 선이 그려지고 있을때 클릭할 때마다 클릭 지�
 	
 var jsonCL = JSON.parse('${jsonCL}');
 
- 			for (var k = 0; k < jsonCL.length; k++) {
-			findWay(jsonCL[k]);
-		}
- 			
 displayPlaces(jsonCL); ///////////////////////////////////////////////////////////////////
 
-       
        
        
 // 검색 결과 목록과 마커를 표출하는 함수입니다
@@ -480,6 +334,12 @@ function displayPlaces(places) {
     fragment = document.createDocumentFragment(), 
     bounds = new daum.maps.LatLngBounds(), 
     listStr = '';
+    
+    for (var k = 0; k < jsonCL.length; k++) {
+		findWay(jsonCL[k]);
+	}
+    
+    ////////////////
     
     for ( var i=0; i<places.length; i++ ) {
 		
@@ -516,24 +376,20 @@ function displayPlaces(places) {
           //click
 			daum.maps.event.addListener(marker, 'click',
 			function(){
-				//infowindow2.close();
-				//displayInfowindow2(marker, items);
-				infowindow.close();
-				displayInfowindow(marker, items);
+				infowindow2.close();
+				displayInfowindow2(marker, items);
 			});
           
 			itemEl.onclick = function(){
-// 				infowindow2.close();
-// 				displayInfowindow2(marker, items);
-				infowindow.close();
-				displayInfowindow(marker, items);
+				infowindow2.close();
+				displayInfowindow2(marker, items);
 				
 			};
             
 			daum.maps.event.addListener(map, 'click',
 					function(){
 						infowindow.close();
-						//infowindow2.close();
+						infowindow2.close();
 					});
 			
             
@@ -599,21 +455,13 @@ function addMarker(position, idx, title) {
     return marker;
 }
 
-// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-function removeMarker() {
-    for ( var i = 0; i < markers.length; i++ ) {
-        markers[i].setMap(null);
-    }   
-    markers = [];
-}
-
 
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, items) {
-//var content = '<div style="padding:5px; z-index:1;"><table><tr><td>'+items.title+'</td></tr><tr><td>'+items.newAddress+'</td></tr></div>';
-var content = '<div class="wsTable"><table><tr><th colspan="2" class="wshd">'+items.title+'</th></tr><tr><td rowspan="4"><img style="height:150px" src="'+items.imageUrl+'"/></td></tr><tr><td>'+items.newAddress+'</td></tr><tr><td>'+items.phone+'</td></tr><tr><td><a href="'+items.placeUrl+'">웹 주소로 이동하기</a></td></tr></table></div>';
+var content = '<div style="padding:5px; z-index:1;">'+items.title+'</div>';
+    
     infowindow.setContent(content);
     infowindow.open(map, marker);
 }
@@ -622,8 +470,8 @@ function displayInfowindow2(marker, items) {
 
     var content = '<div style="z-index:1;"><table><tr><td colspan="2">'+items.title+'</td></tr><tr>';
 
-    if(items.imageUrl == ""){
-    	content += '<td colspan="2"><img height="200px" src="/product-images/20158247753528.jpg"/></td>';
+    if(items.imageUrl == null){
+    	content += '<td colspan="2"><img height="200px" src="/product-images/2015816103038346.jpg"/></td>';
     }else{
     	content += '<td colspan="2"><img height="200px" src="'+items.imageUrl+'"/></td>';
     }
@@ -632,6 +480,18 @@ function displayInfowindow2(marker, items) {
     infowindow2.setContent(content);
     infowindow2.open(map, marker);
 }
+
+
+
+
+//지도 위에 표시되고 있는 마커를 모두 제거합니다
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+
 
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {   
@@ -732,10 +592,6 @@ function findWay(items){
 			});
 		}
 
-		// 마우스 우클릭 하여 선 그리기가 종료됐을 때 호출하여 
-		// 그려진 선의 총거리 정보와 거리에 대한 도보, 자전거 시간을 계산하여
-		// HTML Content를 만들어 리턴하는 함수입니다
-		
 };
 
 
@@ -820,10 +676,33 @@ function getTimeHTML(distance) {
 }
 
 
+function deleteClickLine() {
+    if (clickLine) {
+        clickLine.setMap(null);    
+        clickLine = null;        
+    }
+}
+function deleteDistance () {
+    if (distanceOverlay) {
+        distanceOverlay.setMap(null);
+        distanceOverlay = null;
+    }
+}
+function deleteCircleDot() {
+    var i;
 
+    for ( i = 0; i < dots.length; i++ ){
+        if (dots[i].circle) { 
+            dots[i].circle.setMap(null);
+        }
 
+        if (dots[i].distance) {
+            dots[i].distance.setMap(null);
+        }
+    }
 
-
+    dots = [];
+}
 
 
 

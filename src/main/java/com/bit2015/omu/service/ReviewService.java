@@ -242,7 +242,6 @@ public class ReviewService {
 				planList.add(planAll.get(i));
 			}
 		}//for문 끝
-		System.out.println("planList.toString()   = =  ="+planList.toString());
 		
 		PlanVo planVo = new PlanVo();
 		List<ContentVo> contentList = new ArrayList<ContentVo>();
@@ -267,7 +266,6 @@ public class ReviewService {
 		List<ReviewVo> reviewList = getReviewList();
 
 		model.addAttribute("planList", planList);
-		model.addAttribute("contentList", contentList);
 		model.addAttribute("jsonCL", jsonCL);
 		model.addAttribute("planVo", planVo);
 		model.addAttribute("reviewList", reviewList);
@@ -384,7 +382,7 @@ public class ReviewService {
 		// pno뽑기
 		List<PlanVo> planList = planDao.getUserPlan(memberVo.getMember_no());
 		// order by desc 이므로 0번째 인덱스가 가장 최신
-		PlanVo lastplan = planList.get(0);
+		PlanVo lastplan = planList.get(planList.size()-1);
 
 		ContentBoxVo contentBoxVo = new ContentBoxVo();
 		contentBoxVo.setPlan_no(lastplan.getPlan_no());
@@ -432,6 +430,68 @@ public class ReviewService {
 	public List<ContentVo> getNear(Double lat, Double lng, Double d) {
 		List<ContentVo> contentList = contentDao.selectAllNear(lat, lng, d);
 		return contentList;
+	}
+
+	public void modifyBoard(Model model, Long board_no) {
+
+		PlanVo planVo = planDao.selectVo(boardDao.selectVo(board_no).getPlan_no());
+		
+		List<ContentVo> contentList = new ArrayList<ContentVo>();
+		String jsonCL="";
+		
+		List<ContentBoxVo> contentBoxList = contentBoxDao.selectAllByPno(planVo.getPlan_no());
+		for (int i = 0; i < contentBoxList.size(); i++) {
+			contentList.add(contentDao.selectVo(contentBoxList.get(i).getContent_no()));
+		}
+
+		jsonCL = jsonn((ArrayList<?>) contentList);
+		
+		List<BoardImgBoxVo> boardImgBoxList = boardImgBoxDao
+				.selectAllByBno(board_no);
+
+		BoardVo boardVo = boardDao.selectVo(board_no);
+		
+		List<ReviewVo> reviewList = getReviewList();
+		
+		model.addAttribute("boardVo", boardVo);
+		model.addAttribute("boardImgBoxList", boardImgBoxList);
+		model.addAttribute("jsonCL", jsonCL);
+		model.addAttribute("planVo", planVo);
+		model.addAttribute("reviewList", reviewList);
+	}
+
+	public void updateboard(Model model, BoardVo boardVo, HttpSession session,
+			Long totalCost, Long totalTime, MultipartFile img) {
+		MemberVo memberVo = (MemberVo) session.getAttribute("authUser");
+
+		if(memberVo.getMember_no()==boardVo.getMember_no()){
+		
+					// plan에 totalcost, totalTime update.
+					Long pno = boardVo.getPlan_no();
+					PlanVo planVo = planDao.selectVo(pno);
+					planVo.setTotalCost(totalCost);
+					planVo.setTotalTime(totalTime);
+					planDao.update(planVo);
+		
+					// board insert.
+					boardDao.update(boardVo);
+		
+					// boardImgBox 생성 후 insert.
+					BoardImgBoxVo boardImgBoxVo = new BoardImgBoxVo();
+					boardImgBoxVo.setBoard_no(boardVo.getBoard_no());
+					
+					// img url 설정
+					String img_url = ful.upload(img);
+					if (img_url != "") {
+						System.out.println("img_url = " + img_url);
+						boardImgBoxVo.setImageUrl(img_url);
+						boardImgBoxDao.insert(boardImgBoxVo);
+					}
+		}
+
+		List<ReviewVo> reviewList = getReviewList();
+		model.addAttribute("reviewList", reviewList);
+		
 	}
 	
 }// review Service
