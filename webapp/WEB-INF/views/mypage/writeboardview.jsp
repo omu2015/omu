@@ -34,7 +34,7 @@
 	<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<c:import url="/WEB-INF/views/include/header_mypage.jsp">
-		<c:param name="pageName" value="planView"/>
+		<c:param name="pageName" value="myBoardView"/>
 		</c:import>
 		<!-- end header -->
 	<div id="wrapper">

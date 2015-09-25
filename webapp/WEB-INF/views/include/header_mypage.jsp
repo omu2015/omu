@@ -11,7 +11,8 @@
 <body>
 
 
-	<header> <c:choose>
+	<header> 
+	<c:choose>
 		<c:when test="${param.pageName=='planView' }">
 
 			<div id="menu_div" style="z-index: 10000;">
@@ -45,7 +46,7 @@
 			</div>
 		</c:when>
 
-		<c:when test="${param.pageName=='selectPlanView' }">
+		<c:when test="${param.pageName=='myBoardView' }">
 			<div id="menu_div"  style="z-index: 10000;">
 				<div id="navigation">
 					<div id="menu">

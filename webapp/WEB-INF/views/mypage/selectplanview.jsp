@@ -84,7 +84,7 @@
 		<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<c:import url="/WEB-INF/views/include/header_mypage.jsp">
-		<c:param name="pageName" value="selectPlanView"/>
+		<c:param name="pageName" value="planView"/>
 		</c:import>
 		<!-- end header -->
 
@@ -101,7 +101,9 @@
 						</div>
 	</form>	
 				</div>
+				      <div style="float: right; margin-right: 10%;" >
 					    <a href="/mypage"><input class="back" type="button" value="되돌아가기"  ></a>
+			          </div> 
 			</div>
 		</div>
 		</section>

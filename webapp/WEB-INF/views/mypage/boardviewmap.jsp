@@ -376,7 +376,7 @@
 			<!-- start header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<c:import url="/WEB-INF/views/include/header_mypage.jsp">
-		<c:param name="pageName" value="selectPlanView"/>
+		<c:param name="pageName" value="myBoardView"/>
 		</c:import>
 		<!-- end header -->
 		
